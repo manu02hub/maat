@@ -20,6 +20,7 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'perfil' => Route::has('perfil'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -28,6 +29,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/perfil', function () {
+    return Inertia::render('PerfilEmpresa');
+})->middleware(['auth', 'verified'])->name('perfil-empresa');
 
 Route::get('/events', function () {
     return Inertia::render('Events');
