@@ -8,20 +8,20 @@ import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
-const confirmingUserDeletion = ref(false);
+const confirmingEmpresaDeletion = ref(false);
 const passwordInput = ref(null);
 
 const form = useForm({
     password: '',
 });
 
-const confirmUserDeletion = () => {
-    confirmingUserDeletion.value = true;
+const confirmEmpresaDeletion = () => {
+    confirmingEmpresaDeletion.value = true;
 
     nextTick(() => passwordInput.value.focus());
 };
 
-const deleteUser = () => {
+const deleteEmpresa = () => {
     form.delete(route('profile.destroy'), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
@@ -31,7 +31,7 @@ const deleteUser = () => {
 };
 
 const closeModal = () => {
-    confirmingUserDeletion.value = false;
+    confirmingEmpresaDeletion.value = false;
 
     form.reset();
 };
@@ -49,9 +49,9 @@ const closeModal = () => {
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
+        <DangerButton @click="confirmEmpresaDeletion">Delete Account</DangerButton>
 
-        <Modal :show="confirmingUserDeletion" @close="closeModal">
+        <Modal :show="confirmingEmpresaDeletion" @close="closeModal">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
                     Are you sure you want to delete your account?
@@ -72,7 +72,7 @@ const closeModal = () => {
                         type="password"
                         class="mt-1 block w-3/4"
                         placeholder="Password"
-                        @keyup.enter="deleteUser"
+                        @keyup.enter="deleteEmpresa"
                     />
 
                     <InputError :message="form.errors.password" class="mt-2" />
@@ -86,7 +86,7 @@ const closeModal = () => {
                         class="ml-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
-                        @click="deleteUser"
+                        @click="deleteEmpresa"
                     >
                         Delete Account
                     </DangerButton>
