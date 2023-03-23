@@ -10,14 +10,14 @@ const props = defineProps({
     status: String,
 });
 
-const empresa = usePage().props.auth.empresa;
+const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: empresa.name,
-    email: empresa.email,
-    ubicacion: empresa.ubicacion,
-    web: empresa.web,
-    descripcion: empresa.descripcion,
+    name: user.name,
+    email: user.email,
+    ubicacion: user.ubicacion,
+    web: user.web,
+    descripcion: user.descripcion,
 });
 </script>
 
@@ -78,7 +78,7 @@ const form = useForm({
                     <InputError class="mt-2" :message="form.errors.desc" />
                 </div>
 
-                <div v-if="props.mustVerifyEmail && empresa.email_verified_at === null">
+                <div v-if="props.mustVerifyEmail && user.email_verified_at === null">
                     <p class="text-sm mt-2 text-gray-800">
                         Your email address is unverified.
                         <Link :href="route('verification.send')" method="post" as="button"

@@ -49,7 +49,7 @@ const closeModal = () => {
             </p>
         </header>
 
-        <DangerButton @click="confirmEmpresaDeletion">Delete Account</DangerButton>
+        <DangerButton class="mt-3" @click="confirmEmpresaDeletion">Delete Account</DangerButton>
 
         <Modal :show="confirmingEmpresaDeletion" @close="closeModal">
             <div class="p-6">
@@ -77,7 +77,6 @@ const closeModal = () => {
 
                     <InputError :message="form.errors.password" class="mt-2" />
                 </div>
-                <br>
 
                 <div class="mt-6 flex justify-end">
                     <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
