@@ -1,0 +1,474 @@
+/* CSS de Alex */
+/*Selector universal*/
+* {
+    margin: 0;
+    font-family: "Montserrat";
+}
+
+/* Código hecho en primer trimestre de DAM y DAW (grid) */
+/*El grid*/
+.row {
+    /* En la propiedad display agregamos grid para establecer una cuadricula */
+    display: grid;
+    /* Define el numero de columnas en el diseño de cuadricula */
+    grid-template-columns: repeat(12, [ col ] 1fr);
+    /* Define la altura de cada fila */
+    grid-template-rows: repeat(5, [ row ] auto);
+    column-gap: 1em; /* espacio entre columnas */
+    row-gap: 15px; /* espacio entre filas */
+    /* Alinea horizontalmente la cuadricula del interior del contenedor */
+    /* justify-content: center; */
+    /* Alinea verticalmente la cuadricula del interior del contenedor */
+    /* align-content: center; */
+}
+
+.col {
+    /* background: rgb(70, 70, 70); */ /* Color de fondo */
+    /* text-transform: uppercase; */ /* Letra en mayuscula */
+    padding: 1em; /* padding del texto */
+    font-size: 14px; /* Tamaño del texto */
+    /* color: rgb(255, 255, 255); */
+}
+
+.noRowGap {
+    row-gap: 0;
+}
+
+.noColGap {
+    column-gap: 0;
+}
+
+/* Rellena espacio del nav (temporal) */
+.prueba {
+    height: 4rem;
+    background: lightblue;
+    margin-bottom: 2rem;
+}
+
+/* Quita los estilos de listado */
+ul {
+    list-style: none;
+}
+
+/* Quita el estilo que tiene los links */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Estilo del tab */
+.listadoTab {
+    display: flex; /* Lo coloca todo en la misma fila*/
+    border-bottom: 1.5px solid #dee2e6; /* Colorea el borde de abajo y lo hace visible */
+    padding: 0;
+}
+
+.listadoOpcionTab {
+    margin-right: 0;
+    padding: 0.5rem;
+}
+
+.tab {
+    padding: 0.5rem;
+}
+
+/* Senala el tab activo */
+.listadoOpcionTab.activo {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    background-color: #2d764b;
+    transition: 1s;
+}
+
+/* Color del texto del tab activo */
+.listadoOpcionTab.activo a.tab {
+    color: white;
+    transition: 1s;
+}
+
+.listadoOpcionTab a.tab {
+    color: black;
+    transition: 1s;
+}
+
+/* Estilo cuando el raton pasa por encima de los tabs */
+.listadoOpcionTab:hover {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    background-color: #73cd99;
+    transition: 1s;
+}
+
+.listadoOpcionTab:hover a.tab {
+    color: black;
+}
+
+/* Estilo del buscador (filtro) */
+.divBuscador {
+    height: 2rem;
+    margin-top: 2rem;
+}
+
+.inputBuscador {
+    height: 1.37rem;
+    width: 100%;
+    box-sizing: content-box !important; /* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
+    font-size: 1.2rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.4rem;
+    padding-left: 5.2px;
+}
+
+/* Estilo de los botones y sus imagenes correspondientes */
+.btnBuscar {
+    background: lightblue;
+    border: 1px solid lightblue;
+    padding: 0.6rem;
+}
+
+.imgBuscar {
+    margin-bottom: -4px;
+}
+
+.btnFiltrar {
+    background: lightblue;
+    border: 1px solid lightblue;
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem;
+    padding: 0.6rem;
+}
+
+/* Estilo del contenedor de los filtros */
+.optionsFilter {
+    background-color: #73cd99;
+    height: 10rem;
+    width: 100%;
+}
+
+/* Estilo cuando pasa por un boton */
+.btn:hover {
+    cursor: pointer; /* Botones https://developer.mozilla.org/en-US/docs/Web/CSS/cursor */
+    background-color: #7bc8e1;
+}
+
+/* Estilos del listado */
+.listadoOrg {
+    height: 27.5rem; /* Altura */
+    border: 1px solid black; /* Borde (tamano, su aspecto, y color) */
+    /* Radio de los bordes */
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.15rem;
+    border-bottom-right-radius: 0.15rem;
+    border-bottom-left-radius: 0.5rem;
+    /* Comportamiento cuando se sale de la altura o ancho establecido */
+    overflow-y: scroll;
+    /* Margenes */
+    margin-top: 2.5rem;
+    margin-bottom: 4rem;
+    /* Rellenos */
+    padding-top: 1.35rem;
+    padding-right: 1.75rem;
+    padding-bottom: 1.35rem;
+    padding-left: 1.75rem;
+}
+
+/* Imagen de las organizaciones */
+.imgOrg {
+    width: 100%;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+/* Descripción de las organizaciones */
+.contenedorDesc {
+    background: lightblue;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    padding: 0.75rem;
+}
+
+.cardOrg {
+    margin-bottom: 2rem;
+}
+
+/* Sombreado del contenedor y sus elementos (para darle efecto a todo el contenedor) */
+.cardOrg,
+.cardOrg > img.imgOrg,
+.cardOrg > div.contenedorDesc {
+    box-shadow: 10px 0.32rem 0.32rem #b6b6b6;
+}
+
+/* Sombreado cuando el ratón pasa por encima del contenedor */
+.cardOrg:hover,
+.cardOrg:hover > img.imgOrg,
+.cardOrg:hover > div.contenedorDesc {
+    box-shadow: 10px 0.32rem 0.32rem #949494;
+}
+
+/* Estilo de los titulos */
+h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-bottom: 0.35rem;
+}
+
+/* Estilos responsive */
+/* Pantalla grande  */
+@media only screen and (min-width: 941px) {
+    .col-lg-1 {
+        grid-column: span 1;
+    }
+    .col-lg-2 {
+        grid-column: span 2;
+    }
+    .col-lg-3 {
+        grid-column: span 3;
+    }
+    .col-lg-4 {
+        grid-column: span 4;
+    }
+    .col-lg-5 {
+        grid-column: span 5;
+    }
+    .col-lg-6 {
+        grid-column: span 6;
+    }
+    .col-lg-7 {
+        grid-column: span 7;
+    }
+    .col-lg-8 {
+        grid-column: span 8;
+    }
+    .col-lg-9 {
+        grid-column: span 9;
+    }
+    .col-lg-10 {
+        grid-column: span 10;
+    }
+    .col-lg-11 {
+        grid-column: span 11;
+    }
+    .col-lg-12 {
+        grid-column: span 12;
+    }
+}
+
+/* Pantalla tablet  */
+@media only screen and (min-width: 768px) and (max-width: 941px) {
+    .col-md-1 {
+        grid-column: span 1;
+    }
+    .col-md-2 {
+        grid-column: span 2;
+    }
+    .col-md-3 {
+        grid-column: span 3;
+    }
+    .col-md-4 {
+        grid-column: span 4;
+    }
+    .col-md-5 {
+        grid-column: span 5;
+    }
+    .col-md-6 {
+        grid-column: span 6;
+    }
+    .col-md-7 {
+        grid-column: span 7;
+    }
+    .col-md-8 {
+        grid-column: span 8;
+    }
+    .col-md-9 {
+        grid-column: span 9;
+    }
+    .col-md-10 {
+        grid-column: span 10;
+    }
+    .col-md-11 {
+        grid-column: span 11;
+    }
+    .col-md-12 {
+        grid-column: span 12;
+    }
+}
+
+/*Pantalla movil*/
+@media only screen and (min-width: 451px) and (max-width: 768px) {
+    .col-sm-1 {
+        grid-column: span 1;
+    }
+    .col-sm-2 {
+        grid-column: span 2;
+    }
+    .col-sm-3 {
+        grid-column: span 3;
+    }
+    .col-sm-4 {
+        grid-column: span 4;
+    }
+    .col-sm-5 {
+        grid-column: span 5;
+    }
+    .col-sm-6 {
+        grid-column: span 6;
+    }
+    .col-sm-7 {
+        grid-column: span 7;
+    }
+    .col-sm-8 {
+        grid-column: span 8;
+    }
+    .col-sm-9 {
+        grid-column: span 9;
+    }
+    .col-sm-10 {
+        grid-column: span 10;
+    }
+    .col-sm-11 {
+        grid-column: span 11;
+    }
+    .col-sm-12 {
+        grid-column: span 12;
+    }
+
+    /* Estilo del contenedor de la descripción */
+    .contenedorDesc {
+        border-top-right-radius: 0rem;
+        border-bottom-left-radius: 0.75rem;
+        border-bottom-right-radius: 0.75rem;
+    }
+
+    /* Estilo de la imagen (para que quede enfocado y centrado, no hacerlo más peuqeño la imagen) */
+    .imgOrg {
+        height: 10rem;
+        object-fit: cover; /* https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit */
+        border-top-right-radius: 0.75rem;
+        border-bottom-left-radius: 0rem;
+    }
+
+    /*Coloca las opciones del menu nav interactivo en filas*/
+    li.nav {
+        justify-content: center;
+        display: flex;
+        margin: 0;
+        padding: 2rem !important;
+    }
+
+    /*Menu de icono. Hace aparecer la imagen*/
+    .menu-icon {
+        display: block;
+        position: absolute;
+        top: 100px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    /*Imagen del icono*/
+    .menu-icon img {
+        width: 30px;
+        height: 30px;
+        border-radius: 2px;
+    }
+
+    /*Menu interactivo nav*/
+    ul.navList {
+        display: block;
+        position: fixed;
+        /*NavUl height depende del view height (alto de la pantalla actual)*/
+        height: 100vh;
+        /*Muestra el menu interactivo*/
+        top: 146px;
+        left: -120%; /*Sin esto, algunos elementos no se ocultan*/
+        right: 0;
+    }
+
+    /*Lo que hace cuando esta checkeado*/
+    #check:checked ~ ul {
+        left: 0; /**/
+        background-color: #93bce8;
+        transition: all 0.25s; /*Pequeña animación/transición*/
+    }
+}
+
+@media only screen and (max-width: 451px) {
+    .col-1 {
+        grid-column: span 1;
+    }
+    .col-2 {
+        grid-column: span 2;
+    }
+    .col-3 {
+        grid-column: span 3;
+    }
+    .col-4 {
+        grid-column: span 4;
+    }
+    .col-5 {
+        grid-column: span 5;
+    }
+    .col-6 {
+        grid-column: span 6;
+    }
+    .col-7 {
+        grid-column: span 7;
+    }
+    .col-8 {
+        grid-column: span 8;
+    }
+    .col-9 {
+        grid-column: span 9;
+    }
+    .col-10 {
+        grid-column: span 10;
+    }
+    .col-11 {
+        grid-column: span 11;
+    }
+    .col-12 {
+        grid-column: span 12;
+    }
+
+    /*Coloca las opciones del menu nav interactivo en filas*/
+    li.nav {
+        justify-content: center;
+        display: flex;
+        margin: 0;
+        padding: 2rem !important;
+    }
+
+    /*Menu de icono. Hace aparecer la imagen*/
+    .menu-icon {
+        display: block;
+        position: absolute;
+        top: 100px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    /*Imagen del icono*/
+    .menu-icon img {
+        width: 30px;
+        height: 30px;
+        border-radius: 2px;
+    }
+
+    /*Menu interactivo nav*/
+    ul.navList {
+        display: block;
+        position: fixed;
+        /*NavUl height depende del view height (alto de la pantalla actual)*/
+        height: 100vh;
+        /*Muestra el menu interactivo*/
+        top: 146px;
+        left: -120%; /*Sin esto, algunos elementos no se ocultan*/
+        right: 0;
+    }
+
+    /*Lo que hace cuando esta checkeado*/
+    #check:checked ~ ul {
+        left: 0; /**/
+        background-color: #93bce8;
+        transition: all 0.25s; /*Pequeña animación/transición*/
+    }
+}
