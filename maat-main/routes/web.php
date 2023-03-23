@@ -33,6 +33,14 @@ Route::get('/events', function () {
     return Inertia::render('Events');
 })->middleware(['auth', 'verified'])->name('events');
 
+Route::get('/perfilempresa', function () {
+    return Inertia::render('Carlos/PerfilEmpresa');
+})->middleware(['auth', 'verified'])->name('perfil-empresa');
+
+Route::get('/editempresa', function () {
+    return Inertia::render('Carlos/EditEmpresa');
+})->middleware(['auth', 'verified'])->name('edit-empresa');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
