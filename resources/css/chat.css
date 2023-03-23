@@ -253,6 +253,10 @@ a {
     padding-bottom: 0.5rem;
 }
 
+.btnBack{
+    display: none;
+}
+
 /* Estilos responsive */
 /* Pantalla grande  */
 @media only screen and (min-width: 941px) {
@@ -390,6 +394,36 @@ a {
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
     }
+
+    .chatCard {
+        display: flex;
+    }
+
+    .imgOrg {
+        width: 4rem;
+    }
+
+    .nameContainer {
+        display: flex;
+    }
+
+    /* Botón para ir atras y solo aparece cuando es pequena la pantalla */
+    .btnBack {
+        display: block;
+        background: none;
+        border: none;
+        margin: -8.5px 1rem -8.5px 0.1rem;
+    }
+
+    .btnBack > img{
+        width: 2.2rem;
+        filter: invert(1);
+    }
+
+    .btnBack > img:hover{
+        cursor: pointer;
+        filter: contrast(0);
+    }
 }
 
 @media only screen and (max-width: 451px) {
@@ -435,5 +469,36 @@ a {
         font-size: large;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
+    }
+
+
+    .chatCard {
+        display: flex;
+    }
+
+    .imgOrg {
+        width: 4rem;
+    }
+
+    .nameContainer {
+        display: flex;
+    }
+
+    /* Botón para ir atras y solo aparece cuando es pequena la pantalla */
+    .btnBack {
+        display: block;
+        background: none;
+        border: none;
+        margin: -8.5px 1rem -8.5px 0.1rem;
+    }
+
+    .btnBack > img{
+        width: 2.2rem;
+        filter: invert(1);
+    }
+
+    .btnBack > img:hover{
+        cursor: pointer;
+        filter: contrast(0);
     }
 }

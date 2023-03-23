@@ -5,35 +5,38 @@ export default {
         return {
             msg: '',
             nameChat: '',
-            reciente: true
+            reciente: true,
+            chatSmall: false,
+            widthWindow: 0,
         }
     },
 
     watch: {
-
     },
 
     methods: {
         enviar: function (msg) {
             var msgContainer = "";
-            var prueba = document.getElementById('prueba');
-            var chat = document.getElementById('chatContainer');
+            var prueba = document.getElementsByClassName('contenedorPrueba');
+            var chat = document.getElementsByClassName('contenedorChatAfuera');
             var date = new Date();
 
             msgContainer += "<div class='sendChat'>" + msg
             msgContainer += "<p class='timeChatSend'>Enviado a las " + date.toLocaleTimeString() + " de " + date.toLocaleDateString() + "</p></div>"
-            prueba.innerHTML += msgContainer;
+            prueba[0].innerHTML += msgContainer;
+            prueba[1].innerHTML += msgContainer;
 
             this.msg = '';
 
             // Hace scroll hacia el ultimo mensaje
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
-            chat.scrollTo(0, chat.scrollHeight);
+            chat[0].scrollTo(0, chat[0].scrollHeight);
+            chat[1].scrollTo(0, chat[1].scrollHeight);
         },
 
         mostrar: function (event) {
-            var prueba = document.getElementById('prueba');
+            var prueba = document.getElementsByClassName('contenedorPrueba');
 
             try {
                 // Resetea todos los chats a sus estilos por defecto (ninguno activo) del chat de recientes
@@ -64,7 +67,13 @@ export default {
                 this.nameChat = event.currentTarget.lastChild.firstChild.textContent;
 
                 // Resetea los chats enviados
-                prueba.innerHTML = '';
+                prueba[0].innerHTML = '';
+                prueba[1].innerHTML = '';
+
+                // Si la pantalla es muy pequena, entonces muestra el chat del pequeno
+                if (window.innerWidth <= 768) {
+                    this.chatSmall = true;
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -85,7 +94,30 @@ export default {
                 console.error(error);
             }
         },
+
+        // Metodo para ver cuando lo cambian la pantalla
+        onResize: function () {
+            this.widthWindow = window.innerWidth;
+
+            if (window.innerWidth < 768) {
+                this.chatSmall = true;
+            } else {
+                this.chatSmall = false;
+            }
+        }
     },
+
+    // Se pone un listener cuando se carga la pagina para ver cuando se ha hecho la pantalla mas pequeno
+    // https://stackoverflow.com/questions/47219272/how-can-i-monitor-changing-window-sizes-in-vue
+    mounted() {
+        window.addEventListener('resize', this.onResize);
+        this.widthWindow = window.innerWidth;
+    },
+
+    // Antes de destruirlo, se remueve ese listener
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onResize);
+    }
 }
 
 </script>
@@ -100,7 +132,7 @@ export default {
     <main>
         <div class="row noRowGap noColGap">
             <!-- Contenido dividido en 2 contenedores -->
-            <div class="col-lg-3 col-md-3 col-sm-12 col-12 borderContainer">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12 borderContainer" v-show="!this.chatSmall">
                 <div class="chatListOptions row noRowGap noColGap">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-6 chatFilter"
                         v-bind:class="{ 'activeFilterChat': this.reciente }" v-on:click="this.reciente = true">
@@ -201,45 +233,96 @@ export default {
                 </div>
             </div>
 
+            <!-- https://pictogrammers.com/library/mdi/icon/arrow-left-bold-box/ -->
             <div class="col-lg-9 col-md-9 col-sm-12 col-12 row noRowGap noColGap pantallaChat">
-                <div class="nameContainer col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h2>{{ this.nameChat }}</h2>
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatContainer">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatUsers" id="chatContainer">
-                        <div class="receptorChat">
-                            Mensaje prueba
-                            <p class="timeChatReceived">Hora</p>
-                        </div>
-
-                        <div class="receptorChat">
-                            Mensaje prueba
-                            <p class="timeChatReceived">Hora</p>
-                        </div>
-
-                        <div class="sendChat">
-                            Mensaje usuario
-                            <p class="timeChatSend">Hora</p>
-                        </div>
-
-                        <div id="prueba"></div>
+                <div v-show="this.widthWindow > 768"
+                    class="col-lg-12 col-md-12 col-sm-12 col-12 row noRowGap noColGap pantallaChat">
+                    <div class="nameContainer col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h2>{{ this.nameChat }}</h2>
                     </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatInputContainer">
-                        <!-- El autocomplete es código del primer trimestre -->
-                        <input autocomplete="no" v-model="msg" type="text" class="inputChat" placeholder="Escribe..."
-                            v-bind:disabled="this.nameChat == ''">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatContainer">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatUsers contenedorChatAfuera">
+                            <div class="receptorChat">
+                                Mensaje prueba
+                                <p class="timeChatReceived">Hora</p>
+                            </div>
 
-                        <!-- Es lo mismo que v-on:click pero abreviado -->
-                        <button class="btnChat" @click="enviar(msg)">
-                            <img src="./../../img/send.svg">
-                        </button>
+                            <div class="receptorChat">
+                                Mensaje prueba
+                                <p class="timeChatReceived">Hora</p>
+                            </div>
 
-                        <!-- https://developer.mozilla.org/es/docs/Web/HTML/Element/input -->
-                        <button class="btnChat" @click="uploadFile">
-                            <img src="./../../img/attachment.svg">
+                            <div class="sendChat">
+                                Mensaje usuario
+                                <p class="timeChatSend">Hora</p>
+                            </div>
+
+                            <div class="contenedorPrueba"></div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatInputContainer">
+                            <!-- El autocomplete es código del primer trimestre -->
+                            <input autocomplete="no" v-model="msg" type="text" class="inputChat" placeholder="Escribe..."
+                                v-bind:disabled="this.nameChat == ''">
+
+                            <!-- Es lo mismo que v-on:click pero abreviado -->
+                            <button class="btnChat" @click="enviar(msg)">
+                                <img src="./../../img/send.svg">
+                            </button>
+
+                            <!-- https://developer.mozilla.org/es/docs/Web/HTML/Element/input -->
+                            <button class="btnChat" @click="uploadFile">
+                                <img src="./../../img/attachment.svg">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-show="this.widthWindow < 768 && this.chatSmall"
+                    class="col-lg-12 col-md-12 col-sm-12 col-12 row noRowGap noColGap pantallaChat">
+                    <div class="nameContainer col-lg-12 col-md-12 col-sm-12 col-12">
+                        <button class="btnBack" v-show="this.chatSmall">
+                            <img src="./../../img/arrow-left-bold-box.svg" @click="this.chatSmall = false">
                         </button>
+                        <h2>{{ this.nameChat }}</h2>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatContainer">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatUsers contenedorChatAfuera">
+                            <div class="receptorChat">
+                                Mensaje prueba
+                                <p class="timeChatReceived">Hora</p>
+                            </div>
+
+                            <div class="receptorChat">
+                                Mensaje prueba
+                                <p class="timeChatReceived">Hora</p>
+                            </div>
+
+                            <div class="sendChat">
+                                Mensaje usuario
+                                <p class="timeChatSend">Hora</p>
+                            </div>
+
+                            <div class="contenedorPrueba"></div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatInputContainer">
+                            <!-- El autocomplete es código del primer trimestre -->
+                            <input autocomplete="no" v-model="msg" type="text" class="inputChat" placeholder="Escribe..."
+                                v-bind:disabled="this.nameChat == ''">
+
+                            <!-- Es lo mismo que v-on:click pero abreviado -->
+                            <button class="btnChat" @click="enviar(msg)">
+                                <img src="./../../img/send.svg">
+                            </button>
+
+                            <!-- https://developer.mozilla.org/es/docs/Web/HTML/Element/input -->
+                            <button class="btnChat" @click="uploadFile">
+                                <img src="./../../img/attachment.svg">
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
