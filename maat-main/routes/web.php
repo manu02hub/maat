@@ -33,6 +33,30 @@ Route::get('/events', function () {
     return Inertia::render('Events');
 })->middleware(['auth', 'verified'])->name('events');
 
+Route::get('/eventsIndex', function () {
+    return Inertia::render('Manu/Events');
+})->middleware(['auth', 'verified'])->name('eventsIndex');
+
+Route::get('/editEvent', function () {
+    return Inertia::render('Manu/EditEvents');
+})->middleware(['auth', 'verified'])->name('edit-event');
+
+Route::get('/createEvent', function () {
+    return Inertia::render('Manu/CreateEvents');
+})->middleware(['auth', 'verified'])->name('create-event');
+
+Route::get('/plans', function () {
+    return Inertia::render('Manu/Plans');
+})->middleware(['auth', 'verified'])->name('plans');
+
+Route::get('/eventUser', function () {
+    return Inertia::render('Manu/EventUser');
+})->middleware(['auth', 'verified'])->name('event-user');
+
+Route::get('/eventInfo', function () {
+    return Inertia::render('Manu/EventInfo');
+})->middleware(['auth', 'verified'])->name('event-info');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -1,9 +1,9 @@
 <template>
-  <div class="grow flex flex-col md:translate-x-0 transition-transform duration-300 ease-in-out" :class="profileSidebarOpen ? 'translate-x-1/3' : 'translate-x-0'">
+  <div class="grow flex flex-col md:translate-x-0 transition-transform duration-300 ease-in-out w-full" :class="profileSidebarOpen ? 'translate-x-1/3' : 'translate-x-0'">
 
     <!-- Profile background -->
     <div class="relative h-56 bg-slate-200">
-      <img class="object-cover h-full w-full" src="../../images/profile-bg.jpg" width="979" height="220" alt="Profile background" />
+      <img class="object-cover h-full w-full" src="" width="979" height="220" alt="Profile background" />
       <!-- Close button -->
       <button
         class="md:hidden absolute top-4 left-4 sm:left-6 text-white opacity-80 hover:opacity-100"
@@ -28,7 +28,7 @@
 
           <!-- Avatar -->
           <div class="inline-flex -ml-1 -mt-1 mb-4 sm:mb-0">
-            <img class="rounded-full border-4 border-white" src="../../images/user-128-01.jpg" width="128" height="128" alt="Avatar" />
+            <img class="rounded-full border-4 border-white" src="" width="128" height="128" alt="Avatar" />
           </div>
 
           <!-- Actions -->
@@ -127,7 +127,7 @@
                 <!-- Card header -->
                 <div class="grow flex items-center truncate mb-2">
                   <div class="w-8 h-8 shrink-0 flex items-center justify-center bg-slate-700 rounded-full mr-2">
-                    <img class="ml-1" src="../../images/icon-03.svg" width="14" height="14" alt="Icon 03" />
+                    <img class="ml-1" src="" width="14" height="14" alt="Icon 03" />
                   </div>
                   <div class="truncate">
                     <span class="text-sm font-medium text-slate-800">Acme Marketing</span>
@@ -139,10 +139,10 @@
                 <div class="flex justify-between items-center">
                   <!-- Avatars group -->
                   <div class="flex -space-x-3 -ml-0.5">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-02.jpg" width="24" height="24" alt="Avatar" />
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-03.jpg" width="24" height="24" alt="Avatar" />
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-04.jpg" width="24" height="24" alt="Avatar" />
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-05.jpg" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
                   </div>
                   <!-- Link -->
                   <div>
@@ -156,7 +156,7 @@
                 <!-- Card header -->
                 <div class="grow flex items-center truncate mb-2">
                   <div class="w-8 h-8 shrink-0 flex items-center justify-center bg-slate-700 rounded-full mr-2">
-                    <img class="ml-1" src="../../images/icon-02.svg" width="14" height="14" alt="Icon 02" />
+                    <img class="ml-1" src="" width="14" height="14" alt="Icon 02" />
                   </div>
                   <div class="truncate">
                     <span class="text-sm font-medium text-slate-800">Acme Product</span>
@@ -168,9 +168,9 @@
                 <div class="flex justify-between items-center">
                   <!-- Avatars group -->
                   <div class="flex -space-x-3 -ml-0.5">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-06.jpg" width="24" height="24" alt="Avatar" />
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-03.jpg" width="24" height="24" alt="Avatar" />
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/avatar-01.jpg" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
+                    <img class="rounded-full border-2 border-white box-content" src="" width="24" height="24" alt="Avatar" />
                   </div>
                   <!-- Link -->
                   <div>

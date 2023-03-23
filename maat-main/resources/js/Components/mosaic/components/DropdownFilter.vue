@@ -70,7 +70,7 @@
                 <button class="btn-xs bg-indigo-500 hover:bg-indigo-600 text-white" @click="dropdownOpen = false" @focusout="dropdownOpen = false">Apply</button>
               </li>
             </ul>
-          </div>          
+          </div>
         </div>
       </div>
     </transition>

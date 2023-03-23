@@ -98,7 +98,7 @@ export default {
 
     return {
       chartData,
-    } 
+    }
   }
 }
 </script>
