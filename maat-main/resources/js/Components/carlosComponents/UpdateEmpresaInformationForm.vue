@@ -15,6 +15,9 @@ const empresa = usePage().props.auth.empresa;
 const form = useForm({
     name: empresa.name,
     email: empresa.email,
+    ubicacion: empresa.ubicacion,
+    web: empresa.web,
+    descripcion: empresa.descripcion,
 });
 </script>
 
@@ -69,8 +72,8 @@ const form = useForm({
                 <div>
                     <InputLabel for="descripion" value="Descripcion / Sobre nosotros" />
 
-                    <TextInput id="desc" type="text" class="mt-1 block w-full" v-model="form.desc" required autofocus
-                        autocomplete="desc" />
+                    <TextInput id="descripcion" type="text" class="mt-1 block w-full" v-model="form.descripcion" required autofocus
+                        autocomplete="descripcion" />
 
                     <InputError class="mt-2" :message="form.errors.desc" />
                 </div>
