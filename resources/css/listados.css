@@ -197,6 +197,7 @@ a {
 .cardOrg > img.imgOrg,
 .cardOrg > div.contenedorDesc {
     box-shadow: 10px 0.32rem 0.32rem #b6b6b6;
+    transition: 1s;
 }
 
 /* Sombreado cuando el ratón pasa por encima del contenedor */
