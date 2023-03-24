@@ -120,6 +120,109 @@
               </div>
             </SidebarLinkGroup>
 
+
+
+
+<!--...................................... OPCIONES BRUNO ......................................................................-->
+
+<SidebarLinkGroup v-slot="parentLink" :active="route().current('dashboard')">
+
+<a class="block text-slate-200 truncate transition duration-150" href="#0" @click.prevent="sidebarExpanded ? parentLink.handleClick() : sidebarExpanded = true">
+<div class="flex">
+<div class="flex items-center justify-between">
+  <div class="items-center">
+    <svg class="shrink-0 h-0 w-6" viewBox="0 0 24 24">
+      <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-500' : 'text-slate-400'" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />-->
+      <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-600' : 'text-slate-600'" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />-->
+      <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-200' : 'text-slate-400'" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />-->
+    </svg>
+    <div class="flex items-center">
+    <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+      <path class="fill-current" :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'" d="M1 3h22v20H1z" />
+      <path class="fill-current" :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'" d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+    </svg>
+    <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Vistas Bruno</span>
+  </div>
+  </div>
+  <!-- Icon -->
+  <div class="flex shrink-0 ml-2">
+        <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" :class="parentLink.expanded && 'rotate-180'" viewBox="0 0 12 12">
+            <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+        </svg>
+    </div>
+</div>
+</div>
+</a>
+<div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
+<ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
+  <!--<router-link to="/" custom v-slot="{ href, navigate, isExactActive }">-->
+    <li class="mb-1 last:mb-0">
+    <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+            <NavLink :href="route('Panel_ong')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Panel admin ONG</span></NavLink>
+        </a>
+    </li>
+
+    <li class="mb-1 last:mb-0">
+        <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+            <NavLink :href="route('Panel_company')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Panel admin empresa</span></NavLink>
+        </a>
+    </li>
+
+    <li class="mb-1 last:mb-0">
+        <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+            <NavLink :href="route('Panel_user')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Panel admin usuario</span></NavLink>
+        </a>
+    </li>
+
+    <li class="mb-1 last:mb-0">
+        <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+            <NavLink :href="route('Panel_maat')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Panel admin Maat</span></NavLink>
+        </a>
+    </li>
+
+    <li class="mb-1 last:mb-0">
+        <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+            <NavLink :href="route('show')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Mostrar crud</span></NavLink>
+        </a>
+    </li>
+
+    <li class="mb-1 last:mb-0">
+        <a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+            <NavLink :href="route('edit')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Formulario de editar</span></NavLink>
+        </a>
+    </li>
+
+
+    <li class="mb-1 last:mb-0">
+
+<a class="block transition duration-150 truncate" :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'" :href="href" @click="navigate">
+    <NavLink :href="route('events')"><span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Zona de control - MAAT</span></NavLink>
+</a>
+
+</li>
+  <!--</router-link>-->
+</ul>
+</div>
+</SidebarLinkGroup>
+
+
+
+<!--...............................................................................-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- Calendar -->
 
                 <NavLink :href="route('events')">

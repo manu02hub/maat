@@ -51,13 +51,13 @@
               <td class="p-2 whitespace-nowrap">
                 <div class="flex shrink-0 -space-x-3 -ml-px">
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-01.jpg" width="28" height="28" alt="User 01" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 01" />
                   </a>
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-02.jpg" width="28" height="28" alt="User 02" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 02" />
                   </a>
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-03.jpg" width="28" height="28" alt="User 03" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 03" />
                   </a>
                 </div>
               </td>
@@ -97,13 +97,13 @@
               <td class="p-2 whitespace-nowrap">
                 <div class="flex shrink-0 -space-x-3 -ml-px">
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-07.jpg" width="28" height="28" alt="User 07" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 07" />
                   </a>
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-04.jpg" width="28" height="28" alt="User 04" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 04" />
                   </a>
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-11.jpg" width="28" height="28" alt="User 11" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 11" />
                   </a>
                 </div>
               </td>
@@ -143,7 +143,7 @@
               <td class="p-2 whitespace-nowrap">
                 <div class="flex shrink-0 -space-x-3 -ml-px">
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-05.jpg" width="28" height="28" alt="User 05" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 05" />
                   </a>
                 </div>
               </td>
@@ -183,10 +183,10 @@
               <td class="p-2 whitespace-nowrap">
                 <div class="flex shrink-0 -space-x-3 -ml-px">
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-06.jpg" width="28" height="28" alt="User 06" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 06" />
                   </a>
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-11.jpg" width="28" height="28" alt="User 11" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 11" />
                   </a>
                 </div>
               </td>
@@ -227,10 +227,10 @@
               <td class="p-2 whitespace-nowrap">
                 <div class="flex shrink-0 -space-x-3 -ml-px">
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-09.jpg" width="28" height="28" alt="User 09" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 09" />
                   </a>
                   <a class="block" href="#0">
-                    <img class="rounded-full border-2 border-white box-content" src="../../images/user-28-01.jpg" width="28" height="28" alt="User 01" />
+                    <img class="rounded-full border-2 border-white box-content" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="28" height="28" alt="User 01" />
                   </a>
                 </div>
               </td>

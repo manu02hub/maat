@@ -33,6 +33,34 @@ Route::get('/events', function () {
     return Inertia::render('Events');
 })->middleware(['auth', 'verified'])->name('events');
 
+//--------- RUTAS BRUNO ---------
+Route::get('panel_ong', function () {
+    return Inertia::render('Bruno/Panel_ong');
+})->middleware(['auth', 'verified'])->name('Panel_ong');
+
+Route::get('panel_company', function () {
+    return Inertia::render('Bruno/Panel_company');
+})->middleware(['auth', 'verified'])->name('Panel_company');
+
+Route::get('panel_user', function () {
+    return Inertia::render('Bruno/Panel_user');
+})->middleware(['auth', 'verified'])->name('Panel_user');
+
+Route::get('panel_maat', function () {
+    return Inertia::render('Bruno/maat/panel_maat');
+})->middleware(['auth', 'verified'])->name('Panel_maat');
+
+Route::get('show', function () {
+    return Inertia::render('Bruno/maat/show');
+})->middleware(['auth', 'verified'])->name('show');
+
+Route::get('edit', function () {
+    return Inertia::render('Bruno/maat/edit');
+})->middleware(['auth', 'verified'])->name('edit');
+//-------------------------------
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

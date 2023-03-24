@@ -45,6 +45,8 @@
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <span class="sr-only">Menu</span>
+
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><NavLink :href="route('edit')">+</NavLink></button>
               </th>
             </tr>
           </thead>
@@ -69,22 +71,24 @@
 import { ref, watch } from 'vue'
 import Customer from './CustomersTableItem.vue'
 
-import Image01 from '../../images/user-40-01.jpg'
-import Image02 from '../../images/user-40-02.jpg'
-import Image03 from '../../images/user-40-03.jpg'
-import Image04 from '../../images/user-40-04.jpg'
-import Image05 from '../../images/user-40-05.jpg'
-import Image06 from '../../images/user-40-06.jpg'
-import Image07 from '../../images/user-40-07.jpg'
-import Image08 from '../../images/user-40-08.jpg'
-import Image09 from '../../images/user-40-09.jpg'
-import Image10 from '../../images/user-40-10.jpg'
+import NavLink from '@/Components/NavLink.vue';
+import Image01 from './user.jpg'
+import Image02 from './user.jpg'
+import Image03 from './user.jpg'
+import Image04 from './user.jpg'
+import Image05 from './user.jpg'
+import Image06 from './user.jpg'
+import Image07 from './user.jpg'
+import Image08 from './user.jpg'
+import Image09 from './user.jpg'
+import Image10 from './user.jpg'
 
 export default {
   name: 'CustomersTable',
   components: {
     Customer,
-  },  
+    NavLink,
+  },
   props: ['selectedItems'],
   setup(props, { emit }) {
 
@@ -97,12 +101,12 @@ export default {
         selected.value = customers.value.map(customer => customer.id)
       }
     }
-    
+
     watch(selected, () => {
       selectAll.value = customers.value.length === selected.value.length ? true : false
       emit('change-selection', selected.value)
-    })    
-    
+    })
+
     const customers = ref([
       {
         id: '0',
@@ -223,7 +227,7 @@ export default {
         spent: '$1,289.97',
         refunds: '2',
         fav: false
-      }      
+      }
     ])
 
     return {
