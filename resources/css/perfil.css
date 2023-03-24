@@ -130,16 +130,19 @@ a {
     transition: 1s;
 }
 
+/* Este chat solo aparece cuando es pequena la pantalla */
 .btnChat {
     display: none;
     float: right;
 }
 
+/* Estilo del boton del chat (para pantallas grandes) */
 .btnChat2 {
     height: 4rem;
     width: 100%;
 }
 
+/* Estilo cuando pasa el raton por encima del boton */
 .btnChat:hover,
 .btnChat2:hover {
     background-color: #2d764b;
@@ -256,6 +259,7 @@ del SVG (gráficos vectoriales escalables) */
         grid-column: span 12;
     }
 
+    /* Ajuste de la imagen de los empleados */
     .imgEmpl {
         height: 4.5rem;
         width: 75%;
@@ -312,6 +316,7 @@ del SVG (gráficos vectoriales escalables) */
         text-align: center;
     }
 
+    /* Los botones de chat se intercambian. Aparece solo el boton para pantallas pequenas */
     .btnChat {
         display: inline-block;
         width: 8rem;
@@ -322,6 +327,7 @@ del SVG (gráficos vectoriales escalables) */
     }
 }
 
+/* Pantallas muy pequenas */
 @media only screen and (max-width: 451px) {
     .col-1 {
         grid-column: span 1;

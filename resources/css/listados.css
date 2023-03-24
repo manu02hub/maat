@@ -348,49 +348,6 @@ h1 {
         border-top-right-radius: 0.75rem;
         border-bottom-left-radius: 0rem;
     }
-
-    /*Coloca las opciones del menu nav interactivo en filas*/
-    li.nav {
-        justify-content: center;
-        display: flex;
-        margin: 0;
-        padding: 2rem !important;
-    }
-
-    /*Menu de icono. Hace aparecer la imagen*/
-    .menu-icon {
-        display: block;
-        position: absolute;
-        top: 100px;
-        right: 20px;
-        cursor: pointer;
-    }
-
-    /*Imagen del icono*/
-    .menu-icon img {
-        width: 30px;
-        height: 30px;
-        border-radius: 2px;
-    }
-
-    /*Menu interactivo nav*/
-    ul.navList {
-        display: block;
-        position: fixed;
-        /*NavUl height depende del view height (alto de la pantalla actual)*/
-        height: 100vh;
-        /*Muestra el menu interactivo*/
-        top: 146px;
-        left: -120%; /*Sin esto, algunos elementos no se ocultan*/
-        right: 0;
-    }
-
-    /*Lo que hace cuando esta checkeado*/
-    #check:checked ~ ul {
-        left: 0; /**/
-        background-color: #93bce8;
-        transition: all 0.25s; /*Pequeña animación/transición*/
-    }
 }
 
 @media only screen and (max-width: 451px) {
@@ -429,48 +386,5 @@ h1 {
     }
     .col-12 {
         grid-column: span 12;
-    }
-
-    /*Coloca las opciones del menu nav interactivo en filas*/
-    li.nav {
-        justify-content: center;
-        display: flex;
-        margin: 0;
-        padding: 2rem !important;
-    }
-
-    /*Menu de icono. Hace aparecer la imagen*/
-    .menu-icon {
-        display: block;
-        position: absolute;
-        top: 100px;
-        right: 20px;
-        cursor: pointer;
-    }
-
-    /*Imagen del icono*/
-    .menu-icon img {
-        width: 30px;
-        height: 30px;
-        border-radius: 2px;
-    }
-
-    /*Menu interactivo nav*/
-    ul.navList {
-        display: block;
-        position: fixed;
-        /*NavUl height depende del view height (alto de la pantalla actual)*/
-        height: 100vh;
-        /*Muestra el menu interactivo*/
-        top: 146px;
-        left: -120%; /*Sin esto, algunos elementos no se ocultan*/
-        right: 0;
-    }
-
-    /*Lo que hace cuando esta checkeado*/
-    #check:checked ~ ul {
-        left: 0; /**/
-        background-color: #93bce8;
-        transition: all 0.25s; /*Pequeña animación/transición*/
     }
 }

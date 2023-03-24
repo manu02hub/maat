@@ -253,6 +253,7 @@ a {
     padding-bottom: 0.5rem;
 }
 
+/* El boton solo aparece cuando son pantallas pequenas */
 .btnBack{
     display: none;
 }
@@ -297,6 +298,7 @@ a {
         grid-column: span 12;
     }
 
+    /* Ajustando las opciones de chat (reciente y todos los contactos) */
     .chatFilter {
         padding: 1rem;
     }
@@ -395,14 +397,17 @@ a {
         padding-bottom: 1.25rem;
     }
 
+    /* Pone todos los elementos de la lista de contactos en la misma linea */
     .chatCard {
         display: flex;
     }
 
+    /* Ajuste de la foto del contacto */
     .imgOrg {
         width: 4rem;
     }
 
+    /* Pone todo lo que esta en el contenedor del nombre del chat en la misma linea */
     .nameContainer {
         display: flex;
     }
@@ -415,11 +420,13 @@ a {
         margin: -8.5px 1rem -8.5px 0.1rem;
     }
 
+    /* Cambia el estilo del vector grafico */
     .btnBack > img{
         width: 2.2rem;
         filter: invert(1);
     }
 
+    /* Estilo cuando se pasa el raton por encima de la imagen */
     .btnBack > img:hover{
         cursor: pointer;
         filter: contrast(0);
@@ -471,15 +478,17 @@ a {
         padding-bottom: 1.25rem;
     }
 
-
+    /* Pone todos los elementos de la lista de contactos en la misma linea */
     .chatCard {
         display: flex;
     }
 
+    /* Cambia el estilo del vector grafico */
     .imgOrg {
         width: 4rem;
     }
 
+    /* Pone todo lo que esta en el contenedor del nombre del chat en la misma linea */
     .nameContainer {
         display: flex;
     }
@@ -492,11 +501,13 @@ a {
         margin: -8.5px 1rem -8.5px 0.1rem;
     }
 
+    /* Cambia el estilo del vector grafico */
     .btnBack > img{
         width: 2.2rem;
         filter: invert(1);
     }
 
+    /* Estilo cuando se pasa el raton por encima de la imagen */
     .btnBack > img:hover{
         cursor: pointer;
         filter: contrast(0);
