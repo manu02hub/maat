@@ -20,7 +20,6 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'perfil' => Route::has('perfil'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -31,8 +30,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/perfil', function () {
-    return Inertia::render('PerfilEmpresa');
-})->middleware(['auth', 'verified'])->name('perfil-empresa');
+    return Inertia::render('PerfilUsuario');
+})->middleware(['auth', 'verified'])->name('perfil-usuario');
+
+Route::get('/editar', function () {
+    return Inertia::render('EditarUsuario');
+})->middleware(['auth', 'verified'])->name('editar-usuario');
+
 
 Route::get('/events', function () {
     return Inertia::render('Events');

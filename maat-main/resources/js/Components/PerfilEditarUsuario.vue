@@ -26,21 +26,19 @@
               <input id="business-id" class="form-input w-full" type="text" />
             </div>
             <div class="sm:w-1/3">
-              <label class="block text-sm font-medium mb-1" for="location">Localidad</label>
-              <input id="location" class="form-input w-full" type="text" />
+              <label class="block text-sm font-medium mb-1" for="location">Empresa</label>
+              <input id="location" class="form-input w-full" type="text" disabled/>
             </div>
           </div>
         </section>
         <!-- Email -->
         <section>
-          <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Email</h3>
           <!--<div class="text-sm">Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia.</div>-->
           <div class="flex flex-wrap mt-5">
             <div class="mr-2">
-              <label class="sr-only" for="email">Email</label>
-              <input id="email" class="form-input" type="email" />
+              <label class="block text-sm font-medium mb-1" for="email">Email-Empresa</label>
+              <input id="email" class="form-input" type="email" disabled/>
             </div>
-            <button class="btn border-slate-200 hover:border-slate-300 shadow-sm text-indigo-500">Cambiar</button>
           </div>
         </section>
         <!-- Password -->
@@ -50,11 +48,6 @@
           <div class="mt-5">
             <button class="btn border-slate-200 shadow-sm text-indigo-500">Establecer nueva contraseña</button>
           </div>
-        </section>
-        <!-- Smart Sync -->
-        <section>
-          <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Eventos asistidos:</h3>
-          <div class="text-sm">"Aquí aparecerá un listado"</div>
         </section>
       </div>
       <!-- Panel footer -->
