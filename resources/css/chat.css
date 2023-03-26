@@ -213,7 +213,7 @@ a {
     overflow-wrap: break-word;
     font-size: medium;
     background-color: #ffffff;
-    border-radius: 4rem 0.75rem 4rem 0.25rem; /* Le da forma de burbuja*/
+    border-radius: 5rem 4rem 4rem 0.25rem; /* Le da forma de burbuja*/
     margin-right: 4.25rem;
     margin-bottom: 1rem;
     padding: 1.5rem;
@@ -225,7 +225,7 @@ a {
     overflow-wrap: break-word;
     font-size: medium;
     background-color: #ffffff;
-    border-radius: 0.75rem 4rem 0.75rem 4rem;
+    border-radius: 4rem 5rem 0.25rem 4rem;
     margin-bottom: 1rem;
     margin-left: 4.25rem;
     padding: 1.5rem;
