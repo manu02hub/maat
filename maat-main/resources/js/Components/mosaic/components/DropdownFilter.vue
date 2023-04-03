@@ -70,7 +70,11 @@
                 <button class="btn-xs bg-indigo-500 hover:bg-indigo-600 text-white" @click="dropdownOpen = false" @focusout="dropdownOpen = false">Apply</button>
               </li>
             </ul>
+<<<<<<< HEAD
           </div>
+=======
+          </div>          
+>>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
         </div>
       </div>
     </transition>
@@ -118,4 +122,8 @@ export default {
     }
   }
 }
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b

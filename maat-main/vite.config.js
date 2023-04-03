@@ -17,7 +17,10 @@ export default defineConfig({
             },
         }),
     ],
+<<<<<<< HEAD
     optimizeDeps: {
         exclude: ['oh-vue-icons/icons'],
       },
+=======
+>>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
 });

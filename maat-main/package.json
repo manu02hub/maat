@@ -23,7 +23,10 @@
         "chart.js": "^4.2.1",
         "chartjs-adapter-moment": "^1.0.1",
         "moment": "^2.29.4",
+<<<<<<< HEAD
         "oh-vue-icons": "^1.0.0-rc3",
+=======
+>>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
         "vue-chartjs": "^5.2.0"
     }
 }
