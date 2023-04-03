@@ -7,7 +7,7 @@
         <h1>¿Que hacemos?</h1>
 
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-  
+
 <!-- The Timeline -->
 
 <ul class="timeline mb-5">
@@ -22,7 +22,7 @@
 			<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
 		</div>
 	</li>
-  
+
 	<!-- Item 2 -->
 	<li>
 		<div class="direction-l">
@@ -44,7 +44,7 @@
 			<div class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
 		</div>
 	</li>
-  
+
 </ul>
 
 
@@ -89,7 +89,7 @@
   background: -o-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: -ms-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: linear-gradient(to bottom, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
-  
+
   z-index: 5;
 }
 
@@ -121,7 +121,7 @@
 .flag-wrapper {
   position: relative;
   display: inline-block;
-  
+
   text-align: center;
 }
 
@@ -131,7 +131,7 @@
   background: rgb(248,248,248);
   padding: 6px 10px;
   border-radius: 5px;
-  
+
   font-weight: 600;
   text-align: left;
 }
@@ -198,7 +198,7 @@
 
 .time-wrapper {
   display: inline;
-  
+
   line-height: 1em;
   font-size: 0.66666em;
   color: rgb(250,80,80);
@@ -221,7 +221,7 @@
 
 .desc {
   margin: 1em 0.75em 0 0;
-  
+
   font-size: 0.77777em;
   font-style: italic;
   line-height: 1.5em;
@@ -315,7 +315,7 @@
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0,0.20);
 	-moz-box-shadow: 0 0 1px rgba(0,0,0,0.20);
 	box-shadow: 0 0 1px rgba(0,0,0,0.20);
-	
+
   z-index: 15;
 }
 
@@ -324,7 +324,7 @@
 	position: relative;
 	margin: 1em 1em 0 1em;
 	padding: 1em;
-	
+
   z-index: 15;
 }
 

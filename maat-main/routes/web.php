@@ -15,7 +15,6 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
 Route::get('/', function () {
     // return Inertia::render('Welcome', [
     //     'canLogin' => Route::has('login'),
@@ -25,17 +24,6 @@ Route::get('/', function () {
     // ]);
     return Inertia::render('public/Index');
 })->name('index');
-=======
-
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
->>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -45,7 +33,6 @@ Route::get('/events', function () {
     return Inertia::render('Events');
 })->middleware(['auth', 'verified'])->name('events');
 
-<<<<<<< HEAD
 //---------------------MANU-----------------
 Route::get('/eventsIndex', function () {
     return Inertia::render('private/Manu/Events');
@@ -168,8 +155,6 @@ Route::get('feed/post', function () {
 })->middleware(['auth', 'verified'])->name('post');
 //------------------------------------------
 
-=======
->>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

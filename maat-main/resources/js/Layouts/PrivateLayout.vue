@@ -1,6 +1,5 @@
 <script setup>
-<<<<<<< HEAD
-=======
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 
@@ -12,13 +11,12 @@ import AnalyticsCard04 from '@/Components/mosaic/partials/analytics/AnalyticsCar
 
 import WelcomeBanner from '@/Components/mosaic/partials/dashboard/WelcomeBanner.vue';
 
->>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
+
 import Sidebar from '@/Components/mosaic/partials/Sidebar.vue';
 import HeaderVue from '@/Components/mosaic/partials/Header.vue';
 </script>
 
 <template>
-<<<<<<< HEAD
     <div class="flex h-screen overflow-hidden">
         <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
 
@@ -26,39 +24,8 @@ import HeaderVue from '@/Components/mosaic/partials/Header.vue';
             <!-- Site header -->
             <HeaderVue :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
             <main>
-                    <slot ></slot>
+                <slot></slot>
             </main>
         </div>
     </div>
-=======
-
-
-
-    <div class="flex h-screen overflow-hidden">
-    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" />
-
-    <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-white">
-      <!-- Site header -->
-      <HeaderVue :sidebarOpen="sidebarOpen" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
-
-
-      <main>
-        <div class="relative flex">
-            <slot></slot>
-        </div>
-
-    </main>
-
-
-
-
-</div>
-    </div>
-
-
-
-
-
-
->>>>>>> 6d99990ebfdb12bc38a99cc93a13f68ed23d634b
 </template>
