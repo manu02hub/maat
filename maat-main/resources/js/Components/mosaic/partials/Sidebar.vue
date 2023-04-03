@@ -56,7 +56,7 @@
                         <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Pages</span>
                     </h3>
                     <ul class="mt-3">
-                        <!-- Dashboard -->
+                        <!-- ALEX -->
                         <SidebarLinkGroup v-slot="parentLink" :active="route().current('dashboard')">
 
                             <a class="block text-slate-200 truncate transition duration-150" href="#0"
@@ -79,8 +79,8 @@
                                                         d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
                                                 </svg>
                                                 <span
-                                                    class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Lista
-                                                    opciones</span>
+                                                    class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    ALEX</span>
                                             </div>
                                         </div>
                                         <!-- Icon -->
@@ -101,9 +101,9 @@
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
                                             :href="href" @click="navigate">
-                                            <NavLink :href="route('dashboard')"><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Opcion
-                                                    1</span></NavLink>
+                                            <NavLink :href="route('chat')"><span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    Chat</span></NavLink>
                                         </a>
 
 
@@ -116,9 +116,9 @@
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
                                             :href="href" @click="navigate">
-                                            <NavLink :href="route('events')"><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Opcion
-                                                    2</span></NavLink>
+                                            <NavLink :href="route('listado')"><span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    Listado organizaciones</span></NavLink>
                                         </a>
 
                                     </li>
@@ -129,9 +129,9 @@
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
                                             :href="href" @click="navigate">
-                                            <NavLink :href="route('events')"><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Opcion
-                                                    3</span></NavLink>
+                                            <NavLink :href="route('perfilP')"><span
+                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    Perfil Publico EMPRESA/ORGANIZACION</span></NavLink>
                                         </a>
 
                                     </li>
@@ -180,7 +180,8 @@
                                                 d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
                                         </svg>
                                         <span
-                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Mis eventos ONG</span>
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Mis
+                                            eventos ONG</span>
                                     </div>
                                 </a>
                             </li>
@@ -226,11 +227,199 @@
                                                 d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
                                         </svg>
                                         <span
-                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos Usuario</span>
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Eventos
+                                            Usuario</span>
                                     </div>
                                 </a>
                             </li>
                         </NavLink>
+
+                        <!-- LISTADO USER EMPRESA -->
+                        <NavLink :href="route('listUserEmpresa')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listado
+                                            Usuarios Empresa</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+
+                        <!-- LISTADO USER ONG -->
+                        <NavLink :href="route('listUserONG')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listado
+                                            Usuarios ONG</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+
+                        <!-- LPERFIL USUARIO -->
+                        <NavLink :href="route('perfil-usuario')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            Perfil Usuario</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!-- EDITAR PRFIL USUARIO -->
+                        <NavLink :href="route('editar-usuario')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            Editar Perfil Usuario</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  PRFIL EMPRESA -->
+                        <NavLink :href="route('perfil-empresa')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            Perfil Empresa</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                         <!--  EDITAR EMPRESA -->
+                         <NavLink :href="route('edit-empresa')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            Editar Empresa</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  FEED -->
+                        <NavLink :href="route('feed')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            FEED</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+                        <br>
+                        <!--  POST -->
+                        <NavLink :href="route('post')">
+                            <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
+                                <a class="block text-slate-200 truncate transition duration-150"
+                                    :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"
+                                    @click="navigate">
+                                    <div class="flex items-center">
+                                        <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
+                                                d="M1 3h22v20H1z" />
+                                            <path class="fill-current"
+                                                :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                            POST</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
                     </ul>
                 </div>
             </div>
