@@ -42,7 +42,8 @@ import Hacemos from '@/Components/Public/Hacemos.vue';
 .videoContenedor img {
     position: absolute;
     text-align: center;
-    width: 51%;
+    width: 50%;
+    height: 54.9%;
 }
 
 video {
