@@ -34,7 +34,7 @@ import Hacemos from '@/Components/Public/Hacemos.vue';
 <style>
 .videoContenedor {
     text-align: center;
-    width: 50%;
+    width: 75%;
     margin: 0 auto;
 
 }
@@ -42,7 +42,7 @@ import Hacemos from '@/Components/Public/Hacemos.vue';
 .videoContenedor img {
     position: absolute;
     text-align: center;
-    width: 50%;
+    width: 75%;
 }
 
 video {
