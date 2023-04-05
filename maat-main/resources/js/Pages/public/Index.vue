@@ -43,7 +43,6 @@ import Hacemos from '@/Components/Public/Hacemos.vue';
     position: absolute;
     text-align: center;
     width: 50%;
-    height: 54.9%;
 }
 
 video {
