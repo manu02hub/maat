@@ -26,7 +26,6 @@
         background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url("../../../img/banner.jpg");
         text-align: center;
         margin: 0 auto;
-        display: grid;
         grid-template-columns: 50% 50%;
         grid-template-rows: auto;
     }

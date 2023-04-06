@@ -1,11 +1,11 @@
 <script setup>
-import MenuSimple from '@/Components/Public/MenuSimple.vue';
+import NavbarResponsive from '@/Components/Public/NavbarResponsive.vue';
 import FooterSimple from '@/Components/Public/FooterSimple.vue';
 
 </script>
 
 <template>
-    <MenuSimple/>
+    <NavbarResponsive/>
     <slot></slot>
 
     <FooterSimple/>
