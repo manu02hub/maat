@@ -1,11 +1,15 @@
 <!-- Parte Alex -->
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
             filter: false,
-            organization: false
+            organization: false,
+            user: '',
+            prueba: ''
         }
     },
 
@@ -14,7 +18,27 @@ export default {
     },
 
     methods: {
+        getData: async function () {
+            // Usamos axios para conseguir datos como las organizaciones registradas y el usuario actual
+            // CORS afecta cuando se intenta hacerlo con http. En local vale que se haga directamente
+            await axios.get('/get/listado', {
+                params: {
+                    ong: 1
+                }
+            }).then((response) => {
+                // Recibe los datos obtenidos (según lo que envía de vuelta el controller
+                // correspondiente)
+                console.log(response.data);
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     },
+
+    mounted() {
+        this.user = this.$page.props.auth.user;
+        console.log(this.user)
+    }
 }
 
 </script>
@@ -26,6 +50,11 @@ export default {
 
     <!-- Contenido propio -->
     <main>
+        <div>
+            <input type="text" v-model="prueba" placeholder="prueba">
+            <button class="btn btn-primary" @click="getData">Prueba</button>
+        </div>
+
         <div class="row noRowGap">
             <div class="col-lg-1 col-md-1"></div>
             <div class="col-lg-10 col-md-10 col-sm-12 col-12">

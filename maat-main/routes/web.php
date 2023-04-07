@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ListadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +18,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     // return Inertia::render('Welcome', [
     //     'canLogin' => Route::has('login'),
@@ -93,17 +97,30 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'ONG'], function
 
 
 //---------------------ALEX-----------------
-Route::get('/listado', function () {
-    return Inertia::render('private/Alex/ListadoCliente');
-})->name('listado');
 
-Route::get('/perfilP', function () {
-    return Inertia::render('private/Alex/PerfilPublic');
-})->name('perfilP');
+Route::middleware('auth')->group(function () {
+    Route::get('/listado', function () {
+        return Inertia::render('private/Alex/ListadoCliente');
+    })->name('listado');
 
-Route::get('/chat', function () {
-    return Inertia::render('private/Alex/Chat');
-})->name('chat');
+    Route::get('/perfilP', function () {
+        return Inertia::render('private/Alex/PerfilPublic');
+    })->name('perfilP');
+
+    Route::get('/chat', function () {
+        return Inertia::render('private/Alex/Chat');
+    })->name('chat');
+
+    Route::get('/get/listado', [ListadoController::class, 'index']);
+    Route::get('/get/empresa', [ProfileController::class, 'getEmpr']);
+    Route::get('/logout', [AuthenticatedSessionController::class, 'cerrarSesion']);
+});
+
+// Route::get('/get/listado', function () {
+//     return Inertia::render('private/Alex/ListadoCliente');
+// })->name('listado');
+
+
 //------------------------------------------
 
 //---------------------MARIO Y PAULA-----------------
@@ -161,4 +178,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

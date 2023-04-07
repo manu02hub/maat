@@ -4,13 +4,17 @@ export default {
         const registerButton = document.getElementById("register");
         const loginButton = document.getElementById("login");
         const container = document.getElementById("container");
+
+        // Empresa es false y ONG es true
         registerButton.addEventListener("click", () => {
             container.classList.add("right-panel-active");
         });
+
         loginButton.addEventListener("click", () => {
             container.classList.remove("right-panel-active");
         });
     },
+
     components: { GuestLayout }
 };
 </script>
@@ -22,6 +26,7 @@ import TextInput from "@/Components/TextInput.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import ShadowBox from "@/Components/ShadowBox.vue";
+
 const form = useForm({
     nombre_empresa: "",
     nif: "",
@@ -29,12 +34,33 @@ const form = useForm({
     password: "",
     password_confirmation: "",
     terms: false,
+    clientOng: false
 });
+
 const submit = () => {
     form.post(route("register"), {
         onFinish: () => form.reset("password", "password_confirmation"),
     });
 };
+
+// Cambia de ong a empresa y viceversa
+const changeToOng = () => {
+    form.nombre_empresa = "";
+    form.nif = "";
+    form.correo = "";
+    form.password = "";
+    form.password_confirmation = "";
+    form.clientOng = true;
+}
+
+const changeToEmpr = () => {
+    form.nombre_empresa = "";
+    form.nif = "";
+    form.correo = "";
+    form.password = "";
+    form.password_confirmation = "";
+    form.clientOng = false;
+}
 </script>
 <template>
     <Head title="Registro" />
@@ -132,10 +158,10 @@ const submit = () => {
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <button class="ghost" id="login">¿Eres una ONG?</button>
+                    <button class="ghost" id="login" @click="changeToOng">¿Eres una ONG?</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <button class="ghost" id="register">
+                    <button class="ghost" id="register" @click="changeToEmpr">
                         ¿Eres una empresa?
                     </button>
                 </div>
@@ -318,4 +344,5 @@ button.ghost i {
 
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
-}</style>
+}
+</style>
