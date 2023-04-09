@@ -61,6 +61,7 @@ const changeToEmpr = () => {
     form.password_confirmation = "";
     form.clientOng = false;
 }
+
 </script>
 <template>
     <Head title="Registro" />
@@ -75,7 +76,7 @@ const changeToEmpr = () => {
                         <InputError class="mt-2" :message="form.errors.nombre_empresa" />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="nif" value="NIF" class="block text-sm font-medium mb-1" />
+                        <InputLabel for="nif" value="Numero / Tarjeta" class="block text-sm font-medium mb-1" />
                         <TextInput id="nif" type="text" v-model="form.nif" required autofocus class="form-input w-full" />
                     </div>
                     <div class="mt-4">

@@ -47,8 +47,8 @@ class RegisteredUserController extends Controller
         if ($idOrg == null) {
             // Se crea la empresa
             $org = DB::insert(
-                'insert into entidad (nombre, ubicacion, web, descripcion, tamano) values (?, ?, ?, ?, ?)',
-                [$request->nombre_empresa, 'Ubicacion', 'Web', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quae cum saepe veritatis, incidunt assumenda quibusdam numquam beatae animi harum soluta quos nihil qui quaerat sequi alias sint veniam quisquam!', 1]
+                'insert into entidad (nombre, ubicacion, web, descripcion, tamano, numero_tarjeta) values (?, ?, ?, ?, ?, ?)',
+                [$request->nombre_empresa, 'Ubicacion', 'Web', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quae cum saepe veritatis, incidunt assumenda quibusdam numquam beatae animi harum soluta quos nihil qui quaerat sequi alias sint veniam quisquam!', 1, $request->nif]
             );
 
             $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
             $empresa = DB::insert('insert into empresa (entidad_id) values (?)', [$idOrg[0]->id]);
         }
 
-        // Mira si existe el usuario
+        // Mira si existe el usuario a registrar dentro de la entidad
         $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
         from maat.users
         inner join maat.entidad on entidad.id = users.entidad_id
@@ -67,8 +67,14 @@ class RegisteredUserController extends Controller
         from maat.users
         where users.email = ?', [$request->correo]);
 
+        // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
+        $employees = DB::select('select count(users.id) as empleados
+        from maat.users
+        inner join maat.entidad on entidad.id = users.entidad_id
+        where entidad.nombre = ?', [$request->nombre_empresa]);
+
         // Si no existe el usuario en la organización y el email a registrar no existe
-        if ($userExist == null && $emailExist == null) {
+        if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
             // Se crea usuario administrador de esa organizacion
             $user = User::create([
                 'nombre' => $request->nombre_empresa,

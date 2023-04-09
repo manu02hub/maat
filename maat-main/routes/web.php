@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
 
 /*
@@ -98,23 +98,22 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'ONG'], function
 
 //---------------------ALEX-----------------
 
-Route::middleware('auth')->group(function () {
-    Route::get('/listado', function () {
-        return Inertia::render('private/Alex/ListadoCliente');
-    })->name('listado');
+Route::get('/listado', function () {
+    return Inertia::render('private/Alex/ListadoCliente');
+})->middleware(['auth', 'verified'])->name('listado');
 
-    Route::get('/perfilP', function () {
-        return Inertia::render('private/Alex/PerfilPublic');
-    })->name('perfilP');
+Route::get('/perfilP', function () {
+    return Inertia::render('private/Alex/PerfilPublic');
+})->middleware(['auth', 'verified'])->name('perfilP');
 
-    Route::get('/chat', function () {
-        return Inertia::render('private/Alex/Chat');
-    })->name('chat');
+Route::get('/chat', function () {
+    return Inertia::render('private/Alex/Chat');
+})->middleware(['auth', 'verified'])->name('chat');
 
-    Route::get('/get/listado', [ListadoController::class, 'index']);
-    Route::get('/get/empresa', [ProfileController::class, 'getEmpr']);
-    Route::get('/logout', [AuthenticatedSessionController::class, 'cerrarSesion']);
-});
+Route::get('/get/listado', [ListadoController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/get/empresa', [ProfileEmprController::class, 'getEmpr'])->middleware(['auth', 'verified']);
+Route::post('/edit/empresa', [ProfileEmprController::class, 'editEmpr'])->middleware(['auth', 'verified']);
+Route::post('/del/empresa', [ProfileEmprController::class, 'deleteEmpr'])->middleware(['auth', 'verified'])->name('empr.delete');
 
 // Route::get('/get/listado', function () {
 //     return Inertia::render('private/Alex/ListadoCliente');

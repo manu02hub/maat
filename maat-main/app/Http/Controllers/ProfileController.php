@@ -62,20 +62,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    // Alex
-    /**
-     * Coge los datos de la empresa del usuario iniciado sesion
-     */
-    public function getEmpr(Request $request)
-    {
-        $org = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre,
-        entidad.logo, entidad.ubicacion, entidad.web, entidad.descripcion, entidad.tamano,
-        entidad.numero_tarjeta
-        from maat.users
-        inner join maat.entidad on entidad.id = users.entidad_id
-        where entidad.id = ?', [$request->empresa]);
-
-        return $org;
-    }
 }
