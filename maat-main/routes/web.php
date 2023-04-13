@@ -123,6 +123,12 @@ Route::get('/donativos', function () {
     return Inertia::render('public/Donativos');
 })->name('donativos');
 
+Route::get('/correoRecivido', function () {
+    return Inertia::render('public/CorreoRecivido');
+})->name('correoRecivido');
+
+
+
 
 //---------------------PIERO-----------------
 Route::get('/perfil', function () {
