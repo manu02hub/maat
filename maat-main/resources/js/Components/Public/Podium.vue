@@ -1277,7 +1277,7 @@
                                 Udacity &#40664;&#35748;&#20027;&#39029;</span
                             >
                             <span data-country="BR"
-                                >Tornar esta a p�gina padr�o da Udacity</span
+                                >Tornar esta a página padr�o da Udacity</span
                             >
                             <span data-country="IN"
                                 >Always make this my Udacity homepage</span
@@ -1291,7 +1291,7 @@
                         ><span data-country="CN"
                             >&#21069;&#24448;&#20248;&#36798;&#23398;&#22478;&#20013;&#25991;&#32593;&#31449;</span
                         ><span data-country="BR"
-                            >Ir para a p�gina brasileira</span
+                            >Ir para a página brasileira</span
                         ><span data-country="IN">Go to Indian Site</span></a
                     >
                     <a
