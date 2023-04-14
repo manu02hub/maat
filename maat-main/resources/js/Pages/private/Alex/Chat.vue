@@ -1,13 +1,23 @@
 <!-- Parte Alex -->
 <script>
+import axios from 'axios';
+import { useForm } from '@inertiajs/vue3';
+
 export default {
     data() {
         return {
-            msg: '',
             nameChat: '',
             reciente: true,
             chatSmall: false,
             widthWindow: 0,
+
+            form: useForm({
+                msg: '',
+                idOrigen: 0,
+                idDestino: 0,
+                fecha: '',
+                hora: '',
+            })
         }
     },
 
@@ -15,28 +25,8 @@ export default {
     },
 
     methods: {
-        enviar: function (msg) {
-            var msgContainer = "";
-            var prueba = document.getElementsByClassName('contenedorPrueba');
-            var chat = document.getElementsByClassName('contenedorChatAfuera');
-            var date = new Date();
-
-            msgContainer += "<div class='sendChat'>" + msg
-            msgContainer += "<p class='timeChatSend'>Enviado a las " + date.toLocaleTimeString() + " de " + date.toLocaleDateString() + "</p></div>"
-            prueba[0].innerHTML += msgContainer;
-            prueba[1].innerHTML += msgContainer;
-
-            this.msg = '';
-
-            // Hace scroll hacia el ultimo mensaje
-            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
-            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
-            chat[0].scrollTo(0, chat[0].scrollHeight);
-            chat[1].scrollTo(0, chat[1].scrollHeight);
-        },
-
         mostrar: function (event) {
-            var prueba = document.getElementsByClassName('contenedorPrueba');
+            var prueba = document.getElementsByClassName('contenedorChat');
 
             try {
                 // Resetea todos los chats a sus estilos por defecto (ninguno activo) del chat de recientes
@@ -99,10 +89,63 @@ export default {
         onResize: function () {
             this.widthWindow = window.innerWidth;
 
+            // Cambia el valor dependiendo del tamano de la pantalla
             if (window.innerWidth < 768) {
                 this.chatSmall = true;
             } else {
                 this.chatSmall = false;
+            }
+        },
+
+        iniciarChat: function () {
+            var msgContainer = "";
+            var chat = document.getElementsByClassName('contenedorChat');
+            var contenedorChat = document.getElementsByClassName('contenedorChatAfuera');
+
+            msgContainer += "<div class='sendChat'>" + this.form.msg
+            msgContainer +=
+                "<p class='timeChatSend'>Enviado a las " +
+                this.form.hora + " de " + this.form.fecha + "</p></div>";
+
+            chat[0].innerHTML += msgContainer;
+            chat[1].innerHTML += msgContainer;
+
+            // Hace scroll hacia el ultimo mensaje
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+            contenedorChat[0].scrollTo(0, contenedorChat[0].scrollHeight);
+            contenedorChat[1].scrollTo(0, contenedorChat[1].scrollHeight);
+        },
+
+        enviar: function (msg) {
+            var msgContainer = "";
+            var chat = document.getElementsByClassName('contenedorChat');
+            var contenedorChat = document.getElementsByClassName('contenedorChatAfuera');
+            var date = new Date();
+
+            if (msg != null && msg != '') {
+                this.form.msg = msg;
+
+                msgContainer += "<div class='sendChat'>" + this.form.msg
+                msgContainer +=
+                    "<p class='timeChatSend'>Enviado a las " +
+                    this.form.hora + " de " + this.form.fecha + "</p></div>";
+
+                chat[0].innerHTML += msgContainer;
+                chat[1].innerHTML += msgContainer;
+
+                // Hace scroll hacia el ultimo mensaje
+                // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
+                // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+                contenedorChat[0].scrollTo(0, contenedorChat[0].scrollHeight);
+                contenedorChat[1].scrollTo(0, contenedorChat[1].scrollHeight);
+
+                this.form.hora = date.toLocaleTimeString();
+                this.form.fecha = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+
+                this.form.post('/chat/send', {
+                    onFinish: () => console.log('Se ha actualizado los datos de la empresa')
+                });
             }
         }
     },
@@ -110,13 +153,48 @@ export default {
     // Se pone un listener cuando se carga la pagina para ver cuando se ha hecho la pantalla mas pequeno
     // https://stackoverflow.com/questions/47219272/how-can-i-monitor-changing-window-sizes-in-vue
     mounted() {
+        // Esta escuchando cuando cambia el tamano de la pantalla
         window.addEventListener('resize', this.onResize);
         this.widthWindow = window.innerWidth;
-    },
 
-    // Antes de destruirlo, se remueve ese listener
-    beforeDestroy() {
-        window.removeEventListener('resize', this.onResize);
+        console.log(this.$page.props);
+
+        // Si es nulo, entonces se ha accedido mediante /chat
+        if (this.$page.props.chatWith == null) {
+            // Muestra todos los chats
+
+            // Si tiene valor, entonces se ha accedido mediante chat del perfil publico
+        } else {
+            // Abre el chat que se ha escogido.
+            // Peticion para recibir el chat con la que se quiere hablar
+            axios.post('/chat/getBy', {
+                params: {
+                    id: this.$page.props.chatWith,
+                    userId: this.$page.props.auth.user.entidad_id,
+                }
+            }).then((response) => {
+                console.log(response.data);
+                this.nameChat = response.data.chatWith[0][0].nombre;
+
+                this.form.msg = response.data.chatWith[0][0].contenido;
+                this.form.idOrigen = this.$page.props.auth.user.entidad_id;
+
+                // El que es distinto es con quien quiere chatear
+                if (response.data.chatWith[0][0].id_origen != this.$page.props.auth.user.entidad_id) {
+                    this.form.idDestino = response.data.chatWith[0][0].id_origen;
+                } else {
+                    this.form.idDestino = response.data.chatWith[0][0].id_destino;
+                }
+
+                this.form.fecha = response.data.chatWith[0][0].fecha;
+                this.form.hora = response.data.chatWith[0][0].hora;
+                this.iniciarChat();
+            });
+        }
+
+        // Notas de chat:
+        // Recibe y envia id de origen y destino en los mensajes. Revisar si es el usuario quien lo envia
+        // Si no, entonces significa que lo ha enviado el que ha contactado (el otro)
     }
 }
 
@@ -150,7 +228,8 @@ export default {
                         <div v-show="this.reciente">
                             <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg" alt="">
+                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                    alt="">
 
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
@@ -163,7 +242,8 @@ export default {
 
                             <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg" alt="">
+                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                    alt="">
 
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
@@ -179,7 +259,8 @@ export default {
                         <div v-show="!this.reciente">
                             <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg" alt="">
+                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                    alt="">
 
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
@@ -192,7 +273,8 @@ export default {
 
                             <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg" alt="">
+                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                    alt="">
 
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
@@ -205,7 +287,8 @@ export default {
 
                             <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg" alt="">
+                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                    alt="">
 
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
@@ -218,7 +301,8 @@ export default {
 
                             <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg" alt="">
+                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                    alt="">
 
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
@@ -248,17 +332,12 @@ export default {
                                 <p class="timeChatReceived">Hora</p>
                             </div>
 
-                            <div class="receptorChat">
-                                Mensaje prueba
-                                <p class="timeChatReceived">Hora</p>
-                            </div>
-
                             <div class="sendChat">
                                 Mensaje usuario
                                 <p class="timeChatSend">Hora</p>
                             </div>
 
-                            <div class="contenedorPrueba"></div>
+                            <div class="contenedorChat"></div>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatInputContainer">
@@ -290,22 +369,7 @@ export default {
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatContainer">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatUsers contenedorChatAfuera">
-                            <div class="receptorChat">
-                                Mensaje prueba
-                                <p class="timeChatReceived">Hora</p>
-                            </div>
-
-                            <div class="receptorChat">
-                                Mensaje prueba
-                                <p class="timeChatReceived">Hora</p>
-                            </div>
-
-                            <div class="sendChat">
-                                Mensaje usuario
-                                <p class="timeChatSend">Hora</p>
-                            </div>
-
-                            <div class="contenedorPrueba"></div>
+                            <div class="contenedorChat"></div>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatInputContainer">
@@ -335,7 +399,7 @@ export default {
     </footer>
 </template>
 
-<style>
+<style >
 /* Importando css propio */
 @import url("./../../../../css/chat.css");
 </style>

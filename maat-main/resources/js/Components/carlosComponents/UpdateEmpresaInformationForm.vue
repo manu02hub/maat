@@ -42,9 +42,7 @@ onMounted(() => {
 
 // Actualiza los datos
 const actualizar = () => {
-    form.post("/edit/empresa", {
-        onFinish: () => window.alert('Se ha actualizado los datos de la empresa')
-    });
+    form.post("/edit/empresa");
 };
 </script>
 

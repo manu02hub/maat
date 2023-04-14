@@ -102,23 +102,38 @@ Route::get('/listado', function () {
     return Inertia::render('private/Alex/ListadoCliente');
 })->middleware(['auth', 'verified'])->name('listado');
 
-Route::get('/perfilP', function () {
-    return Inertia::render('private/Alex/PerfilPublic');
-})->middleware(['auth', 'verified'])->name('perfilP');
+Route::get('/perfilP/{id}', [ListadoController::class, 'getPerfilP'])->middleware(
+    ['auth', 'verified']
+)->name('perfilP');
 
+// Abre el chat en general
 Route::get('/chat', function () {
     return Inertia::render('private/Alex/Chat');
 })->middleware(['auth', 'verified'])->name('chat');
 
-Route::get('/get/listado', [ListadoController::class, 'index'])->middleware(['auth', 'verified']);
+// Abre el chat según la id de la entidad con la que se quiera hablar
+Route::get('/chat/{id}', [ListadoController::class, 'getIdReceptor'])->middleware(
+    ['auth', 'verified']
+)->name('getIdChatWith');
+Route::post('/chat/getBy', [ListadoController::class, 'getChatById'])->middleware(
+    ['auth', 'verified']
+)->name('chatById');
+Route::post('/chat/send', [ListadoController::class, 'sendChat'])->middleware(
+    ['auth', 'verified']
+)->name('chat.send');
+
+// Listado de ONGs
+Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
+Route::get('/get/listado/reciente', [ListadoController::class, 'getListadoOngRecientes'])->middleware(
+    ['auth', 'verified']
+);
+
+// CRUD empresa
 Route::get('/get/empresa', [ProfileEmprController::class, 'getEmpr'])->middleware(['auth', 'verified']);
 Route::post('/edit/empresa', [ProfileEmprController::class, 'editEmpr'])->middleware(['auth', 'verified']);
-Route::post('/del/empresa', [ProfileEmprController::class, 'deleteEmpr'])->middleware(['auth', 'verified'])->name('empr.delete');
-
-// Route::get('/get/listado', function () {
-//     return Inertia::render('private/Alex/ListadoCliente');
-// })->name('listado');
-
+Route::post('/del/empresa', [ProfileEmprController::class, 'deleteEmpr'])->middleware(
+    ['auth', 'verified']
+)->name('empr.delete');
 
 //------------------------------------------
 

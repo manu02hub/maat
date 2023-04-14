@@ -124,7 +124,7 @@
                                     </li>
                                     <!--</router-link>-->
                                     <!--<router-link to="/dashboard/fintech" custom v-slot="{ href, navigate, isExactActive }">-->
-                                    <li class="mb-1 last:mb-0">
+                                    <!-- <li class="mb-1 last:mb-0">
 
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
@@ -134,7 +134,7 @@
                                                     Perfil Publico EMPRESA/ORGANIZACION</span></NavLink>
                                         </a>
 
-                                    </li>
+                                    </li> -->
                                     <!--</router-link>-->
                                 </ul>
                             </div>
