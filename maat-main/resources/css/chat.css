@@ -254,7 +254,7 @@ a {
 }
 
 /* El boton solo aparece cuando son pantallas pequenas */
-.btnBack{
+.btnBack {
     display: none;
 }
 
@@ -421,13 +421,13 @@ a {
     }
 
     /* Cambia el estilo del vector grafico */
-    .btnBack > img{
+    .btnBack > img {
         width: 2.2rem;
         filter: invert(1);
     }
 
     /* Estilo cuando se pasa el raton por encima de la imagen */
-    .btnBack > img:hover{
+    .btnBack > img:hover {
         cursor: pointer;
         filter: contrast(0);
     }
@@ -502,13 +502,13 @@ a {
     }
 
     /* Cambia el estilo del vector grafico */
-    .btnBack > img{
+    .btnBack > img {
         width: 2.2rem;
         filter: invert(1);
     }
 
     /* Estilo cuando se pasa el raton por encima de la imagen */
-    .btnBack > img:hover{
+    .btnBack > img:hover {
         cursor: pointer;
         filter: contrast(0);
     }

@@ -176,7 +176,7 @@ export default {
     </main>
 </template>
 
-<style>
+<style scoped>
 /* Importando css propio */
 @import url("./../../../../css/listados.css");
 </style>

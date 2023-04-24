@@ -118,7 +118,7 @@ export default {
     <!-- Footer -->
 </template>
 
-<style>
+<style scoped>
 /* Importando css propio */
 @import url("./../../../../css/perfil.css");
 

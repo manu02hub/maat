@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Exception;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -18,146 +17,174 @@ class ListadoController extends Controller
      */
     public function getListado(Request $request)
     {
-        // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
-        $ong = DB::select('select * from maat.organizacion
-        inner join maat.entidad on organizacion.entidad_id = entidad.id
-        where entidad.id = ?', [$request->id]);
+        try {
+            // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
+            $ong = DB::select('select * from maat.organizacion
+            inner join maat.entidad on organizacion.entidad_id = entidad.id
+            where entidad.id = ?', [$request->id]);
 
-        // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
-        $empr = DB::select('select * from maat.empresa
-        inner join maat.entidad on empresa.entidad_id = entidad.id
-        where entidad.id = ?', [$request->id]);
+            // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
+            $empr = DB::select('select * from maat.empresa
+            inner join maat.entidad on empresa.entidad_id = entidad.id
+            where entidad.id = ?', [$request->id]);
 
-        // Es ONG por lo que va a mostrar las organizaciones de tipo empresa
-        if (count($ong) == 1) {
-            $ong  = DB::select('select * from maat.empresa
+            // Es ONG por lo que va a mostrar las organizaciones de tipo empresa
+            if (count($ong) == 1) {
+                $ong  = DB::select('select * from maat.empresa
             inner join maat.entidad on empresa.entidad_id = entidad.id');
 
-            // Envía los resultados obtenidos
-            return $ong;
-            // Es empresa por lo que va a mostrar las organizaciones de tipo ONG
-        } else if (count($empr) == 1) {
-            $empr = DB::select('select * from maat.organizacion
+                // Envía los resultados obtenidos
+                return $ong;
+                // Es empresa por lo que va a mostrar las organizaciones de tipo ONG
+            } else if (count($empr) == 1) {
+                $empr = DB::select('select * from maat.organizacion
             inner join maat.entidad on organizacion.entidad_id = entidad.id');
 
-            // Envía los resultados obtenidos
-            return $empr;
-        } else {
-            // Te devuelve al listado (acceso desde el metodo en url)
-            return Inertia::render('private/Alex/ListadoCliente');
+                // Envía los resultados obtenidos
+                return $empr;
+            } else {
+                // Te devuelve al listado (acceso desde el metodo en url)
+                return Inertia::render('private/Alex/ListadoCliente');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
     public function getListadoOngRecientes()
     {
-        // Guarda en $orgs todas las organizaciones de tipo ong
-        $orgs = DB::select('select * from maat.organizacion
-        inner join maat.entidad on organizacion.entidad_id = entidad.id');
+        try {
+            // Guarda en $orgs todas las organizaciones de tipo ong
+            $orgs = DB::select('select * from maat.organizacion
+            inner join maat.entidad on organizacion.entidad_id = entidad.id');
 
-        // Insertar dato
-        // $insertar = DB::insert('insert into prueba (name) values (?)', [$request->prueba]);
+            // Insertar dato
+            // $insertar = DB::insert('insert into prueba (name) values (?)', [$request->prueba]);
 
-        // Actualizar dato
-        // $update = DB::update("update prueba set name = ? where idprueba = ?", [$request->prueba, 1]);
-        // $update = DB::update("update prueba set name = 'asd' where idprueba = ?", [$request->prueba]);
+            // Actualizar dato
+            // $update = DB::update("update prueba set name = ? where idprueba = ?", [$request->prueba, 1]);
+            // $update = DB::update("update prueba set name = 'asd' where idprueba = ?", [$request->prueba]);
 
-        // Envía los resultados obtenidos
-        return $orgs;
+            // Envía los resultados obtenidos
+            return $orgs;
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     public function getPerfilP($id)
     {
-        // Mira si existe la entidad a llamar
-        $orgs = DB::select('select * from maat.entidad where entidad.id = ?', [$id]);
+        try {
+            // Mira si existe la entidad a llamar
+            $orgs = DB::select('select * from maat.entidad where entidad.id = ?', [$id]);
 
-        // Guarda en $orgData los datos de la organizacion de manera ascendente
-        // (administradores > empleados)
-        $orgData = DB::select('select users.nombre as empleado, users.email, users.rol_id, entidad.id as org,
-        entidad.nombre, entidad.logo, entidad.ubicacion, entidad.web, entidad.descripcion, entidad.tamano,
-        entidad.numero_tarjeta
-        from maat.entidad
-        inner join maat.users on users.entidad_id = entidad.id
-        where entidad.id = ?
-        order by users.rol_id asc', [$id]);
+            // Guarda en $orgData los datos de la organizacion de manera ascendente
+            // (administradores > empleados)
+            $orgData = DB::select('select users.nombre as empleado, users.email, users.rol_id, entidad.id as org,
+            entidad.nombre, entidad.logo, entidad.ubicacion, entidad.web, entidad.descripcion, entidad.tamano,
+            entidad.numero_tarjeta
+            from maat.entidad
+            inner join maat.users on users.entidad_id = entidad.id
+            where entidad.id = ?
+            order by users.rol_id asc', [$id]);
 
-        // Mira si es una ONG o no
-        $ong = DB::select('select * from maat.entidad
-        inner join maat.organizacion on entidad.id = organizacion.entidad_id
-        where entidad.id = ?', [$id]);
+            // Mira si es una ONG o no
+            $ong = DB::select('select * from maat.entidad
+            inner join maat.organizacion on entidad.id = organizacion.entidad_id
+            where entidad.id = ?', [$id]);
 
-        // Envía los resultados obtenidos
-        if (count($orgs) == 1 && count($orgData) != 0) {
-            return Inertia::render('private/Alex/PerfilPublic', ['datos' => $orgData, 'isOng' => count($ong)]);
-        } else {
-            return Inertia::render('private/Alex/ListadoCliente');
+            // Envía los resultados obtenidos
+            if (count($orgs) == 1 && count($orgData) != 0) {
+                return Inertia::render('private/Alex/PerfilPublic', ['datos' => $orgData, 'isOng' => count($ong)]);
+            } else {
+                return Inertia::render('private/Alex/ListadoCliente');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
     // Redirecciona si la id a acceder es numerica
     public function getIdReceptor($id)
     {
-        // Dependiendo de si el numero es numerico o no, te lleva a una vista u otra
-        if (is_numeric($id)) {
-            return Inertia::render('private/Alex/Chat', ['chatWith' => $id]);
-        } else {
-            return Inertia::render('private/Alex/ListadoCliente');
+        try {
+            // Dependiendo de si el numero es numerico o no, te lleva a una vista u otra
+            if (is_numeric($id)) {
+                return Inertia::render('private/Alex/Chat', ['chatWith' => $id]);
+            } else {
+                return Inertia::render('private/Alex/ListadoCliente');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
     public function getChatById(Request $request)
     {
-        // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
-        $ong = DB::select('select * from maat.organizacion
+        try {
+            // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
+            $ong = DB::select('select * from maat.organizacion
                 inner join maat.entidad on organizacion.entidad_id = entidad.id
                 where entidad.id = ?', [$request->params['userId']]);
 
-        // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
-        $empr = DB::select('select * from maat.empresa
+            // Revisa que la id de la entidad con la que se quiere chatear no sea la misma que la del usuario
+            $withIsOng = DB::select('select * from maat.organizacion
+                        inner join maat.entidad on organizacion.entidad_id = entidad.id
+                        where entidad.id = ?', [$request->params['id']]);
+
+            // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
+            $empr = DB::select('select * from maat.empresa
                 inner join maat.entidad on empresa.entidad_id = entidad.id
                 where entidad.id = ?', [$request->params['userId']]);
 
-        // Es ONG el usuario, por lo que va a mostrar los chats de empresa
-        if (count($ong) == 1 && $request->params['id'] != $request->params['userId']) {
-            // Guarda en $chatEmpresa todas las entidades empresas
-            $chatEmpresa = DB::select('select * from maat.entidad
+            // Revisa que la id de la entidad con la que se quiere chatear no sea la misma que la del usuario
+            $withIsEmpr = DB::select('select * from maat.empresa
+                        inner join maat.entidad on empresa.entidad_id = entidad.id
+                        where entidad.id = ?', [$request->params['id']]);
+
+            // Es ONG el usuario, por lo que va a mostrar los chats de empresa
+            if (
+                count($ong) == 1 && $request->params['id'] != $request->params['userId'] &&
+                count($withIsOng) < 1
+            ) {
+                // Guarda en $chatEmpresa todas las entidades empresas
+                $chatEmpresa = DB::select('select * from maat.entidad
                     inner join maat.empresa on empresa.entidad_id = entidad.id');
 
-            // Mira con quien está chateando
-            $chatWith = DB::select(
-                'select * from maat.chat
-                    where chat.organizacion_id = ? and chat.empresa_id = ?',
-                [$request->params['userId'], $request->params['id']]
-            );
-
-            // Mira si existe el chat con el usuario seleccionado
-            if (count($chatWith) == 0) {
-                // Si no existe, entonces crea uno
-                $chatId = DB::table('maat.chat')->insertGetId([
-                    'empresa_id' => $request->params['id'],
-                    'organizacion_id' => $request->params['userId']
-                ]);
-
-                $chat = DB::table('maat.mensaje')->insert([
-                    'contenido' => 'Has iniciado un chat',
-                    'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
-                    'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
-                    'chat_id' => $chatId,
-                    'id_origen' => $request->params['id'],
-                    'id_destino' => $request->params['userId'],
-                ]);
-
+                // Mira con quien está chateando
                 $chatWith = DB::select(
-                    'select mensaje.id_origen, mensaje.id_destino, mensaje.contenido,
-                        mensaje.fecha, mensaje.hora, entidad.nombre from maat.chat
-                        inner join maat.mensaje on mensaje.chat_id = chat.id
-                        inner join maat.entidad on entidad.id = chat.organizacion_id
-                        where chat.organizacion_id = ? and chat.empresa_id = ?',
+                    'select * from maat.chat
+                    where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['userId'], $request->params['id']]
                 );
 
-                // Mira todos los chats existentes.
-                return ['chats' => $chatEmpresa, 'chatWith' => $chatWith];
-            } else if (count($chatWith) > 0) {
+                // Recoge los chats recientes (o sea los que hayan tenido contacto con la empresa
+                // anteriormente)
+                $recentChats = DB::select(
+                    'select * from maat.entidad
+                    inner join maat.chat on chat.empresa_id = entidad.id
+                    where chat.organizacion_id = ?',
+                    [$request->params['userId']]
+                );
+
+                // Mira si existe el chat con el usuario seleccionado
+                if (count($chatWith) == 0) {
+                    // Si no existe, entonces crea uno
+                    $chatId = DB::table('maat.chat')->insertGetId([
+                        'empresa_id' => $request->params['id'],
+                        'organizacion_id' => $request->params['userId']
+                    ]);
+
+                    $chat = DB::table('maat.mensaje')->insert([
+                        'contenido' => 'Has iniciado un chat',
+                        'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
+                        'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
+                        'chat_id' => $chatId,
+                        'id_origen' => $request->params['id'],
+                        'id_destino' => $request->params['userId'],
+                    ]);
+                }
+
                 // Si existe, entonces abre el historial de chat con el usuario
                 $chatWith = DB::select(
                     'select mensaje.id_origen, mensaje.id_destino, mensaje.contenido,
@@ -169,51 +196,69 @@ class ListadoController extends Controller
                 );
 
                 // Mira todos los chats existentes.
-                return ['chats' => $chatEmpresa, 'chatWith' => [$chatWith]];
-            }
+                return ['chats' => $chatEmpresa, 'chatWith' => [$chatWith], 'recentChats' => $recentChats];
 
-            // Es empresa el usuario, por lo que va a mostrar los chats de ONG
-        } else if (count($empr) == 1 && $request->params['id'] != $request->params['userId']) {
-            // Guarda en $chatOngs todas las entidades ONGs
-            $chatOngs = DB::select('select * from maat.entidad
+                // Es empresa el usuario, por lo que va a mostrar los chats de ONG
+            } else if (
+                count($empr) == 1 && $request->params['id'] != $request->params['userId'] &&
+                count($withIsEmpr) < 1
+            ) {
+                // Guarda en $chatOngs todas las entidades ONGs
+                $chatOngs = DB::select('select * from maat.entidad
                     inner join maat.organizacion on organizacion.entidad_id = entidad.id');
 
-            // Mira con quien está chateando
-            $chatWith = DB::select(
-                'select * from maat.chat
-                    where chat.organizacion_id = ? and chat.empresa_id = ?',
-                [$request->params['id'], $request->params['userId']]
-            );
-
-            // Mira si existe el chat con el usuario
-            if (count($chatWith) == 0) {
-                // Si no existe, entonces crea uno
-                $chatId = DB::table('maat.chat')->insertGetId([
-                    'empresa_id' => $request->params['userId'],
-                    'organizacion_id' => $request->params['id']
-                ]);
-
-                $chat = DB::table('maat.mensaje')->insert([
-                    'contenido' => 'Has iniciado un chat',
-                    'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
-                    'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
-                    'chat_id' => $chatId,
-                    'id_origen' => $request->params['userId'],
-                    'id_destino' => $request->params['id'],
-                ]);
-
+                // Mira con quien está chateando
                 $chatWith = DB::select(
-                    'select mensaje.id_origen, mensaje.id_destino, mensaje.contenido,
-                        mensaje.fecha, mensaje.hora, entidad.nombre from maat.chat
-                        inner join maat.mensaje on mensaje.chat_id = chat.id
-                        inner join maat.entidad on entidad.id = chat.organizacion_id
-                        where chat.organizacion_id = ? and chat.empresa_id = ?',
+                    'select * from maat.chat
+                    where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['id'], $request->params['userId']]
                 );
 
-                // Mira todos los chats existentes.
-                return ['chats' => $chatOngs, 'chatWith' => $chatWith];
-            } else if (count($chatWith) > 0) {
+                // Se ha usado el IN para poder coger los ultimos mensajes (valores concretos)
+                // https://www.w3schools.com/mysql/mysql_in.asp
+                // https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html
+                // Recoge los chats recientes (o sea los que hayan tenido contacto con la empresa
+                // anteriormente)
+                // Salia un error de clausula group by mayormente porque no puede agrupar diferentes
+                // valores de una misma columna (en este caso el contenido del mensaje)
+                $recentChats = DB::select(
+                    'select entidad.nombre, c1.organizacion_id, mensaje.contenido
+                    from maat.chat as c1
+                    inner join (
+                        select mensaje.chat_id
+                        from maat.mensaje
+                        group by mensaje.chat_id
+                        order by mensaje.chat_id desc
+                        ) c2
+                    on c1.id = c2.chat_id
+                    inner join mensaje on c2.chat_id = mensaje.chat_id
+                    inner join maat.entidad on entidad.id = c1.organizacion_id
+                    where empresa_id = ? and mensaje.contenido in (
+                        select max(contenido)
+                        from maat.mensaje
+                        where c2.chat_id = mensaje.chat_id
+                        )',
+                    [$request->params['userId']]
+                );
+
+                // Mira si existe el chat con el usuario
+                if (count($chatWith) == 0) {
+                    // Si no existe, entonces crea uno
+                    $chatId = DB::table('maat.chat')->insertGetId([
+                        'empresa_id' => $request->params['userId'],
+                        'organizacion_id' => $request->params['id']
+                    ]);
+
+                    $chat = DB::table('maat.mensaje')->insert([
+                        'contenido' => 'Has iniciado un chat',
+                        'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
+                        'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
+                        'chat_id' => $chatId,
+                        'id_origen' => $request->params['userId'],
+                        'id_destino' => $request->params['id'],
+                    ]);
+                }
+
                 // Si existe, entonces abre el historial de chat con el usuario
                 $chatWith = DB::select(
                     'select mensaje.id_origen, mensaje.id_destino, mensaje.contenido,
@@ -225,8 +270,12 @@ class ListadoController extends Controller
                 );;
 
                 // Mira todos los chats existentes.
-                return ['chats' => $chatOngs, 'chatWith' => [$chatWith]];
+                return ['chats' => $chatOngs, 'chatWith' => [$chatWith], 'recentChats' => $recentChats];
+            } else {
+                return "No existe";
             }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -243,81 +292,86 @@ class ListadoController extends Controller
             $empr = DB::select('select * from maat.empresa
             inner join maat.entidad on empresa.entidad_id = entidad.id
             where entidad.id = ?', [$request->authId]);
-        } catch (Exception $e) {
-            echo $e;
+
+            // Es ONG el usuario, por lo que va a mostrar los chats de empresa
+            if (count($ong) == 1) {
+                // Verifica que son distintas entidades (usuario y el del chat escogido)
+                $checkType = DB::select('select * from maat.chat
+                inner join maat.mensaje on mensaje.chat_id = chat.id
+                where chat');
+
+                return $ong;
+                // Es empresa el usuario, por lo que va a mostrar los chats de ONG
+            } else if (count($empr) == 1) {
+                // Muestra todos los chats ONG
+                $recent = DB::select('select * from maat.chat
+                inner join maat.mensaje on mensaje.chat_id = chat.id
+                inner join maat.organizacion on organizacion.entidad_id = chat.organizacion_id
+                where chat.empresa_id = ?', [$request->authId]);
+            }
+
+            // Mira todos los chats existentes.
+            return Inertia::render('private/Alex/Chat', ['id' => $request->authId]);
+        } catch (\Throwable $th) {
+            echo $th;
         }
-
-        // Es ONG el usuario, por lo que va a mostrar los chats de empresa
-        if (count($ong) == 1) {
-            // Verifica que son distintas entidades (usuario y el del chat escogido)
-            $checkType = DB::select('select * from maat.chat
-            inner join maat.mensaje on mensaje.chat_id = chat.id
-            where chat');
-
-            return $ong;
-            // Es empresa el usuario, por lo que va a mostrar los chats de ONG
-        } else if (count($empr) == 1) {
-            // Muestra todos los chats ONG
-            $recent = DB::select('select * from maat.chat
-            inner join maat.mensaje on mensaje.chat_id = chat.id
-            inner join maat.organizacion on organizacion.entidad_id = chat.organizacion_id
-            where chat.empresa_id = ?', [$request->authId]);
-        }
-
-        // Mira todos los chats existentes.
-        return Inertia::render('private/Alex/Chat', ['id' => $request->authId]);
     }
 
     // Método para enviar mensajes de chat
     public function sendChat(Request $request)
     {
-        // Mira si el usuario es de una organizacion
-        $ong = DB::select('select * from maat.organizacion
-        inner join maat.entidad on organizacion.entidad_id = entidad.id
-        where entidad.id = ?', [$request->idOrigen]);
+        try {
+            // Mira si el usuario es de una organizacion
+            $ong = DB::select('select * from maat.organizacion
+            inner join maat.entidad on organizacion.entidad_id = entidad.id
+            where entidad.id = ?', [$request->idOrigen]);
 
-        // Mira si el usuario es de una empresa
-        $empr = DB::select('select * from maat.empresa
-        inner join maat.entidad on empresa.entidad_id = entidad.id
-        where entidad.id = ?', [$request->idOrigen]);
+            // Mira si el usuario es de una empresa
+            $empr = DB::select('select * from maat.empresa
+            inner join maat.entidad on empresa.entidad_id = entidad.id
+            where entidad.id = ?', [$request->idOrigen]);
 
-        // Dependiendo del contador entonces significa que es un tipo de usuario (ONG o empresa)
-        // Es ONG el usuario, por lo que va enviar de ong a empresa
-        if (count($ong) == 1) {
-            // Coge el id del chat del usuario
-            $chatId = DB::select(
-                'select * from maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
-                [$request->idOrigen, $request->idDestino]
-            );
+            // Dependiendo del contador entonces significa que es un tipo de usuario (ONG o empresa)
+            // Es ONG el usuario, por lo que va enviar de ong a empresa
+            if (count($ong) == 1) {
+                // Coge el id del chat del usuario
+                $chatId = DB::select(
+                    'select * from maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
+                    [$request->idOrigen, $request->idDestino]
+                );
 
-            $chat = DB::table('maat.mensaje')->insert([
-                'contenido' => $request->msg,
-                'fecha' => $request->fecha,
-                'hora' => $request->hora,
-                'chat_id' => $chatId[0]->id,
-                'id_origen' => $request->idOrigen,
-                'id_destino' => $request->idDestino,
-            ]);
+                $chat = DB::table('maat.mensaje')->insert([
+                    'contenido' => $request->msg,
+                    'fecha' => $request->fecha,
+                    'hora' => $request->hora,
+                    'chat_id' => $chatId[0]->id,
+                    'id_origen' => $request->idOrigen,
+                    'id_destino' => $request->idDestino,
+                ]);
 
-            // Es empresa el usuario, por lo que va a mostrar los chats de ONG
-        } else if (count($empr) == 1) {
-            // Coge el id del chat del usuario
-            $chatId = DB::select(
-                'select id from maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
-                [$request->idDestino, $request->idOrigen]
-            );
+                // Es empresa el usuario, por lo que va a mostrar los chats de ONG
+            } else if (count($empr) == 1) {
+                // Coge el id del chat del usuario para saber la id del chat al que pertenece el mensaje
+                // enviado
+                $chatId = DB::select(
+                    'select id from maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
+                    [$request->idDestino, $request->idOrigen]
+                );
 
-            // Envia el mensaje a la base de datos
-            $chat = DB::table('maat.mensaje')->insert([
-                'contenido' => $request->msg,
-                'fecha' => $request->fecha,
-                'hora' => $request->hora,
-                'chat_id' => $chatId[0]->id,
-                'id_origen' => $request->idOrigen,
-                'id_destino' => $request->idDestino,
-            ]);
-        } else {
-            return Inertia::render('private/Alex/ListadoCliente');
+                // Envia el mensaje a la base de datos
+                $chat = DB::table('maat.mensaje')->insert([
+                    'contenido' => $request->msg,
+                    'fecha' => $request->fecha,
+                    'hora' => $request->hora,
+                    'chat_id' => $chatId[0]->id,
+                    'id_origen' => $request->idOrigen,
+                    'id_destino' => $request->idDestino,
+                ]);
+            } else {
+                return Inertia::render('private/Alex/ListadoCliente');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 }
