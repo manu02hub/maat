@@ -11,12 +11,12 @@ import { Link } from "@inertiajs/vue3";
         </label>
         <label class="logo">maat</label>
         <ul>
-            <li><Link :href="route('index')" class="active">Inicio</Link></li>
-            <li><Link :href="route('noticias')">Noticias</Link></li>
-            <li><Link :href="route('donativos')">Donativos</Link></li>
-            <li><Link :href="route('ranking')">Ranking</Link></li>
-            <li><Link :href="route('login')">Login</Link></li>
-            <li><Link :href="route('register')">Registro</Link></li>
+            <li><Link :href="route('index')" active-class="active">Inicio</Link></li>
+            <li><Link :href="route('noticias')" active-class="active">Noticias</Link></li>
+            <li><Link :href="route('donativos')" active-class="active">Donativos</Link></li>
+            <li><Link :href="route('ranking')" active-class="active">Ranking</Link></li>
+            <li><Link :href="route('login')" active-class="active">Login</Link></li>
+            <li><Link :href="route('register')" active-class="active">Registro</Link></li>
         </ul>
     </nav>
     <section></section>

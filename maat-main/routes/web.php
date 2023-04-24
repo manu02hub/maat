@@ -123,12 +123,11 @@ Route::get('/donativos', function () {
     return Inertia::render('public/Donativos');
 })->name('donativos');
 
-Route::get('/correoRecivido', function () {
-    return Inertia::render('public/CorreoRecivido');
-})->name('correoRecivido');
 
+//---------------------MARIO-----------------
 
-
+// Route::post('/form', FormController::class)->name('contact');
+// Route::get('/correo', EmployeeController::class, )->name('correo');
 
 //---------------------PIERO-----------------
 Route::get('/perfil', function () {
