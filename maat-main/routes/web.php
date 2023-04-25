@@ -118,9 +118,17 @@ Route::get('/chat/{id}', [ListadoController::class, 'getIdReceptor'])->middlewar
 Route::post('/chat/getBy', [ListadoController::class, 'getChatById'])->middleware(
     ['auth', 'verified']
 )->name('chatById');
+
+// Para abrir chat al clickear en una entidad
+Route::post('/chat/open', [ListadoController::class, 'getChatSelected'])->middleware(
+    ['auth', 'verified']
+)->name('chat.open');
+
+// Enviar mensajes de chat
 Route::post('/chat/send', [ListadoController::class, 'sendChat'])->middleware(
     ['auth', 'verified']
 )->name('chat.send');
+
 
 // Listado de ONGs
 Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);

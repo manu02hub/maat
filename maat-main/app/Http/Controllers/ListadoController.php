@@ -15,6 +15,8 @@ class ListadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Obtiene un listado de las empresas u organizaciones dependiendo de la entidad a la que pertenece
+    // el usuario
     public function getListado(Request $request)
     {
         try {
@@ -31,14 +33,14 @@ class ListadoController extends Controller
             // Es ONG por lo que va a mostrar las organizaciones de tipo empresa
             if (count($ong) == 1) {
                 $ong  = DB::select('select * from maat.empresa
-            inner join maat.entidad on empresa.entidad_id = entidad.id');
+                inner join maat.entidad on empresa.entidad_id = entidad.id');
 
                 // Envía los resultados obtenidos
                 return $ong;
                 // Es empresa por lo que va a mostrar las organizaciones de tipo ONG
             } else if (count($empr) == 1) {
                 $empr = DB::select('select * from maat.organizacion
-            inner join maat.entidad on organizacion.entidad_id = entidad.id');
+                inner join maat.entidad on organizacion.entidad_id = entidad.id');
 
                 // Envía los resultados obtenidos
                 return $empr;
@@ -51,6 +53,8 @@ class ListadoController extends Controller
         }
     }
 
+    // Obtiene el listado de organizaciones recientes (o empresas)
+    // FALTA POR HACER
     public function getListadoOngRecientes()
     {
         try {
@@ -72,6 +76,7 @@ class ListadoController extends Controller
         }
     }
 
+    // Obtiene el perfil publico de la entidad escogida
     public function getPerfilP($id)
     {
         try {
@@ -104,7 +109,7 @@ class ListadoController extends Controller
         }
     }
 
-    // Redirecciona si la id a acceder es numerica
+    // Redirecciona si la id a acceder es un numero
     public function getIdReceptor($id)
     {
         try {
@@ -161,9 +166,22 @@ class ListadoController extends Controller
                 // Recoge los chats recientes (o sea los que hayan tenido contacto con la empresa
                 // anteriormente)
                 $recentChats = DB::select(
-                    'select * from maat.entidad
-                    inner join maat.chat on chat.empresa_id = entidad.id
-                    where chat.organizacion_id = ?',
+                    'select entidad.nombre, c1.empresa_id as entidad, mensaje.contenido
+                    from maat.chat as c1
+                    inner join (
+                        select mensaje.chat_id
+                        from maat.mensaje
+                        group by mensaje.chat_id
+                        order by mensaje.chat_id desc
+                        ) c2
+                    on c1.id = c2.chat_id
+                    inner join mensaje on c2.chat_id = mensaje.chat_id
+                    inner join maat.entidad on entidad.id = c1.empresa_id
+                    where organizacion_id = ? and mensaje.contenido in (
+                        select max(contenido)
+                        from maat.mensaje
+                        where c2.chat_id = mensaje.chat_id
+                        )',
                     [$request->params['userId']]
                 );
 
@@ -222,7 +240,7 @@ class ListadoController extends Controller
                 // Salia un error de clausula group by mayormente porque no puede agrupar diferentes
                 // valores de una misma columna (en este caso el contenido del mensaje)
                 $recentChats = DB::select(
-                    'select entidad.nombre, c1.organizacion_id, mensaje.contenido
+                    'select entidad.nombre, c1.organizacion_id as entidad, mensaje.contenido
                     from maat.chat as c1
                     inner join (
                         select mensaje.chat_id
@@ -280,6 +298,7 @@ class ListadoController extends Controller
     }
 
     // Coge todos los chats dependiendo del usuario
+    // Necesario hacerlo
     public function getAllChats(Request $request)
     {
         try {
@@ -316,6 +335,57 @@ class ListadoController extends Controller
             echo $th;
         }
     }
+
+    // Coge el chat de la entidad seleccionada. Solo se accede por click, por lo que se puede ir
+    // directamente a coger los datos
+    public function getChatSelected(Request $request)
+    {
+        try {
+            // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
+            $ong = DB::select('select * from maat.organizacion
+            inner join maat.entidad on organizacion.entidad_id = entidad.id
+            where entidad.id = ?', [$request->params['userId']]);
+
+            // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
+            $empr = DB::select('select * from maat.empresa
+            inner join maat.entidad on empresa.entidad_id = entidad.id
+            where entidad.id = ?', [$request->params['userId']]);
+
+            // Es ONG el usuario, por lo que va a mostrar los chats de empresa
+            if (count($ong) == 1) {
+                // Verifica que son distintas entidades (usuario y el del chat escogido)
+                $getChatHistory = DB::select(
+                    'select chat.id, entidad.nombre, mensaje.contenido, mensaje.fecha, mensaje.hora,
+                    mensaje.id_origen, mensaje.id_destino
+                    from maat.chat
+                    inner join maat.mensaje on mensaje.chat_id = chat.id
+                    inner join maat.entidad on entidad.id = chat.empresa_id
+                    where chat.empresa_id = ? and chat.organizacion_id = ?',
+                    [$request->params['id'], $request->params['userId']]
+                );
+
+                return $getChatHistory;
+                // Es empresa el usuario, por lo que va a mostrar los chats de ONG
+            } else if (count($empr) == 1) {
+                // Muestra todos los chats ONG
+                $getChatHistory = DB::select(
+                    'select chat.id, entidad.nombre, mensaje.contenido, mensaje.fecha, mensaje.hora,
+                    mensaje.id_origen, mensaje.id_destino
+                    from maat.chat
+                    inner join maat.mensaje on mensaje.chat_id = chat.id
+                    inner join maat.entidad on entidad.id = chat.organizacion_id
+                    where chat.empresa_id = ? and chat.organizacion_id = ?',
+                    [$request->params['userId'], $request->params['id']]
+                );
+
+                return $getChatHistory;
+            }
+        } catch (\Throwable $th) {
+            echo $th;
+        }
+    }
+
+    // Recoge el historial de mensajes de la entidad seleccionada
 
     // Método para enviar mensajes de chat
     public function sendChat(Request $request)

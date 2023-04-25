@@ -30,7 +30,9 @@ export default {
     },
 
     methods: {
-        mostrar: function (event) {
+        // Muestra chats ya contactados (necesario crear uno si no existe chat, es decir, al querrer
+        // chatear con una nueva entidad)
+        mostrar: function (event, entidadChatear) {
             var prueba = document.getElementsByClassName('contenedorChat');
 
             try {
@@ -71,6 +73,38 @@ export default {
                 }
 
                 // Recoger los chats del clickeado
+                axios.post('/chat/open', {
+                    params: {
+                        id: entidadChatear,
+                        userId: this.$page.props.auth.user.entidad_id,
+                    }
+                }).then((response) => {
+                    console.log(response.data);
+                    this.chatInicial = [];
+
+                    // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
+                    this.nameChat = response.data[0].nombre;
+
+                    response.data.forEach(mensajes => {
+                        this.chatInicial.push(
+                            [mensajes.contenido, mensajes.id_origen, mensajes.fecha, mensajes.hora]
+                        );
+                    });
+
+                    // El que es distinto es con quien quiere chatear. Es decir, si origen es igual a la
+                    // entidad del usuario, entonces significa que con el que quiere chatear es quien
+                    // este en la entidad destino y viceversa
+                    if (response.data[0].id_origen != this.$page.props.auth.user.entidad_id) {
+                        this.form.idDestino = response.data[0].id_origen;
+                    } else {
+                        this.form.idDestino = response.data[0].id_destino;
+                    }
+
+                    this.form.fecha = response.data[0].fecha;
+                    this.form.hora = response.data[0].hora;
+                    this.iniciarChatPorId();
+                })
+
                 // Mostrar historial del chat del clickeado
             } catch (error) {
                 console.error(error);
@@ -96,6 +130,8 @@ export default {
         // Metodo para ver cuando lo cambian la pantalla
         onResize: function () {
             try {
+                // Para que sepa si es más pequeño del permitido para cambiar los estilos y que encaje
+                // mejor con pantallas pequeñas
                 this.widthWindow = window.innerWidth;
 
                 // Cambia el valor dependiendo del tamano de la pantalla
@@ -180,6 +216,49 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+
+        // Solo se usa para conseguir los datos iniciales si se accede al chat url con variables (id de
+        // la entidad con la que se quiere chatear)
+        getInitialDataWithId: async function () {
+            // Abre el chat que se ha escogido.
+            // Peticion para recibir el chat con la que se quiere hablar
+            await axios.post('/chat/getBy', {
+                params: {
+                    id: this.$page.props.chatWith,
+                    userId: this.$page.props.auth.user.entidad_id,
+                }
+            }).then((response) => {
+                this.listChats = response.data.chats; // Lista chats
+                this.recentChats = response.data.recentChats; // Recientes chats
+
+                // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
+                this.nameChat = response.data.chatWith[0][0].nombre;
+
+                response.data.chatWith[0].forEach(mensajes => {
+                    this.chatInicial.push(
+                        [mensajes.contenido, mensajes.id_origen, mensajes.fecha, mensajes.hora]
+                    );
+                });
+
+                // El que es distinto es con quien quiere chatear
+                if (response.data.chatWith[0][0].id_origen != this.$page.props.auth.user.entidad_id) {
+                    this.form.idDestino = response.data.chatWith[0][0].id_origen;
+                } else {
+                    this.form.idDestino = response.data.chatWith[0][0].id_destino;
+                }
+
+                this.form.fecha = response.data.chatWith[0][0].fecha;
+                this.form.hora = response.data.chatWith[0][0].hora;
+                this.iniciarChatPorId();
+
+                // En caso de error (porque no se obtiene los datos que se quiere), entonces cambia de
+                // vista
+            }).catch((response) => {
+                // Recarga la pagina y pone los estilos propios de esa pagina
+                // window.location.href = route('listado');
+                console.log(response)
+            });
         }
     },
 
@@ -195,6 +274,10 @@ export default {
 
             console.log(this.$page.props);
 
+            // Pone el origen para indicar de quien proviene si manda un mensaje (o sea,
+            // del usuario activo, tu)
+            this.form.idOrigen = this.$page.props.auth.user.entidad_id;
+
             // Si es nulo, entonces se ha accedido mediante /chat
             if (this.$page.props.chatWith == null) {
                 // Muestra todos los chats
@@ -202,51 +285,7 @@ export default {
                 // Si tiene valor, entonces se ha accedido mediante chat del perfil publico
             } else {
                 // Abre el chat que se ha escogido.
-                // Peticion para recibir el chat con la que se quiere hablar
-                axios.post('/chat/getBy', {
-                    params: {
-                        id: this.$page.props.chatWith,
-                        userId: this.$page.props.auth.user.entidad_id,
-                    }
-                }).then((response) => {
-                    console.log(response.data);
-
-                    this.listChats = response.data.chats; // Lista chats
-                    this.recentChats = response.data.recentChats; // Recientes chats
-
-                    // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
-                    this.nameChat = response.data.chatWith[0][0].nombre;
-
-                    response.data.chatWith[0].forEach(mensajes => {
-                        this.chatInicial.push(
-                            [mensajes.contenido, mensajes.id_origen, mensajes.fecha, mensajes.hora]
-                        );
-                    });
-
-                    // this.form.msg = response.data.chatWith[0][0].contenido;
-                    this.form.idOrigen = this.$page.props.auth.user.entidad_id;
-
-                    // El que es distinto es con quien quiere chatear
-                    if (response.data.chatWith[0][0].id_origen != this.$page.props.auth.user.entidad_id) {
-                        this.form.idDestino = response.data.chatWith[0][0].id_origen;
-                    } else {
-                        this.form.idDestino = response.data.chatWith[0][0].id_destino;
-                    }
-
-                    this.form.fecha = response.data.chatWith[0][0].fecha;
-                    this.form.hora = response.data.chatWith[0][0].hora;
-                    this.iniciarChatPorId();
-
-                    // response.data.chats contiene todos los chats y recentsChats los recientes, o sea
-                    // con los que ha hablado la entidad
-
-                    // En caso de error (porque no se obtiene los datos que se quiere), entonces cambia de
-                    // vista
-                }).catch((response) => {
-                    // Recarga la pagina y pone los estilos propios de esa pagina
-                    // window.location.href = route('listado');
-                    console.log(response)
-                });
+                this.getInitialDataWithId();
             }
         } catch (error) {
             console.log(error);
@@ -292,7 +331,7 @@ export default {
                         <!-- Este chat solo se muestra si son recientes -->
                         <div v-show="this.reciente">
                             <div v-for="data in recentChats" class="row noRowGap noColGap chatCard"
-                                @click="mostrar($event)">
+                                @click="mostrar($event, data.entidad)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
                                     alt="">
@@ -306,7 +345,7 @@ export default {
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
                                     <h2>{{ data.nombre }}</h2>
                                     <p>
-                                        Last message: {{data.contenido}}
+                                        Last message: {{ data.contenido }}
                                     </p>
                                 </div>
                             </div>
