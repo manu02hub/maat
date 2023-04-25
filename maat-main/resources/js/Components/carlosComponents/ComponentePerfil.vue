@@ -17,13 +17,17 @@
         </div>
 
         <!-- Content -->
-        <div class="relative px-4 sm:px-6 pb-8">
+        <!-- Solo muestra el contenido si no esta vacio el entData. Sirve para que no salga error (renderiza
+            la pagina antes de recibir datos del controlador) -->
+        <div class="relative px-4 sm:px-6 pb-8" v-if="this.entData != ''">
 
             <!-- Header -->
             <header class="text-center sm:text-left mb-6">
                 <!-- Name -->
                 <div class="inline-flex items-start mb-2 mt-2">
-                    <h1 class="text-2xl text-slate-800 font-bold">Nombre Empresa</h1>
+                    <h1 class="text-2xl text-slate-800 font-bold">
+                        {{ this.entData[0].nombre }}
+                    </h1>
                 </div>
                 <!-- Bio -->
                 <div class="text-sm mb-3">Sector de la empresa etc</div>
@@ -34,7 +38,9 @@
                             <path
                                 d="M8 8.992a2 2 0 1 1-.002-3.998A2 2 0 0 1 8 8.992Zm-.7 6.694c-.1-.1-4.2-3.696-4.2-3.796C1.7 10.69 1 8.892 1 6.994 1 3.097 4.1 0 8 0s7 3.097 7 6.994c0 1.898-.7 3.697-2.1 4.996-.1.1-4.1 3.696-4.2 3.796-.4.3-1 .3-1.4-.1Zm-2.7-4.995L8 13.688l3.4-2.997c1-1 1.6-2.198 1.6-3.597 0-2.798-2.2-4.996-5-4.996S3 4.196 3 6.994c0 1.399.6 2.698 1.6 3.697 0-.1 0-.1 0 0Z" />
                         </svg>
-                        <span class="text-sm font-medium whitespace-nowrap text-slate-500 ml-2">Ubicación</span>
+                        <span class="text-sm font-medium whitespace-nowrap text-slate-500 ml-2">
+                            {{ this.entData[0].ubicacion }}
+                        </span>
                     </div>
                     <div class="flex items-center">
                         <svg class="w-4 h-4 fill-current shrink-0 text-slate-400" viewBox="0 0 16 16">
@@ -42,7 +48,9 @@
                                 d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0ZM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12Zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2Z" />
                         </svg>
                         <a class="text-sm font-medium whitespace-nowrap text-indigo-500 hover:text-indigo-600 ml-2"
-                            href="#0">paginaempresa.com</a>
+                            href="#0">
+                            {{ this.entData[0].web }}
+                        </a>
                     </div>
                 </div>
             </header>
@@ -59,10 +67,9 @@
                     <div>
                         <h2 class="text-slate-800 font-semibold mb-2">Sobre Nosotros</h2>
                         <div class="text-sm space-y-2">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <p>
+                                {{ this.entData[0].descripcion }}
+                            </p>
                             <p>Consectetur adipiscing elit, sed do eiusmod tempor magna aliqua.</p>
                         </div>
                     </div>
@@ -139,9 +146,42 @@
 <script>
 import AvatarGroup from './../manuComponents/AvatarGroup.vue'
 import CardAsociaciones from './CardAsociaciones.vue';
+
+import axios from 'axios';
+
 export default {
     name: "ProfileBody",
     props: ["profileSidebarOpen"],
-    components: { AvatarGroup, CardAsociaciones }
+    components: { AvatarGroup, CardAsociaciones },
+
+    // Obtener los datos del usuario actual y la empresa a la que pertenece
+    data() {
+        return {
+            entData: '',
+            user: ''
+        }
+    },
+
+    methods: {
+        getEmpresa: async function () {
+            // CORS afecta cuando se intenta hacerlo con http. En local vale que se haga directamente
+            await axios.get('/get/empresa', {
+                params: {
+                    empresa: this.user.entidad_id
+                }
+            }).then((response) => {
+                // Recibe los datos obtenidos (según lo que envía de vuelta el controller
+                // correspondiente)
+                this.entData = response.data;
+            }).catch((error) => {
+                console.log(error)
+            })
+        },
+    },
+
+    mounted() {
+        this.user = this.$page.props.auth.user;
+        this.getEmpresa();
+    }
 }
 </script>

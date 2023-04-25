@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
+use Illuminate\Support\Facades\DB;
+
 class ProfileController extends Controller
 {
     /**
