@@ -28,11 +28,14 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import ShadowBox from "@/Components/ShadowBox.vue";
 
 const form = useForm({
+    nombre: "",
+    dni: "",
     nombre_empresa: "",
     nif: "",
     correo: "",
     password: "",
     password_confirmation: "",
+    rol: "1",
     terms: false,
     clientOng: false
 });
@@ -69,7 +72,16 @@ const changeToEmpr = () => {
         <div class="form-container register-container">
             <ShadowBox>
                 <form @submit.prevent="submit">
-                    <div>
+                    <div class="mt-4">
+                        <InputLabel for="nombre" value="Nombre Empresa" class="block text-sm font-medium mb-1" />
+                        <TextInput id="nombre" type="text" v-model="form.nombre" required autofocus class="form-input w-full" />
+                        <InputError class="mt-2" :message="form.errors.nombre" />
+                    </div>
+                    <div class="mt-4">
+                        <InputLabel for="dni" value="Numero / Tarjeta" class="block text-sm font-medium mb-1" />
+                        <TextInput id="dni" type="text" v-model="form.dni" required autofocus class="form-input w-full" />
+                    </div>
+                    <div class="mt-4">
                         <InputLabel for="nombre_empresa" value="Nombre Empresa" class="block text-sm font-medium mb-1" />
                         <TextInput id="nombre_empresa" type="text" v-model="form.nombre_empresa" required autofocus
                             class="form-input w-full" />

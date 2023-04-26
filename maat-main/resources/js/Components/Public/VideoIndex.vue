@@ -30,9 +30,12 @@ export default {
 
 <style>
 .videoContenedor {
-    text-align: center;
-    width: 75%;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
+    text-align: center;
+    z-index: 0;
+    margin-bottom: 2%;
 }
 
 .videoContenedor img {
@@ -43,5 +46,7 @@ export default {
 
 video {
     text-align: center;
+    width: 75%;
+
 }
 </style>

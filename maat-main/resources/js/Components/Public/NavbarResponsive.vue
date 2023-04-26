@@ -7,7 +7,7 @@ import { Link } from "@inertiajs/vue3";
     <nav>
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
-            <i class="bx bx-menu"></i>
+            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg"/></i>
         </label>
         <label class="logo">maat</label>
         <ul>
@@ -34,7 +34,6 @@ import { Link } from "@inertiajs/vue3";
         rgba(59, 215, 72, 0.6) 5%,
         rgba(8, 51, 11, 0.9)
     );
-
 }
 
 * {
@@ -53,6 +52,8 @@ nav {
     box-shadow: var(--shadow);
     height: 80px;
     width: 100%;
+    z-index: 100;
+
 }
 label.logo {
     color: var(--white);

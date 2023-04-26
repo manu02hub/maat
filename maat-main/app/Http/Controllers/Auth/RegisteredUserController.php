@@ -77,11 +77,12 @@ class RegisteredUserController extends Controller
         if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
             // Se crea usuario administrador de esa organizacion
             $user = User::create([
-                'nombre' => $request->nombre_empresa,
+                'nombre' => $request->nombre,
+                // 'dni'=>$request->dni,
                 'email' => $request->correo,
                 'password' => Hash::make($request->password),
                 'activo' => 1,
-                'rol_id' => 1,
+                'rol_id' =>  $request->rol,
                 'entidad_id' => $idOrg[0]->id
             ]);
 
