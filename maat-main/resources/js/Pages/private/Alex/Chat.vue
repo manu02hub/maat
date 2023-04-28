@@ -33,6 +33,8 @@ export default {
         // Muestra chats ya contactados (necesario crear uno si no existe chat, es decir, al querrer
         // chatear con una nueva entidad)
         mostrar: function (event, entidadChatear) {
+            var chat = document.getElementsByClassName('contenedorChat');
+
             try {
                 // Resetea todos los chats a sus estilos por defecto (ninguno activo) del chat de recientes
                 // Recorre todos los chats existentes de recientes
@@ -62,8 +64,8 @@ export default {
                 this.nameChat = event.currentTarget.lastChild.firstChild.textContent;
 
                 // Resetea los chats enviados
-                prueba[0].innerHTML = '';
-                prueba[1].innerHTML = '';
+                chat[0].innerHTML = '';
+                chat[1].innerHTML = '';
 
                 // Si la pantalla es muy pequena, entonces muestra el chat del pequeno
                 if (window.innerWidth <= 768) {

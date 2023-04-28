@@ -139,6 +139,7 @@ export default {
 
     <!-- Contenido propio -->
     <main>
+        <!--
         <div>
             <input
                 type="text"
@@ -161,6 +162,7 @@ export default {
             <br />
             <button class="btn btn-primary" @click="s">Prueba</button>
         </div>
+         -->
 
         <div class="row noRowGap">
             <div class="col-lg-1 col-md-1"></div>
