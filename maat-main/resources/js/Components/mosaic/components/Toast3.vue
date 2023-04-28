@@ -36,8 +36,3 @@ export default {
   props: ['type', 'open'],
 }
 </script>
-
-<style scoped>
-@import url('./../../../../css/bootstrap.css');
-@import url('./../../../../css/app.css');
-</style>

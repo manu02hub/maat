@@ -460,11 +460,6 @@ const mirarInputsTarjeta = (e) => {
     </div>
 </template>
 
-<style scoped>
-@import url("./../../../css/bootstrap.css");
-@import url("./../../../css/app.css");
-</style>
-
 <style>
 button {
     position: relative;

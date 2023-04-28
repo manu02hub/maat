@@ -4,11 +4,13 @@
 * {
     margin: 0;
     font-family: "Montserrat";
+    box-sizing: unset;
+    line-height: normal;
 }
 
 /* Código hecho en primer trimestre de DAM y DAW (grid) */
 /*El grid*/
-.row {
+.rowPropio {
     /* En la propiedad display agregamos grid para establecer una cuadricula */
     display: grid;
     /* Define el numero de columnas en el diseño de cuadricula */
@@ -17,57 +19,50 @@
     grid-template-rows: repeat(5, [ row ] auto);
     column-gap: 1em; /* espacio entre columnas */
     row-gap: 15px; /* espacio entre filas */
-    /* Alinea horizontalmente la cuadricula del interior del contenedor */
-    /* justify-content: center; */
-    /* Alinea verticalmente la cuadricula del interior del contenedor */
-    /* align-content: center; */
 }
 
-.col {
-    /* background: rgb(70, 70, 70); */ /* Color de fondo */
-    /* text-transform: uppercase; */ /* Letra en mayuscula */
+.colPropio {
     padding: 1em; /* padding del texto */
     font-size: 14px; /* Tamaño del texto */
-    /* color: rgb(255, 255, 255); */
 }
 
-.noRowGap {
+.noRowGapPropio {
     row-gap: 0;
 }
 
-.noColGap {
+.noColGapPropio {
     column-gap: 0;
 }
 
 /* Rellena espacio del nav (temporal) */
-.prueba {
+.pruebaPropio {
     height: 4rem;
     background: #291f1e;
 }
 
 /* Quita los estilos de listado */
-ul {
+.ulNoListPropio {
     list-style: none;
 }
 
 /* Quita el estilo que tiene los links */
-a {
+.aNoDecPropio {
     text-decoration: none;
     color: black;
 }
 
 /* Estilo del contenedor de las opciones de chat */
-.chatListOptions {
+.chatListOptionsPropio {
     text-align: center;
 }
 
 /* Estilo de los filtros de chat (mas recientes o todos los contactos) */
-.chatFilter {
+.chatFilterPropio {
     background-color: #73cd99;
     padding: 0;
 }
 
-.chatFilter:hover {
+.chatFilterPropio:hover {
     color: white;
     background-color: #2d764b;
     cursor: pointer;
@@ -75,19 +70,19 @@ a {
 }
 
 /* Estilo cuando está activo ese tipo de chat (lista de chat reciente o no) */
-.activeFilterChat {
+.activeFilterChatPropio {
     background-color: white;
     transition: 1s;
 }
 
 /* Limita el tamano del chat y anade scroll */
-.chatLimited {
+.chatLimitedPropio {
     height: 26rem;
     overflow-y: scroll;
 }
 
 /* Estilo del contenedor del chat */
-.chatCard {
+.chatCardPropio {
     /* background-color: lightgreen; */
     text-align: left;
     border-top: 1px solid #291f1e;
@@ -96,30 +91,30 @@ a {
     transition: 1s;
 }
 
-.chatCard:hover {
+.chatCardPropio:hover {
     cursor: pointer;
     background-color: #c4e9d3;
     transition: 1s;
 }
 
-.chatCardActive {
+.chatCardActivePropio {
     background-color: #73cd99 !important;
 }
 
 /* Estilo del contenedor de informacion del chat (nombre, ultimo mensaje enviado) */
-.infoChat {
+.infoChatPropio {
     margin-left: 1rem;
 }
 
 /* Imagen del logo de la organizacion */
-.imgOrg {
+.imgOrgPropio {
     height: 2.75rem;
     width: 100%;
     border-radius: 100%;
 }
 
 /* Estilo del contenedor de nombre */
-.nameContainer {
+.nameContainerPropio {
     height: 1.45rem;
     color: white; /* Cambia el color del texto */
     background-color: #291f1e;
@@ -130,23 +125,23 @@ a {
 }
 
 /* Border que separa el chat de los contactos */
-.borderContainer {
+.borderContainerPropio {
     height: 30rem;
     border-right: 1px solid #291f1e;
 }
 
 /* Fondo de la pantalla de chat */
-.pantallaChat {
+.pantallaChatPropio {
     background-color: #2d764b;
 }
 
 /* Tamano del chat en general (contenedores incluidos) */
-.chatContainer {
+.chatContainerPropio {
     height: 26.3rem;
 }
 
 /* Contenedor del chat (donde hablan los usuarios) */
-.chatUsers {
+.chatUsersPropio {
     height: 63.25%;
     border-radius: 0.75rem;
     overflow-y: scroll;
@@ -156,14 +151,14 @@ a {
 }
 
 /* Contenedor del input para el chat (donde hablan los usuarios) */
-.chatInputContainer {
+.chatInputContainerPropio {
     display: flex;
     height: 15.31%;
     background-color: lightgrey;
 }
 
 /* Estilo del input del chat */
-.inputChat {
+.inputChatPropio {
     width: 80%;
     background: #ffffff;
     font-size: large;
@@ -177,7 +172,7 @@ a {
 
 /* Cambiar color del input cuando se enfoca (cuando esta activo) */
 /* https://stackoverflow.com/questions/16156594/how-to-change-border-color-of-textarea-on-focus */
-.inputChat:focus {
+.inputChatPropio:focus {
     /* Quita los bordes que aparece cuando se enfoca en el input */
     outline: none !important;
     /* El nuevo borde del input */
@@ -189,25 +184,26 @@ a {
 }
 
 /* Estilo de los botones del chat */
-.btnChat {
+.btnChatPropio {
+    padding: 1px 6px; /* Estilo propio del botón (el de por defecto) */
     border: 1px solid #c4e9d3;
     background-color: #73cd99;
     margin: 0.75rem 0rem 0.75rem 0rem;
 }
 
 /* Lo que pasa cuando el raton pasa por encima */
-.btnChat:hover {
+.btnChatPropio:hover {
     cursor: pointer;
     background-color: #2d764b;
 }
 
 /* Cambia el color de las imagenes por el filtro cuando se pasa por encima el raton */
-.btnChat:hover > img {
+.btnChatPropio:hover > img {
     filter: invert(1);
 }
 
 /* Estilo del chat (burbuja) que recibe el usuario */
-.receptorChat {
+.receptorChatPropio {
     height: min-content; /* Para que tenga la altura adecuada al texto que se recive */
     /* Para separarlo si supera el límite del chat (texto muy largo sin espacios, por ejemplo) */
     overflow-wrap: break-word;
@@ -220,7 +216,7 @@ a {
 }
 
 /* Estilo del chat (burbuja) que envia el usuario */
-.sendChat {
+.sendChatPropio {
     height: min-content;
     overflow-wrap: break-word;
     font-size: medium;
@@ -232,7 +228,7 @@ a {
 }
 
 /* Tiempo que se envio o recibio el mensaje*/
-.timeChatReceived {
+.timeChatReceivedPropio {
     width: max-content;
     color: grey;
     font-style: italic;
@@ -243,7 +239,7 @@ a {
 }
 
 /* Estilo del tiempo del chat recibido */
-.timeChatSend {
+.timeChatSendPropio {
     color: grey;
     font-style: italic;
     font-size: smaller;
@@ -254,97 +250,105 @@ a {
 }
 
 /* El boton solo aparece cuando son pantallas pequenas */
-.btnBack {
+.btnBackPropio {
     display: none;
+}
+
+/* Estilo del último mensaje enviado */
+.lastMsgPropio{
+    color: #3d3d3d;
+    font-style: italic;
+    font-size: smaller;
+    margin-top: 1px;
 }
 
 /* Estilos responsive */
 /* Pantalla grande  */
 @media only screen and (min-width: 941px) {
-    .col-lg-1 {
+    .col-lg-1Propio {
         grid-column: span 1;
     }
-    .col-lg-2 {
+    .col-lg-2Propio {
         grid-column: span 2;
     }
-    .col-lg-3 {
+    .col-lg-3Propio {
         grid-column: span 3;
     }
-    .col-lg-4 {
+    .col-lg-4Propio {
         grid-column: span 4;
     }
-    .col-lg-5 {
+    .col-lg-5Propio {
         grid-column: span 5;
     }
-    .col-lg-6 {
+    .col-lg-6Propio {
         grid-column: span 6;
     }
-    .col-lg-7 {
+    .col-lg-7Propio {
         grid-column: span 7;
     }
-    .col-lg-8 {
+    .col-lg-8Propio {
         grid-column: span 8;
     }
-    .col-lg-9 {
+    .col-lg-9Propio {
         grid-column: span 9;
     }
-    .col-lg-10 {
+    .col-lg-10Propio {
         grid-column: span 10;
     }
-    .col-lg-11 {
+    .col-lg-11Propio {
         grid-column: span 11;
     }
-    .col-lg-12 {
+    .col-lg-12Propio {
         grid-column: span 12;
     }
 
     /* Ajustando las opciones de chat (reciente y todos los contactos) */
-    .chatFilter {
+    .chatFilterPropio {
         padding: 1rem;
     }
 }
 
 /* Pantalla tablet  */
 @media only screen and (min-width: 768px) and (max-width: 941px) {
-    .col-md-1 {
+    .col-md-1Propio {
         grid-column: span 1;
     }
-    .col-md-2 {
+    .col-md-2Propio {
         grid-column: span 2;
     }
-    .col-md-3 {
+    .col-md-3Propio {
         grid-column: span 3;
     }
-    .col-md-4 {
+    .col-md-4Propio {
         grid-column: span 4;
     }
-    .col-md-5 {
+    .col-md-5Propio {
         grid-column: span 5;
     }
-    .col-md-6 {
+    .col-md-6Propio {
         grid-column: span 6;
     }
-    .col-md-7 {
+    .col-md-7Propio {
         grid-column: span 7;
     }
-    .col-md-8 {
+    .col-md-8Propio {
         grid-column: span 8;
     }
-    .col-md-9 {
+    .col-md-9Propio {
         grid-column: span 9;
     }
-    .col-md-10 {
+    .col-md-10Propio {
         grid-column: span 10;
     }
-    .col-md-11 {
+    .col-md-11Propio {
         grid-column: span 11;
     }
-    .col-md-12 {
+    .col-md-12Propio {
         grid-column: span 12;
     }
 
     /* Titulo de los tipos de chat (recientes y todos los contactos) */
-    .filterTitle {
+    .filterTitlePropio {
         font-size: large;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
@@ -353,162 +357,164 @@ a {
 
 /*Pantalla movil*/
 @media only screen and (min-width: 451px) and (max-width: 768px) {
-    .col-sm-1 {
+    .col-sm-1Propio {
         grid-column: span 1;
     }
-    .col-sm-2 {
+    .col-sm-2Propio {
         grid-column: span 2;
     }
-    .col-sm-3 {
+    .col-sm-3Propio {
         grid-column: span 3;
     }
-    .col-sm-4 {
+    .col-sm-4Propio {
         grid-column: span 4;
     }
-    .col-sm-5 {
+    .col-sm-5Propio {
         grid-column: span 5;
     }
-    .col-sm-6 {
+    .col-sm-6Propio {
         grid-column: span 6;
     }
-    .col-sm-7 {
+    .col-sm-7Propio {
         grid-column: span 7;
     }
-    .col-sm-8 {
+    .col-sm-8Propio {
         grid-column: span 8;
     }
-    .col-sm-9 {
+    .col-sm-9Propio {
         grid-column: span 9;
     }
-    .col-sm-10 {
+    .col-sm-10Propio {
         grid-column: span 10;
     }
-    .col-sm-11 {
+    .col-sm-11Propio {
         grid-column: span 11;
     }
-    .col-sm-12 {
+    .col-sm-12Propio {
         grid-column: span 12;
     }
 
     /* Titulo de los tipos de chat (recientes y todos los contactos) */
-    .filterTitle {
+    .filterTitlePropio {
         font-size: large;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
     }
 
     /* Pone todos los elementos de la lista de contactos en la misma linea */
-    .chatCard {
+    .chatCardPropio {
         display: flex;
     }
 
     /* Ajuste de la foto del contacto */
-    .imgOrg {
+    .imgOrgPropio {
         width: 4rem;
     }
 
     /* Pone todo lo que esta en el contenedor del nombre del chat en la misma linea */
-    .nameContainer {
+    .nameContainerPropio {
         display: flex;
     }
 
     /* Botón para ir atras y solo aparece cuando es pequena la pantalla */
-    .btnBack {
+    .btnBackPropio {
         display: block;
         background: none;
         border: none;
         margin: -8.5px 1rem -8.5px 0.1rem;
+        padding: 1px 6px; /* Estilo propio del botón (el de por defecto) */
     }
 
     /* Cambia el estilo del vector grafico */
-    .btnBack > img {
+    .btnBackPropio > img {
         width: 2.2rem;
         filter: invert(1);
     }
 
     /* Estilo cuando se pasa el raton por encima de la imagen */
-    .btnBack > img:hover {
+    .btnBackPropio > img:hover {
         cursor: pointer;
         filter: contrast(0);
     }
 }
 
 @media only screen and (max-width: 451px) {
-    .col-1 {
+    .col-1Propio {
         grid-column: span 1;
     }
-    .col-2 {
+    .col-2Propio {
         grid-column: span 2;
     }
-    .col-3 {
+    .col-3Propio {
         grid-column: span 3;
     }
-    .col-4 {
+    .col-4Propio {
         grid-column: span 4;
     }
-    .col-5 {
+    .col-5Propio {
         grid-column: span 5;
     }
-    .col-6 {
+    .col-6Propio {
         grid-column: span 6;
     }
-    .col-7 {
+    .col-7Propio {
         grid-column: span 7;
     }
-    .col-8 {
+    .col-8Propio {
         grid-column: span 8;
     }
-    .col-9 {
+    .col-9Propio {
         grid-column: span 9;
     }
-    .col-10 {
+    .col-10Propio {
         grid-column: span 10;
     }
-    .col-11 {
+    .col-11Propio {
         grid-column: span 11;
     }
-    .col-12 {
+    .col-12Propio {
         grid-column: span 12;
     }
 
     /* Titulo de los tipos de chat (recientes y todos los contactos) */
-    .filterTitle {
+    .filterTitlePropio {
         font-size: large;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
     }
 
     /* Pone todos los elementos de la lista de contactos en la misma linea */
-    .chatCard {
+    .chatCardPropio {
         display: flex;
     }
 
     /* Cambia el estilo del vector grafico */
-    .imgOrg {
+    .imgOrgPropio {
         width: 4rem;
     }
 
     /* Pone todo lo que esta en el contenedor del nombre del chat en la misma linea */
-    .nameContainer {
+    .nameContainerPropio {
         display: flex;
     }
 
     /* Botón para ir atras y solo aparece cuando es pequena la pantalla */
-    .btnBack {
+    .btnBackPropio {
         display: block;
         background: none;
         border: none;
         margin: -8.5px 1rem -8.5px 0.1rem;
+        padding: 1px 6px; /* Estilo propio del botón (el de por defecto) */
     }
 
     /* Cambia el estilo del vector grafico */
-    .btnBack > img {
+    .btnBackPropio > img {
         width: 2.2rem;
         filter: invert(1);
     }
 
     /* Estilo cuando se pasa el raton por encima de la imagen */
-    .btnBack > img:hover {
+    .btnBackPropio > img:hover {
         cursor: pointer;
         filter: contrast(0);
     }

@@ -133,8 +133,10 @@ export default {
 </script>
 
 <template>
-    <nav class="row noRowGap">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12 prueba"></div>
+    <nav class="rowPropio noRowGapPropio">
+        <div
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+        ></div>
     </nav>
 
     <!-- Contenido propio -->
@@ -164,76 +166,95 @@ export default {
         </div>
          -->
 
-        <div class="row noRowGap">
-            <div class="col-lg-1 col-md-1"></div>
-            <div class="col-lg-10 col-md-10 col-sm-12 col-12">
-                <ul class="listadoTab">
+        <div class="rowPropio noRowGapPropio">
+            <div class="col-lg-1Propio col-md-1Propio"></div>
+            <div
+                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio"
+            >
+                <ul class="listadoTabPropio ulNoStylePropio">
                     <!-- Usando v-bind:class de Vue puedo activar ciertas clases solo cuando se cumplan -->
                     <!-- la condición indicada -->
                     <!-- https://es.vuejs.org/v2/guide/class-and-style.html -->
                     <!-- La clase activo solo estara en el elemento cuando this.organization es falso-->
                     <li
-                        class="listadoOpcionTab"
-                        v-bind:class="{ activo: !this.organization }"
+                        class="listadoOpcionTabPropio"
+                        v-bind:class="{ activoPropio: !this.organization }"
                         v-on:click="this.organization = false"
                     >
-                        <a class="tab" href="#">Org. contactada</a>
+                        <a class="tabPropio aNoStylePropio" href="#"
+                            >Org. contactada</a
+                        >
                     </li>
                     <li
-                        class="listadoOpcionTab"
-                        v-bind:class="{ activo: this.organization }"
+                        class="listadoOpcionTabPropio"
+                        v-bind:class="{ activoPropio: this.organization }"
                         v-on:click="this.organization = true"
                     >
-                        <a class="tab" href="#">Demás Org.</a>
+                        <a class="tabPropio aNoStylePropio" href="#"
+                            >Demás Org.</a
+                        >
                     </li>
                 </ul>
 
-                <div class="divBuscador row noRowGap noColGap">
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-8">
+                <div
+                    class="divBuscadorPropio rowPropio noRowGapPropio noColGapPropio"
+                >
+                    <div
+                        class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-8Propio"
+                    >
                         <input
-                            class="inputBuscador"
+                            class="inputBuscadorPropio"
                             type="text"
                             placeholder="Buscar..."
                         />
                     </div>
 
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-4">
-                        <button class="btn btnBuscar">
+                    <div
+                        class="col-lg-2Propio col-md-2Propio col-sm-2Propio col-4Propio"
+                    >
+                        <button class="btnPropio btnBuscarPropio">
                             <img
                                 src="./../../../../img/search.svg"
-                                class="imgBuscar"
+                                class="imgBuscarPropio"
                             />
                         </button>
 
                         <!-- Cambia el estado del filtro gracias al v-on:click de Vue -->
                         <button
-                            class="btn btnFiltrar"
+                            class="btnPropio btnFiltrarPropio"
                             v-on:click="this.filter = !this.filter"
                         >
                             <img
                                 src="./../../../../img/filter.svg"
-                                class="imgBuscar"
+                                class="imgBuscarPropio"
                             />
                         </button>
                     </div>
                 </div>
 
-                <div class="row noRowGap noColGap">
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-10">
+                <div class="rowPropio noRowGapPropio noColGapPropio">
+                    <div
+                        class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-10Propio"
+                    >
                         <!-- Solo muestra si se activa el filtro -->
-                        <div v-show="this.filter" class="optionsFilter"></div>
+                        <div
+                            v-show="this.filter"
+                            class="optionsFilterPropio"
+                        ></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row noRowGap">
-            <div class="col-lg-1 col-md-1"></div>
+        <div class="rowPropio noRowGapPropio">
+            <div class="col-lg-1Propio col-md-1Propio"></div>
 
-            <div class="col-lg-10 col-md-10 col-sm-12 col-12 listadoOrg">
+            <div
+                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio listadoOrgPropio"
+            >
                 <!-- Mostrar listado de organizaciones recientes -->
                 <div v-show="!this.organization">
-                    <h1 v-if="this.orgs.length == 0">
+                    <h1 class="h1Propio" v-if="this.orgs.length == 0">
                         No se ha contactado con una organización recientemente
                     </h1>
 
@@ -241,20 +262,20 @@ export default {
                         <!-- Lista de organizaciones (de 1 en 1) -->
                         <a
                             :href="route('perfilP', data.id)"
-                            class="row noRowGap noColGap cardOrg"
+                            class="rowPropio noRowGapPropio noColGapPropio cardOrgPropio"
                         >
                             <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                             <img
                                 src="./../../../../img/prueba.jpg"
-                                class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                 alt=""
                             />
 
                             <!-- Descripcion -->
                             <div
-                                class="col-lg-10 col-md-10 col-sm-12 col-12 contenedorDesc"
+                                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio contenedorDescPropio"
                             >
-                                <h1>{{ data.nombre }}</h1>
+                                <h1 class="h1Propio">{{ data.nombre }}</h1>
                                 <p>
                                     {{ data.descripcion }}
                                 </p>
@@ -265,26 +286,28 @@ export default {
 
                 <!-- Mostrar todas las organizaciones -->
                 <div v-show="this.organization">
-                    <h1 v-if="this.orgs.length == 0">No hay ONGs</h1>
+                    <h1 class="h1Propio" v-if="this.orgs.length == 0">
+                        No hay ONGs
+                    </h1>
 
                     <!-- Lista de organizaciones (de 1 en 1) -->
                     <template v-for="data in orgs">
                         <a
                             :href="route('perfilP', data.id)"
-                            class="row noRowGap noColGap cardOrg"
+                            class="rowPropio noRowGapPropio noColGapPropio cardOrgPropio"
                         >
                             <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                             <img
                                 src="./../../../../img/prueba.jpg"
-                                class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
+                                class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                 alt=""
                             />
 
                             <!-- Descripcion -->
                             <div
-                                class="col-lg-10 col-md-10 col-sm-12 col-12 contenedorDesc"
+                                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio contenedorDescPropio"
                             >
-                                <h1>{{ data.nombre }}</h1>
+                                <h1 class="h1Propio">{{ data.nombre }}</h1>
                                 <p>
                                     {{ data.descripcion }}
                                 </p>

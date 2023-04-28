@@ -268,8 +268,3 @@ export default {
   name: 'AnalyticsCard11',
 }
 </script>
-
-<style scoped>
-@import url('./../../../../../css/bootstrap.css');
-@import url('./../../../../../css/app.css');
-</style>

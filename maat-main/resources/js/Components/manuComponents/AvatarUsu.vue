@@ -13,8 +13,3 @@ export default {
     <img class="rounded-full border-2 border-white box-content object-fit-cover" :src="imagen" alt="Avatar" style="width: 86px; height: 86px;"/>
 
 </template>
-
-<style scoped>
-@import url('./../../../css/bootstrap.css');
-@import url('./../../../css/app.css');
-</style>

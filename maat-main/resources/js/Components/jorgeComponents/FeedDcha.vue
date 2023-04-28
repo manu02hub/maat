@@ -251,8 +251,3 @@ export default {
     name: 'FeedDcha',
 }
 </script>
-
-<style scoped>
-@import url('./../../../css/bootstrap.css');
-@import url('./../../../css/app.css');
-</style>

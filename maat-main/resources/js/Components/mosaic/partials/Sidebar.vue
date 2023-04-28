@@ -100,9 +100,9 @@
 
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
-                                            :href="route('chat')" @click="navigate">
-                                            <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                    Chat</span>
+                                            :href="href" @click="navigate">
+                                            <NavLink :href="route('chat')"> <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    Chat</span></NavLink>
                                         </a>
 
 
@@ -114,13 +114,13 @@
 
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
-                                            :href="route('listado')" @click="navigate">
-                                            <span
+                                            :href="href" @click="navigate">
+                                            <NavLink :href="route('listado')"> <span
                                                 class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                    Listado organizaciones</span>
+                                                    Listado organizaciones</span></NavLink>
                                         </a>
-
                                     </li>
+
                                     <!--</router-link>-->
                                     <!--<router-link to="/dashboard/fintech" custom v-slot="{ href, navigate, isExactActive }">-->
                                     <!-- <li class="mb-1 last:mb-0">
@@ -574,8 +574,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-@import url('./../../../../css/bootstrap.css');
-@import url('./../../../../css/app.css');
-</style>

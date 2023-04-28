@@ -64,11 +64,6 @@ const submit = () => {
     </div>
 </template>
 
-<style scoped>
-@import url('./../../../css/bootstrap.css');
-@import url('./../../../css/app.css');
-</style>
-
 <style>
 .form_izq {
     background-color: #73cd99;

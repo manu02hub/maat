@@ -7,73 +7,68 @@
 
 /* Código hecho en primer trimestre de DAM y DAW (grid) */
 /*El grid*/
-.row {
+.rowPropio {
+    color: black;
+    text-decoration: none;
     /* En la propiedad display agregamos grid para establecer una cuadricula */
     display: grid;
     /* Define el numero de columnas en el diseño de cuadricula */
-    grid-template-columns: repeat(12, [ col ] 1fr);
+    grid-template-columns: repeat(12, [ col] 1fr);
     /* Define la altura de cada fila */
-    grid-template-rows: repeat(5, [ row ] auto);
+    grid-template-rows: repeat(5, [ row] auto);
     column-gap: 1em; /* espacio entre columnas */
     row-gap: 15px; /* espacio entre filas */
-    /* Alinea horizontalmente la cuadricula del interior del contenedor */
-    /* justify-content: center; */
-    /* Alinea verticalmente la cuadricula del interior del contenedor */
-    /* align-content: center; */
 }
 
-.col {
-    /* background: rgb(70, 70, 70); */ /* Color de fondo */
-    /* text-transform: uppercase; */ /* Letra en mayuscula */
+.colPropio {
     padding: 1em; /* padding del texto */
     font-size: 14px; /* Tamaño del texto */
-    /* color: rgb(255, 255, 255); */
 }
 
-.noRowGap {
+.noRowGapPropio {
     row-gap: 0;
 }
 
-.noColGap {
+.noColGapPropio {
     column-gap: 0;
 }
 
 /* Rellena espacio del nav (temporal) */
-.prueba {
+.pruebaPropio {
     height: 4rem;
     background: lightblue;
     margin-bottom: 2rem;
 }
 
 /* Quita los estilos de listado */
-ul {
+.ulNoStylePropio {
     list-style: none;
 }
 
 /* Quita el estilo que tiene los links */
-a {
+.aNoStylePropio {
     text-decoration: none;
     color: black;
 }
 
 /* Estilo del tab */
-.listadoTab {
+.listadoTabPropio {
     display: flex; /* Lo coloca todo en la misma fila*/
     border-bottom: 1.5px solid #dee2e6; /* Colorea el borde de abajo y lo hace visible */
     padding: 0;
 }
 
-.listadoOpcionTab {
+.listadoOpcionTabPropio {
     margin-right: 0;
     padding: 0.5rem;
 }
 
-.tab {
+.tabPropio {
     padding: 0.5rem;
 }
 
 /* Senala el tab activo */
-.listadoOpcionTab.activo {
+.listadoOpcionTabPropio.activoPropio {
     border-top-left-radius: 0.75rem;
     border-top-right-radius: 0.75rem;
     background-color: #2d764b;
@@ -81,56 +76,62 @@ a {
 }
 
 /* Color del texto del tab activo */
-.listadoOpcionTab.activo a.tab {
+.listadoOpcionTabPropio.activoPropio a.tabPropio {
     color: white;
     transition: 1s;
 }
 
-.listadoOpcionTab a.tab {
+.listadoOpcionTabPropio a.tabPropio {
     color: black;
     transition: 1s;
 }
 
 /* Estilo cuando el raton pasa por encima de los tabs */
-.listadoOpcionTab:hover {
+.listadoOpcionTabPropio:hover {
     border-top-left-radius: 0.75rem;
     border-top-right-radius: 0.75rem;
     background-color: #73cd99;
     transition: 1s;
 }
 
-.listadoOpcionTab:hover a.tab {
+.listadoOpcionTabPropio:hover a.tabPropio {
     color: black;
 }
 
 /* Estilo del buscador (filtro) */
-.divBuscador {
+.divBuscadorPropio {
     height: 2rem;
     margin-top: 2rem;
 }
 
-.inputBuscador {
+.inputBuscadorPropio {
     height: 1.37rem;
-    width: 100%;
+    width: 98.26%;
     box-sizing: content-box !important; /* https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing */
     font-size: 1.2rem;
     padding-top: 0.2rem;
     padding-bottom: 0.4rem;
     padding-left: 5.2px;
+    box-shadow: 8px 0.3rem 0.3rem #939292;
+}
+
+.inputBuscadorPropio:focus {
+    border: 2px solid black !important;
+    box-shadow: 8px 0.3rem 0.3rem #afafaf !important;
 }
 
 /* Estilo de los botones y sus imagenes correspondientes */
-.btnBuscar {
+.btnBuscarPropio {
     background: lightblue;
     border: 1px solid lightblue;
     padding: 0.6rem;
 }
 
-.imgBuscar {
+.imgBuscarPropio {
     margin-bottom: -4px;
 }
 
-.btnFiltrar {
+.btnFiltrarPropio {
     background: lightblue;
     border: 1px solid lightblue;
     border-top-right-radius: 0.35rem;
@@ -139,20 +140,20 @@ a {
 }
 
 /* Estilo del contenedor de los filtros */
-.optionsFilter {
+.optionsFilterPropio {
     background-color: #73cd99;
     height: 10rem;
-    width: 100%;
+    width: 103%;
 }
 
 /* Estilo cuando pasa por un boton */
-.btn:hover {
+.btnPropio:hover {
     cursor: pointer; /* Botones https://developer.mozilla.org/en-US/docs/Web/CSS/cursor */
     background-color: #7bc8e1;
 }
 
 /* Estilos del listado */
-.listadoOrg {
+.listadoOrgPropio {
     height: 27.5rem; /* Altura */
     border: 1px solid black; /* Borde (tamano, su aspecto, y color) */
     /* Radio de los bordes */
@@ -173,7 +174,7 @@ a {
 }
 
 /* Imagen de las organizaciones */
-.imgOrg {
+.imgOrgPropio {
     height: 100%;
     width: 100%;
     border-top-left-radius: 0.75rem;
@@ -181,34 +182,34 @@ a {
 }
 
 /* Descripción de las organizaciones */
-.contenedorDesc {
+.contenedorDescPropio {
     background: lightblue;
     border-top-right-radius: 0.75rem;
     border-bottom-right-radius: 0.75rem;
     padding: 0.75rem;
 }
 
-.cardOrg {
+.cardOrgPropio {
     margin-bottom: 2rem;
 }
 
 /* Sombreado del contenedor y sus elementos (para darle efecto a todo el contenedor) */
-.cardOrg,
-.cardOrg > img.imgOrg,
-.cardOrg > div.contenedorDesc {
+.cardOrgPropio,
+.cardOrgPropio > img.imgOrgPropio,
+.cardOrgPropio > div.contenedorDescPropio {
     box-shadow: 10px 0.32rem 0.32rem #b6b6b6;
     transition: 1s;
 }
 
 /* Sombreado cuando el ratón pasa por encima del contenedor */
-.cardOrg:hover,
-.cardOrg:hover > img.imgOrg,
-.cardOrg:hover > div.contenedorDesc {
+.cardOrgPropio:hover,
+.cardOrgPropio:hover > img.imgOrgPropio,
+.cardOrgPropio:hover > div.contenedorDescPropio {
     box-shadow: 10px 0.32rem 0.32rem #949494;
 }
 
 /* Estilo de los titulos */
-h1 {
+.h1Propio {
     font-size: xx-large;
     font-weight: bolder;
     margin-bottom: 0.35rem;
@@ -217,132 +218,132 @@ h1 {
 /* Estilos responsive */
 /* Pantalla grande  */
 @media only screen and (min-width: 941px) {
-    .col-lg-1 {
+    .col-lg-1Propio {
         grid-column: span 1;
     }
-    .col-lg-2 {
+    .col-lg-2Propio {
         grid-column: span 2;
     }
-    .col-lg-3 {
+    .col-lg-3Propio {
         grid-column: span 3;
     }
-    .col-lg-4 {
+    .col-lg-4Propio {
         grid-column: span 4;
     }
-    .col-lg-5 {
+    .col-lg-5Propio {
         grid-column: span 5;
     }
-    .col-lg-6 {
+    .col-lg-6Propio {
         grid-column: span 6;
     }
-    .col-lg-7 {
+    .col-lg-7Propio {
         grid-column: span 7;
     }
-    .col-lg-8 {
+    .col-lg-8Propio {
         grid-column: span 8;
     }
-    .col-lg-9 {
+    .col-lg-9Propio {
         grid-column: span 9;
     }
-    .col-lg-10 {
+    .col-lg-10Propio {
         grid-column: span 10;
     }
-    .col-lg-11 {
+    .col-lg-11Propio {
         grid-column: span 11;
     }
-    .col-lg-12 {
+    .col-lg-12Propio {
         grid-column: span 12;
     }
 }
 
 /* Pantalla tablet  */
 @media only screen and (min-width: 768px) and (max-width: 941px) {
-    .col-md-1 {
+    .col-md-1Propio {
         grid-column: span 1;
     }
-    .col-md-2 {
+    .col-md-2Propio {
         grid-column: span 2;
     }
-    .col-md-3 {
+    .col-md-3Propio {
         grid-column: span 3;
     }
-    .col-md-4 {
+    .col-md-4Propio {
         grid-column: span 4;
     }
-    .col-md-5 {
+    .col-md-5Propio {
         grid-column: span 5;
     }
-    .col-md-6 {
+    .col-md-6Propio {
         grid-column: span 6;
     }
-    .col-md-7 {
+    .col-md-7Propio {
         grid-column: span 7;
     }
-    .col-md-8 {
+    .col-md-8Propio {
         grid-column: span 8;
     }
-    .col-md-9 {
+    .col-md-9Propio {
         grid-column: span 9;
     }
-    .col-md-10 {
+    .col-md-10Propio {
         grid-column: span 10;
     }
-    .col-md-11 {
+    .col-md-11Propio {
         grid-column: span 11;
     }
-    .col-md-12 {
+    .col-md-12Propio {
         grid-column: span 12;
     }
 }
 
 /*Pantalla movil*/
 @media only screen and (min-width: 451px) and (max-width: 768px) {
-    .col-sm-1 {
+    .col-sm-1Propio {
         grid-column: span 1;
     }
-    .col-sm-2 {
+    .col-sm-2Propio {
         grid-column: span 2;
     }
-    .col-sm-3 {
+    .col-sm-3Propio {
         grid-column: span 3;
     }
-    .col-sm-4 {
+    .col-sm-4Propio {
         grid-column: span 4;
     }
-    .col-sm-5 {
+    .col-sm-5Propio {
         grid-column: span 5;
     }
-    .col-sm-6 {
+    .col-sm-6Propio {
         grid-column: span 6;
     }
-    .col-sm-7 {
+    .col-sm-7Propio {
         grid-column: span 7;
     }
-    .col-sm-8 {
+    .col-sm-8Propio {
         grid-column: span 8;
     }
-    .col-sm-9 {
+    .col-sm-9Propio {
         grid-column: span 9;
     }
-    .col-sm-10 {
+    .col-sm-10Propio {
         grid-column: span 10;
     }
-    .col-sm-11 {
+    .col-sm-11Propio {
         grid-column: span 11;
     }
-    .col-sm-12 {
+    .col-sm-12Propio {
         grid-column: span 12;
     }
 
     /* Estilo del contenedor de la descripción */
-    .contenedorDesc {
+    .contenedorDescPropio {
         border-top-right-radius: 0rem;
         border-bottom-left-radius: 0.75rem;
         border-bottom-right-radius: 0.75rem;
     }
 
-    /* Estilo de la imagen (para que quede enfocado y centrado, no hacerlo más peuqeño la imagen) */
-    .imgOrg {
+    /* Estilo de la imagen (para que quede enfocado y centrado, no hacerlo más pequeño la imagen) */
+    .imgOrgPropio {
         height: 10rem;
         object-fit: cover; /* https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit */
         border-top-right-radius: 0.75rem;
@@ -351,40 +352,40 @@ h1 {
 }
 
 @media only screen and (max-width: 451px) {
-    .col-1 {
+    .col-1Propio {
         grid-column: span 1;
     }
-    .col-2 {
+    .col-2Propio {
         grid-column: span 2;
     }
-    .col-3 {
+    .col-3Propio {
         grid-column: span 3;
     }
-    .col-4 {
+    .col-4Propio {
         grid-column: span 4;
     }
-    .col-5 {
+    .col-5Propio {
         grid-column: span 5;
     }
-    .col-6 {
+    .col-6Propio {
         grid-column: span 6;
     }
-    .col-7 {
+    .col-7Propio {
         grid-column: span 7;
     }
-    .col-8 {
+    .col-8Propio {
         grid-column: span 8;
     }
-    .col-9 {
+    .col-9Propio {
         grid-column: span 9;
     }
-    .col-10 {
+    .col-10Propio {
         grid-column: span 10;
     }
-    .col-11 {
+    .col-11Propio {
         grid-column: span 11;
     }
-    .col-12 {
+    .col-12Propio {
         grid-column: span 12;
     }
 }

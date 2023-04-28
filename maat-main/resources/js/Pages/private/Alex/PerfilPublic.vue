@@ -3,9 +3,9 @@
 export default {
     data() {
         return {
-            org: '',
-            img: 'http://[::1]:5173/resources/img/fondoP.jpg'
-        }
+            org: "",
+            img: "http://[::1]:5173/resources/img/fondoP.jpg",
+        };
     },
 
     // Pone las variables para que luego se puedan montarse
@@ -16,103 +16,157 @@ export default {
             console.log(error);
         }
     },
-}
+};
 </script>
 
 <!-- Contenido propio -->
 <template>
     <!-- NavBar -->
-    <nav class="row noRowGap">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12 prueba"></div>
+    <nav class="rowPropio noRowGapPropio">
+        <div
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+        ></div>
     </nav>
 
     <main>
-        <div class="row noRowGap">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 fondoP" :style="{ 'background-image': 'url(' + img + ')' }" />
-            <img src="./../../../../img/prueba.jpg" class="col-lg-12 col-md-12 col-sm-12 col-12 logoOrg" />
+        <div class="rowPropio noRowGapPropio">
+            <div
+                class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio fondoPPropio"
+                :style="{ 'background-image': 'url(' + img + ')' }"
+            />
+            <img
+                src="./../../../../img/prueba.jpg"
+                class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio logoOrgPropio"
+            />
         </div>
 
-
-        <div class="row noRowGap">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12 row noRowGap noColGap">
+        <div class="rowPropio noRowGapPropio">
+            <div
+                class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio rowPropio noRowGapPropio noColGapPropio"
+            >
                 <!-- Contenedor para toda la información de la organización -->
-                <div class="contenedorDesc col-lg-8 col-md-8 col-sm-12 col-12 ">
+                <div
+                    class="contenedorDescPropio col-lg-8Propio col-md-8Propio col-sm-12Propio col-12Propio"
+                >
                     <!-- Boton del chat (solo si es pantalla pequena, si no, aparece la otra) -->
-                    <a :href="route('getIdChatWith', [this.org[0].org])">
-                        <button class="btnChat">
+                    <a class="aNoDecPropio" :href="route('getIdChatWith', [this.org[0].org])">
+                        <button class="btnChatPropio">
                             Chat
-                            <img src="./../../../../img/chat-fill.svg" class="filtroSvg">
+                            <img
+                                src="./../../../../img/chat-fill.svg"
+                                class="filtroSvgPropio"
+                            />
                         </button>
                     </a>
 
                     <!-- Mostrar descripcion -->
-                    <div class="desc">
-                        <h1>{{ this.org[0].nombre }}</h1>
+                    <div class="descPropio">
+                        <h1 class="h1StyleDefault">{{ this.org[0].nombre }}</h1>
 
                         <!-- Mira si es una ONG o una empresa -->
-                        <h3 class="type" v-if="this.$page.props.isOng == 1">ONG</h3>
-                        <h3 class="type" v-else="this.$page.props.isOng != 1">Empresa</h3>
+                        <h3
+                            class="typePropio"
+                            v-if="this.$page.props.isOng == 1"
+                        >
+                            ONG
+                        </h3>
+                        <h3
+                            class="typePropio"
+                            v-else="this.$page.props.isOng != 1"
+                        >
+                            Empresa
+                        </h3>
 
                         <!-- Descripción de la empresa -->
-                        <p class="descTxt">
+                        <p class="descTxtPropio">
                             {{ this.org[0].descripcion }}
                         </p>
                     </div>
 
                     <!-- Mostrar galeria -->
-                    <div class="desc">
-                        <h1>Galeria</h1>
+                    <div class="descPropio">
+                        <h1 class="h1StyleDefault">Galeria</h1>
+
                         <!-- Descripción de la empresa -->
-                        <p class="descTxt">
-                            Eventos.
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint iusto saepe, illum quo cupiditate
-                            voluptate sunt ipsum, nostrum nulla dolorum quasi velit temporibus esse! Obcaecati harum vel
-                            nemo
-                            doloribus omnis.
+                        <p class="descTxtPropio">
+                            Eventos. Lorem ipsum dolor sit amet consectetur,
+                            adipisicing elit. Sint iusto saepe, illum quo
+                            cupiditate voluptate sunt ipsum, nostrum nulla
+                            dolorum quasi velit temporibus esse! Obcaecati harum
+                            vel nemo doloribus omnis.
                         </p>
                     </div>
 
                     <!-- Mostrar empleados -->
-                    <div class="row noRowGap noColGap cardEmpl" v-for="(data, index) in org">
+                    <div
+                        class="rowPropio noRowGapPropio noColGapPropio cardEmplPropio"
+                        v-for="(data, index) in org"
+                    >
                         <!-- Solo muestra los 3 primeros empleados de la lista -->
                         <template v-if="index < 3">
-                            <img src="./../../../../img/prueba.jpg" class="col-lg-3 col-md-2 col-sm-12 col-12 imgEmpl"
-                                alt="">
+                            <img
+                                src="./../../../../img/prueba.jpg"
+                                class="col-lg-3Propio col-md-2Propio col-sm-12Propio col-12Propio imgEmplPropio"
+                                alt=""
+                            />
 
                             <!-- Descripcion -->
-                            <div class="col-lg-9 col-md-10 col-sm-12 col-12 empleado">
-                                <h2>{{ data.empleado }}</h2>
+                            <div
+                                class="col-lg-9Propio col-md-10Propio col-sm-12Propio col-12Propio empleadoPropio"
+                            >
+                                <h2 class="h2TitlePropio">
+                                    {{ data.empleado }}
+                                </h2>
                                 <!-- Dice si eres un administrador o un empleado -->
-                                <p class="descTxt">Contacto: {{ data.email }}</p>
-                                <p class="descEmpl" v-if="data.rol_id == 1">Administrador</p>
-                                <p class="descEmpl" v-if="data.rol_id == 2">Empleado</p>
+                                <p class="descTxtPropio">
+                                    Contacto: {{ data.email }}
+                                </p>
+                                <p
+                                    class="descEmplPropio"
+                                    v-if="data.rol_id == 1"
+                                >
+                                    Administrador
+                                </p>
+                                <p
+                                    class="descEmplPropio"
+                                    v-if="data.rol_id == 2"
+                                >
+                                    Empleado
+                                </p>
                             </div>
                         </template>
                     </div>
                 </div>
-                <div class="contenedorDesc col-lg-4 col-md-4 col-sm-12 col-12 ">
-                    <a :href="route('getIdChatWith', [this.org[0].org])">
-                        <button class="btnChat2">
+                <div
+                    class="contenedorDescPropio col-lg-4Propio col-md-4Propio col-sm-12Propio col-12Propio"
+                >
+                    <a class="aNoDecPropio" :href="route('getIdChatWith', [this.org[0].org])">
+                        <button class="btnChat2Propio">
                             Chat
-                            <img src="./../../../../img/chat-fill.svg" class="filtroSvg">
+                            <img
+                                src="./../../../../img/chat-fill.svg"
+                                class="filtroSvgPropio"
+                            />
                         </button>
                     </a>
 
-                    <div class="desc">
-                        <h1>Contacto</h1>
-                        <p class="descTxt">{{ this.org[0].web }}</p>
-                        <p class="descTxt">{{ this.org[0].numero_tarjeta }}</p>
-                        <p class="descTxt">{{ this.org[0].ubicacion }}</p>
+                    <div class="descPropio">
+                        <h1 class="h1StyleDefault">Contacto</h1>
+                        <p class="descTxtPropio">{{ this.org[0].web }}</p>
+                        <p class="descTxtPropio">
+                            {{ this.org[0].numero_tarjeta }}
+                        </p>
+                        <p class="descTxtPropio">{{ this.org[0].ubicacion }}</p>
                     </div>
 
-                    <div class="desc">
-                        <h1>Eventos finalizados</h1>
-                        <p class="descTxt">Eventos más recientes</p>
+                    <div class="descPropio">
+                        <h1 class="h1StyleDefault">Eventos finalizados</h1>
+                        <p class="descTxtPropio">Eventos más recientes</p>
                     </div>
 
-                    <div class="desc">
-                        <h1>Eventos en curso</h1>
-                        <p class="descTxt">Eventos en curso</p>
+                    <div class="descPropio">
+                        <h1 class="h1StyleDefault">Eventos en curso</h1>
+                        <p class="descTxtPropio">Eventos en curso</p>
                     </div>
                 </div>
             </div>
@@ -126,8 +180,40 @@ export default {
 /* Importando css propio */
 @import url("./../../../../css/perfil.css");
 
-.type {
+/* Estilos de h1 por defecto */
+.h1StyleDefault {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.typePropio {
+    /* Estilos de h3 por defecto */
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+
+    /* Estilos añadidos */
     font-style: italic;
     margin-top: 0.35rem;
+}
+
+/* Los estilos por defecto. Aparece si escribe h2 */
+.h2TitlePropio {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
 }
 </style>

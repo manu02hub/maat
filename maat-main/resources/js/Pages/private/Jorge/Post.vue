@@ -46,8 +46,3 @@ import EntradaPost from "@/Components/jorgeComponents/EntradaPost.vue";
         </div>
     </AuthenticatedLayout>
 </template>
-
-<style scoped>
-@import url("./../../../../css/bootstrap.css");
-@import url("./../../../../css/app.css");
-</style>

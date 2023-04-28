@@ -7,7 +7,7 @@
 
 /* Código hecho en primer trimestre de DAM y DAW (grid) */
 /*El grid*/
-.row {
+.rowPropio {
     /* En la propiedad display agregamos grid para establecer una cuadricula */
     display: grid;
     /* Define el numero de columnas en el diseño de cuadricula */
@@ -16,52 +16,40 @@
     grid-template-rows: repeat(5, [ row ] auto);
     column-gap: 1em; /* espacio entre columnas */
     row-gap: 15px; /* espacio entre filas */
-    /* Alinea horizontalmente la cuadricula del interior del contenedor */
-    /* justify-content: center; */
-    /* Alinea verticalmente la cuadricula del interior del contenedor */
-    /* align-content: center; */
 }
 
-.col {
-    /* background: rgb(70, 70, 70); */ /* Color de fondo */
-    /* text-transform: uppercase; */ /* Letra en mayuscula */
+.colPropio {
     padding: 1em; /* padding del texto */
     font-size: 14px; /* Tamaño del texto */
-    /* color: rgb(255, 255, 255); */
 }
 
-.noRowGap {
+.noRowGapPropio {
     row-gap: 0;
 }
 
-.noColGap {
+.noColGapPropio {
     column-gap: 0;
 }
 
 /* Rellena espacio del nav (temporal) */
-.prueba {
+.pruebaPropio {
     height: 4rem;
     background: lightblue;
 }
 
-/* Quita los estilos de listado */
-ul {
-    list-style: none;
-}
-
 /* Quita el estilo que tiene los links */
-a {
+.aNoDecPropio {
     text-decoration: none;
     color: black;
 }
 
 /* El fondo que hay debajo de la foto del logo de la Org */
-.fondoP {
+.fondoPPropio {
     height: 13rem;
 }
 
 /* Estilo del logo (la imagen) */
-.logoOrg {
+.logoOrgPropio {
     /* Sus dimensiones */
     width: 13rem;
     height: 10rem;
@@ -75,7 +63,7 @@ a {
 }
 
 /* Colocacion del contenedor mediante margenes y rellenos */
-.contenedorDesc {
+.contenedorDescPropio {
     background-color: lightblue;
     border: 1px solid black;
     margin-top: 2.5rem;
@@ -89,13 +77,13 @@ a {
 }
 
 /* Estilo del contenedor de empleados */
-.cardEmpl {
+.cardEmplPropio {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
 /* Estilo de la imagen del empleado */
-.imgEmpl {
+.imgEmplPropio {
     height: 7.75rem;
     width: 75%;
     border-radius: 2.5rem;
@@ -104,12 +92,12 @@ a {
 }
 
 /* Estilo del contenedor de la descripcion del empleado */
-.empleado {
+.empleadoPropio {
     padding: 0.75rem;
 }
 
 /* Estilo de la descripcion del empleado */
-.descEmpl {
+.descEmplPropio {
     font-size: larger;
     font-style: italic;
     margin-top: 0.5rem;
@@ -117,8 +105,8 @@ a {
 }
 
 /* Estilo del boton del chat */
-.btnChat,
-.btnChat2 {
+.btnChatPropio,
+.btnChat2Propio {
     height: 4rem;
     font-size: larger;
     font-weight: bold;
@@ -131,50 +119,57 @@ a {
 }
 
 /* Este chat solo aparece cuando es pequena la pantalla */
-.btnChat {
+.btnChatPropio {
     display: none;
     float: right;
 }
 
 /* Estilo del boton del chat (para pantallas grandes) */
-.btnChat2 {
+.btnChat2Propio {
     height: 4rem;
     width: 100%;
 }
 
 /* Estilo cuando pasa el raton por encima del boton */
-.btnChat:hover,
-.btnChat2:hover {
+.btnChatPropio:hover,
+.btnChat2Propio:hover {
     background-color: #2d764b;
     cursor: pointer;
     color: white;
     transition: 1s;
 }
 
+/* Para evitar que otros estilos interfieran */
+.filtroSvgPropio{
+    display: inline;
+    vertical-align: unset;
+}
+
 /* Este estilo hace que cuando se pase el raton por encima del boton, se cambie el filtro (invertir color
 del SVG (gráficos vectoriales escalables) */
 /* https://stackoverflow.com/questions/22252472/how-can-i-change-the-color-of-an-svg-element */
-.btnChat:hover > .filtroSvg,
-.btnChat2:hover > .filtroSvg {
+.btnChatPropio:hover > .filtroSvgPropio,
+.btnChat2Propio:hover > .filtroSvgPropio {
     /* https://developer.mozilla.org/es/docs/Web/CSS/filter */
     filter: invert(1);
     transition: 1s;
 }
 
 /* Animacion de transicion sobre el vector grafico */
-.btnChat > .filtroSvg,
-.btnChat2 > .filtroSvg {
+.btnChatPropio > .filtroSvgPropio,
+.btnChat2Propio > .filtroSvgPropio {
     transition: 1s;
 }
 
 /* Estilos sobre el contenido dentro del contenedorDesc */
 /* Referido a la seccion de descripcion */
-.desc {
+.descPropio {
     margin-top: 1rem;
 }
 
 /* Texto descripcion de la organizacion */
-.descTxt {
+.descTxtPropio {
+    font-size: medium;
     margin-top: 0.65rem;
     margin-bottom: 0.65rem;
 }
@@ -182,85 +177,85 @@ del SVG (gráficos vectoriales escalables) */
 /* Estilos responsive */
 /* Pantalla grande  */
 @media only screen and (min-width: 941px) {
-    .col-lg-1 {
+    .col-lg-1Propio {
         grid-column: span 1;
     }
-    .col-lg-2 {
+    .col-lg-2Propio {
         grid-column: span 2;
     }
-    .col-lg-3 {
+    .col-lg-3Propio {
         grid-column: span 3;
     }
-    .col-lg-4 {
+    .col-lg-4Propio {
         grid-column: span 4;
     }
-    .col-lg-5 {
+    .col-lg-5Propio {
         grid-column: span 5;
     }
-    .col-lg-6 {
+    .col-lg-6Propio {
         grid-column: span 6;
     }
-    .col-lg-7 {
+    .col-lg-7Propio {
         grid-column: span 7;
     }
-    .col-lg-8 {
+    .col-lg-8Propio {
         grid-column: span 8;
     }
-    .col-lg-9 {
+    .col-lg-9Propio {
         grid-column: span 9;
     }
-    .col-lg-10 {
+    .col-lg-10Propio {
         grid-column: span 10;
     }
-    .col-lg-11 {
+    .col-lg-11Propio {
         grid-column: span 11;
     }
-    .col-lg-12 {
+    .col-lg-12Propio {
         grid-column: span 12;
     }
 }
 
 /* Pantalla tablet  */
 @media only screen and (min-width: 768px) and (max-width: 941px) {
-    .col-md-1 {
+    .col-md-1Propio {
         grid-column: span 1;
     }
-    .col-md-2 {
+    .col-md-2Propio {
         grid-column: span 2;
     }
-    .col-md-3 {
+    .col-md-3Propio {
         grid-column: span 3;
     }
-    .col-md-4 {
+    .col-md-4Propio {
         grid-column: span 4;
     }
-    .col-md-5 {
+    .col-md-5Propio {
         grid-column: span 5;
     }
-    .col-md-6 {
+    .col-md-6Propio {
         grid-column: span 6;
     }
-    .col-md-7 {
+    .col-md-7Propio {
         grid-column: span 7;
     }
-    .col-md-8 {
+    .col-md-8Propio {
         grid-column: span 8;
     }
-    .col-md-9 {
+    .col-md-9Propio {
         grid-column: span 9;
     }
-    .col-md-10 {
+    .col-md-10Propio {
         grid-column: span 10;
     }
-    .col-md-11 {
+    .col-md-11Propio {
         grid-column: span 11;
     }
-    .col-md-12 {
+    .col-md-12Propio {
         grid-column: span 12;
     }
 
     /* Ajuste de la imagen de los empleados */
-    .imgEmpl {
+    .imgEmplPropio {
         height: 4.5rem;
         width: 75%;
     }
@@ -268,106 +263,106 @@ del SVG (gráficos vectoriales escalables) */
 
 /*Pantalla movil*/
 @media only screen and (min-width: 451px) and (max-width: 768px) {
-    .col-sm-1 {
+    .col-sm-1Propio {
         grid-column: span 1;
     }
-    .col-sm-2 {
+    .col-sm-2Propio {
         grid-column: span 2;
     }
-    .col-sm-3 {
+    .col-sm-3Propio {
         grid-column: span 3;
     }
-    .col-sm-4 {
+    .col-sm-4Propio {
         grid-column: span 4;
     }
-    .col-sm-5 {
+    .col-sm-5Propio {
         grid-column: span 5;
     }
-    .col-sm-6 {
+    .col-sm-6Propio {
         grid-column: span 6;
     }
-    .col-sm-7 {
+    .col-sm-7Propio {
         grid-column: span 7;
     }
-    .col-sm-8 {
+    .col-sm-8Propio {
         grid-column: span 8;
     }
-    .col-sm-9 {
+    .col-sm-9Propio {
         grid-column: span 9;
     }
-    .col-sm-10 {
+    .col-sm-10Propio {
         grid-column: span 10;
     }
-    .col-sm-11 {
+    .col-sm-11Propio {
         grid-column: span 11;
     }
-    .col-sm-12 {
+    .col-sm-12Propio {
         grid-column: span 12;
     }
 
     /* Ajuste de la imagen del empleado */
-    .imgEmpl {
+    .imgEmplPropio {
         height: 10rem;
         width: 15rem;
     }
 
     /* Ajusta el texto dentro del contenedor de descripcion del empleado */
-    .empleado {
+    .empleadoPropio {
         text-align: center;
     }
 
     /* Los botones de chat se intercambian. Aparece solo el boton para pantallas pequenas */
-    .btnChat {
+    .btnChatPropio {
         display: inline-block;
         width: 8rem;
     }
 
-    .btnChat2 {
+    .btnChat2Propio {
         display: none;
     }
 }
 
 /* Pantallas muy pequenas */
 @media only screen and (max-width: 451px) {
-    .col-1 {
+    .col-1Propio {
         grid-column: span 1;
     }
-    .col-2 {
+    .col-2Propio {
         grid-column: span 2;
     }
-    .col-3 {
+    .col-3Propio {
         grid-column: span 3;
     }
-    .col-4 {
+    .col-4Propio {
         grid-column: span 4;
     }
-    .col-5 {
+    .col-5Propio {
         grid-column: span 5;
     }
-    .col-6 {
+    .col-6Propio {
         grid-column: span 6;
     }
-    .col-7 {
+    .col-7Propio {
         grid-column: span 7;
     }
-    .col-8 {
+    .col-8Propio {
         grid-column: span 8;
     }
-    .col-9 {
+    .col-9Propio {
         grid-column: span 9;
     }
-    .col-10 {
+    .col-10Propio {
         grid-column: span 10;
     }
-    .col-11 {
+    .col-11Propio {
         grid-column: span 11;
     }
-    .col-12 {
+    .col-12Propio {
         grid-column: span 12;
     }
 
     /* Logo ajustado a pantallas más pequenas */
-    .logoOrg {
+    .logoOrgPropio {
         width: 10rem;
         height: 8rem;
         position: absolute;
@@ -377,29 +372,29 @@ del SVG (gráficos vectoriales escalables) */
     }
 
     /* Ajuste de la imagen del empleado */
-    .imgEmpl {
+    .imgEmplPropio {
         height: 6rem;
         width: 8rem;
     }
 
     /* Ajusta el texto dentro del contenedor de descripcion del empleado */
-    .empleado {
+    .empleadoPropio {
         text-align: center;
     }
 
     /* Pone mas estilo cuando la pantalla es pequena*/
-    .btnChat {
+    .btnChatPropio {
         display: inline-block;
         width: 100%;
     }
 
     /* Oculta botón de chat situado en contactos */
-    .btnChat2 {
+    .btnChat2Propio {
         display: none;
     }
 
     /* Ajuste del contenedor de descripcion de la organizacion */
-    .contenedorDesc {
+    .contenedorDescPropio {
         padding-right: 1rem;
         padding-left: 1rem;
     }

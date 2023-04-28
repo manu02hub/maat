@@ -91,7 +91,3 @@ import { Head } from '@inertiajs/vue3';
 
 </template>
 
-<style scoped>
-@import url('./../../css/bootstrap.css');
-@import url('./../../css/app.css');
-</style>

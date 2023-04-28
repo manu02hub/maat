@@ -22,8 +22,3 @@ import UpdatePasswordForm from '@/Components/carlosComponents/UpdatePasswordForm
 
     </PrivateLayout>
 </template>
-
-<style scoped>
-@import url('./../../../../css/bootstrap.css');
-@import url('./../../../../css/app.css');
-</style>
