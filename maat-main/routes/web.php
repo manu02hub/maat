@@ -241,6 +241,13 @@ Route::get('feed/post', function () {
     return Inertia::render('private/Jorge/Post');
 })->middleware(['auth', 'verified'])->name('post');
 //------------------------------------------
+Route::get('/perfilempresa', function () {
+    return Inertia::render('Carlos/PerfilEmpresa');
+})->middleware(['auth', 'verified'])->name('perfil-empresa');
+
+Route::get('/editempresa', function () {
+    return Inertia::render('Carlos/EditEmpresa');
+})->middleware(['auth', 'verified'])->name('edit-empresa');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

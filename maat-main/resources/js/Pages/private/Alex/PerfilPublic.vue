@@ -85,7 +85,7 @@ export default {
                     </div>
                 </div>
                 <div class="contenedorDesc col-lg-4 col-md-4 col-sm-12 col-12 ">
-                    <a :href="route('getIdChatWith', [this.org[0].org])">
+                    <a :href="route('getIdChatWith', [this.org[0].org])"></a>
                     </div>
 
                     <div class="desc">
@@ -98,8 +98,7 @@ export default {
                         <p class="descTxt">Eventos en curso</p>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>        
     </main>
 
     <!-- Footer -->

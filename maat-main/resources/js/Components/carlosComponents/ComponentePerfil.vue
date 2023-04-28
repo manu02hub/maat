@@ -28,10 +28,8 @@
                     <h1 class="text-2xl text-slate-800 font-bold">
                         {{ this.entData[0].nombre }}
                     </h1>
+                    <h1 class="text-2xl text-slate-800 font-bold">Nombre Empresa</h1>
                 </div>
-                <!-- Bio -->
-                <div class="text-sm mb-3">Sector de la empresa etc</div>
-                <!-- Meta -->
                 <div class="flex flex-wrap justify-center sm:justify-start space-x-4">
                     <div class="flex items-center">
                         <svg class="w-4 h-4 fill-current shrink-0 text-slate-400" viewBox="0 0 16 16">
