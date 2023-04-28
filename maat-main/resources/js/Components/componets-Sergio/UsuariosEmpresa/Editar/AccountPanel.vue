@@ -1,8 +1,14 @@
+<script setup>
+import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+import CardEvent from "@/Components/manuComponents/CardEvent.vue";
+import { Head, Link } from "@inertiajs/vue3";
+</script>
 
 <template>
     <div class="grid-system">
         <header>
-            <span>{{ $page.props.auth.user.name }}</span>
+            <span>{{ $page.props.user.name }}</span>
         </header>
         <div class="div-img">
             <img src="https://preview.cruip.com/mosaic/images/user-128-01.jpg" alt="">
@@ -11,20 +17,20 @@
             <span>Usuario de empresa</span>
             <div class="div-datos-basicos">
                 <div class="div-form-primero">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">{{ $page.props.user.name }}</label>
                     <input type="text" id="nombre">
                 </div>
-                <div class="div-form-primero">
+                <!-- <div class="div-form-primero">
                     <label for="apellidos">Apellidos</label>
                     <input type="text" id="apellidos">
-                </div>
-                <div class="div-form-primero">
+                </div> -->
+                <!-- <div class="div-form-primero">
                     <label for="puesto">Puesto</label>
                     <input type="text" id="puesto">
-                </div>
+                </div> -->
             </div>
             <div class="div-form-segundo">
-                <label for="email">Email</label>
+                <label for="email">{{ $page.props.user.name }}</label>
                 <input type="text" id="email">
             </div>
             <button class="button-email">Save</button>
@@ -36,10 +42,10 @@
             <button class="button-password">Restablecer contraseña</button>
         </div>
         <footer>
-            <Link :href="route('listUserEmpresa')">
+            <Link :href="route('indexUser')">
             <button class="btn-cancelar">Cancelar</button>
             </Link>
-            <Link :href="route('listUserEmpresa')">
+            <Link :href="route('indexUser')">
             <button class="btn-save">Guardar cambios</button>
             </Link>
         </footer>
@@ -193,11 +199,3 @@ footer {
 }
 </style>
 
-<script>
-import { ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
-
-export default {
-    components: { Link },
-}
-</script>

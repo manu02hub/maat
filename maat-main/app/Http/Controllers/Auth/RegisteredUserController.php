@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Redirect; 
 use Inertia\Inertia;
 use Inertia\Response;
-
 use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
@@ -25,6 +25,54 @@ class RegisteredUserController extends Controller
     {
         return Inertia::render('Auth/Register');
     }
+
+    public function indexUser(Request $request){
+        $user = User::all();
+        return Inertia::render('private/Sergio/UsuariosEmpresa/Listado', compact('user'));
+    }
+
+    public function createUser(Request $request){
+        // dd($request);
+        $user = new User();
+        $user-> nombre = $request->nombre;
+        $user-> email = $request->email;
+        $user-> password = $request->password;
+        // $user-> password_confirmation = $request->password_confirmation;
+        $user-> rol_id= $request->rol;
+        $user->entidad_id=1;
+        $user->save();
+        return Redirect::route('indexUser');
+    }
+
+    public function editUser($id){
+        $user = User::findOrFail($id);
+        // return Inertia::render('private/Sergio/UsuariosEmpresa/EditarUsuario', compact('user'));
+        return Inertia::render('private/Piero/EditarUsuario', compact('user'));
+
+    }
+    
+    public function updateUser(Request $request){
+        $id = $request->id;
+        $user = User::findOrFail($id);
+        // dd($User);
+        $user->update([
+            'nombre' => $request->nombre,
+            'email' => $request->email,
+            'password' => $request->password,
+            'rol_id' => $request->rol_id,
+            'entidad_id' => $request->entidad_id,
+        ]);
+        return Redirect::route('indexUser');
+    }
+
+    public function destroyUser($id)
+    {
+        $evento = User::findOrFail($id);
+        $evento->delete();
+        return back();
+    }
+ 
+
 
     /**
      * Handle an incoming registration request.

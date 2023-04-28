@@ -235,7 +235,7 @@
                         </NavLink>
 
                         <!-- LISTADO USER EMPRESA -->
-                        <NavLink :href="route('listUserEmpresa')">
+                        <NavLink :href="route('indexUser')">
                             <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
                                 <a class="block text-slate-200 truncate transition duration-150"
                                     :class="isExactActive ? 'hover:text-slate-200' : 'hover:text-white'" :href="href"

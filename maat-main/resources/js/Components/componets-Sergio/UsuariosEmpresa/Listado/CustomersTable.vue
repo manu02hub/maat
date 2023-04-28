@@ -1,3 +1,9 @@
+<script setup>
+import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+import CardEvent from "@/Components/manuComponents/CardEvent.vue";
+import { Head, Link } from "@inertiajs/vue3";
+</script>
 
 <template>
     <div class="grid-system">
@@ -28,19 +34,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="users in $page.props.user" :key="users.id">
                             <td class="th-id">1</td>
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
-                            <td class="attr-td">Sergio</td>
-                            <td class="attr-td">Hervas</td>
-                            <td class="attr-td">Sergiohervas9@gmail.com</td>
-                            <td class="attr-td">212</td>
-                            <td class="attr-td">422</td>
+                            <td class="attr-td">{{ users.nombre }}</td>
+                            <td class="attr-td">{{ users.nombre }}</td>
+                            <td class="attr-td">{{ users.email }}</td>
+                            <td class="attr-td">{{ users.id }}</td>
+                            <td class="attr-td">{{ users.nombre }}</td>
                             <td class="attr-td">
-                                <Link :href="route('editUserEmpresa')"
-                                    class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <Link :href="route('editUser', users.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">
                                     <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -57,6 +62,7 @@
                                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                     </svg>
                                 </button>
+                                <Link :href="route('deleteUser', users.id)">
                                 <button class="action-buttons-list" @click="Eliminar">
                                     <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -68,6 +74,7 @@
                                         <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                     </svg>
                                 </button>
+                                </Link>
                             </td>
                         </tr>
 
@@ -187,14 +194,3 @@ th {
 }
 </style>
 
-<script>
-import { Link } from '@inertiajs/vue3'
-export default {
-    components: { Link },
-    methods: {
-        Eliminar() {
-            alert('Eliminar usuario');
-        }
-    }
-}
-</script>

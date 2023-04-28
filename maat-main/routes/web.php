@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +67,9 @@ Route::get('/eventInfo', function () {
 //-----------------------------------SERGIO---------------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'Empresa'], function () {
-    Route::get('/listado', function () {
-        return Inertia::render('private/Sergio/UsuariosEmpresa/Listado');
-    })->name('listUserEmpresa');
+    // Route::get('/listado', function () {
+    //     return Inertia::render('private/Sergio/UsuariosEmpresa/Listado');
+    // })->name('listUserEmpresa');
 
     Route::get('/info', function () {
         return Inertia::render('private/Sergio/UsuariosEmpresa/InfoUsuario');
@@ -159,6 +161,13 @@ Route::get('/donativos', function () {
 
 // Route::post('/form', FormController::class)->name('contact');
 // Route::get('/correo', EmployeeController::class, )->name('correo');
+
+Route::get('/indexUser', [RegisteredUserController::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
+Route::patch('/createUser', [RegisteredUserController::class, 'createUser'])->middleware(['auth', 'verified'])->name('createUser');
+Route::get('/editUser/{id}', [RegisteredUserController::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
+Route::patch('/update', [RegisteredUserController::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
+Route::get('/eliminar/{id}', [RegisteredUserController::class, 'destroyUser'])->name('deleteUser');
+
 
 //---------------------PIERO-----------------
 Route::get('/perfil', function () {
