@@ -17,8 +17,8 @@ import { Head, Link } from "@inertiajs/vue3";
             <span>Usuario de empresa</span>
             <div class="div-datos-basicos">
                 <div class="div-form-primero">
-                    <label for="nombre">{{ $page.props.user.name }}</label>
-                    <input type="text" id="nombre">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" :value="$page.props.user.nombre">
                 </div>
                 <!-- <div class="div-form-primero">
                     <label for="apellidos">Apellidos</label>
@@ -30,8 +30,8 @@ import { Head, Link } from "@inertiajs/vue3";
                 </div> -->
             </div>
             <div class="div-form-segundo">
-                <label for="email">{{ $page.props.user.name }}</label>
-                <input type="text" id="email">
+                <label for="email">Email</label>
+                <input type="text" id="email" :value="$page.props.user.email">
             </div>
             <button class="button-email">Save</button>
             <div class="div-form-segundo">
@@ -45,7 +45,7 @@ import { Head, Link } from "@inertiajs/vue3";
             <Link :href="route('indexUser')">
             <button class="btn-cancelar">Cancelar</button>
             </Link>
-            <Link :href="route('indexUser')">
+            <Link :href="route('updateUser')">
             <button class="btn-save">Guardar cambios</button>
             </Link>
         </footer>

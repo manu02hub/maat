@@ -46,8 +46,9 @@ class RegisteredUserController extends Controller
 
     public function editUser($id){
         $user = User::findOrFail($id);
+        // dd($user);
         // return Inertia::render('private/Sergio/UsuariosEmpresa/EditarUsuario', compact('user'));
-        return Inertia::render('private/Piero/EditarUsuario', compact('user'));
+        return Inertia::render('private/Sergio/UsuariosEmpresa/EditUsuario', compact('user'));
 
     }
     
