@@ -9,6 +9,9 @@ export default {
             listChats: "",
             recentChats: "",
             nameChat: '',
+            idEntidadChat: 0,
+            idChatInterval: 0,
+            chatHistory: "",
 
             // chatInicial se usa para las ventanas del chat
             chatInicial: [],
@@ -26,15 +29,10 @@ export default {
         }
     },
 
-    watch: {
-    },
-
     methods: {
         // Muestra chats ya contactados (necesario crear uno si no existe chat, es decir, al querrer
         // chatear con una nueva entidad)
         mostrar: function (event, entidadChatear) {
-            var prueba = document.getElementsByClassName('contenedorChat');
-
             try {
                 // Resetea todos los chats a sus estilos por defecto (ninguno activo) del chat de recientes
                 // Recorre todos los chats existentes de recientes
@@ -72,14 +70,15 @@ export default {
                     this.chatSmall = true;
                 }
 
+                this.idEntidadChat = entidadChatear;
+
                 // Recoger los chats del clickeado
                 axios.post('/chat/open', {
                     params: {
-                        id: entidadChatear,
+                        id: this.idEntidadChat,
                         userId: this.$page.props.auth.user.entidad_id,
                     }
                 }).then((response) => {
-                    console.log(response.data);
                     this.chatInicial = [];
 
                     // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
@@ -100,8 +99,6 @@ export default {
                         this.form.idDestino = response.data[0].id_destino;
                     }
 
-                    this.form.fecha = response.data[0].fecha;
-                    this.form.hora = response.data[0].hora;
                     this.iniciarChatPorId();
                 })
 
@@ -160,12 +157,12 @@ export default {
                         msgContainer += "<div class='sendChat'>" + mensajes[0]
                         msgContainer +=
                             "<p class='timeChatSend'>Enviado a las " +
-                            mensajes[2] + " de " + mensajes[3] + "</p></div>";
+                            mensajes[3] + " de " + mensajes[2] + "</p></div>";
                     } else {
                         msgContainer += "<div class='receptorChat'>" + mensajes[0]
                         msgContainer +=
                             "<p class='timeChatReceived'>Enviado a las " +
-                            mensajes[2] + " de " + mensajes[3] + "</p></div>";
+                            mensajes[3] + " de " + mensajes[2] + "</p></div>";
                     }
                 });
 
@@ -221,44 +218,130 @@ export default {
         // Solo se usa para conseguir los datos iniciales si se accede al chat url con variables (id de
         // la entidad con la que se quiere chatear)
         getInitialDataWithId: async function () {
-            // Abre el chat que se ha escogido.
-            // Peticion para recibir el chat con la que se quiere hablar
-            await axios.post('/chat/getBy', {
-                params: {
-                    id: this.$page.props.chatWith,
-                    userId: this.$page.props.auth.user.entidad_id,
-                }
-            }).then((response) => {
-                this.listChats = response.data.chats; // Lista chats
-                this.recentChats = response.data.recentChats; // Recientes chats
+            try {
+                // Abre el chat que se ha escogido.
+                // Peticion para recibir el chat con la que se quiere hablar
+                await axios.post('/chat/getBy', {
+                    params: {
+                        id: this.idEntidadChat,
+                        userId: this.$page.props.auth.user.entidad_id,
+                    }
+                }).then((response) => {
+                    this.listChats = response.data.chats; // Lista chats
+                    this.recentChats = response.data.recentChats; // Recientes chats
 
-                // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
-                this.nameChat = response.data.chatWith[0][0].nombre;
+                    // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
+                    this.nameChat = response.data.chatWith[0][0].nombre;
 
-                response.data.chatWith[0].forEach(mensajes => {
-                    this.chatInicial.push(
-                        [mensajes.contenido, mensajes.id_origen, mensajes.fecha, mensajes.hora]
-                    );
+                    response.data.chatWith[0].forEach(mensajes => {
+                        this.chatInicial.push(
+                            [mensajes.contenido, mensajes.id_origen, mensajes.fecha, mensajes.hora]
+                        );
+                    });
+
+                    // El que es distinto es con quien quiere chatear
+                    if (response.data.chatWith[0][0].id_origen != this.$page.props.auth.user.entidad_id) {
+                        this.form.idDestino = response.data.chatWith[0][0].id_origen;
+                    } else {
+                        this.form.idDestino = response.data.chatWith[0][0].id_destino;
+                    }
+
+                    this.form.fecha = response.data.chatWith[0][0].fecha;
+                    this.form.hora = response.data.chatWith[0][0].hora;
+                    this.iniciarChatPorId();
+
+                    // En caso de error (porque no se obtiene los datos que se quiere), entonces cambia de
+                    // vista
+                }).catch((response) => {
+                    // Recarga la pagina y pone los estilos propios de esa pagina
+                    // window.location.href = route('listado');
+                    console.log(response)
                 });
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
-                // El que es distinto es con quien quiere chatear
-                if (response.data.chatWith[0][0].id_origen != this.$page.props.auth.user.entidad_id) {
-                    this.form.idDestino = response.data.chatWith[0][0].id_origen;
-                } else {
-                    this.form.idDestino = response.data.chatWith[0][0].id_destino;
-                }
+        // Solo lanza cuando se llega desde /chat sin id
+        getChatNoId: async function () {
+            try {
+                // Abre el chat que se ha escogido.
+                // Peticion para todos los chats
+                await axios.post('/chat/all', {
+                    params: {
+                        userId: this.$page.props.auth.user.entidad_id,
+                    }
+                }).then((response) => {
+                    this.listChats = response.data.chats; // Lista chats
+                    this.recentChats = response.data.recentChats; // Recientes chats
 
-                this.form.fecha = response.data.chatWith[0][0].fecha;
-                this.form.hora = response.data.chatWith[0][0].hora;
-                this.iniciarChatPorId();
+                    // En caso de error (porque no se obtiene los datos que se quiere), entonces cambia de
+                    // vista
+                }).catch((response) => {
+                    // Recarga la pagina y pone los estilos propios de esa pagina
+                    // window.location.href = route('listado');
+                    console.log(response)
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
 
-                // En caso de error (porque no se obtiene los datos que se quiere), entonces cambia de
-                // vista
-            }).catch((response) => {
-                // Recarga la pagina y pone los estilos propios de esa pagina
-                // window.location.href = route('listado');
-                console.log(response)
-            });
+        getRefreshedChat: async function () {
+            var msgContainer = "";
+            var chat = document.getElementsByClassName('contenedorChat');
+            var contenedorChat = document.getElementsByClassName('contenedorChatAfuera');
+
+            try {
+                axios.post('/chat/refresh', {
+                    params: {
+                        id: this.idEntidadChat,
+                        userId: this.$page.props.auth.user.entidad_id,
+                    }
+                }).then((response) => {
+                    chat[0].innerHTML = "";
+                    chat[1].innerHTML = "";
+
+                    // El chat coge las 100 últimas, por lo que hay que darle la vuelta para
+                    // decirle desde los mensajes más antiguos a los más recientes
+                    this.chatInicial = [];
+
+                    response.data.reverse().forEach(mensajes => {
+                        this.chatInicial.push(
+                            [mensajes.contenido, mensajes.id_origen, mensajes.fecha, mensajes.hora]
+                        );
+                    });
+
+                    // Recorre todos los mensajes del chat entre los 2 usuarios (solo cuando
+                    // se inicia por id)
+                    this.chatInicial.forEach(mensajes => {
+                        // Si origen es la misma que la entidad del usuario
+                        if (mensajes[1] == this.$page.props.auth.user.entidad_id) {
+                            // Le aparece el bocadillo de mensaje con su contenido, fecha y hora
+                            msgContainer += "<div class='sendChat'>" + mensajes[0]
+                            msgContainer +=
+                                "<p class='timeChatSend'>Enviado a las " +
+                                mensajes[3] + " de " + mensajes[2] + "</p></div>";
+                        } else {
+                            msgContainer += "<div class='receptorChat'>" + mensajes[0]
+                            msgContainer +=
+                                "<p class='timeChatReceived'>Enviado a las " +
+                                mensajes[3] + " de " + mensajes[2] + "</p></div>";
+                        }
+                    });
+
+                    chat[0].innerHTML += msgContainer;
+                    chat[1].innerHTML += msgContainer;
+
+                    // Hace scroll hacia el ultimo mensaje
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+                    contenedorChat[0].scrollTo(0, contenedorChat[0].scrollHeight);
+                    contenedorChat[1].scrollTo(0, contenedorChat[1].scrollHeight);
+                })
+            } catch (error) {
+                console.log(error)
+            }
         }
     },
 
@@ -272,8 +355,6 @@ export default {
             window.addEventListener('resize', this.onResize);
             this.widthWindow = window.innerWidth;
 
-            console.log(this.$page.props);
-
             // Pone el origen para indicar de quien proviene si manda un mensaje (o sea,
             // del usuario activo, tu)
             this.form.idOrigen = this.$page.props.auth.user.entidad_id;
@@ -281,9 +362,12 @@ export default {
             // Si es nulo, entonces se ha accedido mediante /chat
             if (this.$page.props.chatWith == null) {
                 // Muestra todos los chats
+                this.getChatNoId();
 
                 // Si tiene valor, entonces se ha accedido mediante chat del perfil publico
             } else {
+                this.idEntidadChat = this.$page.props.chatWith;
+
                 // Abre el chat que se ha escogido.
                 this.getInitialDataWithId();
             }
@@ -330,6 +414,10 @@ export default {
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 chatLimited">
                         <!-- Este chat solo se muestra si son recientes -->
                         <div v-show="this.reciente">
+                            <div v-if="recentChats.length == 0">
+                                <h2>No hay chats recientes</h2>
+                            </div>
+
                             <div v-for="data in recentChats" class="row noRowGap noColGap chatCard"
                                 @click="mostrar($event, data.entidad)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
@@ -353,7 +441,8 @@ export default {
 
                         <!-- Este chat solo se muestra si le ha dado a todos los contactos -->
                         <div v-show="!this.reciente">
-                            <div v-for="data in listChats" class="row noRowGap noColGap chatCard" @click="mostrar($event)">
+                            <div v-for="data in listChats" class="row noRowGap noColGap chatCard"
+                                @click="mostrar($event, data.entidad_id)">
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
                                     alt="">
@@ -365,17 +454,6 @@ export default {
                                 <!-- Descripcion -->
                                 <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
                                     <h2>{{ data.nombre }}</h2>
-                                </div>
-                            </div>
-
-                            <div class="row noRowGap noColGap chatCard" @click="mostrar($event)">
-                                <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                                <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
-                                    alt="">
-
-                                <!-- Descripcion -->
-                                <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
-                                    <h2>Empresa 4</h2>
                                 </div>
                             </div>
                         </div>

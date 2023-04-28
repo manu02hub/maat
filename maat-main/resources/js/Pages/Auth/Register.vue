@@ -15,7 +15,7 @@ export default {
         });
     },
 
-    components: { GuestLayout }
+    components: { GuestLayout },
 };
 </script>
 <script setup>
@@ -27,6 +27,8 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import ShadowBox from "@/Components/ShadowBox.vue";
 
+import * as Validaciones from "./../../validations/Validaciones.js";
+
 const form = useForm({
     nombre_empresa: "",
     nif: "",
@@ -34,34 +36,83 @@ const form = useForm({
     password: "",
     password_confirmation: "",
     terms: false,
-    clientOng: false
+    clientOng: false,
 });
 
 const submit = () => {
-    form.post(route("register"), {
-        onFinish: () => form.reset("password", "password_confirmation"),
-    });
+    try {
+        // Validaciones
+        if (
+            Validaciones.checkInjection(form.nombre_empresa) &&
+            Validaciones.checkUserTxt(form.nombre_empresa) &&
+            Validaciones.checkInjection(form.nif) &&
+            Validaciones.checkTarjeta(form.nif) &&
+            Validaciones.checkInputEmail(form.correo) &&
+            Validaciones.checkEmailTxt(form.correo) &&
+            Validaciones.checkInjection(form.password) &&
+            Validaciones.checkPassword(form.password)
+        ) {
+            form.post(route("register"), {
+                onFinish: () => form.reset("password", "password_confirmation"),
+            });
+        } else {
+            console.log("Hay un error");
+        }
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 // Cambia de ong a empresa y viceversa
 const changeToOng = () => {
-    form.nombre_empresa = "";
-    form.nif = "";
-    form.correo = "";
-    form.password = "";
-    form.password_confirmation = "";
-    form.clientOng = true;
-}
+    try {
+        form.nombre_empresa = "";
+        form.nif = "";
+        form.correo = "";
+        form.password = "";
+        form.password_confirmation = "";
+        form.clientOng = true;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const changeToEmpr = () => {
-    form.nombre_empresa = "";
-    form.nif = "";
-    form.correo = "";
-    form.password = "";
-    form.password_confirmation = "";
-    form.clientOng = false;
-}
+    try {
+        form.nombre_empresa = "";
+        form.nif = "";
+        form.correo = "";
+        form.password = "";
+        form.password_confirmation = "";
+        form.clientOng = false;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
+const mirarInputs = (e) => {
+    try {
+        Validaciones.checkInput(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsEmail = (e) => {
+    try {
+        Validaciones.checkInputEmail(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsTarjeta = (e) => {
+    try {
+        Validaciones.checkInputTarjeta(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
 </script>
 <template>
     <Head title="Registro" />
@@ -70,43 +121,118 @@ const changeToEmpr = () => {
             <ShadowBox>
                 <form @submit.prevent="submit">
                     <div>
-                        <InputLabel for="nombre_empresa" value="Nombre Empresa" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nombre_empresa" type="text" v-model="form.nombre_empresa" required autofocus
-                            class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.nombre_empresa" />
+                        <InputLabel
+                            for="nombre_empresa"
+                            value="Nombre Empresa"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="nombre_empresa"
+                            type="text"
+                            v-model="form.nombre_empresa"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.nombre_empresa"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="nif" value="Numero / Tarjeta" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nif" type="text" v-model="form.nif" required autofocus class="form-input w-full" />
+                        <InputLabel
+                            for="nif"
+                            value="Numero / Tarjeta"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="nif"
+                            type="text"
+                            v-model="form.nif"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputsTarjeta($event)"
+                            @keypress="mirarInputsTarjeta($event)"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="correo" value="Correo" class="block text-sm font-medium mb-1" />
-                        <TextInput id="correo" type="email" v-model="form.correo" required autofocus
-                            class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.correo" />
+                        <InputLabel
+                            for="correo"
+                            value="Correo"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="correo"
+                            type="email"
+                            v-model="form.correo"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputsEmail($event)"
+                            @keypress="mirarInputsEmail($event)"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.correo"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="password" value="Contraseña" class="block text-sm font-medium mb-1" />
-                        <TextInput id="password" type="password" v-model="form.password" required
-                            autocomplete="new-password" class="form-input w-full" />
-                        <InputError class="mt-3" :message="form.errors.password" />
+                        <InputLabel
+                            for="password"
+                            value="Contraseña"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="password"
+                            type="password"
+                            v-model="form.password"
+                            required
+                            autocomplete="new-password"
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                        />
+                        <InputError
+                            class="mt-3"
+                            :message="form.errors.password"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="password_confirmation" value="Confirma la contraseña"
-                            class="block text-sm font-medium mb-1" />
-                        <TextInput id="password_confirmation" type="password" v-model="form.password_confirmation" required
-                            autocomplete="new-password" class="form-input w-full" />
-                        <InputError class="mt-3 form-input w-full" :message="form.errors.password_confirmation" />
+                        <InputLabel
+                            for="password_confirmation"
+                            value="Confirma la contraseña"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            v-model="form.password_confirmation"
+                            required
+                            autocomplete="new-password"
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                        />
+                        <InputError
+                            class="mt-3 form-input w-full"
+                            :message="form.errors.password_confirmation"
+                        />
                     </div>
                     <div class="mt-3">
-                        <PrimaryButton class="boton mt-3 ml-0" :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing">
+                        <PrimaryButton
+                            class="boton mt-3 ml-0"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
                             Registrar
                         </PrimaryButton>
                         <hr />
                     </div>
                     <Link :href="route('login')" class="underline mt-3">
-                    ¿Ya está registrado?
+                        ¿Ya está registrado?
                     </Link>
                 </form>
             </ShadowBox>
@@ -115,43 +241,118 @@ const changeToEmpr = () => {
             <ShadowBox>
                 <form @submit.prevent="submit" class="space-y-4">
                     <div>
-                        <InputLabel for="nombre_empresa" value="Nombre ONG" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nombre_empresa" type="text" v-model="form.nombre_empresa" required autofocus
-                            class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.nombre_empresa" />
+                        <InputLabel
+                            for="nombre_empresa"
+                            value="Nombre ONG"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="nombre_empresa"
+                            type="text"
+                            v-model="form.nombre_empresa"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.nombre_empresa"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="nif" value="NIF" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nif" type="text" v-model="form.nif" required autofocus class="form-input w-full" />
+                        <InputLabel
+                            for="nif"
+                            value="NIF"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="nif"
+                            type="text"
+                            v-model="form.nif"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputsTarjeta($event)"
+                            @keypress="mirarInputsTarjeta($event)"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="correo" value="Correo" class="block text-sm font-medium mb-1" />
-                        <TextInput id="correo" type="email" v-model="form.correo" required autofocus
-                            class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.correo" />
+                        <InputLabel
+                            for="correo"
+                            value="Correo"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="correo"
+                            type="email"
+                            v-model="form.correo"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputsEmail($event)"
+                            @keypress="mirarInputsEmail($event)"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.correo"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="password" value="Contraseña" class="block text-sm font-medium mb-1" />
-                        <TextInput id="password" type="password" v-model="form.password" required
-                            autocomplete="new-password" class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.password" />
+                        <InputLabel
+                            for="password"
+                            value="Contraseña"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="password"
+                            type="password"
+                            v-model="form.password"
+                            required
+                            autocomplete="new-password"
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.password"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="password_confirmation" value="Confirma la contraseña"
-                            class="block text-sm font-medium mb-1" />
-                        <TextInput id="password_confirmation" type="password" v-model="form.password_confirmation" required
-                            autocomplete="new-password" class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+                        <InputLabel
+                            for="password_confirmation"
+                            value="Confirma la contraseña"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            v-model="form.password_confirmation"
+                            required
+                            autocomplete="new-password"
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                        />
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.password_confirmation"
+                        />
                     </div>
                     <div>
-                        <PrimaryButton class="boton btn text-white ml-0" :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing">
+                        <PrimaryButton
+                            class="boton btn text-white ml-0"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
                             Registrar
                         </PrimaryButton>
                         <hr />
                     </div>
                     <Link :href="route('login')" class="underline mt-3">
-                    ¿Ya está registrado?
+                        ¿Ya está registrado?
                     </Link>
                 </form>
             </ShadowBox>
@@ -159,7 +360,9 @@ const changeToEmpr = () => {
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <button class="ghost" id="login" @click="changeToOng">¿Eres una ONG?</button>
+                    <button class="ghost" id="login" @click="changeToOng">
+                        ¿Eres una ONG?
+                    </button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <button class="ghost" id="register" @click="changeToEmpr">
@@ -255,7 +458,6 @@ button.ghost i {
 }
 
 @keyframes show {
-
     0%,
     49.99% {
         opacity: 0;
@@ -306,9 +508,11 @@ button.ghost i {
     right: 0;
     top: 0;
     bottom: 0;
-    background: linear-gradient(to top,
-            rgba(46, 94, 109, 0.4) 40%,
-            rgba(46, 94, 109, 0));
+    background: linear-gradient(
+        to top,
+        rgba(46, 94, 109, 0.4) 40%,
+        rgba(46, 94, 109, 0)
+    );
 }
 
 .container.right-panel-active .overlay {

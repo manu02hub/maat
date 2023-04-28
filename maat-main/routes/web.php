@@ -115,6 +115,13 @@ Route::get('/chat', function () {
 Route::get('/chat/{id}', [ListadoController::class, 'getIdReceptor'])->middleware(
     ['auth', 'verified']
 )->name('getIdChatWith');
+
+// Chat coger todo si se ha accedido desde url /chat sin id
+Route::post('/chat/all', [ListadoController::class, 'getAllChats'])->middleware(
+    ['auth', 'verified']
+)->name('chatAll');
+
+// Recepcion de los datos iniciales (ejecutados a partir de url chat con id)
 Route::post('/chat/getBy', [ListadoController::class, 'getChatById'])->middleware(
     ['auth', 'verified']
 )->name('chatById');
@@ -125,16 +132,13 @@ Route::post('/chat/open', [ListadoController::class, 'getChatSelected'])->middle
 )->name('chat.open');
 
 // Enviar mensajes de chat
-Route::post('/chat/send', [ListadoController::class, 'sendChat'])->middleware(
-    ['auth', 'verified']
-)->name('chat.send');
+Route::post('/chat/send', [ListadoController::class, 'sendChat'])->name('chat.send');
 
+// Recarga los últimos 100 mensajes de chat
+Route::post('/chat/refresh', [ListadoController::class, 'refreshChatSelected'])->name('chat.refresh');
 
 // Listado de ONGs
 Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
-Route::get('/get/listado/reciente', [ListadoController::class, 'getListadoOngRecientes'])->middleware(
-    ['auth', 'verified']
-);
 
 // CRUD empresa
 Route::get('/get/empresa', [ProfileEmprController::class, 'getEmpr'])->middleware(['auth', 'verified']);

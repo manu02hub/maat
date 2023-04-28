@@ -10,7 +10,11 @@ export default {
 
     // Pone las variables para que luego se puedan montarse
     beforeMount() {
-        this.org = this.$page.props.datos;
+        try {
+            this.org = this.$page.props.datos;
+        } catch (error) {
+            console.log(error);
+        }
     },
 }
 </script>
