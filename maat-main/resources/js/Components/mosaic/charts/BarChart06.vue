@@ -34,7 +34,7 @@ export default {
     const canvas = ref(null)
     const legend = ref(null)
     let chart = null
-    
+
     onMounted(() => {
       const ctx = canvas.value
       chart = new Chart(ctx, {
@@ -54,7 +54,7 @@ export default {
             y: {
               border: {
                 display: false,
-              },            
+              },
               grid: {
                 display: false,
                 drawTicks: false,
@@ -150,7 +150,7 @@ export default {
               image.src = images[index];
               c.ctx.drawImage(image, xAxis.left - 52, y - 18);
             });
-          },          
+          },
         }],
       })
     })
@@ -164,3 +164,9 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

@@ -1,26 +1,34 @@
 <template>
-  <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="activeCondition && 'bg-slate-900'">
-    <slot :handleClick="handleClick" :expanded="expanded" />
-  </li>
+    <li
+        class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+        :class="activeCondition && 'bg-slate-900'"
+    >
+        <slot :handleClick="handleClick" :expanded="expanded" />
+    </li>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 export default {
-  name: 'SidebarLinkGroup',
-  props: ['activeCondition'],
-  setup(props) {
-    const expanded = ref(props.activeCondition)
+    name: "SidebarLinkGroup",
+    props: ["activeCondition"],
+    setup(props) {
+        const expanded = ref(props.activeCondition);
 
-    const handleClick = () => {
-      expanded.value = !expanded.value
-    }
+        const handleClick = () => {
+            expanded.value = !expanded.value;
+        };
 
-    return {
-      expanded,
-      handleClick,
-    }
-  },
-}
+        return {
+            expanded,
+            handleClick,
+        };
+    },
+};
 </script>
+
+<style scoped>
+@import url("./../../../../css/bootstrap.css");
+@import url("./../../../../css/app.css");
+</style>

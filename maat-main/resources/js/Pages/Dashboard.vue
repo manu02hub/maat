@@ -18,7 +18,6 @@ import { Head } from '@inertiajs/vue3';
 <template>
     <Head title="Dashboard" />
 
-
     <PrivateLayout>
 
         <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-white">
@@ -41,9 +40,6 @@ import { Head } from '@inertiajs/vue3';
         </div>
 
     </PrivateLayout>
-
-
-
 
 
     <!--<AuthenticatedLayout>
@@ -91,11 +87,11 @@ import { Head } from '@inertiajs/vue3';
             </div>
         </div>
 
-
     </AuthenticatedLayout>-->
 
-
-
-
-
 </template>
+
+<style scoped>
+@import url('./../../css/bootstrap.css');
+@import url('./../../css/app.css');
+</style>

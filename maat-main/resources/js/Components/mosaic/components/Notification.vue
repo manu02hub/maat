@@ -28,9 +28,9 @@
       </div>
       <div class="text-right mt-1">
         <a class="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Action -&gt;</a>
-      </div>      
+      </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -39,3 +39,8 @@ export default {
   props: ['type', 'open'],
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

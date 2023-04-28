@@ -8,7 +8,7 @@
             <router-link
               v-for="member in item.members"
               :key="member.name"
-              class="block" 
+              class="block"
               :to="member.link"
             >
               <img class="rounded-full border-2 border-white box-content" :src="member.image" width="28" height="28" :alt="member.name" />
@@ -93,8 +93,8 @@ export default {
         default:
           return (`<div></div>`);
       }
-    }    
-    
+    }
+
     return {
       typeColor,
       categoryIcon,
@@ -102,3 +102,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../../css/bootstrap.css');
+@import url('./../../../../../css/app.css');
+</style>

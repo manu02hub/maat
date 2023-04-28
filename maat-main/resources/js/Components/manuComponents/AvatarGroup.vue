@@ -11,3 +11,9 @@ import AvatarUsu from './AvatarUsu.vue'
         <AvatarUsu imagen='http://localhost/img/maat/perfil4.jpg'></AvatarUsu>
     </div>
 </template>
+
+<style scoped>
+@import url('./../../../css/bootstrap.css');
+@import url('./../../../css/app.css');
+</style>
+

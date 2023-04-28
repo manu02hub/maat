@@ -14,3 +14,8 @@ import PlansPanel from '@/Components/mosaic/partials/settings/PlansPanel.vue';
     </PrivateLayout>
 
 </template>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

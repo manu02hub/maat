@@ -100,10 +100,9 @@
 
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
-                                            :href="href" @click="navigate">
-                                            <NavLink :href="route('chat')"><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                    Chat</span></NavLink>
+                                            :href="route('chat')" @click="navigate">
+                                            <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    Chat</span>
                                         </a>
 
 
@@ -115,10 +114,10 @@
 
                                         <a class="block transition duration-150 truncate"
                                             :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
-                                            :href="href" @click="navigate">
-                                            <NavLink :href="route('listado')"><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                    Listado organizaciones</span></NavLink>
+                                            :href="route('listado')" @click="navigate">
+                                            <span
+                                                class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    Listado organizaciones</span>
                                         </a>
 
                                     </li>
@@ -451,8 +450,6 @@ import { ref, onMounted, onUnmounted, watch } from 'vue'
 import SidebarLinkGroup from './SidebarLinkGroup.vue'
 import NavLink from '@/Components/NavLink.vue';
 
-
-
 export default {
 
     name: 'Sidebar',
@@ -577,3 +574,8 @@ export default {
 
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

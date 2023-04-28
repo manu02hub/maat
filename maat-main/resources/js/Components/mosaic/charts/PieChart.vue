@@ -6,7 +6,7 @@
     <div class="px-5 py-4">
       <ul ref="legend" class="flex flex-wrap justify-center -m-1"></ul>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
     const canvas = ref(null)
     const legend = ref(null)
     let chart = null
-    
+
     onMounted(() => {
       const ctx = canvas.value
       chart = new Chart(ctx, {
@@ -104,7 +104,7 @@ export default {
               ul.appendChild(li)
             })
           },
-        }],        
+        }],
       })
     })
 
@@ -117,3 +117,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

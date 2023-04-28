@@ -63,7 +63,7 @@ function checkInjection(txt) {
         if (
             txt.toLowerCase().indexOf("delete") != -1 ||
             txt.toLowerCase().indexOf("select") != -1 ||
-            txt.toLowerCase().indexOf("delete") != -1 ||
+            txt.toLowerCase().indexOf("edit") != -1 ||
             txt.toLowerCase().indexOf("drop") != -1 ||
             txt.toLowerCase().indexOf("update") != -1
         ) {
@@ -112,16 +112,22 @@ function checkEmailTxt(email) {
         // gi significa global, indifferent. El match devuelve una cadena de todos los
         // carácteres que cumplen la condición.
         // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/match
-        if (
-            email.match(/[.]/gi).length >= 1 &&
-            email.match(/[.]/gi).length < 3 &&
-            email1.length > 2 &&
-            email2.length > 2 &&
-            email3.length > 1 &&
-            email3.length < 4 &&
-            !/[0-9]/.test(email3)
-        ) {
-            return true;
+        if (email.indexOf(".") != -1) {
+            if (
+                email.match(/[.]/gi).length >= 1 &&
+                email.match(/[.]/gi).length < 3 &&
+                email1.length > 2 &&
+                email2.length > 2 &&
+                email3.length > 1 &&
+                email3.length < 4 &&
+                !/[0-9]/.test(email3)
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+
+            // No existe un ' . ' en el email
         } else {
             return false;
         }
@@ -131,14 +137,13 @@ function checkEmailTxt(email) {
 }
 
 // Mira el email introducido y lo valida. Devolverá un true o false dependiendo de su validez
-function checkPassword(password, confPass) {
+function checkPassword(password) {
     try {
-        // Mira que password sea de longitud 8-16, password y confirmar contraseña son el mismo.
+        // Mira que password sea de longitud 8-16 y password.
         // Mira que tenga 1 número, 1 mayúscula y 1 minúscula
         if (
             password.length > 7 &&
             password.length <= 16 &&
-            password == confPass &&
             /[0-9]/.test(password) &&
             /[A-Z]/.test(password) &&
             /[a-z]/.test(password)
@@ -158,9 +163,9 @@ function checkTarjeta(tarjeta) {
         // Tiene que tener 9 carácteres. El último carácter debe ser una mayúscula y
         // los demás deben ser números
         if (
-            this.prueba.length == 9 &&
-            /[A-Z]/.test(this.prueba.charAt(8)) &&
-            !/[A-Z]/.test(this.prueba.substring(0, 8))
+            tarjeta.length == 9 &&
+            /[A-Z]/.test(tarjeta.charAt(8)) &&
+            !/[A-Z]/.test(tarjeta.substring(0, 8))
         ) {
             return true;
 

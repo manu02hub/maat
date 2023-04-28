@@ -18,3 +18,8 @@ import { Link } from '@inertiajs/vue3';
         </div>
     </div>
 </template>
+
+<style scoped>
+@import url('./../../css/bootstrap.css');
+@import url('./../../css/app.css');
+</style>

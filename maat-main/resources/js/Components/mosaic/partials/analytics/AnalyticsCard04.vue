@@ -6,7 +6,7 @@
     <!-- Chart built with Chart.js 3 -->
     <!-- Change the height attribute to adjust the chart height -->
     <BarChart :data="chartData" width="595" height="248" />
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -52,7 +52,13 @@ export default {
 
     return {
       chartData,
-    } 
+    }
   }
 }
 </script>
+
+
+<style scoped>
+@import url('./../../../../../css/bootstrap.css');
+@import url('./../../../../../css/app.css');
+</style>

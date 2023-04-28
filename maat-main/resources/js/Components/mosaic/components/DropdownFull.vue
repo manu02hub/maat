@@ -42,7 +42,7 @@
             <svg class="shrink-0 ml-2 fill-current text-indigo-400" :class="option.id !== selected && 'invisible'" width="12" height="9" viewBox="0 0 12 9">
               <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
             </svg>
-          </button>          
+          </button>
         </div>
       </div>
     </transition>
@@ -58,7 +58,7 @@ export default {
 
     const dropdownOpen = ref(false)
     const trigger = ref(null)
-    const dropdown = ref(null)    
+    const dropdown = ref(null)
     const selected = ref(0)
 
     const options = ref([
@@ -100,8 +100,8 @@ export default {
     onUnmounted(() => {
       document.removeEventListener('click', clickHandler)
       document.removeEventListener('keydown', keyHandler)
-    })    
-    
+    })
+
     return {
       dropdownOpen,
       trigger,
@@ -112,3 +112,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

@@ -4,7 +4,7 @@
     @mouseenter="tooltipOpen = true"
     @mouseleave="tooltipOpen = false"
     @focusin="tooltipOpen = true"
-    @focusout="tooltipOpen = false"    
+    @focusout="tooltipOpen = false"
   >
     <button
       class="block"
@@ -31,7 +31,7 @@
             bg === 'dark' ? 'bg-slate-800' : 'bg-white border border-slate-200 shadow-lg',
             sizeClasses(size),
             positionInnerClasses(position)
-          ]"          
+          ]"
         >
           <slot />
         </div>
@@ -62,7 +62,7 @@ export default {
           return 'bottom-full left-1/2 -translate-x-1/2';
       }
     }
-    
+
     const sizeClasses = (size) => {
       switch (size) {
         case 'lg':
@@ -87,7 +87,7 @@ export default {
         default:
           return 'mb-2';
       }
-    }    
+    }
 
     return {
       tooltipOpen,
@@ -98,3 +98,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

@@ -128,7 +128,7 @@ export default {
 
     const modalContent = ref(null)
     const searchInput = ref(null)
-    
+
     // close on click outside
     const clickHandler = ({ target }) => {
       if (!props.modalOpen || modalContent.value.contains(target)) return
@@ -153,7 +153,7 @@ export default {
 
     watch(() => props.modalOpen, (open) => {
       open && nextTick(() => searchInput.value.focus())
-    })    
+    })
 
     return {
       modalContent,
@@ -162,3 +162,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

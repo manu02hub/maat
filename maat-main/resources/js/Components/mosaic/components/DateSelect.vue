@@ -45,7 +45,7 @@
               <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
             </svg>
             <span>{{option.period}}</span>
-          </button>          
+          </button>
         </div>
       </div>
     </transition>
@@ -61,7 +61,7 @@ export default {
 
     const dropdownOpen = ref(false)
     const trigger = ref(null)
-    const dropdown = ref(null)    
+    const dropdown = ref(null)
     const selected = ref(2)
 
     const options = ref([
@@ -107,8 +107,8 @@ export default {
     onUnmounted(() => {
       document.removeEventListener('click', clickHandler)
       document.removeEventListener('keydown', keyHandler)
-    })    
-    
+    })
+
     return {
       dropdownOpen,
       trigger,
@@ -119,3 +119,8 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

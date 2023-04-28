@@ -21,7 +21,7 @@ export default {
 
     const canvas = ref(null)
     let chart = null
-    
+
     onMounted(() => {
       const ctx = canvas.value
       chart = new Chart(ctx, {
@@ -102,3 +102,9 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

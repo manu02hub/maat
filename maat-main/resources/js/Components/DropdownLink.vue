@@ -9,3 +9,8 @@ import { Link } from '@inertiajs/vue3';
         <slot />
     </Link>
 </template>
+
+<style scoped>
+@import url('./../../css/bootstrap.css');
+@import url('./../../css/app.css');
+</style>

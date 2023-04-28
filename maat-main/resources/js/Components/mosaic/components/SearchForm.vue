@@ -16,8 +16,13 @@ export default {
   name: 'SearchForm',
   props: {
     placeholder: {
-      default: 'Search…'      
+      default: 'Search…'
     }
   }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

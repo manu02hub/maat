@@ -99,13 +99,18 @@ export default {
     onUnmounted(() => {
       document.removeEventListener('click', clickHandler)
       document.removeEventListener('keydown', keyHandler)
-    })    
+    })
 
     return {
       dropdownOpen,
       trigger,
       dropdown,
     }
-  }  
+  }
 }
 </script>
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

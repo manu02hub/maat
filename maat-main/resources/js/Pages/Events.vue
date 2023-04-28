@@ -15,10 +15,10 @@ import { Head } from '@inertiajs/vue3';
 
     </AuthenticatedLayout>
 
-
-
-
-
-
-
 </template>
+
+<style scoped>
+@import url('./../../css/bootstrap.css');
+@import url('./../../css/app.css');
+</style>
+

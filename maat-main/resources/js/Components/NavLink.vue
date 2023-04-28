@@ -16,3 +16,8 @@ const classes = computed(() =>
         <slot />
     </Link>
 </template>
+
+<style>
+@import url('./../../css/bootstrap.css');
+@import url('./../../css/app.css');
+</style>

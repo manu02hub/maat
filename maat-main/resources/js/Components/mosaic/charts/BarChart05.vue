@@ -12,7 +12,7 @@
   </div>
   <div class="grow">
     <canvas ref="canvas" :data="data" :width="width" :height="height"></canvas>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -35,7 +35,7 @@ export default {
     const canvas = ref(null)
     const legend = ref(null)
     let chart = null
-    
+
     onMounted(() => {
       const ctx = canvas.value
       chart = new Chart(ctx, {
@@ -144,7 +144,7 @@ export default {
               ul.appendChild(li)
             })
           },
-        }],        
+        }],
       })
     })
 
@@ -157,3 +157,9 @@ export default {
   }
 }
 </script>
+
+
+<style scoped>
+@import url('./../../../../css/bootstrap.css');
+@import url('./../../../../css/app.css');
+</style>

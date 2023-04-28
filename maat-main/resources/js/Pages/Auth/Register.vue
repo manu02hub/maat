@@ -29,6 +29,7 @@ import ShadowBox from "@/Components/ShadowBox.vue";
 
 import * as Validaciones from "./../../validations/Validaciones.js";
 
+// Es true porque aparece ONG por defecto
 const form = useForm({
     nombre_empresa: "",
     nif: "",
@@ -36,27 +37,95 @@ const form = useForm({
     password: "",
     password_confirmation: "",
     terms: false,
-    clientOng: false,
+    clientOng: true,
 });
 
 const submit = () => {
+    var valido = 0;
+
     try {
-        // Validaciones
-        if (
-            Validaciones.checkInjection(form.nombre_empresa) &&
-            Validaciones.checkUserTxt(form.nombre_empresa) &&
-            Validaciones.checkInjection(form.nif) &&
-            Validaciones.checkTarjeta(form.nif) &&
-            Validaciones.checkInputEmail(form.correo) &&
-            Validaciones.checkEmailTxt(form.correo) &&
-            Validaciones.checkInjection(form.password) &&
-            Validaciones.checkPassword(form.password)
-        ) {
+        // Si es empresa
+        if (!form.clientOng) {
+            // Validaciones. Mira si los respectivos campos son válidos. Mira también
+            // si hay injecciones
+            if (
+                Validaciones.checkInjection(form.nombre_empresa) &&
+                Validaciones.checkUserTxt(form.nombre_empresa)
+            ) {
+                valido++;
+                form.errors.nombre_empresa = null;
+            } else {
+                form.errors.nombre_empresa =
+                    "Asegurese que su usuario tenga una longitud de 4 y 30 " +
+                    "carácteres y que sea un usuario válido";
+            }
+
+            // Validación de la tarjeta empresarial
+            if (
+                Validaciones.checkInjection(form.nif) &&
+                Validaciones.checkTarjeta(form.nif)
+            ) {
+                valido++;
+                form.errors.nif = null;
+            } else {
+                form.errors.nif =
+                    "Asegurese de que sea una tarjeta válida. Tiene que tener la misma " +
+                    "estructura a la siguiente: 12345678A";
+            }
+
+            // Validación email
+            if (
+                Validaciones.checkInjection(form.correo) &&
+                Validaciones.checkEmailTxt(form.correo)
+            ) {
+                valido++;
+                form.errors.correo = null;
+            } else {
+                form.errors.correo =
+                    "Asegurate de que es un email válido parecido a la siguiente " +
+                    "estructura: AAA@AAA.AA o AAA@AAA.AAA";
+            }
+
+            // Validación password
+            if (
+                Validaciones.checkInjection(form.password) &&
+                Validaciones.checkPassword(form.password)
+            ) {
+                valido++;
+                form.errors.password = null;
+            } else {
+                // Mira que tenga 1 número, 1 mayúscula y 1 minúscula
+                form.errors.password =
+                    "La contraseña tiene que ser válida y tener entre 8-16 carácteres e " +
+                    "incluir 1 número, 1 mayúscula y 1 minúscula.";
+            }
+
+            // Valida si password es igual a confimaciónd de la password
+            if (form.password == form.password_confirmation) {
+                valido++;
+                form.errors.password_confirmation = null;
+            } else {
+                form.errors.password_confirmation =
+                    "La contraseñas introducidas deben ser las mismas";
+            }
+
+            // Si cumple todos los requisitos envía el formulario
+            if (valido == 5) {
+                form.post(route("register"), {
+                    onFinish: () =>
+                        form.reset("password", "password_confirmation"),
+                });
+            } else {
+                console.log(
+                    "Hay un error en el formulario. Por favor, revise los datos introducidos"
+                );
+            }
+
+            // Solo cuando es ONG
+        } else {
             form.post(route("register"), {
                 onFinish: () => form.reset("password", "password_confirmation"),
             });
-        } else {
-            console.log("Hay un error");
         }
     } catch (error) {
         console.log(error);
@@ -72,6 +141,7 @@ const changeToOng = () => {
         form.password = "";
         form.password_confirmation = "";
         form.clientOng = true;
+        console.log("e");
     } catch (error) {
         console.log(error);
     }
@@ -119,6 +189,7 @@ const mirarInputsTarjeta = (e) => {
     <div class="container" id="container">
         <div class="form-container register-container">
             <ShadowBox>
+                <!-- Cuando es empresa -->
                 <form @submit.prevent="submit">
                     <div>
                         <InputLabel
@@ -126,16 +197,20 @@ const mirarInputsTarjeta = (e) => {
                             value="Nombre Empresa"
                             class="block text-sm font-medium mb-1"
                         />
+
                         <TextInput
                             id="nombre_empresa"
                             type="text"
                             v-model="form.nombre_empresa"
+                            autocomplete="no"
                             required
                             autofocus
                             class="form-input w-full"
                             @keydown="mirarInputs($event)"
                             @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
                         />
+
                         <InputError
                             class="mt-2"
                             :message="form.errors.nombre_empresa"
@@ -151,12 +226,16 @@ const mirarInputsTarjeta = (e) => {
                             id="nif"
                             type="text"
                             v-model="form.nif"
+                            autocomplete="no"
                             required
                             autofocus
                             class="form-input w-full"
                             @keydown="mirarInputsTarjeta($event)"
                             @keypress="mirarInputsTarjeta($event)"
+                            @paste="$event.preventDefault()"
                         />
+
+                        <InputError class="mt-2" :message="form.errors.nif" />
                     </div>
                     <div class="mt-4">
                         <InputLabel
@@ -168,12 +247,15 @@ const mirarInputsTarjeta = (e) => {
                             id="correo"
                             type="email"
                             v-model="form.correo"
+                            autocomplete="no"
                             required
                             autofocus
                             class="form-input w-full"
                             @keydown="mirarInputsEmail($event)"
                             @keypress="mirarInputsEmail($event)"
+                            @paste="$event.preventDefault()"
                         />
+
                         <InputError
                             class="mt-2"
                             :message="form.errors.correo"
@@ -194,7 +276,9 @@ const mirarInputsTarjeta = (e) => {
                             class="form-input w-full"
                             @keydown="mirarInputs($event)"
                             @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
                         />
+
                         <InputError
                             class="mt-3"
                             :message="form.errors.password"
@@ -215,6 +299,7 @@ const mirarInputsTarjeta = (e) => {
                             class="form-input w-full"
                             @keydown="mirarInputs($event)"
                             @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
                         />
                         <InputError
                             class="mt-3 form-input w-full"
@@ -237,6 +322,7 @@ const mirarInputsTarjeta = (e) => {
                 </form>
             </ShadowBox>
         </div>
+
         <div class="form-container login-container">
             <ShadowBox>
                 <form @submit.prevent="submit" class="space-y-4">
@@ -373,6 +459,12 @@ const mirarInputsTarjeta = (e) => {
         </div>
     </div>
 </template>
+
+<style scoped>
+@import url("./../../../css/bootstrap.css");
+@import url("./../../../css/app.css");
+</style>
+
 <style>
 button {
     position: relative;
