@@ -11,7 +11,11 @@
 
                 <!-- Profile background -->
                 <div class="relative h-56 bg-slate-200">
+<<<<<<< HEAD
                     <img class="object-cover h-full w-full" src="../../images/profile-bg.jpg" width="979" height="220"
+=======
+                    <img class="object-cover h-full w-full" src="" width="979" height="220"
+>>>>>>> sergio
                         alt="Profile background" />
 
                     <!-- Close button -->
@@ -39,7 +43,11 @@
                                 <img class="rounded-full border-4 border-white" src="" width="128" height="128"
                                     alt="Avatar" />
 
+<<<<<<< HEAD
                                 <img class="rounded-full border-4 border-white" src="../../images/user-128-01.jpg"
+=======
+                                <img class="rounded-full border-4 border-white" src=""
+>>>>>>> sergio
                                     width="128" height="128" alt="Avatar" />
 
                             </div>
@@ -163,7 +171,11 @@
 
                                                 <img class="ml-1" src="" width="14" height="14" alt="Icon 03" />
 
+<<<<<<< HEAD
                                                 <img class="ml-1" src="../../images/icon-03.svg" width="14" height="14"
+=======
+                                                <img class="ml-1" src="" width="14" height="14"
+>>>>>>> sergio
                                                     alt="Icon 03" />
 
                                             </div>
@@ -189,6 +201,7 @@
                                                     width="24" height="24" alt="Avatar" />
 
                                                 <img class="rounded-full border-2 border-white box-content"
+<<<<<<< HEAD
                                                     src="../../images/avatar-02.jpg" width="24" height="24" alt="Avatar" />
                                                 <img class="rounded-full border-2 border-white box-content"
                                                     src="../../images/avatar-03.jpg" width="24" height="24" alt="Avatar" />
@@ -196,6 +209,15 @@
                                                     src="../../images/avatar-04.jpg" width="24" height="24" alt="Avatar" />
                                                 <img class="rounded-full border-2 border-white box-content"
                                                     src="../../images/avatar-05.jpg" width="24" height="24" alt="Avatar" />
+=======
+                                                    src="" width="24" height="24" alt="Avatar" />
+                                                <img class="rounded-full border-2 border-white box-content"
+                                                    src="" width="24" height="24" alt="Avatar" />
+                                                <img class="rounded-full border-2 border-white box-content"
+                                                    src="" width="24" height="24" alt="Avatar" />
+                                                <img class="rounded-full border-2 border-white box-content"
+                                                    src="" width="24" height="24" alt="Avatar" />
+>>>>>>> sergio
 
                                             </div>
                                             <!-- Link -->
@@ -215,7 +237,11 @@
 
                                                 <img class="ml-1" src="" width="14" height="14" alt="Icon 02" />
 
+<<<<<<< HEAD
                                                 <img class="ml-1" src="../../images/icon-02.svg" width="14" height="14"
+=======
+                                                <img class="ml-1" src="" width="14" height="14"
+>>>>>>> sergio
                                                     alt="Icon 02" />
 
                                             </div>
@@ -239,11 +265,19 @@
                                                     width="24" height="24" alt="Avatar" />
 
                                                 <img class="rounded-full border-2 border-white box-content"
+<<<<<<< HEAD
                                                     src="../../images/avatar-06.jpg" width="24" height="24" alt="Avatar" />
                                                 <img class="rounded-full border-2 border-white box-content"
                                                     src="../../images/avatar-03.jpg" width="24" height="24" alt="Avatar" />
                                                 <img class="rounded-full border-2 border-white box-content"
                                                     src="../../images/avatar-01.jpg" width="24" height="24" alt="Avatar" />
+=======
+                                                    src="" width="24" height="24" alt="Avatar" />
+                                                <img class="rounded-full border-2 border-white box-content"
+                                                    src="" width="24" height="24" alt="Avatar" />
+                                                <img class="rounded-full border-2 border-white box-content"
+                                                    src="" width="24" height="24" alt="Avatar" />
+>>>>>>> sergio
 
                                             </div>
                                             <!-- Link -->

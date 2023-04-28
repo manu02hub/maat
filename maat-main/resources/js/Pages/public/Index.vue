@@ -21,4 +21,3 @@ import VideoIndex from '@/Components/Public/VideoIndex.vue';
     </PublicLayout>
 </template>
 
-

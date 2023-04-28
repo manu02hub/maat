@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -52,6 +53,24 @@ Route::get('/createEvent', function () {
     return Inertia::render('private/Manu/CreateEvents');
 })->middleware(['auth', 'verified'])->name('create-event');
 
+Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('eventsIndex');
+Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified'])->name('createNewEvent');
+Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
+Route::patch('/update', [EventController::class, 'update'])->middleware(['auth', 'verified'])->name('update');
+Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit');
+Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->name('delete');
+Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified'])->name('eventsUser');
+Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->middleware(['auth', 'verified'])->name('allEventsToUser');
+Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified'])->name('ownEventsUser');
+Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified'])->name('add_event_to_user');
+Route::get('/delete_event_of_user/{id}', [EventController::class, 'desapuntarseEvento'])->middleware(['auth', 'verified'])->name('delete_event_of_user');
+Route::get('/eventInfo', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified'])->name('eventInfo');
+
+
+// Route::get('/createEvent', function () {
+//     return Inertia::render('private/Manu/CreateEvents');
+// })->middleware(['auth', 'verified'])->name('create-event');
+
 Route::get('/plans', function () {
     return Inertia::render('private/Manu/Plans');
 })->middleware(['auth', 'verified'])->name('plans');
@@ -63,6 +82,13 @@ Route::get('/eventUser', function () {
 Route::get('/eventInfo', function () {
     return Inertia::render('private/Manu/EventInfo');
 })->middleware(['auth', 'verified'])->name('event-info');
+// Route::get('/eventUser', function () {
+//     return Inertia::render('private/Manu/EventUser');
+// })->middleware(['auth', 'verified'])->name('event-user');
+
+// Route::get('/eventInfo', function () {
+//     return Inertia::render('private/Manu/EventInfo');
+// })->middleware(['auth', 'verified'])->name('event-info');
 //--------------------------------------
 //-----------------------------------SERGIO---------------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/
@@ -70,6 +96,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'Empresa'], func
     // Route::get('/listado', function () {
     //     return Inertia::render('private/Sergio/UsuariosEmpresa/Listado');
     // })->name('listUserEmpresa');
+    Route::get('/listado', function () {
+        return Inertia::render('private/Sergio/UsuariosEmpresa/Listado');
+    })->name('listUserEmpresa');
 
     Route::get('/info', function () {
         return Inertia::render('private/Sergio/UsuariosEmpresa/InfoUsuario');
@@ -137,6 +166,17 @@ Route::post('/del/empresa', [ProfileEmprController::class, 'deleteEmpr'])->middl
     ['auth', 'verified']
 )->name('empr.delete');
 
+Route::get('/listado', function () {
+    return Inertia::render('private/Alex/ListadoCliente');
+})->name('listado');
+
+Route::get('/perfilP', function () {
+    return Inertia::render('private/Alex/PerfilPublic');
+})->name('perfilP');
+
+Route::get('/chat', function () {
+    return Inertia::render('private/Alex/Chat');
+})->name('chat');
 //------------------------------------------
 
 //---------------------MARIO Y PAULA-----------------

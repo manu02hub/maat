@@ -290,9 +290,6 @@ export default {
                                 <img src="./../../../../img/prueba.jpg" class="col-lg-2 col-md-2 col-sm-12 col-12 imgOrg"
                                     alt="">
 
-                                <!-- Descripcion -->
-                                <div class="col-lg-10 col-md-10 col-sm-12 col-12 infoChat">
-                                    <h2>Empresa 3</h2>
                                     <p>
                                         Last message
                                     </p>
@@ -390,7 +387,6 @@ export default {
                     </div>
                 </div>
             </div>
-        </div>
     </main>
 
     <!-- Footer -->

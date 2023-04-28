@@ -28,7 +28,6 @@ export default {
             <img src="./../../../../img/prueba.jpg" class="col-lg-12 col-md-12 col-sm-12 col-12 logoOrg" />
         </div>
 
-
         <div class="row noRowGap">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12 row noRowGap noColGap">
                 <!-- Contenedor para toda la información de la organización -->
@@ -79,7 +78,6 @@ export default {
                             <div class="col-lg-9 col-md-10 col-sm-12 col-12 empleado">
                                 <h2>{{ data.empleado }}</h2>
                                 <!-- Dice si eres un administrador o un empleado -->
-                                <p class="descTxt">Contacto: {{ data.email }}</p>
                                 <p class="descEmpl" v-if="data.rol_id == 1">Administrador</p>
                                 <p class="descEmpl" v-if="data.rol_id == 2">Empleado</p>
                             </div>
@@ -88,17 +86,6 @@ export default {
                 </div>
                 <div class="contenedorDesc col-lg-4 col-md-4 col-sm-12 col-12 ">
                     <a :href="route('getIdChatWith', [this.org[0].org])">
-                        <button class="btnChat2">
-                            Chat
-                            <img src="./../../../../img/chat-fill.svg" class="filtroSvg">
-                        </button>
-                    </a>
-
-                    <div class="desc">
-                        <h1>Contacto</h1>
-                        <p class="descTxt">{{ this.org[0].web }}</p>
-                        <p class="descTxt">{{ this.org[0].numero_tarjeta }}</p>
-                        <p class="descTxt">{{ this.org[0].ubicacion }}</p>
                     </div>
 
                     <div class="desc">

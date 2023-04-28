@@ -194,3 +194,17 @@ th {
 }
 </style>
 
+<<<<<<< HEAD
+=======
+<script>
+import { Link } from '@inertiajs/vue3'
+export default {
+    components: { Link },
+    methods: {
+        Eliminar() {
+            alert('Eliminar usuario');
+        }
+    }
+}
+</script>
+>>>>>>> sergio

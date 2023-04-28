@@ -11,8 +11,11 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 
+=======
+>>>>>>> sergio
 class ProfileController extends Controller
 {
     /**

@@ -14,7 +14,6 @@ export default {
             container.classList.remove("right-panel-active");
         });
     },
-
     components: { GuestLayout }
 };
 </script>

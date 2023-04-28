@@ -37,7 +37,6 @@
                 </div>
             </div>
 
-
             <div class="border-t border-slate-200">
                 <div class="flex divide-x divide-slate-200r">
                     <Link
