@@ -15,7 +15,7 @@ import FormMailPrueba from '@/Components/Public/FormMailPrueba.vue';
 <template class="container">
     <Head title="Index" />
     <PublicLayout>
-        <FormMailPrueba/>
+        <!-- <FormMailPrueba/> -->
         <VideoIndex/>
         <AboutUs />
         <Partners />

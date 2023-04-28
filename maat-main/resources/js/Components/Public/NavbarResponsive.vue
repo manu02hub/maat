@@ -53,6 +53,7 @@ nav {
     box-shadow: var(--shadow);
     height: 80px;
     width: 100%;
+    z-index: 10;
 }
 label.logo {
     color: var(--white);

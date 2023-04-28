@@ -127,7 +127,7 @@ Route::get('/correoRecivido', function () {
     return Inertia::render('public/CorreoRecivido');
 })->name('correoRecivido');
 
-
+// Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
 
 
 //---------------------PIERO-----------------

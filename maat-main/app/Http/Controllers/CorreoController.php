@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controller;
+namespace App\Http\Controllers;
+
 use App\Mail\CorreoRecivido;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;

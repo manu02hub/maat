@@ -2,7 +2,7 @@
 
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShoulQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CorreoRecivido extends Mailable implements ShouldQueue
 {

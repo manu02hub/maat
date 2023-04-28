@@ -64,6 +64,10 @@ export default {
 
 
 <style>
+.containerPartners{
+    z-index: 2;
+}
+
 .containerPartners h1 {
     font-size: 75px;
 }
