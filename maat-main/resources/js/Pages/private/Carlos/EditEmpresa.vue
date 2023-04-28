@@ -13,13 +13,12 @@ import UpdatePasswordForm from '@/Components/carlosComponents/UpdatePasswordForm
 
     <PrivateLayout>
 
-       <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-1">
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-1">
             <UpdateEmpresaInformationForm></UpdateEmpresaInformationForm>
-            <UpdatePasswordForm></UpdatePasswordForm>
+            <!-- Se ha quitado porque no tiene que ver al ser empresa (contrasena está asociada al user) -->
+            <!-- <UpdatePasswordForm></UpdatePasswordForm> -->
             <DeleteEmpresaForm></DeleteEmpresaForm>
         </div>
 
     </PrivateLayout>
-
-
 </template>

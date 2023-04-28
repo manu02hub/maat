@@ -7,16 +7,16 @@ import { Link } from "@inertiajs/vue3";
     <nav>
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
-            <i class="bx bx-menu"></i>
+            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg"/></i>
         </label>
         <label class="logo">maat</label>
         <ul>
-            <li><Link :href="route('index')" class="active">Inicio</Link></li>
-            <li><Link :href="route('noticias')">Noticias</Link></li>
-            <li><Link :href="route('donativos')">Donativos</Link></li>
-            <li><Link :href="route('ranking')">Ranking</Link></li>
-            <li><Link :href="route('login')">Login</Link></li>
-            <li><Link :href="route('register')">Registro</Link></li>
+            <li><Link :href="route('index')" active-class="active">Inicio</Link></li>
+            <li><Link :href="route('noticias')" active-class="active">Noticias</Link></li>
+            <li><Link :href="route('donativos')" active-class="active">Donativos</Link></li>
+            <li><Link :href="route('ranking')" active-class="active">Ranking</Link></li>
+            <li><Link :href="route('login')" active-class="active">Login</Link></li>
+            <li><Link :href="route('register')" active-class="active">Registro</Link></li>
         </ul>
     </nav>
     <section></section>
@@ -34,7 +34,6 @@ import { Link } from "@inertiajs/vue3";
         rgba(59, 215, 72, 0.6) 5%,
         rgba(8, 51, 11, 0.9)
     );
-
 }
 
 * {
@@ -53,7 +52,7 @@ nav {
     box-shadow: var(--shadow);
     height: 80px;
     width: 100%;
-    z-index: 10;
+    z-index: 100;
 }
 label.logo {
     color: var(--white);
