@@ -11,15 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Redirect; 
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\DB;
-=======
-use Inertia\Inertia;
-use Inertia\Response;
->>>>>>> sergio
 
 class RegisteredUserController extends Controller
 {
@@ -31,7 +26,6 @@ class RegisteredUserController extends Controller
         return Inertia::render('Auth/Register');
     }
 
-<<<<<<< HEAD
     public function indexUser(Request $request){
         $user = User::all();
         return Inertia::render('private/Sergio/UsuariosEmpresa/Listado', compact('user'));
@@ -79,10 +73,6 @@ class RegisteredUserController extends Controller
         return back();
     }
  
-
-
-=======
->>>>>>> sergio
     /**
      * Handle an incoming registration request.
      *
@@ -90,7 +80,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-<<<<<<< HEAD
         // No registra con el validate por alguna razón
         // $request->validate([
         //     'name' => 'required|string|max:255',
@@ -150,7 +139,6 @@ class RegisteredUserController extends Controller
         }
 
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
-=======
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
@@ -167,7 +155,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
->>>>>>> sergio
         return redirect(RouteServiceProvider::HOME);
     }
 }
