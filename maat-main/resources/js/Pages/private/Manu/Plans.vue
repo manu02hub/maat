@@ -8,17 +8,8 @@ import PlansPanel from '@/Components/mosaic/partials/settings/PlansPanel.vue';
 
 <template>
     <Head title="EventsIndex" />
-<<<<<<< HEAD
-
-    <PrivateLayout>
-        <PlansPanel></PlansPanel>
-    </PrivateLayout>
-
-</template>
-=======
     <PrivateLayout>
         <PlansPanel></PlansPanel>
     </PrivateLayout>
 </template>
 
->>>>>>> sergio
