@@ -9,7 +9,7 @@
     >
       <img class="w-8 h-8 rounded-full" src="https://media.c5n.com/p/23e83bbc00263816974509a0e7ca37e0/adjuntos/326/imagenes/000/045/0000045267/1200x675/smart/foto-perfil-facebook.png" width="32" height="32" alt="User" />
       <div class="flex items-center truncate">
-        <span class="truncate ml-2 text-sm font-medium group-hover:text-slate-800">Acme Inc.</span>
+        <span class="truncate ml-2 text-sm font-medium group-hover:text-slate-800">{{this.email}}</span>
         <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
           <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
         </svg>
@@ -25,8 +25,14 @@
     >
       <div v-show="dropdownOpen" class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1" :class="align === 'right' ? 'right-0' : 'left-0'">
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-          <div class="font-medium text-slate-800">Acme Inc.</div>
-          <div class="text-xs text-slate-500 italic">Administrator</div>
+            <div class="font-medium text-slate-800">{{this.email}}</div>
+            <div v-if="this.idRol == 1" class="text-xs text-slate-500 italic">
+                Administrador
+            </div>
+
+            <div v-if="this.idRol == 2" class="text-xs text-slate-500 italic">
+                Empleado
+            </div>
         </div>
         <ul
           ref="dropdown"
@@ -47,6 +53,7 @@
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { usePage } from "@inertiajs/vue3";
 //import UserAvatar from '../images/user-avatar-32.png'
 
 export default {
@@ -55,8 +62,20 @@ export default {
   data() {
     return {
       //UserAvatar: UserAvatar,
+      email: "Acme Inc.",
+      idRol: 1,
     }
   },
+
+  mounted() {
+        try {
+            this.email = usePage().props.auth.user.email;
+            this.idRol = usePage().props.auth.user.rol_id;
+        } catch (error) {
+            console.log(error);
+        }
+  },
+
   setup() {
 
     const dropdownOpen = ref(false)
