@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
+use App\Mail\EmployeeForm;
+use Illuminate\Support\Facades\Mail;
 
 
 /*
@@ -77,8 +79,16 @@ Route::get('/plans', function () {
 Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
 Route::patch('/createUser', [RegisterUser::class, 'createUser'])->middleware(['auth', 'verified'])->name('createUser');
 Route::get('/editUser/{id}', [RegisterUser::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
-Route::patch('/update', [RegisterUser::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
+Route::patch('/updateUser', [RegisterUser::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
 Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->name('deleteUser');
+
+//Mail
+Route::get('employeeForm/{mail}',function($mail){    
+    // dd($mail);
+    $correo = new EmployeeForm;
+
+    Mail::to($mail)->send($correo);
+})->name('employeeForm');;
 
 //--------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/

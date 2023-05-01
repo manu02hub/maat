@@ -2,7 +2,13 @@
 import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
 import PrivateLayout from "@/Layouts/PrivateLayout.vue";
 import CardEvent from "@/Components/manuComponents/CardEvent.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+
+
+const form = useForm({
+    email: "",
+});
 </script>
 
 <template>
@@ -16,7 +22,22 @@ import { Head, Link } from "@inertiajs/vue3";
                     <button>Añadir usuario</button>
                     </Link>
                 </div>
+
             </header>
+            <div>
+                <!-- esta es -->
+                <form @submit.prevent="form.get(route('employeeForm',form.email))">
+                    <div class="div-form-primero">
+                        <label for="emaiñl">email</label>
+                        <input type="email" id="email"  v-model="form.email">
+                        <PrimaryButton class="ml-4 bg-green-500">
+                            Enviar mail
+                        </PrimaryButton>
+                    </div>
+                </form>
+                <!-- fin -->
+            </div>
+
             <div class="div-tabla">
                 <table>
                     <thead>

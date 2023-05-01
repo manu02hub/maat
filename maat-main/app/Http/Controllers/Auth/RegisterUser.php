@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Users;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -27,13 +27,13 @@ class RegisterUser extends Controller
     }
 
     public function indexUser(Request $request){
-        $user = User::all();
+        $user = Users::all();
         return Inertia::render('private/Sergio/UsuariosEmpresa/Listado', compact('user'));
     }
 
     public function createUser(Request $request){
         // dd($request);
-        $user = new User();
+        $user = new Users();
         $user-> nombre = $request->nombre;
         $user-> email = $request->email;
         $user-> password = $request->password;
@@ -45,30 +45,30 @@ class RegisterUser extends Controller
     }
 
     public function editUser($id){
-        $user = User::findOrFail($id);
+        $user = Users::findOrFail($id);
         // dd($user);
         // return Inertia::render('private/Sergio/UsuariosEmpresa/EditarUsuario', compact('user'));
         return Inertia::render('private/Sergio/UsuariosEmpresa/EditUsuario', compact('user'));
-
     }
 
     public function updateUser(Request $request){
         $id = $request->id;
-        $user = User::findOrFail($id);
-        // dd($User);
+        $user = Users::findOrFail($id);
+        // dd($user);
+        // dd( $request->nombre);
         $user->update([
             'nombre' => $request->nombre,
             'email' => $request->email,
-            'password' => $request->password,
-            'rol_id' => $request->rol_id,
-            'entidad_id' => $request->entidad_id,
+            // 'password' => $request->password,
+            // 'rol_id' => $request->rol_id,
+            // 'entidad_id' => $request->entidad_id,
         ]);
         return Redirect::route('indexUser');
     }
 
     public function destroyUser($id)
     {
-        $evento = User::findOrFail($id);
+        $evento = Users::findOrFail($id);
         $evento->delete();
         return back();
     }
@@ -123,7 +123,7 @@ class RegisterUser extends Controller
         // Si no existe el usuario en la organización y el email a registrar no existe
         if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
             // Se crea usuario administrador de esa organizacion
-            $user = User::create([
+            $user = Users::create([
                 'nombre' => $request->nombre,
                 // 'dni'=>$request->dni,
                 'email' => $request->correo,
@@ -145,7 +145,7 @@ class RegisterUser extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        $user = Users::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),

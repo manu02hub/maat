@@ -1,55 +1,66 @@
 <script setup>
-import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
-import PrivateLayout from "@/Layouts/PrivateLayout.vue";
-import CardEvent from "@/Components/manuComponents/CardEvent.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import TextInput from '@/Components/TextInput.vue';
+
+// const user = usePage().props.auth.user;
+
+const { props } = usePage();
+let { user } = props;
+const { id, nombre, email} = user;
+
+const form = useForm({
+    id: id,
+    nombre: nombre,
+    email: email,
+});
+
 </script>
 
 <template>
-    <div class="grid-system">
-        <header>
-            <span>{{ $page.props.user.name }}</span>
-        </header>
-        <div class="div-img">
-            <img src="https://preview.cruip.com/mosaic/images/user-128-01.jpg" alt="">
-        </div>
-        <div class="spam-header">
-            <span>Usuario de empresa</span>
-            <div class="div-datos-basicos">
-                <div class="div-form-primero">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" :value="$page.props.user.nombre">
-                </div>
-                <!-- <div class="div-form-primero">
+    <form @submit.prevent="form.patch(route('updateUser'))">
+        <div class="grid-system">
+            <header>
+                <span>{{ form.nombre }}</span>
+            </header>
+            <div class="div-img">
+                <img src="https://preview.cruip.com/mosaic/images/user-128-01.jpg" alt="">
+            </div>
+            <div class="spam-header">
+                <span>Usuario de empresa</span>
+                <div class="div-datos-basicos">
+                    <div class="div-form-primero">
+                        <label for="nombre">Nombre</label>
+                        <TextInput type="text" id="nombre" v-model="form.nombre"/>
+                    </div>
+                    <!-- <div class="div-form-primero">
                     <label for="apellidos">Apellidos</label>
-                    <input type="text" id="apellidos">
+                    <TextInput type="text" id="apellidos">
                 </div> -->
-                <!-- <div class="div-form-primero">
+                    <!-- <div class="div-form-primero">
                     <label for="puesto">Puesto</label>
-                    <input type="text" id="puesto">
+                    <TextInput type="text" id="puesto">
                 </div> -->
+                </div>
+                <div class="div-form-segundo">
+                    <label for="email">Email</label>
+                    <TextInput type="text" id="email" v-model="form.email"/>
+                </div>
+                <button class="button-email">Save</button>
+                <div class="div-form-segundo">
+                    <div>Password</div>
+                    <span>Puede establecer una contraseña permanente si no desea utilizar códigos de inicio de sesión
+                        temporales.</span>
+                </div>
+                <button class="button-password">Restablecer contraseña</button>
             </div>
-            <div class="div-form-segundo">
-                <label for="email">Email</label>
-                <input type="text" id="email" :value="$page.props.user.email">
-            </div>
-            <button class="button-email">Save</button>
-            <div class="div-form-segundo">
-                <div>Password</div>
-                <span>Puede establecer una contraseña permanente si no desea utilizar códigos de inicio de sesión
-                    temporales.</span>
-            </div>
-            <button class="button-password">Restablecer contraseña</button>
+            <footer>
+                <Link :href="route('indexUser')">
+                <button class="btn-cancelar">Cancelar</button>
+                </Link>
+                <button type="submit" class="btn-save">Guardar cambios</button>
+            </footer>
         </div>
-        <footer>
-            <Link :href="route('indexUser')">
-            <button class="btn-cancelar">Cancelar</button>
-            </Link>
-            <Link :href="route('updateUser')">
-            <button class="btn-save">Guardar cambios</button>
-            </Link>
-        </footer>
-    </div>
+    </form>
 </template>
 
 <style scoped>
@@ -198,11 +209,3 @@ footer {
     margin-left: 10px;
 }
 </style>
-
-<script>
-import { ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
-export default {
-    components: { Link },
-}
-</script>
