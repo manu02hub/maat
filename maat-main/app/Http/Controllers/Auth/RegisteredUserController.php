@@ -33,9 +33,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
+        // Si es falso, se está intentando registrar empresa
         if ($request->clientOng == false) {
-            // Busca si existe la organizacion a registrar
+            // Busca si existe la empresa a registrar
             $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
 
             // Si no existe en la base de datos esta empresa
@@ -53,20 +53,20 @@ class RegisteredUserController extends Controller
 
             // Mira si existe el usuario a registrar dentro de la entidad
             $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
-        from maat.users
-        inner join maat.entidad on entidad.id = users.entidad_id
-        where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
+            from maat.users
+            inner join maat.entidad on entidad.id = users.entidad_id
+            where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
 
             // Mira si existe el email a registrar
             $emailExist = DB::select('select users.id, users.email
-        from maat.users
-        where users.email = ?', [$request->correo]);
+            from maat.users
+            where users.email = ?', [$request->correo]);
 
             // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
             $employees = DB::select('select count(users.id) as empleados
-        from maat.users
-        inner join maat.entidad on entidad.id = users.entidad_id
-        where entidad.nombre = ?', [$request->nombre_empresa]);
+            from maat.users
+            inner join maat.entidad on entidad.id = users.entidad_id
+            where entidad.nombre = ?', [$request->nombre_empresa]);
 
             // Si no existe el usuario en la organización y el email a registrar no existe
             if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
@@ -84,6 +84,8 @@ class RegisteredUserController extends Controller
 
                 Auth::login($user);
             }
+
+            // Cuando es una ONG
         } else {
             $request->validate([
                 'name' => 'required|string|max:255',
