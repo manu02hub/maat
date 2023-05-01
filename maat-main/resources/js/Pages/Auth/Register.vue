@@ -14,7 +14,8 @@ export default {
             container.classList.remove("right-panel-active");
         });
     },
-    components: { GuestLayout }
+
+    components: { GuestLayout },
 };
 </script>
 <script setup>
@@ -26,102 +27,302 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import ShadowBox from "@/Components/ShadowBox.vue";
 
+import * as Validaciones from "./../../validations/Validaciones.js";
+
+// Es true porque aparece ONG por defecto
 const form = useForm({
-    nombre: "",
-    dni: "",
     nombre_empresa: "",
     nif: "",
     correo: "",
     password: "",
     password_confirmation: "",
-    rol: "1",
     terms: false,
-    clientOng: false
+    clientOng: true,
 });
 
 const submit = () => {
-    form.post(route("register"), {
-        onFinish: () => form.reset("password", "password_confirmation"),
-    });
+    var valido = 0;
+
+    try {
+        // Si es empresa
+        if (!form.clientOng) {
+            // Validaciones. Mira si los respectivos campos son válidos. Mira también
+            // si hay injecciones
+            if (
+                Validaciones.checkInjection(form.nombre_empresa) &&
+                Validaciones.checkUserTxt(form.nombre_empresa)
+            ) {
+                valido++;
+                form.errors.nombre_empresa = null;
+            } else {
+                form.errors.nombre_empresa =
+                    "Asegurese que su usuario tenga una longitud de 4 y 30 " +
+                    "carácteres y que sea un usuario válido";
+            }
+
+            // Validación de la tarjeta empresarial
+            if (
+                Validaciones.checkInjection(form.nif) &&
+                Validaciones.checkTarjeta(form.nif)
+            ) {
+                valido++;
+                form.errors.nif = null;
+            } else {
+                form.errors.nif =
+                    "Asegurese de que sea una tarjeta válida. Tiene que tener la misma " +
+                    "estructura a la siguiente: 12345678A";
+            }
+
+            // Validación email
+            if (
+                Validaciones.checkInjection(form.correo) &&
+                Validaciones.checkEmailTxt(form.correo)
+            ) {
+                valido++;
+                form.errors.correo = null;
+            } else {
+                form.errors.correo =
+                    "Asegurate de que es un email válido parecido a la siguiente " +
+                    "estructura: AAA@AAA.AA o AAA@AAA.AAA";
+            }
+
+            // Validación password
+            if (
+                Validaciones.checkInjection(form.password) &&
+                Validaciones.checkPassword(form.password)
+            ) {
+                valido++;
+                form.errors.password = null;
+            } else {
+                // Mira que tenga 1 número, 1 mayúscula y 1 minúscula
+                form.errors.password =
+                    "La contraseña tiene que ser válida y tener entre 8-16 carácteres e " +
+                    "incluir 1 número, 1 mayúscula y 1 minúscula.";
+            }
+
+            // Valida si password es igual a confimaciónd de la password
+            if (form.password == form.password_confirmation) {
+                valido++;
+                form.errors.password_confirmation = null;
+            } else {
+                form.errors.password_confirmation =
+                    "La contraseñas introducidas deben ser las mismas";
+            }
+
+            // Si cumple todos los requisitos envía el formulario
+            if (valido == 5) {
+                form.post(route("register"), {
+                    onFinish: () =>
+                        form.reset("password", "password_confirmation"),
+                });
+            } else {
+                console.log(
+                    "Hay un error en el formulario. Por favor, revise los datos introducidos"
+                );
+            }
+
+            // Solo cuando es ONG
+        } else {
+            form.post(route("register"), {
+                onFinish: () => form.reset("password", "password_confirmation"),
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 // Cambia de ong a empresa y viceversa
 const changeToOng = () => {
-    form.nombre_empresa = "";
-    form.nif = "";
-    form.correo = "";
-    form.password = "";
-    form.password_confirmation = "";
-    form.clientOng = true;
-}
+    try {
+        form.nombre_empresa = "";
+        form.nif = "";
+        form.correo = "";
+        form.password = "";
+        form.password_confirmation = "";
+        form.clientOng = true;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const changeToEmpr = () => {
-    form.nombre_empresa = "";
-    form.nif = "";
-    form.correo = "";
-    form.password = "";
-    form.password_confirmation = "";
-    form.clientOng = false;
-}
+    try {
+        form.nombre_empresa = "";
+        form.nif = "";
+        form.correo = "";
+        form.password = "";
+        form.password_confirmation = "";
+        form.clientOng = false;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
+const mirarInputs = (e) => {
+    try {
+        Validaciones.checkInput(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsEmail = (e) => {
+    try {
+        Validaciones.checkInputEmail(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsTarjeta = (e) => {
+    try {
+        Validaciones.checkInputTarjeta(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
 </script>
+
 <template>
     <Head title="Registro" />
     <div class="container" id="container">
         <div class="form-container register-container">
             <ShadowBox>
+                <!-- Cuando es empresa -->
                 <form @submit.prevent="submit">
-                    <div class="mt-4">
-                        <InputLabel for="nombre" value="Nombre Empresa" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nombre" type="text" v-model="form.nombre" required autofocus class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.nombre" />
+                    <div>
+                        <InputLabel
+                            for="nombre_empresa"
+                            value="Nombre Empresa"
+                            class="block text-sm font-medium mb-1"
+                        />
+
+                        <TextInput
+                            id="nombre_empresa"
+                            type="text"
+                            v-model="form.nombre_empresa"
+                            autocomplete="no"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
+                        />
+
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.nombre_empresa"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="dni" value="Numero / Tarjeta" class="block text-sm font-medium mb-1" />
-                        <TextInput id="dni" type="text" v-model="form.dni" required autofocus class="form-input w-full" />
+                        <InputLabel
+                            for="nif"
+                            value="Numero / Tarjeta"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="nif"
+                            type="text"
+                            v-model="form.nif"
+                            autocomplete="no"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputsTarjeta($event)"
+                            @keypress="mirarInputsTarjeta($event)"
+                            @paste="$event.preventDefault()"
+                        />
+
+                        <InputError class="mt-2" :message="form.errors.nif" />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="nombre_empresa" value="Nombre Empresa" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nombre_empresa" type="text" v-model="form.nombre_empresa" required autofocus
-                            class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.nombre_empresa" />
+                        <InputLabel
+                            for="correo"
+                            value="Correo"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="correo"
+                            type="email"
+                            v-model="form.correo"
+                            autocomplete="no"
+                            required
+                            autofocus
+                            class="form-input w-full"
+                            @keydown="mirarInputsEmail($event)"
+                            @keypress="mirarInputsEmail($event)"
+                            @paste="$event.preventDefault()"
+                        />
+
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.correo"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="nif" value="Numero / Tarjeta" class="block text-sm font-medium mb-1" />
-                        <TextInput id="nif" type="text" v-model="form.nif" required autofocus class="form-input w-full" />
+                        <InputLabel
+                            for="password"
+                            value="Contraseña"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="password"
+                            type="password"
+                            v-model="form.password"
+                            required
+                            autocomplete="new-password"
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
+                        />
+
+                        <InputError
+                            class="mt-3"
+                            :message="form.errors.password"
+                        />
                     </div>
                     <div class="mt-4">
-                        <InputLabel for="correo" value="Correo" class="block text-sm font-medium mb-1" />
-                        <TextInput id="correo" type="email" v-model="form.correo" required autofocus
-                            class="form-input w-full" />
-                        <InputError class="mt-2" :message="form.errors.correo" />
-                    </div>
-                    <div class="mt-4">
-                        <InputLabel for="password" value="Contraseña" class="block text-sm font-medium mb-1" />
-                        <TextInput id="password" type="password" v-model="form.password" required
-                            autocomplete="new-password" class="form-input w-full" />
-                        <InputError class="mt-3" :message="form.errors.password" />
-                    </div>
-                    <div class="mt-4">
-                        <InputLabel for="password_confirmation" value="Confirma la contraseña"
-                            class="block text-sm font-medium mb-1" />
-                        <TextInput id="password_confirmation" type="password" v-model="form.password_confirmation" required
-                            autocomplete="new-password" class="form-input w-full" />
-                        <InputError class="mt-3 form-input w-full" :message="form.errors.password_confirmation" />
+                        <InputLabel
+                            for="password_confirmation"
+                            value="Confirma la contraseña"
+                            class="block text-sm font-medium mb-1"
+                        />
+                        <TextInput
+                            id="password_confirmation"
+                            type="password"
+                            v-model="form.password_confirmation"
+                            required
+                            autocomplete="new-password"
+                            class="form-input w-full"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
+                        />
+                        <InputError
+                            class="mt-3 form-input w-full"
+                            :message="form.errors.password_confirmation"
+                        />
                     </div>
                     <div class="mt-3">
-                        <PrimaryButton class="boton mt-3 ml-0" :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing">
+                        <PrimaryButton
+                            class="boton mt-3 ml-0"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
                             Registrar
                         </PrimaryButton>
                         <hr />
                     </div>
                     <Link :href="route('login')" class="underline mt-3">
-                    ¿Ya está registrado?
+                        ¿Ya está registrado?
                     </Link>
                 </form>
             </ShadowBox>
         </div>
+
         <div class="form-container login-container">
             <ShadowBox>
                 <form @submit.prevent="submit" class="space-y-4">
