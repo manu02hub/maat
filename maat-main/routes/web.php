@@ -90,6 +90,10 @@ Route::get('employeeForm/{mail}',function($mail){
     Mail::to($mail)->send($correo);
 })->name('employeeForm');;
 
+Route::get('/formUser', function () {
+    return Inertia::render('Auth/RegisterUser');
+})->name('formUser');
+
 //--------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'Empresa'], function () {

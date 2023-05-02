@@ -28,7 +28,7 @@ const form = useForm({
                 <!-- esta es -->
                 <form @submit.prevent="form.get(route('employeeForm',form.email))">
                     <div class="div-form-primero">
-                        <label for="emaiñl">email</label>
+                        <label for="email">email</label>
                         <input type="email" id="email"  v-model="form.email">
                         <PrimaryButton class="ml-4 bg-green-500">
                             Enviar mail

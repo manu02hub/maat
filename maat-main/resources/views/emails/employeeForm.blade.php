@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Correo electronico</h1>
-    <p>Este es un correo de laravel</p>
+    <p>Hola buenas, usted ha sido invitado a Maat, aqui tiene el correo con el que se puede registrar en nuestra app.</p>
+    <p>http://127.0.0.1:8000/formUser</p>
 </body>
 </html>
