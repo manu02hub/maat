@@ -7,30 +7,74 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm } from "@inertiajs/vue3";
 import { nextTick, ref } from "vue";
+
+import * as Validaciones from "./../../validations/Validaciones.js";
+
 const confirmingEmpresaDeletion = ref(false);
 const passwordInput = ref(null);
+
 const form = useForm({
     password: "",
 });
+
 const confirmEmpresaDeletion = () => {
-    confirmingEmpresaDeletion.value = true;
-    nextTick(() => passwordInput.value.focus());
-};
-const deleteEmpresa = () => {
     try {
-        form.delete(route("profile.destroy"), {
-            preserveScroll: true,
-            onSuccess: () => closeModal(),
-            onError: () => passwordInput.value.focus(),
-            onFinish: () => form.reset(),
-        });
+        confirmingEmpresaDeletion.value = true;
+        nextTick(() => passwordInput.value.focus());
     } catch (error) {
         console.log(error);
     }
 };
+
+const deleteEmpresa = () => {
+    try {
+        // Validación password
+        if (
+            Validaciones.checkInjection(form.password) &&
+            Validaciones.checkPassword(form.password)
+        ) {
+            form.delete(route("profile.destroy"), {
+                preserveScroll: true,
+                onSuccess: () => closeModal(),
+                onError: () => errorPw(),
+                onFinish: () => form.reset(),
+            });
+        } else {
+            // Mira que tenga 1 número, 1 mayúscula y 1 minúscula
+            form.errors.password =
+                "La contraseña tiene que ser válida y tener entre 8-16 carácteres e " +
+                "incluir 1 número, 1 mayúscula y 1 minúscula.";
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const errorPw = () => {
+    try {
+        passwordInput.value.focus();
+        form.errors.password = "Contraseña incorrecta";
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 const closeModal = () => {
-    confirmingEmpresaDeletion.value = false;
-    form.reset();
+    try {
+        confirmingEmpresaDeletion.value = false;
+        form.errors.password = null;
+        form.reset();
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputs = (e) => {
+    try {
+        Validaciones.checkInput(e);
+    } catch (error) {
+        console.log(error);
+    }
 };
 </script>
 
@@ -82,6 +126,9 @@ const closeModal = () => {
                             class="mt-1 block w-3/4"
                             placeholder="Password"
                             @keyup.enter="deleteEmpresa"
+                            @keydown="mirarInputs($event)"
+                            @keypress="mirarInputs($event)"
+                            @paste="$event.preventDefault()"
                         />
 
                         <InputError

@@ -504,7 +504,7 @@ class ListadoController extends Controller
                     from maat.mensaje
                     inner join maat.chat on chat.id = mensaje.chat_id
                     where chat.empresa_id =? and chat.organizacion_id = ?
-                    order by fecha asc, hora desc
+                    order by mensaje.id desc
                     limit 100',
                     [$request->params['id'], $request->params['userId']]
                 );
@@ -516,7 +516,7 @@ class ListadoController extends Controller
                     from maat.mensaje
                     inner join maat.chat on chat.id = mensaje.chat_id
                     where chat.empresa_id =? and chat.organizacion_id = ?
-                    order by fecha asc, hora desc
+                    order by mensaje.id desc
                     limit 100',
                     [$request->params['userId'], $request->params['id']]
                 );
