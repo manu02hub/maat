@@ -1,22 +1,41 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
-
 </script>
 
 <template>
     <nav>
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
-            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg"/></i>
+            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg" /></i>
         </label>
         <label class="logo">maat</label>
         <ul>
-            <li><Link :href="route('index')" active-class="active">Inicio</Link></li>
-            <li><Link :href="route('noticias')" active-class="active">Noticias</Link></li>
-            <li><Link :href="route('donativos')" active-class="active">Donativos</Link></li>
-            <li><Link :href="route('ranking')" active-class="active">Ranking</Link></li>
-            <li><Link :href="route('login')" active-class="active">Login</Link></li>
-            <li><Link :href="route('register')" active-class="active">Registro</Link></li>
+            <li>
+                <Link :href="route('index')" active-class="active">Inicio</Link>
+            </li>
+            <li>
+                <Link :href="route('noticias')" active-class="active"
+                    >Noticias</Link
+                >
+            </li>
+            <li>
+                <Link :href="route('donativos')" active-class="active"
+                    >Donativos</Link
+                >
+            </li>
+            <li>
+                <Link :href="route('ranking')" active-class="active"
+                    >Ranking</Link
+                >
+            </li>
+            <li>
+                <Link :href="route('login')" active-class="active">Login</Link>
+            </li>
+            <li>
+                <Link :href="route('register')" active-class="active"
+                    >Registro</Link
+                >
+            </li>
         </ul>
     </nav>
     <section></section>
@@ -24,11 +43,11 @@ import { Link } from "@inertiajs/vue3";
 
 <style>
 :root {
-    --blue: #12d2db;
+     --blue: #12d2db;
     --white: #fcf2fa;
     --green: #529541aa;
-    --green-blc: #230622dd;
-    --shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.3);
+     --green-blc: #230622dd;
+     --shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.3);
     --navColor: linear-gradient(
         to right,
         rgba(59, 215, 72, 0.6) 5%,
@@ -41,7 +60,6 @@ import { Link } from "@inertiajs/vue3";
     margin: 0;
     text-decoration: none;
     box-sizing: border-box;
-    
 }
 body {
     font-family: "Poppins", sans-serif;
@@ -120,8 +138,8 @@ section {
         font-size: 14px;
     }
     section {
-    padding: 7%;
-}   
+        padding: 7%;
+    }
 }
 
 @media (max-width: 858px) {
@@ -158,7 +176,7 @@ section {
         left: 0;
     }
     section {
-    padding: 8%;
-}   
+        padding: 8%;
+    }
 }
 </style>

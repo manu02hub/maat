@@ -247,7 +247,7 @@
           </li>
         </ul>
       </section>
-      
+
     </div>
 
     <!-- Panel footer -->
@@ -275,6 +275,6 @@ export default {
     return {
       annual
     }
-  }  
+  }
 }
 </script>

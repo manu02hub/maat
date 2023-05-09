@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class plan_contratado extends Model
+class Planes extends Model
 {
     use HasFactory;
 
-    protected $table = 'plan_contratado';
+    protected $table = 'tipos_plan';
 
     public $timestamps = false;
 
     protected $fillable = [
         'id',
-        'activo',
-        'fecha_inicio',
-        'fecha_fin',
-        'tipos_plan_id',
-        'empresa_id'
+        'nombre',
+        'precio',
+        'num_max_asociaciones',
+        'duracion'
     ];
 }

@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
-
+use App\Http\Controllers\PlansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,23 +53,14 @@ Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->mid
 Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified'])->name('ownEventsUser');
 Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified'])->name('add_event_to_user');
 Route::get('/delete_event_of_user/{id}', [EventController::class, 'desapuntarseEvento'])->middleware(['auth', 'verified'])->name('delete_event_of_user');
-Route::get('/eventInfo', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified'])->name('eventInfo');
+Route::get('/eventInfo/{id}', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified'])->name('eventInfo');
+Route::get('/plans', [PlansController::class, 'index'])->middleware(['auth', 'verified'])->name('plans');
+Route::get('/joinPlan/{id}',[PlansController::class, 'joinPlan'])->middleware(['auth', 'verified'])->name('joinPlan');
+Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified'])->name('deposePlan');
 
-// Route::get('/createEvent', function () {
-//     return Inertia::render('private/Manu/CreateEvents');
-// })->middleware(['auth', 'verified'])->name('create-event');
-
-Route::get('/plans', function () {
-    return Inertia::render('private/Manu/Plans');
-})->middleware(['auth', 'verified'])->name('plans');
-
-// Route::get('/eventUser', function () {
-//     return Inertia::render('private/Manu/EventUser');
-// })->middleware(['auth', 'verified'])->name('event-user');
-
-// Route::get('/eventInfo', function () {
-//     return Inertia::render('private/Manu/EventInfo');
-// })->middleware(['auth', 'verified'])->name('event-info');
+// Route::get('/plans', function () {
+//     return Inertia::render('private/Manu/Plans');
+// })->middleware(['auth', 'verified'])->name('plans');
 
 //-----------------------------------SERGIO---------------------------------------------------
 //---------------------MARIO-----------------
@@ -83,8 +74,6 @@ Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->name('de
 //--------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'Empresa'], function () {
-
-
 
     /*------------------------------------------------------------------------------------------*/
     Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
@@ -190,9 +179,7 @@ Route::get('/donativos', function () {
     return Inertia::render('public/Donativos');
 })->name('donativos');
 
-
 // Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
-
 
 //---------------------PIERO-----------------
 Route::get('/perfil', function () {

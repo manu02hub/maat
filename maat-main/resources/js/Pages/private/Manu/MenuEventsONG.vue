@@ -53,6 +53,137 @@ import { Head, Link } from "@inertiajs/vue3";
                     v-for="evento in $page.props.eventos"
                     :key="evento.id"
                 >
+                    <div class="event-card">
+                        <div class="event-image">
+                            <img
+                                src="http://localhost/img/maat/evento1.jpg"
+                                alt=""
+                            />
+                        </div>
+                        <div class="event-details">
+                            <h2 class="event-title">{{ evento.nombre }}</h2>
+                            <p class="event-description">
+                                {{ evento.descripcion }}
+                            </p>
+                            <div class="event-meta">
+                                <p class="event-date">
+                                    {{ evento.fecha_inicio }} /
+                                    {{ evento.fecha_inicio }}
+                                </p>
+                                <p class="event-spots">{{ evento.plazas }}</p>
+                            </div>
+                            <div class="event-actions">
+                                <Link
+                                    :href="route('edit', evento.id)"
+                                    class="btn-edit"
+                                    >Edit Event</Link
+                                >
+                                <Link
+                                    :href="route('delete', evento.id)"
+                                    class="btn-delete"
+                                    >Delete Event</Link
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--------------------------------------------{card}-------------------------------------------->
+            </div>
+        </div>
+    </PrivateLayout>
+</template>
+
+<style scope>
+.limitador {
+    width: 340px; /* ancho del div */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid #fff;
+    padding: 1rem;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-image {
+    flex-shrink: 0;
+    margin-right: 1rem;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-details {
+    flex-grow: 1;
+}
+
+.event-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.event-description {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.event-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.event-meta p {
+    margin-right: 1rem;
+}
+
+.event-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-edit,
+.btn-delete {
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #ffce00;
+    margin-right: 1rem;
+}
+
+.btn-delete {
+    background-color: #ff4d4d;
+}
+</style>
+
+<!--
+    <div
+                    class="m-2"
+                    v-for="evento in $page.props.eventos"
+                    :key="evento.id"
+                >
                     <div
                         class="rounded border border-white-700 p-4 justify-between leading-normal bg-white shadow-lg dark:bg-neutral-500"
                     >
@@ -148,16 +279,4 @@ import { Head, Link } from "@inertiajs/vue3";
                         </div>
                     </div>
                 </div>
-                <!--------------------------------------------{card}-------------------------------------------->
-            </div>
-        </div>
-    </PrivateLayout>
-</template>
-
-<style scope>
-.limitador {
-    width: 340px; /* ancho del div */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-</style>
+-->
