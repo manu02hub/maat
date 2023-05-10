@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\RankingController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -74,13 +75,32 @@ Route::get('/plans', function () {
 // })->middleware(['auth', 'verified'])->name('event-info');
 
 //-----------------------------------SERGIO---------------------------------------------------
-//---------------------MARIO-----------------
+//------------------------------------MARIO---------------------------------------------------
 
+    //PUBLIC
 Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
 Route::patch('/createUser', [RegisterUser::class, 'createUser'])->middleware(['auth', 'verified'])->name('createUser');
 Route::get('/editUser/{id}', [RegisterUser::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
 Route::patch('/updateUser', [RegisterUser::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
 Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->name('deleteUser');
+
+    //RANKING
+Route::get('/ranking', function () {
+    return Inertia::render('public/Ranking');
+})->name('ranking');
+
+Route::get('recogerRanking',[RankingController::class, 'ranking'])->name('recogerRanking');
+
+    //PERFIL
+Route::get('/perfil', function () {
+    return Inertia::render('private/Piero/PerfilUsuario');
+})->middleware(['auth', 'verified'])->name('perfil-usuario');
+
+Route::get('recogerPerfil',[RegisterUser::class, 'indexAuthUser'])->name('recogerPerfil');
+
+Route::get('/editar', function () {
+    return Inertia::render('private/Piero/EditarUsuario');
+})->middleware(['auth', 'verified'])->name('editar-usuario');
 
 //Mail
 Route::get('employeeForm/{mail}',function($mail){    
@@ -187,10 +207,7 @@ Route::post('/del/empresa', [ProfileEmprController::class, 'deleteEmpr'])->middl
 
 //------------------------------------------
 
-//---------------------MARIO Y PAULA-----------------
-Route::get('/ranking', function () {
-    return Inertia::render('public/Ranking');
-})->name('ranking');
+//---------------------PAULA-----------------
 
 Route::get('/noticias', function () {
     return Inertia::render('public/Noticias');
@@ -206,17 +223,6 @@ Route::get('/donativos', function () {
 
 
 // Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
-
-
-//---------------------PIERO-----------------
-Route::get('/perfil', function () {
-    return Inertia::render('private/Piero/PerfilUsuario');
-})->middleware(['auth', 'verified'])->name('perfil-usuario');
-
-Route::get('/editar', function () {
-    return Inertia::render('private/Piero/EditarUsuario');
-})->middleware(['auth', 'verified'])->name('editar-usuario');
-//------------------------------------------
 
 
 //---------------------CARLOS-----------------

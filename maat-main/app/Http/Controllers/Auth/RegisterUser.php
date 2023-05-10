@@ -31,6 +31,11 @@ class RegisterUser extends Controller
         return Inertia::render('private/Sergio/UsuariosEmpresa/Listado', compact('user'));
     }
 
+    public function indexAuthUser(Request $request){
+        $user = Users::all();
+        return Inertia::render('private/Piero/PerfilUsuario', compact('user'));
+    }
+
     public function createUser(Request $request){
         // dd($request);
         $user = new Users();
