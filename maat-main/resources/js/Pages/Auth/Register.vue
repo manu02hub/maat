@@ -123,7 +123,7 @@ const submit = () => {
 
             // Solo cuando es ONG
         } else {
-<<<<<<< HEAD
+
             /*-----------------------------------------------------------------------------------------*/
             // Validaciones. Mira si los respectivos campos son válidos. Mira también
             // si hay injecciones
@@ -201,11 +201,7 @@ const submit = () => {
                     "Hay un error en el formulario. Por favor, revise los datos introducidos"
                 );
             }
-=======
-            form.post(route("register"), {
-                onFinish: () => form.reset("password", "password_confirmation"),
-            });
->>>>>>> f5299890b14b25ccc8a9bbf9eb9c18b157ae60be
+
         }
     } catch (error) {
         console.log(error);

@@ -42,21 +42,21 @@ Route::get('/events', function () {
 
 //---------------------MANU-----------------
 
-Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('eventsIndex');
-Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified'])->name('createNewEvent');
-Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
-Route::patch('/updateEvent', [EventController::class, 'update'])->middleware(['auth', 'verified'])->name('updateEvent');
-Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit');
-Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
-Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified'])->name('eventsUser');
-Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->middleware(['auth', 'verified'])->name('allEventsToUser');
-Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified'])->name('ownEventsUser');
-Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified'])->name('add_event_to_user');
-Route::get('/delete_event_of_user/{id}', [EventController::class, 'desapuntarseEvento'])->middleware(['auth', 'verified'])->name('delete_event_of_user');
-Route::get('/eventInfo/{id}', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified'])->name('eventInfo');
-Route::get('/plans', [PlansController::class, 'index'])->middleware(['auth', 'verified'])->name('plans');
-Route::get('/joinPlan/{id}',[PlansController::class, 'joinPlan'])->middleware(['auth', 'verified'])->name('joinPlan');
-Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified'])->name('deposePlan');
+Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('eventsIndex');
+Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('createNewEvent');
+Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('store');
+Route::patch('/updateEvent', [EventController::class, 'update'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('updateEvent');
+Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('edit');
+Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('delete');
+// Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('eventsUser');
+Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('allEventsToUser');
+Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('ownEventsUser');
+Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('add_event_to_user');
+Route::get('/delete_event_of_user/{id}', [EventController::class, 'desapuntarseEvento'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('delete_event_of_user');
+Route::get('/eventInfo/{id}', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('eventInfo');
+Route::get('/plans', [PlansController::class, 'index'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('plans');
+Route::get('/joinPlan/{id}',[PlansController::class, 'joinPlan'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('joinPlan');
+Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('deposePlan');
 
 // Route::get('/plans', function () {
 //     return Inertia::render('private/Manu/Plans');

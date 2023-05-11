@@ -64,7 +64,45 @@ class PlansController extends Controller
         /**Obtengo la empresa y la entidad que es*/
         $enlaceEmpresa_Entidad = Empresa::where('entidad_id', $entidad_id)->first();
 
-        dd($enlaceEmpresa_Entidad);
+        $plan_a_actualizar = plan_contratado::where('empresa_id', $enlaceEmpresa_Entidad->id)->first();
+        switch ($id) {
+            case 1:
+                $plan_a_actualizar->update([
+                    'activo' => 1,
+                    'fecha_inicio' => now(),
+                    'fecha_fin' => date('Y-m-d H:i:s', strtotime('+4 months')),
+                    'tipos_plan_id' => $id,
+                    'empresa_id' => $enlaceEmpresa_Entidad->id
+                ]);
+                break;
+            case 2:
+                $plan_a_actualizar->update([
+                    'activo' => 1,
+                    'fecha_inicio' => now(),
+                    'fecha_fin' => date('Y-m-d H:i:s', strtotime('+7 months')),
+                    'tipos_plan_id' => $id,
+                    'empresa_id' => $enlaceEmpresa_Entidad->id
+                ]);
+                break;
+            case 3:
+                $plan_a_actualizar->update([
+                    'activo' => 1,
+                    'fecha_inicio' => now(),
+                    'fecha_fin' => date('Y-m-d H:i:s', strtotime('+13 months')),
+                    'tipos_plan_id' => $id,
+                    'empresa_id' => $enlaceEmpresa_Entidad->id
+                ]);
+                break;
+            case 4:
+                $plan_a_actualizar->update([
+                    'activo' => 1,
+                    'fecha_inicio' => now(),
+                    'fecha_fin' => date('Y-m-d H:i:s', strtotime('+2 months')),
+                    'tipos_plan_id' => $id,
+                    'empresa_id' => $enlaceEmpresa_Entidad->id
+                ]);
+                break;
+        }
         return back();
     }
 
