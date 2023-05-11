@@ -36,57 +36,78 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Si es falso, se está intentando registrar empresa
-        if ($request->clientOng == false) {
-            // Busca si existe la empresa a registrar
-            $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
-
-            // Si no existe en la base de datos esta empresa
-            if ($idOrg == null) {
-                // Se crea la empresa
-                $org = DB::insert(
-                    'insert into entidad (nombre, ubicacion, web, descripcion, tamano, numero_tarjeta) values (?, ?, ?, ?, ?, ?)',
-                    [$request->nombre_empresa, 'Ubicacion', 'Web', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quae cum saepe veritatis, incidunt assumenda quibusdam numquam beatae animi harum soluta quos nihil qui quaerat sequi alias sint veniam quisquam!', 1, $request->nif]
-                );
-
+        try {
+            // Si es falso, se está intentando registrar empresa
+            if ($request->clientOng == false) {
+                // Busca si existe la empresa a registrar
                 $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
 
-                $empresa = DB::insert('insert into empresa (entidad_id) values (?)', [$idOrg[0]->id]);
-            }
+                // Si no existe en la base de datos esta empresa
+                if ($idOrg == null) {
+                    // Se crea la empresa
+                    $org = DB::insert(
+                        'insert into entidad (nombre, ubicacion, web, descripcion, tamano, numero_tarjeta) values (?, ?, ?, ?, ?, ?)',
+                        [$request->nombre_empresa, 'Ubicacion', 'Web', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quae cum saepe veritatis, incidunt assumenda quibusdam numquam beatae animi harum soluta quos nihil qui quaerat sequi alias sint veniam quisquam!', 1, $request->nif]
+                    );
 
-            // Mira si existe el usuario a registrar dentro de la entidad
-            $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
-            from maat.users
-            inner join maat.entidad on entidad.id = users.entidad_id
-            where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
+                    $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
 
-            // Mira si existe el email a registrar
-            $emailExist = DB::select('select users.id, users.email
-            from maat.users
-            where users.email = ?', [$request->correo]);
+                    $empresa = DB::insert('insert into empresa (entidad_id) values (?)', [$idOrg[0]->id]);
+                }
 
-            // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
-            $employees = DB::select('select count(users.id) as empleados
-            from maat.users
-            inner join maat.entidad on entidad.id = users.entidad_id
-            where entidad.nombre = ?', [$request->nombre_empresa]);
+                // Mira si existe el usuario a registrar dentro de la entidad
+                $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
+                from maat.users
+                inner join maat.entidad on entidad.id = users.entidad_id
+                where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
 
-            // Si no existe el usuario en la organización y el email a registrar no existe
-            if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
-                // Se crea usuario administrador de esa organizacion
+                // Mira si existe el email a registrar
+                $emailExist = DB::select('select users.id, users.email
+                from maat.users
+                where users.email = ?', [$request->correo]);
+
+                // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
+                $employees = DB::select('select count(users.id) as empleados
+                from maat.users
+                inner join maat.entidad on entidad.id = users.entidad_id
+                where entidad.nombre = ?', [$request->nombre_empresa]);
+
+                // Si no existe el usuario en la organización y el email a registrar no existe
+                if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
+                    // Se crea usuario administrador de esa organizacion
+                    $user = User::create([
+                        'nombre' => $request->nombre_empresa,
+                        'email' => $request->correo,
+                        'password' => Hash::make($request->password),
+                        'activo' => 1,
+                        'rol_id' => 1,
+                        'entidad_id' => $idOrg[0]->id
+                    ]);
+
+                    event(new Registered($user));
+
+                    Auth::login($user);
+                }
+
+                // Cuando es una ONG
+            } else {
+                $request->validate([
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255|unique:' . User::class,
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                ]);
+
                 $user = User::create([
-                    'nombre' => $request->nombre_empresa,
-                    'email' => $request->correo,
+                    'name' => $request->name,
+                    'email' => $request->email,
                     'password' => Hash::make($request->password),
-                    'activo' => 1,
-                    'rol_id' => 1,
-                    'entidad_id' => $idOrg[0]->id
                 ]);
 
                 event(new Registered($user));
 
                 Auth::login($user);
             }
+<<<<<<< HEAD
 
             // Cuando es una ONG
         } else {
@@ -133,6 +154,10 @@ class RegisteredUserController extends Controller
 
             Auth::login($user);
 >>>>>>> f5299890b14b25ccc8a9bbf9eb9c18b157ae60be
+=======
+        } catch (\Throwable $th) {
+            echo $th;
+>>>>>>> alex3
         }
 
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth

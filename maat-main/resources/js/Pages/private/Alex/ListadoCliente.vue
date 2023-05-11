@@ -14,15 +14,142 @@ export default {
             orgs: "",
             ongsRecientes: "",
 
-            prueba: "",
-            prueba1: "asd@asd.com",
-            prueba2: "12345678",
-            prueba3: "12345678",
+            // Filtro para el buscador
+            searchFilter: "",
+            filteredList: [],
+
+            // Datos para paginación
+            maxPags: 0,
+            indexPag: 1,
+            listData: "",
         };
     },
 
     methods: {
+        // Paginación
+        previousPag: function () {
+            var start = 0;
+            var end = 0;
+
+            try {
+                if (this.indexPag != 1) {
+                    // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
+                    // Si es verdadero, entonces son todas las organizaciones
+                    if (!this.organization && this.filteredList.length == 0) {
+                        this.listData = this.ongsRecientes;
+                    } else if (
+                        this.organization &&
+                        this.filteredList.length == 0
+                    ) {
+                        this.listData = this.orgs;
+                    } else {
+                        this.listData = this.filteredList;
+                    }
+
+                    // Va una página atrás
+                    this.indexPag--;
+
+                    // Indica inicio y final de elementos
+                    start = this.indexPag * 2 - 2;
+                    end = this.indexPag * 2;
+
+                    // Coge solo los elementos de la posición indicada
+                    this.listData = this.listData.slice(start, end);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        nextPag: function () {
+            var start = 0;
+            var end = 0;
+
+            try {
+                if (this.indexPag != Math.ceil(this.maxPags / 2)) {
+                    // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
+                    // Si es verdadero, entonces son todas las organizaciones
+                    if (!this.organization && this.filteredList.length == 0) {
+                        this.listData = this.ongsRecientes;
+                    } else if (
+                        this.organization &&
+                        this.filteredList.length == 0
+                    ) {
+                        this.listData = this.orgs;
+                    } else {
+                        this.listData = this.filteredList;
+                    }
+
+                    this.indexPag++;
+
+                    start = this.indexPag * 2 - 2;
+                    end = this.indexPag * 2;
+
+                    this.listData = this.listData.slice(start, end);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        // Va a la primera página
+        firstPag: function () {
+            var start = 0;
+            var end = 0;
+
+            try {
+                // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
+                // Si es verdadero, entonces son todas las organizaciones
+                if (!this.organization && this.filteredList.length == 0) {
+                    this.listData = this.ongsRecientes;
+                } else if (this.organization && this.filteredList.length == 0) {
+                    this.listData = this.orgs;
+                } else {
+                    this.listData = this.filteredList;
+                }
+
+                this.indexPag = 1;
+
+                start = 0;
+                end = this.indexPag * 2;
+
+                this.listData = this.listData.slice(start, end);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        // Va a la última página
+        lastPag: function () {
+            var start = 0;
+            var end = 0;
+
+            try {
+                // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
+                // Si es verdadero, entonces son todas las organizaciones
+                if (!this.organization && this.filteredList.length == 0) {
+                    this.listData = this.ongsRecientes;
+                } else if (this.organization && this.filteredList.length == 0) {
+                    this.listData = this.orgs;
+                } else {
+                    this.listData = this.filteredList;
+                }
+
+                this.indexPag = Math.ceil(this.listData.length / 2);
+
+                start = this.indexPag * 2 - 2;
+                end = this.indexPag * 2;
+
+                this.listData = this.listData.slice(start, end);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         getData: async function () {
+            var start = 0;
+            var end = 0;
+
             try {
                 // Usamos axios para conseguir datos como las organizaciones registradas y el usuario actual
                 // CORS afecta cuando se intenta hacerlo con http. En local vale que se haga directamente
@@ -35,9 +162,22 @@ export default {
                     .then((response) => {
                         // Recibe los datos obtenidos (según lo que envía de vuelta el controller
                         // correspondiente)
-                        console.log(response.data);
                         this.orgs = response.data.organizacion;
                         this.ongsRecientes = response.data.recientes;
+
+                        // Se lee de esta variable los datos
+                        this.listData = response.data.recientes;
+
+                        // Paginación
+                        this.indexPag = 1;
+
+                        // Máximo de páginas
+                        this.maxPags = this.listData.length;
+
+                        start = 0;
+                        end = this.indexPag * 2;
+
+                        this.listData = this.listData.slice(start, end);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -103,18 +243,77 @@ export default {
             }
         },
 
-        s: function (e) {
+        // Cuando cambia de tipo (reciente o todos)
+        changeTypeCont: function (cambio) {
+            var start = 0;
+            var end = 0;
+
             try {
-                // Tiene que tener 9 carácteres. El último carácter debe ser una mayúscula y
-                // los demás deben ser números
-                if (
-                    this.prueba.length == 9 &&
-                    /[A-Z]/.test(this.prueba.charAt(8)) &&
-                    !/[A-Z]/.test(this.prueba.substring(0, 8))
-                ) {
+                this.organization = cambio;
+
+                // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
+                // Si es verdadero, entonces son todas las organizaciones
+                if (!this.organization) {
+                    this.listData = this.ongsRecientes;
+                } else {
+                    this.listData = this.orgs;
                 }
 
-                console.log();
+                // Paginación
+                this.indexPag = 1;
+
+                // Indica el máximo de páginas que habrá
+                this.maxPags = this.listData.length;
+
+                start = 0;
+                end = this.indexPag * 2;
+
+                // Muestra de 2 en 2
+                this.listData = this.listData.slice(start, end);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        // Filtro del buscador
+        buscarFilter: function () {
+            var start = 0;
+            var end = 0;
+
+            try {
+                // Mira que tipo es el actual
+                if (!this.organization) {
+                    this.listData = this.ongsRecientes;
+                } else {
+                    this.listData = this.orgs;
+                }
+
+                // Si no está vacío, entonces filtra
+                if (this.searchFilter != "" && this.searchFilter != null) {
+                    this.listData.forEach((data) => {
+                        if (
+                            data.nombre
+                                .toLowerCase()
+                                .indexOf(this.searchFilter) != -1
+                        ) {
+                            this.filteredList.push(data);
+                        }
+                    });
+
+                    this.listData = this.filteredList;
+                }
+
+                // Paginación
+                this.indexPag = 1;
+
+                // Indica el máximo de páginas que habrá. El calculo ya se hace en el la paginación.
+                this.maxPags = this.listData.length;
+
+                start = 0;
+                end = this.indexPag * 2;
+
+                // Muestra de 2 en 2
+                this.listData = this.listData.slice(start, end);
             } catch (error) {
                 console.log(error);
             }
@@ -135,42 +334,19 @@ export default {
 <template>
     <nav class="rowPropio noRowGapPropio">
         <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio barraNavPropio"
         ></div>
     </nav>
 
     <!-- Contenido propio -->
     <main>
-        <!--
-        <div>
-            <input
-                type="text"
-                v-model="prueba"
-                placeholder="Usuario"
-                @keydown="checkTarjInput($event)"
-                @keypress="checkTarjInput($event)"
-            />
-            <br />
-            <input
-                type="email"
-                v-model="prueba1"
-                placeholder="Email"
-                @keydown="checkEmailInput($event)"
-                @keypress="checkEmailInput($event)"
-            />
-            <br />
-            <input type="text" v-model="prueba2" placeholder="Pass" /> <br />
-            <input type="text" v-model="prueba3" placeholder="Conf pass" />
-            <br />
-            <button class="btn btn-primary" @click="s">Prueba</button>
-        </div>
-         -->
-
         <div class="rowPropio noRowGapPropio">
+            <!-- Deja espacio para centrar el contenido -->
             <div class="col-lg-1Propio col-md-1Propio"></div>
             <div
                 class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio"
             >
+                <!-- Los tabs -->
                 <ul class="listadoTabPropio ulNoStylePropio">
                     <!-- Usando v-bind:class de Vue puedo activar ciertas clases solo cuando se cumplan -->
                     <!-- la condición indicada -->
@@ -179,7 +355,7 @@ export default {
                     <li
                         class="listadoOpcionTabPropio"
                         v-bind:class="{ activoPropio: !this.organization }"
-                        v-on:click="this.organization = false"
+                        v-on:click="this.changeTypeCont(false)"
                     >
                         <a class="tabPropio aNoStylePropio" href="#"
                             >Org. contactada</a
@@ -188,7 +364,7 @@ export default {
                     <li
                         class="listadoOpcionTabPropio"
                         v-bind:class="{ activoPropio: this.organization }"
-                        v-on:click="this.organization = true"
+                        v-on:click="this.changeTypeCont(true)"
                     >
                         <a class="tabPropio aNoStylePropio" href="#"
                             >Demás Org.</a
@@ -206,41 +382,22 @@ export default {
                             class="inputBuscadorPropio"
                             type="text"
                             placeholder="Buscar..."
+                            v-model="this.searchFilter"
                         />
                     </div>
 
                     <div
                         class="col-lg-2Propio col-md-2Propio col-sm-2Propio col-4Propio"
                     >
-                        <button class="btnPropio btnBuscarPropio">
+                        <button
+                            class="btnPropio btnBuscarPropio"
+                            @click="buscarFilter"
+                        >
                             <img
                                 src="./../../../../img/search.svg"
                                 class="imgBuscarPropio"
                             />
                         </button>
-
-                        <!-- Cambia el estado del filtro gracias al v-on:click de Vue -->
-                        <button
-                            class="btnPropio btnFiltrarPropio"
-                            v-on:click="this.filter = !this.filter"
-                        >
-                            <img
-                                src="./../../../../img/filter.svg"
-                                class="imgBuscarPropio"
-                            />
-                        </button>
-                    </div>
-                </div>
-
-                <div class="rowPropio noRowGapPropio noColGapPropio">
-                    <div
-                        class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-10Propio"
-                    >
-                        <!-- Solo muestra si se activa el filtro -->
-                        <div
-                            v-show="this.filter"
-                            class="optionsFilterPropio"
-                        ></div>
                     </div>
                 </div>
             </div>
@@ -249,16 +406,29 @@ export default {
         <div class="rowPropio noRowGapPropio">
             <div class="col-lg-1Propio col-md-1Propio"></div>
 
+            <!-- Listado de organizaciones (tanto recientes como todas) -->
             <div
                 class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio listadoOrgPropio"
             >
                 <!-- Mostrar listado de organizaciones recientes -->
-                <div v-show="!this.organization">
-                    <h1 class="h1Propio" v-if="this.orgs.length == 0">
+                <div>
+                    <h1
+                        class="h1Propio"
+                        v-if="this.listData.length == 0 && !this.organization"
+                    >
                         No se ha contactado con una organización recientemente
                     </h1>
 
-                    <template v-for="data in ongsRecientes">
+                    <h1
+                        class="h1Propio"
+                        v-else-if="
+                            this.listData.length == 0 && this.organization
+                        "
+                    >
+                        No hay organizaciones a contactar
+                    </h1>
+
+                    <template v-for="data in listData">
                         <!-- Lista de organizaciones (de 1 en 1) -->
                         <a
                             :href="route('perfilP', data.id)"
@@ -283,39 +453,70 @@ export default {
                         </a>
                     </template>
                 </div>
-
-                <!-- Mostrar todas las organizaciones -->
-                <div v-show="this.organization">
-                    <h1 class="h1Propio" v-if="this.orgs.length == 0">
-                        No hay ONGs
-                    </h1>
-
-                    <!-- Lista de organizaciones (de 1 en 1) -->
-                    <template v-for="data in orgs">
-                        <a
-                            :href="route('perfilP', data.id)"
-                            class="rowPropio noRowGapPropio noColGapPropio cardOrgPropio"
-                        >
-                            <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                            <img
-                                src="./../../../../img/prueba.jpg"
-                                class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
-                                alt=""
-                            />
-
-                            <!-- Descripcion -->
-                            <div
-                                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio contenedorDescPropio"
-                            >
-                                <h1 class="h1Propio">{{ data.nombre }}</h1>
-                                <p>
-                                    {{ data.descripcion }}
-                                </p>
-                            </div>
-                        </a>
-                    </template>
-                </div>
             </div>
+        </div>
+
+        <!-- Paginación -->
+        <div>
+            <ul class="navPagPropio">
+                <!-- Solo esta activa si hay solo 1 pagina -->
+                <template v-if="Math.ceil(this.maxPags / 2) == 1">
+                    <li class="pagsPropio activoPagsPropio">1</li>
+                </template>
+
+                <template v-else>
+                    <!-- Pagina anterior -->
+                    <li
+                        class="pagsPropio pagsArrowLeftPropio"
+                        @click="previousPag"
+                        v-show="this.indexPag > 1"
+                    >
+                        <span>&laquo;</span>
+                    </li>
+
+                    <!-- Primera pagina -->
+                    <li
+                        class="pagsPropio"
+                        @click="firstPag"
+                        v-show="this.indexPag != 1"
+                    >
+                        1
+                    </li>
+
+                    <li class="pagsPropio" v-show="this.indexPag >= 3">...</li>
+
+                    <li class="pagsPropio activoPagsPropio">
+                        {{ this.indexPag }}
+                    </li>
+
+                    <li
+                        class="pagsPropio"
+                        v-show="
+                            this.indexPag <= Math.ceil(this.maxPags / 2) - 2
+                        "
+                    >
+                        ...
+                    </li>
+
+                    <!-- Ultima pagina -->
+                    <li
+                        class="pagsPropio"
+                        @click="lastPag"
+                        v-show="this.indexPag != Math.ceil(this.maxPags / 2)"
+                    >
+                        {{ Math.ceil(this.maxPags / 2) }}
+                    </li>
+
+                    <!-- Siguiente pagina-->
+                    <li
+                        class="pagsPropio pagsArrowRightPropio"
+                        @click="nextPag"
+                        v-show="this.indexPag < Math.ceil(this.maxPags / 2)"
+                    >
+                        <span>&raquo;</span>
+                    </li>
+                </template>
+            </ul>
         </div>
     </main>
 </template>
@@ -357,11 +558,55 @@ export default {
     column-gap: 0;
 }
 
+/* Paginacion */
+.navPagPropio {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+
+.pagsPropio {
+    cursor: pointer;
+    background: #73cd99;
+    user-select: none;
+    border: 1px solid #2d764b;
+    padding: 0.45rem 0.8rem;
+}
+
+.pagsPropio:hover {
+    background: #41a86c;
+    border: 1px solid #405747;
+    padding: 0.45rem 0.8rem;
+}
+
+.pagsArrowLeftPropio {
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.pagsArrowRightPropio {
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+}
+
+.activoPagsPropio {
+    color: white;
+    background: #2d764b;
+    border: 1px solid #291f1e;
+}
+
+/* Para 80% de pantalla height (según el zoom). Vuelve a normal al poner 100% zoom. */
+@media only screen and (max-height: 762px) and (min-height: 610px) {
+    .listadoOrgPropio {
+        height: 28.5rem !important;
+    }
+}
+
 /* Rellena espacio del nav (temporal) */
-.pruebaPropio {
+.barraNavPropio {
     height: 4rem;
     background: lightblue;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* Quita los estilos de listado */
@@ -425,7 +670,7 @@ export default {
 /* Estilo del buscador (filtro) */
 .divBuscadorPropio {
     height: 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .inputBuscadorPropio {
@@ -449,6 +694,8 @@ export default {
     background: lightblue;
     border: 1px solid lightblue;
     padding: 0.6rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .imgBuscarPropio {
@@ -478,7 +725,7 @@ export default {
 
 /* Estilos del listado */
 .listadoOrgPropio {
-    height: 27.5rem; /* Altura */
+    height: 21rem; /* Altura */
     border: 1px solid black; /* Borde (tamano, su aspecto, y color) */
     /* Radio de los bordes */
     border-top-left-radius: 0.5rem;
@@ -486,10 +733,10 @@ export default {
     border-bottom-right-radius: 0.15rem;
     border-bottom-left-radius: 0.5rem;
     /* Comportamiento cuando se sale de la altura o ancho establecido */
-    overflow-y: scroll;
+    overflow-y: hidden;
     /* Margenes */
-    margin-top: 2.5rem;
-    margin-bottom: 4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     /* Rellenos */
     padding-top: 1.35rem;
     padding-right: 1.75rem;
@@ -675,6 +922,7 @@ export default {
     }
 }
 
+/* Pantallas más pequeñas */
 @media only screen and (max-width: 451px) {
     .col-1Propio {
         grid-column: span 1;

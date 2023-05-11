@@ -10,8 +10,10 @@ export default {
             recentChats: "",
             nameChat: "",
             idEntidadChat: 0,
-            idChatInterval: 0,
             chatHistory: "",
+
+            // Mensaje (para el input)
+            msg: "",
 
             // chatInicial se usa para las ventanas del chat
             chatInicial: [],
@@ -276,6 +278,8 @@ export default {
                                 "Se ha actualizado los datos de la empresa"
                             ),
                     });
+
+                    this.msg = "";
                 }
             } catch (error) {
                 console.log(error);
@@ -285,6 +289,9 @@ export default {
         // Solo se usa para conseguir los datos iniciales si se accede al chat url con variables (id de
         // la entidad con la que se quiere chatear)
         getInitialDataWithId: async function () {
+            var valido = false;
+            var i = 0;
+
             try {
                 // Abre el chat que se ha escogido.
                 // Peticion para recibir el chat con la que se quiere hablar
@@ -299,8 +306,25 @@ export default {
                         this.listChats = response.data.chats; // Lista chats
                         this.recentChats = response.data.recentChats; // Recientes chats
 
-                        // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
-                        this.nameChat = response.data.chatWith[0][0].nombre;
+                        // Bucle hasta que salga o encuentre
+                        while (
+                            !valido &&
+                            i < response.data.recentChats.length
+                        ) {
+                            // Busca si es el que se quiere usar
+                            if (
+                                response.data.recentChats[i].entidad ==
+                                this.$page.props.chatWith
+                            ) {
+                                // Muestra el nombre de la entidad con la que se esta comunicandose en el
+                                // chat
+                                this.nameChat =
+                                    response.data.recentChats[i].nombre;
+                                valido = true; // Ha encontrado lo que se buscaba
+                            }
+
+                            i++;
+                        }
 
                         response.data.chatWith[0].forEach((mensajes) => {
                             this.chatInicial.push([
@@ -368,84 +392,49 @@ export default {
             }
         },
 
+        // Long polling para obtener chat
+        // https://javascript.info/long-polling
         getRefreshedChat: async function () {
-            var msgContainer = "";
             var chat = document.getElementsByClassName("contenedorChatPropio");
-            var contenedorChat = document.getElementsByClassName(
-                "contenedorChatAfueraPropio"
-            );
 
             try {
-                axios
-                    .post("/chat/refresh", {
-                        params: {
-                            id: this.idEntidadChat,
-                            userId: this.$page.props.auth.user.entidad_id,
-                        },
-                    })
-                    .then((response) => {
-                        chat[0].innerHTML = "";
-                        chat[1].innerHTML = "";
+                // Peticiones long polling. Se usa setTimeout porque el setInterval acumula procesos más
+                // rápidamente. Refresca chat cada 7 segundos.
+                await setTimeout(() => {
+                    axios
+                        .post("/chat/refresh", {
+                            params: {
+                                id: this.idEntidadChat,
+                                userId: this.$page.props.auth.user.entidad_id,
+                            },
+                        })
+                        .then((response) => {
+                            // Resetea contenedor de chat
+                            chat[0].innerHTML = "";
+                            chat[1].innerHTML = "";
 
-                        // El chat coge las 100 últimas, por lo que hay que darle la vuelta para
-                        // decirle desde los mensajes más antiguos a los más recientes
-                        this.chatInicial = [];
+                            // El chat coge las 100 últimas, por lo que hay que darle la vuelta para
+                            // decirle desde los mensajes más antiguos a los más recientes
+                            this.chatInicial = [];
 
-                        response.data.reverse().forEach((mensajes) => {
-                            this.chatInicial.push([
-                                mensajes.contenido,
-                                mensajes.id_origen,
-                                mensajes.fecha,
-                                mensajes.hora,
-                            ]);
+                            response.data.reverse().forEach((mensajes) => {
+                                this.chatInicial.push([
+                                    mensajes.contenido,
+                                    mensajes.id_origen,
+                                    mensajes.fecha,
+                                    mensajes.hora,
+                                ]);
+                            });
+
+                            this.iniciarChatPorId();
+
+                            // El finally hace que pase lo que pase, se haga de nuevo el proceso, haciendo
+                            // que refresque el chat continuamente
+                        })
+                        .finally((response) => {
+                            this.getRefreshedChat();
                         });
-
-                        // Recorre todos los mensajes del chat entre los 2 usuarios (solo cuando
-                        // se inicia por id)
-                        this.chatInicial.forEach((mensajes) => {
-                            // Si origen es la misma que la entidad del usuario
-                            if (
-                                mensajes[1] ==
-                                this.$page.props.auth.user.entidad_id
-                            ) {
-                                // Le aparece el bocadillo de mensaje con su contenido, fecha y hora
-                                msgContainer +=
-                                    "<div class='sendChatPropio'>" +
-                                    mensajes[0];
-                                msgContainer +=
-                                    "<p class='timeChatSendPropio pDefaultPropio'>Enviado a las " +
-                                    mensajes[3] +
-                                    " de " +
-                                    mensajes[2] +
-                                    "</p></div>";
-                            } else {
-                                msgContainer +=
-                                    "<div class='receptorChatPropio'>" +
-                                    mensajes[0];
-                                msgContainer +=
-                                    "<p class='timeChatReceivedPropio pDefaultPropio'>Enviado a las " +
-                                    mensajes[3] +
-                                    " de " +
-                                    mensajes[2] +
-                                    "</p></div>";
-                            }
-                        });
-
-                        chat[0].innerHTML += msgContainer;
-                        chat[1].innerHTML += msgContainer;
-
-                        // Hace scroll hacia el ultimo mensaje
-                        // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
-                        // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
-                        contenedorChat[0].scrollTo(
-                            0,
-                            contenedorChat[0].scrollHeight
-                        );
-                        contenedorChat[1].scrollTo(
-                            0,
-                            contenedorChat[1].scrollHeight
-                        );
-                    });
+                }, 7000);
             } catch (error) {
                 console.log(error);
             }
@@ -461,6 +450,8 @@ export default {
             // Esta escuchando cuando cambia el tamano de la pantalla
             window.addEventListener("resize", this.onResize);
             this.widthWindow = window.innerWidth;
+
+            this.getRefreshedChat(); // Recarga chat constantemente
 
             // Pone el origen para indicar de quien proviene si manda un mensaje (o sea,
             // del usuario activo, tu)
@@ -481,15 +472,6 @@ export default {
         } catch (error) {
             console.log(error);
         }
-
-        // Cosas por hacer:
-        /*
-         Hay que coger los recientes (hecho de momento solo cuando se hace por id).
-         Recoger datos cuando se va al chat directamente.
-         Cambiar chat al hacer click.
-         Tener que hacer las validaciones
-
-         */
     },
 };
 </script>
@@ -641,15 +623,17 @@ export default {
                                 v-bind:disabled="this.nameChat == ''"
                             />
 
+                            <!-- Enviar mensaje -->
                             <!-- Es lo mismo que v-on:click pero abreviado -->
                             <button class="btnChatPropio" @click="enviar(msg)">
-                                <img src="./../../../../img/send.svg" />
+                                <span>&#x27A4;</span>
                             </button>
 
+                            <!-- Archivos (enviar) -->
                             <!-- https://developer.mozilla.org/es/docs/Web/HTML/Element/input -->
-                            <button class="btnChatPropio" @click="uploadFile">
-                                <img src="./../../../../img/attachment.svg" />
-                            </button>
+                            <!-- <button class="btnChatPropio" @click="uploadFile">
+                                <span>&#128206;</span>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -692,15 +676,17 @@ export default {
                                 v-bind:disabled="this.nameChat == ''"
                             />
 
+                            <!-- Envia mensajes -->
                             <!-- Es lo mismo que v-on:click pero abreviado -->
                             <button class="btnChatPropio" @click="enviar(msg)">
-                                <img src="./../../../../img/send.svg" />
+                                <span>&#x27A4;</span>
                             </button>
 
+                            <!-- Archivos (enviar) -->
                             <!-- https://developer.mozilla.org/es/docs/Web/HTML/Element/input -->
-                            <button class="btnChatPropio" @click="uploadFile">
-                                <img src="./../../../../img/attachment.svg" />
-                            </button>
+                            <!-- <button class="btnChatPropio" @click="uploadFile">
+                                <span>&#128206;</span>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -734,9 +720,9 @@ export default {
     /* En la propiedad display agregamos grid para establecer una cuadricula */
     display: grid;
     /* Define el numero de columnas en el diseño de cuadricula */
-    grid-template-columns: repeat(12, [ col ] 1fr);
+    grid-template-columns: repeat(12, [ col] 1fr);
     /* Define la altura de cada fila */
-    grid-template-rows: repeat(5, [ row ] auto);
+    grid-template-rows: repeat(5, [ row] auto);
     column-gap: 1em; /* espacio entre columnas */
     row-gap: 15px; /* espacio entre filas */
 }
@@ -756,7 +742,7 @@ export default {
 
 /* Rellena espacio del nav (temporal) */
 .pruebaPropio {
-    height: 4rem;
+    height: 2.75rem;
     background: #291f1e;
 }
 
@@ -797,7 +783,7 @@ export default {
 
 /* Limita el tamano del chat y anade scroll */
 .chatLimitedPropio {
-    height: 26rem;
+    height: 27.5rem;
     overflow-y: scroll;
 }
 
@@ -846,7 +832,7 @@ export default {
 
 /* Border que separa el chat de los contactos */
 .borderContainerPropio {
-    height: 30rem;
+    height: 32.5rem;
     border-right: 1px solid #291f1e;
 }
 
@@ -857,12 +843,12 @@ export default {
 
 /* Tamano del chat en general (contenedores incluidos) */
 .chatContainerPropio {
-    height: 26.3rem;
+    height: 28.75rem;
 }
 
 /* Contenedor del chat (donde hablan los usuarios) */
 .chatUsersPropio {
-    height: 63.25%;
+    height: 67.25%;
     border-radius: 0.75rem;
     overflow-y: scroll;
     background-color: #73cd99;
@@ -873,7 +859,7 @@ export default {
 /* Contenedor del input para el chat (donde hablan los usuarios) */
 .chatInputContainerPropio {
     display: flex;
-    height: 15.31%;
+    height: 13.2%;
     background-color: lightgrey;
 }
 
@@ -905,7 +891,7 @@ export default {
 
 /* Estilo de los botones del chat */
 .btnChatPropio {
-    padding: 1px 6px; /* Estilo propio del botón (el de por defecto) */
+    padding: 1px 1rem; /* Estilo propio del botón (el de por defecto) */
     border: 1px solid #c4e9d3;
     background-color: #73cd99;
     margin: 0.75rem 0rem 0.75rem 0rem;
@@ -917,8 +903,7 @@ export default {
     background-color: #2d764b;
 }
 
-/* Cambia el color de las imagenes por el filtro cuando se pasa por encima el raton */
-.btnChatPropio:hover > img {
+.btnChatPropio:hover span {
     filter: invert(1);
 }
 
@@ -975,7 +960,7 @@ export default {
 }
 
 /* Estilo del último mensaje enviado */
-.lastMsgPropio{
+.lastMsgPropio {
     color: #3d3d3d;
     font-style: italic;
     font-size: smaller;
@@ -1237,6 +1222,34 @@ export default {
     .btnBackPropio > img:hover {
         cursor: pointer;
         filter: contrast(0);
+    }
+}
+
+/* Para 80% de pantalla height (según el zoom). Vuelve a normal al poner 100% zoom. */
+@media only screen and (max-height: 762px) and (min-height: 610px) {
+    .inputChatPropio {
+        width: 85%;
+    }
+
+    .chatLimitedPropio {
+        height: 37.75rem;
+    }
+
+    .chatInputContainerPropio {
+        height: 11.8%;
+        padding-right: 2rem;
+    }
+
+    .chatUsersPropio {
+        height: 73.5%;
+    }
+
+    .chatContainerPropio {
+        height: 38.25rem;
+    }
+
+    .borderContainerPropio {
+        height: 42rem;
     }
 }
 

@@ -17,7 +17,7 @@ import UpdatePasswordForm from '@/Components/carlosComponents/UpdatePasswordForm
 
        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-1">
             <UpdateEmpresaInformationForm></UpdateEmpresaInformationForm>
-            <UpdatePasswordForm></UpdatePasswordForm>
+            <!-- <UpdatePasswordForm></UpdatePasswordForm> -->
             <DeleteEmpresaForm></DeleteEmpresaForm>
         </div>
 

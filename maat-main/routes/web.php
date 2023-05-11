@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisterUser;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
@@ -125,30 +126,34 @@ Route::get('/chat', function () {
 })->middleware(['auth', 'verified'])->name('chat');
 
 // Abre el chat según la id de la entidad con la que se quiera hablar
-Route::get('/chat/{id}', [ListadoController::class, 'getIdReceptor'])->middleware(
+Route::get('/chat/{id}', [ChatController::class, 'getIdReceptor'])->middleware(
     ['auth', 'verified']
 )->name('getIdChatWith');
 
 // Chat coger todo si se ha accedido desde url /chat sin id
-Route::post('/chat/all', [ListadoController::class, 'getAllChats'])->middleware(
+Route::post('/chat/all', [ChatController::class, 'getAllChats'])->middleware(
     ['auth', 'verified']
 )->name('chatAll');
 
 // Recepcion de los datos iniciales (ejecutados a partir de url chat con id)
-Route::post('/chat/getBy', [ListadoController::class, 'getChatById'])->middleware(
+Route::post('/chat/getBy', [ChatController::class, 'getChatById'])->middleware(
     ['auth', 'verified']
 )->name('chatById');
 
 // Para abrir chat al clickear en una entidad
-Route::post('/chat/open', [ListadoController::class, 'getChatSelected'])->middleware(
+Route::post('/chat/open', [ChatController::class, 'getChatSelected'])->middleware(
     ['auth', 'verified']
 )->name('chat.open');
 
 // Enviar mensajes de chat
-Route::post('/chat/send', [ListadoController::class, 'sendChat'])->name('chat.send');
+Route::post('/chat/send', [ChatController::class, 'sendChat'])->middleware(
+    ['auth', 'verified']
+)->name('chat.send');
 
 // Recarga los últimos 100 mensajes de chat
-Route::post('/chat/refresh', [ListadoController::class, 'refreshChatSelected'])->name('chat.refresh');
+Route::post('/chat/refresh', [ChatController::class, 'refreshChatSelected'])->middleware(
+    ['auth', 'verified']
+)->name('chat.refresh');
 
 // Listado de ONGs
 Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);

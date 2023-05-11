@@ -8,16 +8,14 @@ import { Link, useForm, usePage } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 import axios from "axios";
 
+import * as Validaciones from "./../../validations/Validaciones.js";
+
 const props = defineProps({
     mustVerifyEmail: Boolean,
     status: String,
 });
 
-try {
-    const user = usePage().props.auth.user;
-} catch (error) {
-    console.log(error);
-}
+const user = usePage().props.auth.user;
 
 var empresa = "";
 
@@ -53,8 +51,100 @@ onMounted(() => {
 
 // Actualiza los datos
 const actualizar = () => {
+    var contador = 0;
+
     try {
-        form.post("/edit/empresa");
+        // Mira que todo esté correcto antes de introducir los datos
+        // Nombre de la empresa
+        if (
+            form.name.replace(" ", "").length > 3 &&
+            Validaciones.checkInjection(form.name.replace(" ", ""))
+        ) {
+            form.errors.name = "";
+            contador++;
+        } else {
+            form.errors.name =
+                "El nombre de la empresa tiene que tener 4 o más carácteres y ser válido.";
+        }
+
+        // Tarjeta de la empresa
+        if (Validaciones.checkTarjeta(form.numTar)) {
+            form.errors.numTar = "";
+            contador++;
+        } else {
+            form.errors.numTar =
+                "La tarjeta tiene que tener 8 números y una letra en mayúscula al final.";
+        }
+
+        // Ubicación de la empresa
+        if (
+            Validaciones.checkUbicacion(form.ubicacion) &&
+            Validaciones.checkInjection(form.ubicacion)
+        ) {
+            form.errors.ubicacion = "";
+            contador++;
+        } else {
+            form.errors.ubicacion =
+                "La ubicación tiene que ser válido y solo puede llevar 1 punto, 1 guión y tener más de 2 carácteres.";
+        }
+
+        // Link web de la empresa
+        if (
+            Validaciones.checkWeb(form.web) &&
+            Validaciones.checkInjection(form.web)
+        ) {
+            form.errors.web = "";
+            contador++;
+        } else {
+            form.errors.web =
+                "Asegúrate de que la web puesta tenga la siguiente estructura AAA.AAA o AAA.AAA.AAA";
+        }
+
+        // Descripción de la empresa
+        if (
+            form.descripcion.replaceAll(" ", "").length >= 8 &&
+            Validaciones.checkInjection(form.descripcion.replaceAll(" ", ""))
+        ) {
+            form.errors.descripcion = "";
+            contador++;
+        } else {
+            form.errors.descripcion =
+                "La descripción tiene que tener 8 carácteres o más.";
+        }
+
+        // Si cumple las condiciones, se actualizan los datos
+        if (contador == 5) {
+            form.post("/edit/empresa", {
+                onSuccess: () => (form.errors.sentData = ""),
+                onError: () =>
+                    (form.errors.sentData =
+                        "No se han podido cambiar los datos."),
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsWithSpace = (e) => {
+    try {
+        Validaciones.checkInputWithSpace(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsWeb = (e) => {
+    try {
+        Validaciones.checkInput(e);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const mirarInputsTarjeta = (e) => {
+    try {
+        Validaciones.checkInputTarjeta(e);
     } catch (error) {
         console.log(error);
     }
@@ -86,6 +176,9 @@ const actualizar = () => {
                         required
                         autofocus
                         autocomplete="name"
+                        @keydown="mirarInputsWithSpace($event)"
+                        @keypress="mirarInputsWithSpace($event)"
+                        @paste="$event.preventDefault()"
                     />
 
                     <InputError class="mt-2" :message="form.errors.name" />
@@ -101,6 +194,9 @@ const actualizar = () => {
                         v-model="form.numTar"
                         required
                         autocomplete="username"
+                        @keydown="mirarInputsTarjeta($event)"
+                        @keypress="mirarInputsTarjeta($event)"
+                        @paste="$event.preventDefault()"
                     />
 
                     <InputError class="mt-2" :message="form.errors.numTar" />
@@ -117,6 +213,9 @@ const actualizar = () => {
                         required
                         autofocus
                         autocomplete="ubicacion"
+                        @keydown="mirarInputsWithSpace($event)"
+                        @keypress="mirarInputsWithSpace($event)"
+                        @paste="$event.preventDefault()"
                     />
 
                     <InputError class="mt-2" :message="form.errors.ubicacion" />
@@ -133,6 +232,9 @@ const actualizar = () => {
                         required
                         autofocus
                         autocomplete="web"
+                        @keydown="mirarInputsWeb($event)"
+                        @keypress="mirarInputsWeb($event)"
+                        @paste="$event.preventDefault()"
                     />
 
                     <InputError class="mt-2" :message="form.errors.web" />
@@ -152,9 +254,15 @@ const actualizar = () => {
                         required
                         autofocus
                         autocomplete="descripcion"
+                        @keydown="mirarInputsWithSpace($event)"
+                        @keypress="mirarInputsWithSpace($event)"
+                        @paste="$event.preventDefault()"
                     />
 
-                    <InputError class="mt-2" :message="form.errors.desc" />
+                    <InputError
+                        class="mt-2"
+                        :message="form.errors.descripcion"
+                    />
                 </div>
 
                 <div
@@ -182,6 +290,8 @@ const actualizar = () => {
                         address.
                     </div>
                 </div>
+
+                <InputError class="mt-2" :message="form.errors.sentData" />
 
                 <div class="flex items-center gap-4">
                     <PrimaryButton :disabled="form.processing"

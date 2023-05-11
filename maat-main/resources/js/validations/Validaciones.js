@@ -56,6 +56,27 @@ function checkInputTarjeta(e) {
     }
 }
 
+function checkInputWithSpace(e) {
+    try {
+        // Solo permite de la A-Z, a-z, 0-9, el ' - ', el ' . ', el ' - ' y el espacio
+        if (
+            e.key == "Dead" ||
+            (!/[A-Za-z0-9_.-]/.test(e.key) &&
+                e.key.charCodeAt(0) != 22 &&
+                e.key.charCodeAt(0) != 32)
+        ) {
+            e.preventDefault();
+
+            // Solo permite valores que entren en el rango de ASCII 128 (código estandar de
+            // intercambio de información americano)
+        } else if (e.key.charCodeAt(0) < 32 || e.key.charCodeAt(0) > 126) {
+            e.preventDefault();
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Validaciones para ver si existe alguna injeccion no deseada en el texto
 function checkInjection(txt) {
     try {
@@ -79,7 +100,10 @@ function checkInjection(txt) {
 // Mira el usuario recibido y comprueba si es válido. Devolverá un boolean (false o true)
 function checkUserTxt(usuario) {
     try {
-        if (usuario.length > 4 && usuario.length < 31) {
+        if (
+            usuario.replaceAll(" ", "").length > 4 &&
+            usuario.replaceAll(" ", "").length < 31
+        ) {
             return true;
         } else {
             return false;
@@ -97,25 +121,23 @@ function checkEmailTxt(email) {
 
     try {
         // Divide el email en 3 partes
-        email1 = email.substring(0, email.indexOf("@"));
-        email2 = email.substring(
-            email.indexOf("@") + 1,
-            email.lastIndexOf(".")
-        );
-        email3 = email.substring(email.lastIndexOf(".") + 1, email.length);
+        email1 = email.substring(0, email.indexOf("@")).replaceAll(" ", "");
+        email2 = email
+            .substring(email.indexOf("@") + 1, email.lastIndexOf("."))
+            .replaceAll(" ", "");
+        email3 = email
+            .substring(email.lastIndexOf(".") + 1, email.length)
+            .replaceAll(" ", "");
 
         // Comprueba que tenga solo 1 o 2 puntos el email. Comprueba que el email
         // tenga una estructura parecida a AAA@AAA.com
         // También, comprueba que la extensión tenga una longitud 2 a 3 y que no
         // tenga dígitos.
-        // Por último, utilizando regex para ver cuantas veces se repiten el carácter.
-        // gi significa global, indifferent. El match devuelve una cadena de todos los
-        // carácteres que cumplen la condición.
-        // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/match
+        // Por último, utilizando regex reemplaza todos los carácteres que no sean ' . '
         if (email.indexOf(".") != -1) {
             if (
-                email.match(/[.]/gi).length >= 1 &&
-                email.match(/[.]/gi).length < 3 &&
+                email.replace(/[^.]/g, "").length >= 1 &&
+                email.replace(/[^.]/g, "").length < 3 &&
                 email1.length > 2 &&
                 email2.length > 2 &&
                 email3.length > 1 &&
@@ -178,14 +200,95 @@ function checkTarjeta(tarjeta) {
     }
 }
 
+// Valida la web
+function checkWeb(web) {
+    var contenedorWeb1 = "";
+    var contenedorWeb2 = "";
+    var contenedorWeb3 = "";
+    var valido = false;
+
+    try {
+        // g se refiere a global (busca en todo el string).
+        // ^ es para buscar todos los carácteres que no cumplan la condición
+        if (web.replace(/[^.]/g, "").length == 1) {
+            // Divide la página web en diferentes partes
+            contenedorWeb1 = web.substring(0, web.indexOf("."));
+            contenedorWeb2 = web.substring(web.indexOf(".") + 1, web.length);
+
+            // Web 1 se refiere a la parte principal (necesario más de 3 carácteres)
+            // Web 2 se refiere a la extensión (com, org, es, etc)
+            if (
+                contenedorWeb1.length > 2 &&
+                contenedorWeb2.length >= 2 &&
+                contenedorWeb2.length < 4
+            ) {
+                valido = true;
+            }
+        } else if (web.replace(/[^.]/g, "").length == 2) {
+            // Divide la página web en diferentes partes
+            contenedorWeb1 = web.substring(0, web.indexOf("."));
+            contenedorWeb2 = web.substring(
+                web.indexOf(".") + 1,
+                web.lastIndexOf(".")
+            );
+            contenedorWeb3 = web.substring(
+                web.lastIndexOf(".") + 1,
+                web.length
+            );
+
+            // Web 1 se refiere a la parte inicial de la web (como www)
+            // Web 2 se refiere a la parte principal (necesario más de 3 carácteres)
+            // Web 3 se refiere a la extensión (com, org, es, etc)
+            if (
+                contenedorWeb1.length >= 2 &&
+                contenedorWeb1.length < 4 &&
+                contenedorWeb2.length > 2 &&
+                contenedorWeb3.length >= 2 &&
+                contenedorWeb3.length < 4
+            ) {
+                valido = true;
+            }
+        }
+
+        // Si es true, entonces es un valor válido.
+        return valido;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Validación de ubicación
+function checkUbicacion(ubicacion) {
+    try {
+        if (
+            ubicacion.replace(" ", "").length > 2 &&
+            ubicacion.replace(/[^.]/g, "").length >= 0 &&
+            ubicacion.replace(/[^.]/g, "").length < 2 &&
+            ubicacion.replace(/[^-]/g, "").length >= 0 &&
+            ubicacion.replace(/[^-]/g, "").length < 2 &&
+            ubicacion.replace(/[^_]/g, "").length >= 0 &&
+            ubicacion.replace(/[^_]/g, "").length < 2
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Exportarlo a otros componentes de Vue como métodos
 export {
     checkInjection,
     checkInput,
     checkInputEmail,
     checkInputTarjeta,
+    checkInputWithSpace,
     checkUserTxt,
     checkEmailTxt,
     checkPassword,
     checkTarjeta,
+    checkWeb,
+    checkUbicacion
 };
