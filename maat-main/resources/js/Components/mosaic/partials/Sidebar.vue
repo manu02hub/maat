@@ -426,8 +426,7 @@
                         </NavLink>
 
                         <!-- Calendar -->
-                        <br />
-                        <NavLink :href="route('plans')">
+                        <NavLink :href="route('plans')" v-if="$page.props.auth.user.rol_id === 2">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"

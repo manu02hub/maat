@@ -41,7 +41,7 @@ import { Link } from "@inertiajs/vue3";
     <section></section>
 </template>
 
-<style>
+<style scope>
 :root {
      --blue: #12d2db;
     --white: #fcf2fa;
@@ -73,7 +73,7 @@ nav {
     z-index: 100;
 }
 label.logo {
-    color: var(--white);
+    color: white;
     font-size: 30px;
     line-height: 80px;
     padding: 0 80px;
@@ -92,7 +92,7 @@ nav ul li {
     line-height: 80px;
 }
 nav ul li a {
-    color: var(--white);
+    color: white;
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 13px;
@@ -100,7 +100,7 @@ nav ul li a {
 }
 a.active,
 a:hover {
-    background: var(--green);
+    background: #529541aa;
     transition: 0.5s;
 }
 .checkbtn {

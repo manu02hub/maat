@@ -1,5 +1,5 @@
- import './bootstrap';
- import '../css/app.css';
+import './bootstrap';
+import '../css/app.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -13,7 +13,7 @@ import * as FaIcons from "oh-vue-icons/icons/fa";
 
 const Fa = Object.values({ ...FaIcons });
 
-addIcons(FaFlag, RiZhihuFill, Fa, MdDaterange, CoMyspace, RiDeleteBin6Line , MdModeeditOutlined, IoAddOutline)
+addIcons(FaFlag, RiZhihuFill, Fa, MdDaterange, CoMyspace, RiDeleteBin6Line, MdModeeditOutlined, IoAddOutline)
 
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
