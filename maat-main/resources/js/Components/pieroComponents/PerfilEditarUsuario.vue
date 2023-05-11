@@ -18,12 +18,12 @@
           <div class="text-sm">Pequeña descripción del usuario</div>
           <div class="sm:flex sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5">
             <div class="sm:w-1/3">
-              <label class="block text-sm font-medium mb-1" for="name">Nombre</label>
-              <input id="name" class="form-input w-full" type="text" />
+              <label class="block text-sm font-medium mb-1" for="name" >Nombre</label>
+              <input id="name" class="form-input w-full" type="text" v-model="$page.props.auth.user.nombre" />
             </div>
             <div class="sm:w-1/3">
               <label class="block text-sm font-medium mb-1" for="business-id">Nickname</label>
-              <input id="business-id" class="form-input w-full" type="text" />
+              <input id="business-id" class="form-input w-full" type="text" v-model="$page.props.auth.user.nombre" />
             </div>
             <div class="sm:w-1/3">
               <label class="block text-sm font-medium mb-1" for="location">Empresa</label>
@@ -37,7 +37,7 @@
           <div class="flex flex-wrap mt-5">
             <div class="mr-2">
               <label class="block text-sm font-medium mb-1" for="email">Email-Empresa</label>
-              <input id="email" class="form-input" type="email" disabled/>
+              <input id="email" class="form-input" type="email" v-model="$page.props.auth.user.email" disabled />
             </div>
           </div>
         </section>

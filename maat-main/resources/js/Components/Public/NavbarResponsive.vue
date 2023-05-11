@@ -3,7 +3,16 @@ import { Link } from "@inertiajs/vue3";
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> carlos
+=======
+// const clases = computed(() =>
+//     props.active
+//         ? 'active'
+//         : ''
+// );
+
+>>>>>>> mario2
 </script>
 
 <template>
@@ -46,6 +55,7 @@ import { Link } from "@inertiajs/vue3";
         </label>
         <label class="logo">maat</label>
         <ul>
+<<<<<<< HEAD
             <li><Link :href="route('index')" active-class="active">Inicio</Link></li>
             <li><Link :href="route('noticias')" active-class="active">Noticias</Link></li>
             <li><Link :href="route('donativos')" active-class="active">Donativos</Link></li>
@@ -53,6 +63,14 @@ import { Link } from "@inertiajs/vue3";
             <li><Link :href="route('login')" active-class="active">Login</Link></li>
             <li><Link :href="route('register')" active-class="active">Registro</Link></li>
 >>>>>>> carlos
+=======
+            <li><Link :href="route('index')" :class="{ 'active': route().current('index')}">Inicio</Link></li>
+            <li><Link :href="route('noticias')" :class="{ 'active': route().current('noticias')}">Noticias</Link></li>
+            <li><Link :href="route('donativos')" :class="{ 'active': route().current('donativos')}">Donativos</Link></li>
+            <li><Link :href="route('ranking')" :class="{ 'active': route().current('ranking')}">Ranking</Link></li>
+            <li><Link :href="route('login')" :class="{ 'active': route().current('login')}">Login</Link></li> 
+            <li><Link :href="route('register')" :class="{ 'active': route().current('register')}">Registro</Link></li>
+>>>>>>> mario2
         </ul>
     </nav>
     <section></section>
