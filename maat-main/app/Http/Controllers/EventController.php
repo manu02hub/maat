@@ -124,7 +124,7 @@ class EventController extends Controller
         $eventos = Eventos::join('user_has_evento', 'evento.id', '=', 'user_has_evento.evento_id')
             ->where('user_has_evento.user_id', auth()->id())
             ->get();
-        //  dd(auth()->id());
+         dd(auth());
         return Inertia::render('private/Manu/OwnEvents', compact('eventos'));
     }
 

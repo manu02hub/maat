@@ -90,6 +90,7 @@ class RegisteredUserController extends Controller
 
             // Cuando es una ONG
         } else {
+<<<<<<< HEAD
 
             $idOrganizacion = Entidad::where('nombre', $request->nombre_empresa)->first();
 
@@ -115,6 +116,23 @@ class RegisteredUserController extends Controller
             $userExist = Users::where();
 
 
+=======
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:' . User::class,
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            event(new Registered($user));
+
+            Auth::login($user);
+>>>>>>> f5299890b14b25ccc8a9bbf9eb9c18b157ae60be
         }
 
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
