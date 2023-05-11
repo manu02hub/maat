@@ -157,10 +157,14 @@ Route::post('/chat/open', [ChatController::class, 'getChatSelected'])->middlewar
 )->name('chat.open');
 
 // Enviar mensajes de chat
-Route::post('/chat/send', [ChatController::class, 'sendChat'])->name('chat.send');
+Route::post('/chat/send', [ChatController::class, 'sendChat'])->middleware(
+    ['auth', 'verified']
+)->name('chat.send');
 
 // Recarga los últimos 100 mensajes de chat
-Route::post('/chat/refresh', [ChatController::class, 'refreshChatSelected'])->name('chat.refresh');
+Route::post('/chat/refresh', [ChatController::class, 'refreshChatSelected'])->middleware(
+    ['auth', 'verified']
+)->name('chat.refresh');
 
 // Listado de ONGs
 Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
