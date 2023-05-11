@@ -16,6 +16,7 @@ export default {
 
             // Filtro para el buscador
             searchFilter: "",
+            filteredList: [],
 
             // Datos para paginación
             maxPags: 0,
@@ -34,10 +35,15 @@ export default {
                 if (this.indexPag != 1) {
                     // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
                     // Si es verdadero, entonces son todas las organizaciones
-                    if (!this.organization) {
+                    if (!this.organization && this.filteredList.length == 0) {
                         this.listData = this.ongsRecientes;
-                    } else {
+                    } else if (
+                        this.organization &&
+                        this.filteredList.length == 0
+                    ) {
                         this.listData = this.orgs;
+                    } else {
+                        this.listData = this.filteredList;
                     }
 
                     // Va una página atrás
@@ -63,10 +69,15 @@ export default {
                 if (this.indexPag != Math.ceil(this.maxPags / 2)) {
                     // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
                     // Si es verdadero, entonces son todas las organizaciones
-                    if (!this.organization) {
+                    if (!this.organization && this.filteredList.length == 0) {
                         this.listData = this.ongsRecientes;
-                    } else {
+                    } else if (
+                        this.organization &&
+                        this.filteredList.length == 0
+                    ) {
                         this.listData = this.orgs;
+                    } else {
+                        this.listData = this.filteredList;
                     }
 
                     this.indexPag++;
@@ -89,10 +100,12 @@ export default {
             try {
                 // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
                 // Si es verdadero, entonces son todas las organizaciones
-                if (!this.organization) {
+                if (!this.organization && this.filteredList.length == 0) {
                     this.listData = this.ongsRecientes;
-                } else {
+                } else if (this.organization && this.filteredList.length == 0) {
                     this.listData = this.orgs;
+                } else {
+                    this.listData = this.filteredList;
                 }
 
                 this.indexPag = 1;
@@ -114,10 +127,12 @@ export default {
             try {
                 // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
                 // Si es verdadero, entonces son todas las organizaciones
-                if (!this.organization) {
+                if (!this.organization && this.filteredList.length == 0) {
                     this.listData = this.ongsRecientes;
-                } else {
+                } else if (this.organization && this.filteredList.length == 0) {
                     this.listData = this.orgs;
+                } else {
+                    this.listData = this.filteredList;
                 }
 
                 this.indexPag = Math.ceil(this.listData.length / 2);
@@ -261,9 +276,48 @@ export default {
         },
 
         // Filtro del buscador
-        buscarFilter: function(){
+        buscarFilter: function () {
+            var start = 0;
+            var end = 0;
 
-        }
+            try {
+                // Mira que tipo es el actual
+                if (!this.organization) {
+                    this.listData = this.ongsRecientes;
+                } else {
+                    this.listData = this.orgs;
+                }
+
+                // Si no está vacío, entonces filtra
+                if (this.searchFilter != "" && this.searchFilter != null) {
+                    this.listData.forEach((data) => {
+                        if (
+                            data.nombre
+                                .toLowerCase()
+                                .indexOf(this.searchFilter) != -1
+                        ) {
+                            this.filteredList.push(data);
+                        }
+                    });
+
+                    this.listData = this.filteredList;
+                }
+
+                // Paginación
+                this.indexPag = 1;
+
+                // Indica el máximo de páginas que habrá. El calculo ya se hace en el la paginación.
+                this.maxPags = this.listData.length;
+
+                start = 0;
+                end = this.indexPag * 2;
+
+                // Muestra de 2 en 2
+                this.listData = this.listData.slice(start, end);
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
 
     mounted() {
@@ -287,10 +341,12 @@ export default {
     <!-- Contenido propio -->
     <main>
         <div class="rowPropio noRowGapPropio">
+            <!-- Deja espacio para centrar el contenido -->
             <div class="col-lg-1Propio col-md-1Propio"></div>
             <div
                 class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio"
             >
+                <!-- Los tabs -->
                 <ul class="listadoTabPropio ulNoStylePropio">
                     <!-- Usando v-bind:class de Vue puedo activar ciertas clases solo cuando se cumplan -->
                     <!-- la condición indicada -->
@@ -326,41 +382,22 @@ export default {
                             class="inputBuscadorPropio"
                             type="text"
                             placeholder="Buscar..."
+                            v-model="this.searchFilter"
                         />
                     </div>
 
                     <div
                         class="col-lg-2Propio col-md-2Propio col-sm-2Propio col-4Propio"
                     >
-                        <button class="btnPropio btnBuscarPropio">
+                        <button
+                            class="btnPropio btnBuscarPropio"
+                            @click="buscarFilter"
+                        >
                             <img
                                 src="./../../../../img/search.svg"
                                 class="imgBuscarPropio"
                             />
                         </button>
-
-                        <!-- Cambia el estado del filtro gracias al v-on:click de Vue -->
-                        <button
-                            class="btnPropio btnFiltrarPropio"
-                            v-on:click="this.filter = !this.filter"
-                        >
-                            <img
-                                src="./../../../../img/filter.svg"
-                                class="imgBuscarPropio"
-                            />
-                        </button>
-                    </div>
-                </div>
-
-                <div class="rowPropio noRowGapPropio noColGapPropio">
-                    <div
-                        class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-10Propio"
-                    >
-                        <!-- Solo muestra si se activa el filtro -->
-                        <div
-                            v-show="this.filter"
-                            class="optionsFilterPropio"
-                        ></div>
                     </div>
                 </div>
             </div>
@@ -657,6 +694,8 @@ export default {
     background: lightblue;
     border: 1px solid lightblue;
     padding: 0.6rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .imgBuscarPropio {

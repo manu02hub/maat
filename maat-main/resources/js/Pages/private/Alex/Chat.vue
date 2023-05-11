@@ -12,6 +12,9 @@ export default {
             idEntidadChat: 0,
             chatHistory: "",
 
+            // Mensaje (para el input)
+            msg: "",
+
             // chatInicial se usa para las ventanas del chat
             chatInicial: [],
             reciente: true,
@@ -25,8 +28,6 @@ export default {
                 fecha: "",
                 hora: "",
             }),
-
-            s: 0,
         };
     },
 
@@ -277,6 +278,8 @@ export default {
                                 "Se ha actualizado los datos de la empresa"
                             ),
                     });
+
+                    this.msg = "";
                 }
             } catch (error) {
                 console.log(error);
