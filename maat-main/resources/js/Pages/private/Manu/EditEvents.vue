@@ -7,11 +7,22 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import TextArea from '@/Components/TextArea.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+<<<<<<< HEAD
 
+=======
+import { onMounted } from 'vue'
+>>>>>>> carlos
 import { usePage } from '@inertiajs/vue3';
 const { props } = usePage();
 let { evento } = props;
 const { id, nombre, descripcion, fecha_inicio, fecha_final, hora_inicio, hora_final, plazas } = evento;
+<<<<<<< HEAD
+=======
+onMounted(() => {
+    console.log(id, nombre, descripcion, fecha_inicio, fecha_final, hora_inicio, hora_final, plazas)
+})
+
+>>>>>>> carlos
 
 const form = useForm({
     id: id,
@@ -23,6 +34,17 @@ const form = useForm({
     plazas: plazas,
     terms: false,
 });
+<<<<<<< HEAD
+=======
+
+// const submit = (e) => {
+//     e.preventDefault();
+//     form.post(route('update'), {
+//         preserveState: true,
+
+//     });
+// };
+>>>>>>> carlos
 </script>
 
 <template>

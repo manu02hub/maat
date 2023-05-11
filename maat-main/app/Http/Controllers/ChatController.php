@@ -14,6 +14,7 @@ class ChatController extends Controller
     {
         return Inertia::render('private/Alex/ListadoCliente');
     }
+<<<<<<< HEAD
 
     // Redirecciona si la id a acceder es un numero
     public function getIdReceptor($id)
@@ -489,4 +490,6 @@ class ChatController extends Controller
             echo $th;
         }
     }
+=======
+>>>>>>> carlos
 }

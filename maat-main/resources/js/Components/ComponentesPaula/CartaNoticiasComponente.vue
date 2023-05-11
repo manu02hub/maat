@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
 
         <div class="col p-5 m-10" style="background-color:rgb(239, 239, 239);">
@@ -18,6 +19,38 @@
             </div>
         </div>
         <div class="grid xl:grid-cols-2 gap-6 m-10">
+=======
+<script setup>
+import { defineProps } from 'vue'
+import { Link } from '@inertiajs/vue3';
+
+const props = defineProps({
+    id: {
+        type: Number,
+        required: true
+    },
+    titulo: {
+        type: String,
+        required: true
+    },
+    fecha: {
+        type: String,
+        required: true
+    },
+    descripcion: {
+        type: String,
+        required: true
+    },
+    imagen: {
+        type: String,
+        required: true
+    }
+})
+</script>
+
+<template>
+    <div class="grid xl:grid-cols-2 gap-6 m-10">
+>>>>>>> carlos
 
         <!-- Item 1 -->
         <article class="flex bg-white shadow-lg rounded-sm border border-slate-200 overflow-hidden">
@@ -25,12 +58,17 @@
             <router-link class="relative block w-24 sm:w-56 xl:sidebar-expanded:w-40 2xl:sidebar-expanded:w-56 shrink-0"
                 to="/community/meetups-post">
                 <img class="absolute object-cover object-center w-full h-full"
+<<<<<<< HEAD
                     src="https://images.pexels.com/photos/7656124/pexels-photo-7656124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+=======
+                    :src="imagen"
+>>>>>>> carlos
                     width="220" height="236" alt="Meetup 01" />
             </router-link>
             <!-- Content -->
             <div class="grow p-5 flex flex-col">
                 <div class="grow">
+<<<<<<< HEAD
                     <div class="text-sm font-semibold text-indigo-500 uppercase mb-2">Lunes 27 Enero, 2013</div>
                     <router-link class="inline-flex mb-2" to="/community/meetups-post">
                         <a :href="route('item1noticia')" class="text-lg font-bold text-slate-800">“YA NUNCA es primavera”: Greenpeace cambia el mensaje
@@ -57,10 +95,18 @@
                                 width="28" height="28" alt="User 05" />
                         </div>
                         <div class="text-xs font-medium text-slate-400 italic">+22</div>
+=======
+                    <div class="text-sm font-semibold text-indigo-500 uppercase mb-2">{{ fecha }}</div>
+                    <router-link class="inline-flex mb-2" to="/community/meetups-post">
+                        <a :href="route('item1noticia')" class="text-lg font-bold text-slate-800">{{ titulo }}</a>
+                    </router-link>
+                    <div class="text-sm">{{ descripcion }}
+>>>>>>> carlos
                     </div>
                 </div>
             </div>
         </article>
+<<<<<<< HEAD
 
         <!-- Item 2 -->
         <article class="flex bg-white shadow-lg rounded-sm border border-slate-200 overflow-hidden">
@@ -196,3 +242,8 @@ export default {
     name: 'MeetupsPosts',
 }
 </script>
+=======
+    </div>
+</template>
+
+>>>>>>> carlos

@@ -20,6 +20,10 @@ class Entidad extends Model
         'ubicacion',
         'web',
         'descripcion',
+<<<<<<< HEAD
         'tamaño'
+=======
+        'tamano'
+>>>>>>> carlos
     ];
 }

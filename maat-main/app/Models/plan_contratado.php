@@ -18,7 +18,13 @@ class plan_contratado extends Model
         'activo',
         'fecha_inicio',
         'fecha_fin',
+<<<<<<< HEAD
         'tipos_plan_id',
         'empresa_id'
+=======
+        'tipos_plan_',
+        'descripcion',
+        'tamaño'
+>>>>>>> carlos
     ];
 }

@@ -17,9 +17,18 @@ export default defineConfig({
             },
         }),
     ],
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> carlos
 
     optimizeDeps: {
         exclude: ['oh-vue-icons/icons'],
       },
 
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> carlos
 });

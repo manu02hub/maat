@@ -52,6 +52,7 @@ import { Head, Link } from "@inertiajs/vue3";
                             <div class="tab-content tab-space">
                                 <div>
                                     <div
+<<<<<<< HEAD
                                         v-if="$page.props.eventos.length === 0"
                                     >
                                         No hay eventos disponibles
@@ -131,6 +132,78 @@ import { Head, Link } from "@inertiajs/vue3";
                                                             Mas información
                                                         </Link>
                                                     </div>
+=======
+                                        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+                                    >
+                                        <!---------------------------------------{card}--------------------------------------->
+                                        <div
+                                            class="flex justify-center m-5"
+                                            v-for="evento in $page.props
+                                                .eventos"
+                                            :key="evento.id"
+                                        >
+                                            <div
+                                                class="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700"
+                                            >
+                                                <Link
+                                                    href="/eventInfo"
+                                                    data-te-ripple-init
+                                                    data-te-ripple-color="light"
+                                                >
+                                                    <img
+                                                        class="rounded-t-lg"
+                                                        src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
+                                                        alt=""
+                                                    />
+                                                </Link>
+                                                <div class="p-6">
+                                                    <h5
+                                                        class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50 limitador"
+                                                    >
+                                                        {{ evento.nombre }}
+                                                    </h5>
+                                                    <p
+                                                        class="mb-2 text-base text-neutral-600 dark:text-neutral-200 limitador"
+                                                    >
+                                                        {{ evento.descripcion }}
+                                                    </p>
+                                                    <p
+                                                        class="text-sm text-gray-600 flex items-center limitador"
+                                                    >
+                                                        <v-icon
+                                                            name="md-daterange"
+                                                            class="fill-current text-gray-500 w-3 h-3 mr-2"
+                                                        >
+                                                        </v-icon>
+                                                        {{
+                                                            evento.fecha_inicio
+                                                        }}
+                                                    </p>
+                                                    <p
+                                                        class="mb-3 text-sm text-gray-600 flex items-center limitador"
+                                                    >
+                                                        <v-icon
+                                                            name="co-myspace"
+                                                            class="fill-current text-gray-500 w-3 h-3 mr-2"
+                                                        >
+                                                        </v-icon>
+                                                        20 plazas
+                                                    </p>
+                                                    <Link
+                                                        :href="
+                                                            route(
+                                                                'delete_event_of_user',
+                                                                evento.id
+                                                            )
+                                                        "
+                                                        type="button"
+                                                        class="inline-block rounded bg-indigo-400 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                                                        data-te-ripple-init
+                                                        data-te-ripple-color="light"
+                                                    >
+                                                        desapuntarme
+                                                    </Link>
+>>>>>>> carlos
                                                 </div>
                                             </div>
                                         </div>

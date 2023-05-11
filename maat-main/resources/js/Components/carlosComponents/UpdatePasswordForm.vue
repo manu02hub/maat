@@ -5,13 +5,32 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+<<<<<<< HEAD
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
+=======
+<<<<<<< HEAD
+
+const passwordInput = ref(null);
+const currentPasswordInput = ref(null);
+
+=======
+const passwordInput = ref(null);
+const currentPasswordInput = ref(null);
+>>>>>>> master
+>>>>>>> carlos
 const form = useForm({
     current_password: '',
     password: '',
     password_confirmation: '',
 });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
+>>>>>>> carlos
 const updatePassword = () => {
     form.put(route('password.update'), {
         preserveScroll: true,

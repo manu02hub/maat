@@ -14,6 +14,7 @@ export default {
             orgs: "",
             ongsRecientes: "",
 
+<<<<<<< HEAD
             // Filtro para el buscador
             searchFilter: "",
             filteredList: [],
@@ -22,10 +23,17 @@ export default {
             maxPags: 0,
             indexPag: 1,
             listData: "",
+=======
+            prueba: "",
+            prueba1: "asd@asd.com",
+            prueba2: "12345678",
+            prueba3: "12345678",
+>>>>>>> carlos
         };
     },
 
     methods: {
+<<<<<<< HEAD
         // Paginación
         previousPag: function () {
             var start = 0;
@@ -150,6 +158,9 @@ export default {
             var start = 0;
             var end = 0;
 
+=======
+        getData: async function () {
+>>>>>>> carlos
             try {
                 // Usamos axios para conseguir datos como las organizaciones registradas y el usuario actual
                 // CORS afecta cuando se intenta hacerlo con http. En local vale que se haga directamente
@@ -162,6 +173,7 @@ export default {
                     .then((response) => {
                         // Recibe los datos obtenidos (según lo que envía de vuelta el controller
                         // correspondiente)
+<<<<<<< HEAD
                         this.orgs = response.data.organizacion;
                         this.ongsRecientes = response.data.recientes;
 
@@ -178,6 +190,11 @@ export default {
                         end = this.indexPag * 2;
 
                         this.listData = this.listData.slice(start, end);
+=======
+                        console.log(response.data);
+                        this.orgs = response.data.organizacion;
+                        this.ongsRecientes = response.data.recientes;
+>>>>>>> carlos
                     })
                     .catch((error) => {
                         console.log(error);
@@ -243,6 +260,7 @@ export default {
             }
         },
 
+<<<<<<< HEAD
         // Cuando cambia de tipo (reciente o todos)
         changeTypeCont: function (cambio) {
             var start = 0;
@@ -314,6 +332,20 @@ export default {
 
                 // Muestra de 2 en 2
                 this.listData = this.listData.slice(start, end);
+=======
+        s: function (e) {
+            try {
+                // Tiene que tener 9 carácteres. El último carácter debe ser una mayúscula y
+                // los demás deben ser números
+                if (
+                    this.prueba.length == 9 &&
+                    /[A-Z]/.test(this.prueba.charAt(8)) &&
+                    !/[A-Z]/.test(this.prueba.substring(0, 8))
+                ) {
+                }
+
+                console.log();
+>>>>>>> carlos
             } catch (error) {
                 console.log(error);
             }
@@ -334,19 +366,55 @@ export default {
 <template>
     <nav class="rowPropio noRowGapPropio">
         <div
+<<<<<<< HEAD
             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio barraNavPropio"
+=======
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+>>>>>>> carlos
         ></div>
     </nav>
 
     <!-- Contenido propio -->
     <main>
+<<<<<<< HEAD
         <div class="rowPropio noRowGapPropio">
             <!-- Deja espacio para centrar el contenido -->
+=======
+        <!--
+        <div>
+            <input
+                type="text"
+                v-model="prueba"
+                placeholder="Usuario"
+                @keydown="checkTarjInput($event)"
+                @keypress="checkTarjInput($event)"
+            />
+            <br />
+            <input
+                type="email"
+                v-model="prueba1"
+                placeholder="Email"
+                @keydown="checkEmailInput($event)"
+                @keypress="checkEmailInput($event)"
+            />
+            <br />
+            <input type="text" v-model="prueba2" placeholder="Pass" /> <br />
+            <input type="text" v-model="prueba3" placeholder="Conf pass" />
+            <br />
+            <button class="btn btn-primary" @click="s">Prueba</button>
+        </div>
+         -->
+
+        <div class="rowPropio noRowGapPropio">
+>>>>>>> carlos
             <div class="col-lg-1Propio col-md-1Propio"></div>
             <div
                 class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio"
             >
+<<<<<<< HEAD
                 <!-- Los tabs -->
+=======
+>>>>>>> carlos
                 <ul class="listadoTabPropio ulNoStylePropio">
                     <!-- Usando v-bind:class de Vue puedo activar ciertas clases solo cuando se cumplan -->
                     <!-- la condición indicada -->
@@ -355,7 +423,11 @@ export default {
                     <li
                         class="listadoOpcionTabPropio"
                         v-bind:class="{ activoPropio: !this.organization }"
+<<<<<<< HEAD
                         v-on:click="this.changeTypeCont(false)"
+=======
+                        v-on:click="this.organization = false"
+>>>>>>> carlos
                     >
                         <a class="tabPropio aNoStylePropio" href="#"
                             >Org. contactada</a
@@ -364,7 +436,11 @@ export default {
                     <li
                         class="listadoOpcionTabPropio"
                         v-bind:class="{ activoPropio: this.organization }"
+<<<<<<< HEAD
                         v-on:click="this.changeTypeCont(true)"
+=======
+                        v-on:click="this.organization = true"
+>>>>>>> carlos
                     >
                         <a class="tabPropio aNoStylePropio" href="#"
                             >Demás Org.</a
@@ -382,22 +458,55 @@ export default {
                             class="inputBuscadorPropio"
                             type="text"
                             placeholder="Buscar..."
+<<<<<<< HEAD
                             v-model="this.searchFilter"
+=======
+>>>>>>> carlos
                         />
                     </div>
 
                     <div
                         class="col-lg-2Propio col-md-2Propio col-sm-2Propio col-4Propio"
                     >
+<<<<<<< HEAD
                         <button
                             class="btnPropio btnBuscarPropio"
                             @click="buscarFilter"
                         >
+=======
+                        <button class="btnPropio btnBuscarPropio">
+>>>>>>> carlos
                             <img
                                 src="./../../../../img/search.svg"
                                 class="imgBuscarPropio"
                             />
                         </button>
+<<<<<<< HEAD
+=======
+
+                        <!-- Cambia el estado del filtro gracias al v-on:click de Vue -->
+                        <button
+                            class="btnPropio btnFiltrarPropio"
+                            v-on:click="this.filter = !this.filter"
+                        >
+                            <img
+                                src="./../../../../img/filter.svg"
+                                class="imgBuscarPropio"
+                            />
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rowPropio noRowGapPropio noColGapPropio">
+                    <div
+                        class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-10Propio"
+                    >
+                        <!-- Solo muestra si se activa el filtro -->
+                        <div
+                            v-show="this.filter"
+                            class="optionsFilterPropio"
+                        ></div>
+>>>>>>> carlos
                     </div>
                 </div>
             </div>
@@ -406,11 +515,15 @@ export default {
         <div class="rowPropio noRowGapPropio">
             <div class="col-lg-1Propio col-md-1Propio"></div>
 
+<<<<<<< HEAD
             <!-- Listado de organizaciones (tanto recientes como todas) -->
+=======
+>>>>>>> carlos
             <div
                 class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio listadoOrgPropio"
             >
                 <!-- Mostrar listado de organizaciones recientes -->
+<<<<<<< HEAD
                 <div>
                     <h1
                         class="h1Propio"
@@ -429,6 +542,14 @@ export default {
                     </h1>
 
                     <template v-for="data in listData">
+=======
+                <div v-show="!this.organization">
+                    <h1 class="h1Propio" v-if="this.orgs.length == 0">
+                        No se ha contactado con una organización recientemente
+                    </h1>
+
+                    <template v-for="data in ongsRecientes">
+>>>>>>> carlos
                         <!-- Lista de organizaciones (de 1 en 1) -->
                         <a
                             :href="route('perfilP', data.id)"
@@ -453,6 +574,7 @@ export default {
                         </a>
                     </template>
                 </div>
+<<<<<<< HEAD
             </div>
         </div>
 
@@ -518,6 +640,42 @@ export default {
                 </template>
             </ul>
         </div>
+=======
+
+                <!-- Mostrar todas las organizaciones -->
+                <div v-show="this.organization">
+                    <h1 class="h1Propio" v-if="this.orgs.length == 0">
+                        No hay ONGs
+                    </h1>
+
+                    <!-- Lista de organizaciones (de 1 en 1) -->
+                    <template v-for="data in orgs">
+                        <a
+                            :href="route('perfilP', data.id)"
+                            class="rowPropio noRowGapPropio noColGapPropio cardOrgPropio"
+                        >
+                            <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
+                            <img
+                                src="./../../../../img/prueba.jpg"
+                                class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
+                                alt=""
+                            />
+
+                            <!-- Descripcion -->
+                            <div
+                                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio contenedorDescPropio"
+                            >
+                                <h1 class="h1Propio">{{ data.nombre }}</h1>
+                                <p>
+                                    {{ data.descripcion }}
+                                </p>
+                            </div>
+                        </a>
+                    </template>
+                </div>
+            </div>
+        </div>
+>>>>>>> carlos
     </main>
 </template>
 
@@ -558,6 +716,7 @@ export default {
     column-gap: 0;
 }
 
+<<<<<<< HEAD
 /* Paginacion */
 .navPagPropio {
     display: flex;
@@ -607,6 +766,13 @@ export default {
     height: 4rem;
     background: lightblue;
     margin-bottom: 1rem;
+=======
+/* Rellena espacio del nav (temporal) */
+.pruebaPropio {
+    height: 4rem;
+    background: lightblue;
+    margin-bottom: 2rem;
+>>>>>>> carlos
 }
 
 /* Quita los estilos de listado */
@@ -670,7 +836,11 @@ export default {
 /* Estilo del buscador (filtro) */
 .divBuscadorPropio {
     height: 2rem;
+<<<<<<< HEAD
     margin-top: 1rem;
+=======
+    margin-top: 2rem;
+>>>>>>> carlos
 }
 
 .inputBuscadorPropio {
@@ -694,8 +864,11 @@ export default {
     background: lightblue;
     border: 1px solid lightblue;
     padding: 0.6rem;
+<<<<<<< HEAD
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+=======
+>>>>>>> carlos
 }
 
 .imgBuscarPropio {
@@ -725,7 +898,11 @@ export default {
 
 /* Estilos del listado */
 .listadoOrgPropio {
+<<<<<<< HEAD
     height: 21rem; /* Altura */
+=======
+    height: 27.5rem; /* Altura */
+>>>>>>> carlos
     border: 1px solid black; /* Borde (tamano, su aspecto, y color) */
     /* Radio de los bordes */
     border-top-left-radius: 0.5rem;
@@ -733,10 +910,17 @@ export default {
     border-bottom-right-radius: 0.15rem;
     border-bottom-left-radius: 0.5rem;
     /* Comportamiento cuando se sale de la altura o ancho establecido */
+<<<<<<< HEAD
     overflow-y: hidden;
     /* Margenes */
     margin-top: 1.5rem;
     margin-bottom: 1rem;
+=======
+    overflow-y: scroll;
+    /* Margenes */
+    margin-top: 2.5rem;
+    margin-bottom: 4rem;
+>>>>>>> carlos
     /* Rellenos */
     padding-top: 1.35rem;
     padding-right: 1.75rem;
@@ -922,7 +1106,10 @@ export default {
     }
 }
 
+<<<<<<< HEAD
 /* Pantallas más pequeñas */
+=======
+>>>>>>> carlos
 @media only screen and (max-width: 451px) {
     .col-1Propio {
         grid-column: span 1;

@@ -56,6 +56,7 @@ function checkInputTarjeta(e) {
     }
 }
 
+<<<<<<< HEAD
 function checkInputWithSpace(e) {
     try {
         // Solo permite de la A-Z, a-z, 0-9, el ' - ', el ' . ', el ' - ' y el espacio
@@ -77,6 +78,8 @@ function checkInputWithSpace(e) {
     }
 }
 
+=======
+>>>>>>> carlos
 // Validaciones para ver si existe alguna injeccion no deseada en el texto
 function checkInjection(txt) {
     try {
@@ -100,10 +103,14 @@ function checkInjection(txt) {
 // Mira el usuario recibido y comprueba si es válido. Devolverá un boolean (false o true)
 function checkUserTxt(usuario) {
     try {
+<<<<<<< HEAD
         if (
             usuario.replaceAll(" ", "").length > 4 &&
             usuario.replaceAll(" ", "").length < 31
         ) {
+=======
+        if (usuario.length > 4 && usuario.length < 31) {
+>>>>>>> carlos
             return true;
         } else {
             return false;
@@ -121,6 +128,7 @@ function checkEmailTxt(email) {
 
     try {
         // Divide el email en 3 partes
+<<<<<<< HEAD
         email1 = email.substring(0, email.indexOf("@")).replaceAll(" ", "");
         email2 = email
             .substring(email.indexOf("@") + 1, email.lastIndexOf("."))
@@ -128,16 +136,35 @@ function checkEmailTxt(email) {
         email3 = email
             .substring(email.lastIndexOf(".") + 1, email.length)
             .replaceAll(" ", "");
+=======
+        email1 = email.substring(0, email.indexOf("@"));
+        email2 = email.substring(
+            email.indexOf("@") + 1,
+            email.lastIndexOf(".")
+        );
+        email3 = email.substring(email.lastIndexOf(".") + 1, email.length);
+>>>>>>> carlos
 
         // Comprueba que tenga solo 1 o 2 puntos el email. Comprueba que el email
         // tenga una estructura parecida a AAA@AAA.com
         // También, comprueba que la extensión tenga una longitud 2 a 3 y que no
         // tenga dígitos.
+<<<<<<< HEAD
         // Por último, utilizando regex reemplaza todos los carácteres que no sean ' . '
         if (email.indexOf(".") != -1) {
             if (
                 email.replace(/[^.]/g, "").length >= 1 &&
                 email.replace(/[^.]/g, "").length < 3 &&
+=======
+        // Por último, utilizando regex para ver cuantas veces se repiten el carácter.
+        // gi significa global, indifferent. El match devuelve una cadena de todos los
+        // carácteres que cumplen la condición.
+        // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/match
+        if (email.indexOf(".") != -1) {
+            if (
+                email.match(/[.]/gi).length >= 1 &&
+                email.match(/[.]/gi).length < 3 &&
+>>>>>>> carlos
                 email1.length > 2 &&
                 email2.length > 2 &&
                 email3.length > 1 &&
@@ -200,6 +227,7 @@ function checkTarjeta(tarjeta) {
     }
 }
 
+<<<<<<< HEAD
 // Valida la web
 function checkWeb(web) {
     var contenedorWeb1 = "";
@@ -278,17 +306,25 @@ function checkUbicacion(ubicacion) {
     }
 }
 
+=======
+>>>>>>> carlos
 // Exportarlo a otros componentes de Vue como métodos
 export {
     checkInjection,
     checkInput,
     checkInputEmail,
     checkInputTarjeta,
+<<<<<<< HEAD
     checkInputWithSpace,
+=======
+>>>>>>> carlos
     checkUserTxt,
     checkEmailTxt,
     checkPassword,
     checkTarjeta,
+<<<<<<< HEAD
     checkWeb,
     checkUbicacion
+=======
+>>>>>>> carlos
 };
