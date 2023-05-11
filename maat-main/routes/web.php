@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ListadoController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
@@ -96,7 +97,13 @@ Route::get('/perfil', function () {
     return Inertia::render('private/Piero/PerfilUsuario');
 })->middleware(['auth', 'verified'])->name('perfil-usuario');
 
-Route::get('recogerPerfil',[RegisterUser::class, 'indexAuthUser'])->name('recogerPerfil');
+Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
+
+Route::get('editarPerfil',[PerfilController::class, 'editarPerfil'])->name('editarPerfil');
+
+Route::get('updatePerfil',[PerfilController::class, 'editarPerfil'])->name('updatePerfil');
+
+
 
 Route::get('/editar', function () {
     return Inertia::render('private/Piero/EditarUsuario');
