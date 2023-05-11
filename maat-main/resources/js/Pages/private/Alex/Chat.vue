@@ -289,6 +289,9 @@ export default {
         // Solo se usa para conseguir los datos iniciales si se accede al chat url con variables (id de
         // la entidad con la que se quiere chatear)
         getInitialDataWithId: async function () {
+            var valido = false;
+            var i = 0;
+
             try {
                 // Abre el chat que se ha escogido.
                 // Peticion para recibir el chat con la que se quiere hablar
@@ -303,8 +306,25 @@ export default {
                         this.listChats = response.data.chats; // Lista chats
                         this.recentChats = response.data.recentChats; // Recientes chats
 
-                        // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
-                        this.nameChat = response.data.chatWith[0][0].nombre;
+                        // Bucle hasta que salga o encuentre
+                        while (
+                            !valido &&
+                            i < response.data.recentChats.length
+                        ) {
+                            // Busca si es el que se quiere usar
+                            if (
+                                response.data.recentChats[i].entidad ==
+                                this.$page.props.chatWith
+                            ) {
+                                // Muestra el nombre de la entidad con la que se esta comunicandose en el
+                                // chat
+                                this.nameChat =
+                                    response.data.recentChats[i].nombre;
+                                valido = true; // Ha encontrado lo que se buscaba
+                            }
+
+                            i++;
+                        }
 
                         response.data.chatWith[0].forEach((mensajes) => {
                             this.chatInicial.push([
@@ -883,7 +903,7 @@ export default {
     background-color: #2d764b;
 }
 
-.btnChatPropio:hover span{
+.btnChatPropio:hover span {
     filter: invert(1);
 }
 
