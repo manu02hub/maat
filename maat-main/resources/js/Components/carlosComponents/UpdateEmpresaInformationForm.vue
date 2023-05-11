@@ -5,10 +5,17 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
+<<<<<<< HEAD
+=======
+import { onMounted } from 'vue'
+import axios from 'axios';
+
+>>>>>>> master
 const props = defineProps({
     mustVerifyEmail: Boolean,
     status: String,
 });
+<<<<<<< HEAD
 
 const user = usePage().props.auth.user;
 
@@ -19,6 +26,40 @@ const form = useForm({
     web: user.web,
     descripcion: user.descripcion,
 });
+=======
+const user = usePage().props.auth.user;
+
+var empresa = '';
+
+const form = useForm({
+    name: '',
+    numTar: '',
+    ubicacion: '',
+    web: '',
+    descripcion: '',
+    entidad: user.entidad_id
+});
+
+onMounted(() => {
+    axios.get("/get/empresa", {
+        params: {
+            empresa: user.entidad_id
+        }
+    }).then((response) => {
+        empresa = response.data;
+        form.name = empresa[0].nombre
+        form.numTar = empresa[0].numero_tarjeta
+        form.ubicacion = empresa[0].ubicacion
+        form.web = empresa[0].web
+        form.descripcion = empresa[0].descripcion
+    });
+})
+
+// Actualiza los datos
+const actualizar = () => {
+    form.post("/edit/empresa");
+};
+>>>>>>> master
 </script>
 
 <template>
@@ -28,6 +69,7 @@ const form = useForm({
                 <h2 class="text-lg font-medium text-gray-900">Información de la Empresa</h2>
 
                 <p class="mt-1 text-sm text-gray-600">
+<<<<<<< HEAD
                     Update your account's profile information and email address.
                 </p>
             </header>
@@ -35,6 +77,15 @@ const form = useForm({
             <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
                 <div>
                     <InputLabel for="name" value="Nombre" />
+=======
+                    Actualiza los datos de tu empresa
+                </p>
+            </header>
+
+            <form @submit.prevent="actualizar" class="mt-6 space-y-6">
+                <div>
+                    <InputLabel for="name" value="Nombre de la empresa" />
+>>>>>>> master
 
                     <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus
                         autocomplete="name" />
@@ -43,19 +94,33 @@ const form = useForm({
                 </div>
 
                 <div>
+<<<<<<< HEAD
                     <InputLabel for="email" value="Email" />
 
                     <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
                         autocomplete="username" />
 
                     <InputError class="mt-2" :message="form.errors.email" />
+=======
+                    <InputLabel for="numTar" value="Numero / Tarjeta" />
+
+                    <TextInput id="numTar" type="text" class="mt-1 block w-full" v-model="form.numTar" required
+                        autocomplete="username" />
+
+                    <InputError class="mt-2" :message="form.errors.numTar" />
+>>>>>>> master
                 </div>
 
                 <div>
                     <InputLabel for="ubicacion" value="Ubicación" />
 
+<<<<<<< HEAD
                     <TextInput id="ubicacion" type="text" class="mt-1 block w-full" v-model="form.ubicacion" required autofocus
                         autocomplete="ubicacion" />
+=======
+                    <TextInput id="ubicacion" type="text" class="mt-1 block w-full" v-model="form.ubicacion" required
+                        autofocus autocomplete="ubicacion" />
+>>>>>>> master
 
                     <InputError class="mt-2" :message="form.errors.ubicacion" />
                 </div>
@@ -72,8 +137,13 @@ const form = useForm({
                 <div>
                     <InputLabel for="descripion" value="Descripcion / Sobre nosotros" />
 
+<<<<<<< HEAD
                     <TextInput id="descripcion" type="text" class="mt-1 block w-full" v-model="form.descripcion" required autofocus
                         autocomplete="descripcion" />
+=======
+                    <TextInput id="descripcion" type="text" class="mt-1 block w-full" v-model="form.descripcion" required
+                        autofocus autocomplete="descripcion" />
+>>>>>>> master
 
                     <InputError class="mt-2" :message="form.errors.desc" />
                 </div>

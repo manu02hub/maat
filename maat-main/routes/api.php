@@ -1,5 +1,10 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\ListadoController;
+
+>>>>>>> master
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

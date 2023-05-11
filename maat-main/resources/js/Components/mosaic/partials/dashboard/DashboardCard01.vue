@@ -98,7 +98,14 @@ export default {
 
     return {
       chartData,
+<<<<<<< HEAD
     } 
   }
 }
 </script>
+=======
+    }
+  }
+}
+</script>
+>>>>>>> master
