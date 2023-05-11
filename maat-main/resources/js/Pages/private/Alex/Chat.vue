@@ -439,6 +439,14 @@ export default {
                 console.log(error);
             }
         },
+
+        goListado: function(){
+            try {
+                window.location.href = route('listado');
+            } catch (error) {
+                console.log(error);
+            }
+        }
     },
 
     // Lo que hace a la hora de montarse la vista
@@ -482,7 +490,9 @@ export default {
     <nav class="rowPropio noRowGapPropio">
         <div
             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
-        ></div>
+        >
+            <span class="goList" @click="goListado">&#9751;</span>
+        </div>
     </nav>
 
     <main>
@@ -712,6 +722,19 @@ export default {
     font-family: "Montserrat";
     box-sizing: unset;
     line-height: normal;
+}
+
+.goList{
+    color: white;
+    background-color: #23458f;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.85rem;
+    padding: 2.5rem;
+}
+
+.goList:hover{
+    background-color: #6283cb;
 }
 
 /* Código hecho en primer trimestre de DAM y DAW (grid) */

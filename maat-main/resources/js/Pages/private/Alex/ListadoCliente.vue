@@ -1,6 +1,7 @@
 <!-- Parte Alex -->
 
 <script>
+import Sidebar from "@/Components/mosaic/partials/Sidebar.vue";
 import axios from "axios";
 
 import * as Validaciones from "./../../../validations/Validaciones.js";
@@ -328,195 +329,202 @@ export default {
             console.log(error);
         }
     },
+
+    components: { Sidebar },
 };
 </script>
 
 <template>
-    <nav class="rowPropio noRowGapPropio">
-        <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio barraNavPropio"
-        ></div>
-    </nav>
-
-    <!-- Contenido propio -->
     <main>
-        <div class="rowPropio noRowGapPropio">
-            <!-- Deja espacio para centrar el contenido -->
-            <div class="col-lg-1Propio col-md-1Propio"></div>
-            <div
-                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio"
-            >
-                <!-- Los tabs -->
-                <ul class="listadoTabPropio ulNoStylePropio">
-                    <!-- Usando v-bind:class de Vue puedo activar ciertas clases solo cuando se cumplan -->
-                    <!-- la condición indicada -->
-                    <!-- https://es.vuejs.org/v2/guide/class-and-style.html -->
-                    <!-- La clase activo solo estara en el elemento cuando this.organization es falso-->
-                    <li
-                        class="listadoOpcionTabPropio"
-                        v-bind:class="{ activoPropio: !this.organization }"
-                        v-on:click="this.changeTypeCont(false)"
-                    >
-                        <a class="tabPropio aNoStylePropio" href="#"
-                            >Org. contactada</a
-                        >
-                    </li>
-                    <li
-                        class="listadoOpcionTabPropio"
-                        v-bind:class="{ activoPropio: this.organization }"
-                        v-on:click="this.changeTypeCont(true)"
-                    >
-                        <a class="tabPropio aNoStylePropio" href="#"
-                            >Demás Org.</a
-                        >
-                    </li>
-                </ul>
+        <Sidebar class="contenedorSidebar" />
 
+        <div class="contenedorContenidoPropio">
+            <!-- Contenido propio -->
+            <div class="rowPropio noRowGapPropio">
+                <!-- Deja espacio para centrar el contenido -->
+                <div class="col-lg-1Propio col-md-1Propio"></div>
                 <div
-                    class="divBuscadorPropio rowPropio noRowGapPropio noColGapPropio"
+                    class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio"
                 >
-                    <div
-                        class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-8Propio"
-                    >
-                        <input
-                            class="inputBuscadorPropio"
-                            type="text"
-                            placeholder="Buscar..."
-                            v-model="this.searchFilter"
-                        />
-                    </div>
-
-                    <div
-                        class="col-lg-2Propio col-md-2Propio col-sm-2Propio col-4Propio"
-                    >
-                        <button
-                            class="btnPropio btnBuscarPropio"
-                            @click="buscarFilter"
+                    <!-- Los tabs -->
+                    <ul class="listadoTabPropio ulNoStylePropio">
+                        <!-- Usando v-bind:class de Vue puedo activar ciertas clases solo cuando se cumplan -->
+                        <!-- la condición indicada -->
+                        <!-- https://es.vuejs.org/v2/guide/class-and-style.html -->
+                        <!-- La clase activo solo estara en el elemento cuando this.organization es falso-->
+                        <li
+                            class="listadoOpcionTabPropio"
+                            v-bind:class="{ activoPropio: !this.organization }"
+                            v-on:click="this.changeTypeCont(false)"
                         >
-                            <img
-                                src="./../../../../img/search.svg"
-                                class="imgBuscarPropio"
-                            />
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="rowPropio noRowGapPropio">
-            <div class="col-lg-1Propio col-md-1Propio"></div>
-
-            <!-- Listado de organizaciones (tanto recientes como todas) -->
-            <div
-                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio listadoOrgPropio"
-            >
-                <!-- Mostrar listado de organizaciones recientes -->
-                <div>
-                    <h1
-                        class="h1Propio"
-                        v-if="this.listData.length == 0 && !this.organization"
-                    >
-                        No se ha contactado con una organización recientemente
-                    </h1>
-
-                    <h1
-                        class="h1Propio"
-                        v-else-if="
-                            this.listData.length == 0 && this.organization
-                        "
-                    >
-                        No hay organizaciones a contactar
-                    </h1>
-
-                    <template v-for="data in listData">
-                        <!-- Lista de organizaciones (de 1 en 1) -->
-                        <a
-                            :href="route('perfilP', data.id)"
-                            class="rowPropio noRowGapPropio noColGapPropio cardOrgPropio"
-                        >
-                            <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
-                            <img
-                                src="./../../../../img/prueba.jpg"
-                                class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
-                                alt=""
-                            />
-
-                            <!-- Descripcion -->
-                            <div
-                                class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio contenedorDescPropio"
+                            <a class="tabPropio aNoStylePropio" href="#"
+                                >Org. contactada</a
                             >
-                                <h1 class="h1Propio">{{ data.nombre }}</h1>
-                                <p>
-                                    {{ data.descripcion }}
-                                </p>
-                            </div>
-                        </a>
-                    </template>
+                        </li>
+                        <li
+                            class="listadoOpcionTabPropio"
+                            v-bind:class="{ activoPropio: this.organization }"
+                            v-on:click="this.changeTypeCont(true)"
+                        >
+                            <a class="tabPropio aNoStylePropio" href="#"
+                                >Demás Org.</a
+                            >
+                        </li>
+                    </ul>
+
+                    <div
+                        class="divBuscadorPropio rowPropio noRowGapPropio noColGapPropio"
+                    >
+                        <div
+                            class="col-lg-10Propio col-md-10Propio col-sm-10Propio col-8Propio"
+                        >
+                            <input
+                                class="inputBuscadorPropio"
+                                type="text"
+                                placeholder="Buscar..."
+                                v-model="this.searchFilter"
+                            />
+                        </div>
+
+                        <div
+                            class="col-lg-2Propio col-md-2Propio col-sm-2Propio col-4Propio"
+                        >
+                            <button
+                                class="btnPropio btnBuscarPropio"
+                                @click="buscarFilter"
+                            >
+                                <img
+                                    src="./../../../../img/search.svg"
+                                    class="imgBuscarPropio"
+                                />
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Paginación -->
-        <div>
-            <ul class="navPagPropio">
-                <!-- Solo esta activa si hay solo 1 pagina -->
-                <template v-if="Math.ceil(this.maxPags / 2) == 1">
-                    <li class="pagsPropio activoPagsPropio">1</li>
-                </template>
+            <div class="rowPropio noRowGapPropio">
+                <div class="col-lg-1Propio col-md-1Propio"></div>
 
-                <template v-else>
-                    <!-- Pagina anterior -->
-                    <li
-                        class="pagsPropio pagsArrowLeftPropio"
-                        @click="previousPag"
-                        v-show="this.indexPag > 1"
-                    >
-                        <span>&laquo;</span>
-                    </li>
+                <!-- Listado de organizaciones (tanto recientes como todas) -->
+                <div
+                    class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio listadoOrgPropio"
+                >
+                    <!-- Mostrar listado de organizaciones recientes -->
+                    <div>
+                        <h1
+                            class="h1Propio"
+                            v-if="
+                                this.listData.length == 0 && !this.organization
+                            "
+                        >
+                            No se ha contactado con una organización
+                            recientemente
+                        </h1>
 
-                    <!-- Primera pagina -->
-                    <li
-                        class="pagsPropio"
-                        @click="firstPag"
-                        v-show="this.indexPag != 1"
-                    >
-                        1
-                    </li>
+                        <h1
+                            class="h1Propio"
+                            v-else-if="
+                                this.listData.length == 0 && this.organization
+                            "
+                        >
+                            No hay organizaciones a contactar
+                        </h1>
 
-                    <li class="pagsPropio" v-show="this.indexPag >= 3">...</li>
+                        <template v-for="data in listData">
+                            <!-- Lista de organizaciones (de 1 en 1) -->
+                            <a
+                                :href="route('perfilP', data.id)"
+                                class="rowPropio noRowGapPropio noColGapPropio cardOrgPropio"
+                            >
+                                <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
+                                <img
+                                    src="./../../../../img/prueba.jpg"
+                                    class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
+                                    alt=""
+                                />
 
-                    <li class="pagsPropio activoPagsPropio">
-                        {{ this.indexPag }}
-                    </li>
+                                <!-- Descripcion -->
+                                <div
+                                    class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio contenedorDescPropio"
+                                >
+                                    <h1 class="h1Propio">{{ data.nombre }}</h1>
+                                    <p>
+                                        {{ data.descripcion }}
+                                    </p>
+                                </div>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </div>
 
-                    <li
-                        class="pagsPropio"
-                        v-show="
-                            this.indexPag <= Math.ceil(this.maxPags / 2) - 2
-                        "
-                    >
-                        ...
-                    </li>
+            <!-- Paginación -->
+            <div>
+                <ul class="navPagPropio">
+                    <!-- Solo esta activa si hay solo 1 pagina -->
+                    <template v-if="Math.ceil(this.maxPags / 2) == 1">
+                        <li class="pagsPropio activoPagsPropio">1</li>
+                    </template>
 
-                    <!-- Ultima pagina -->
-                    <li
-                        class="pagsPropio"
-                        @click="lastPag"
-                        v-show="this.indexPag != Math.ceil(this.maxPags / 2)"
-                    >
-                        {{ Math.ceil(this.maxPags / 2) }}
-                    </li>
+                    <template v-else>
+                        <!-- Pagina anterior -->
+                        <li
+                            class="pagsPropio pagsArrowLeftPropio"
+                            @click="previousPag"
+                            v-show="this.indexPag > 1"
+                        >
+                            <span>&laquo;</span>
+                        </li>
 
-                    <!-- Siguiente pagina-->
-                    <li
-                        class="pagsPropio pagsArrowRightPropio"
-                        @click="nextPag"
-                        v-show="this.indexPag < Math.ceil(this.maxPags / 2)"
-                    >
-                        <span>&raquo;</span>
-                    </li>
-                </template>
-            </ul>
+                        <!-- Primera pagina -->
+                        <li
+                            class="pagsPropio"
+                            @click="firstPag"
+                            v-show="this.indexPag != 1"
+                        >
+                            1
+                        </li>
+
+                        <li class="pagsPropio" v-show="this.indexPag >= 3">
+                            ...
+                        </li>
+
+                        <li class="pagsPropio activoPagsPropio">
+                            {{ this.indexPag }}
+                        </li>
+
+                        <li
+                            class="pagsPropio"
+                            v-show="
+                                this.indexPag <= Math.ceil(this.maxPags / 2) - 2
+                            "
+                        >
+                            ...
+                        </li>
+
+                        <!-- Ultima pagina -->
+                        <li
+                            class="pagsPropio"
+                            @click="lastPag"
+                            v-show="
+                                this.indexPag != Math.ceil(this.maxPags / 2)
+                            "
+                        >
+                            {{ Math.ceil(this.maxPags / 2) }}
+                        </li>
+
+                        <!-- Siguiente pagina-->
+                        <li
+                            class="pagsPropio pagsArrowRightPropio"
+                            @click="nextPag"
+                            v-show="this.indexPag < Math.ceil(this.maxPags / 2)"
+                        >
+                            <span>&raquo;</span>
+                        </li>
+                    </template>
+                </ul>
+            </div>
         </div>
     </main>
 </template>
@@ -595,11 +603,28 @@ export default {
     border: 1px solid #291f1e;
 }
 
+.contenedorContenidoPropio {
+    width: 85%;
+    float: right;
+    margin-top: 4rem;
+}
+
 /* Para 80% de pantalla height (según el zoom). Vuelve a normal al poner 100% zoom. */
 @media only screen and (max-height: 762px) and (min-height: 610px) {
+    .contenedorContenidoPropio {
+        width: 85% !important;
+        float: right !important;
+        margin-top: 4.5rem !important;
+    }
+
     .listadoOrgPropio {
         height: 28.5rem !important;
     }
+}
+
+.contenedorSidebar {
+    width: 10%;
+    float: left;
 }
 
 /* Rellena espacio del nav (temporal) */
