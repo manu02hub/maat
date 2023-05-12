@@ -8,6 +8,16 @@ export default {
         };
     },
 
+    methods: {
+        goListado: function () {
+            try {
+                window.location.href = route("listado");
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    },
+
     // Pone las variables para que luego se puedan montarse
     beforeMount() {
         try {
@@ -25,7 +35,9 @@ export default {
     <nav class="rowPropio noRowGapPropio">
         <div
             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
-        ></div>
+        >
+            <span class="goBack" @click="goListado">&#8592;</span>
+        </div>
     </nav>
 
     <main>
@@ -193,6 +205,17 @@ export default {
 * {
     margin: 0;
     font-family: "Montserrat";
+}
+
+.goBack {
+    cursor: pointer;
+    font-size: 2.5rem;
+    padding: 2rem;
+    background-color: #73cd99;
+}
+
+.goBack:hover {
+    background-color: seagreen;
 }
 
 /* Código hecho en primer trimestre de DAM y DAW (grid) */
