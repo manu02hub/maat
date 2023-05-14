@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ProfileEmprController extends Controller
 {
@@ -50,27 +53,51 @@ class ProfileEmprController extends Controller
     // Elimina la empresa y todos los usuarios asociados a esta
     public function deleteEmpr(Request $request)
     {
+        $request->validate([
+            'password' => ['required', 'current-password'],
+        ]);
+
+        $user = $request->user();
+
         try {
             $admins = DB::select('select email, rol_id, entidad_id from maat.users
-            where rol_id = 1 and entidad_id = ?', [$request->entidad]);
+            where rol_id = 1 and entidad_id = ?', [$user->entidad_id]);
 
             // Si hay solo 1 administrador de la empresa, se elimina todos los datos de la empresa
             if (count($admins) == 1) {
-                // Elimina de la tabla empresa
-                $delete = DB::delete('delete from maat.empresa where entidad_id = ?', [
-                    $request->entidad
+                // Elimina de la tabla mensaje
+                $delete = DB::delete('delete from maat.mensaje where id_origen = ? or id_destino = ?', [
+                    $user->entidad_id, $user->entidad_id
                 ]);
 
-                // Elimina la empresa y todos los datos asociados a esta
-                $delete = DB::delete('delete from maat.entidad where id = ?', [
-                    $request->entidad
+                // Elimina de la tabla chat
+                $delete = DB::delete('delete from maat.chat where empresa_id = ?', [
+                    $user->entidad_id
+                ]);
+
+                // Elimina de la tabla empresa
+                $delete = DB::delete('delete from maat.empresa where entidad_id = ?', [
+                    $user->entidad_id
                 ]);
 
                 // Elimina todos los usuarios de la empresa
                 $delete = DB::delete('delete from maat.users where entidad_id = ?', [
-                    $request->entidad
+                    $user->entidad_id
                 ]);
+
+                // Elimina la empresa y todos los datos asociados a esta
+                $delete = DB::delete('delete from maat.entidad where id = ?', [
+                    $user->entidad_id
+                ]);
+
+                Auth::logout();
+            } else {
+                Auth::logout();
+                $user->delete();
             }
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
         } catch (\Throwable $th) {
             echo $th;
         }

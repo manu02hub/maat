@@ -33,7 +33,7 @@ const deleteEmpresa = () => {
             Validaciones.checkInjection(form.password) &&
             Validaciones.checkPassword(form.password)
         ) {
-            form.delete(route("profile.destroy"), {
+            form.post(route("empr.delete"), {
                 preserveScroll: true,
                 onSuccess: () => closeModal(),
                 onError: () => errorPw(),
@@ -64,6 +64,7 @@ const closeModal = () => {
         confirmingEmpresaDeletion.value = false;
         form.errors.password = null;
         form.reset();
+        // window.location.href = route("listado");
     } catch (error) {
         console.log(error);
     }

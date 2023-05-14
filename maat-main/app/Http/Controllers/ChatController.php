@@ -223,6 +223,24 @@ class ChatController extends Controller
                     [$request->params['id'], $request->params['userId']]
                 );
 
+                // Mira si existe el chat con el usuario
+                if (count($chatWith) == 0) {
+                    // Si no existe, entonces crea uno
+                    $chatId = DB::table('maat.chat')->insertGetId([
+                        'empresa_id' => $request->params['userId'],
+                        'organizacion_id' => $request->params['id']
+                    ]);
+
+                    $chat = DB::table('maat.mensaje')->insert([
+                        'contenido' => 'Has iniciado un chat',
+                        'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
+                        'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
+                        'chat_id' => $chatId,
+                        'id_origen' => $request->params['userId'],
+                        'id_destino' => $request->params['id'],
+                    ]);
+                }
+
                 // Se ha usado el IN para poder coger los ultimos mensajes (valores concretos)
                 // https://www.w3schools.com/mysql/mysql_in.asp
                 // https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html
@@ -249,24 +267,6 @@ class ChatController extends Controller
                         )',
                     [$request->params['userId']]
                 );
-
-                // Mira si existe el chat con el usuario
-                if (count($chatWith) == 0) {
-                    // Si no existe, entonces crea uno
-                    $chatId = DB::table('maat.chat')->insertGetId([
-                        'empresa_id' => $request->params['userId'],
-                        'organizacion_id' => $request->params['id']
-                    ]);
-
-                    $chat = DB::table('maat.mensaje')->insert([
-                        'contenido' => 'Has iniciado un chat',
-                        'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
-                        'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
-                        'chat_id' => $chatId,
-                        'id_origen' => $request->params['userId'],
-                        'id_destino' => $request->params['id'],
-                    ]);
-                }
 
                 // Si existe, entonces abre el historial de chat con el usuario
                 $chatWith = DB::select(
