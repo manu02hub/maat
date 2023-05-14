@@ -9,7 +9,7 @@ let { user } = props;
 const { id, nombre, email} = user;
 
 const form = useForm({
-    id: id,
+    // id: id,
     nombre: nombre,
     email: email,
 });

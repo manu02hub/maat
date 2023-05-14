@@ -654,7 +654,7 @@
                         </NavLink>
 
                         <!-- LPERFIL USUARIO -->
-                        <NavLink :href="route('perfil-usuario')">
+                        <NavLink :href="route('recogerPerfil')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -703,8 +703,8 @@
                             </li>
                         </NavLink>
 
-                        <!-- EDITAR PRFIL USUARIO -->
-                        <NavLink :href="route('editar-usuario')">
+                        <!-- EDITAR PRFIL USUARIO
+                        <NavLink :href="route('recogerPerfil')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -751,7 +751,7 @@
                                     </div>
                                 </a>
                             </li>
-                        </NavLink>
+                        </NavLink> -->
 
                         <!--  PRFIL EMPRESA -->
                         <NavLink :href="route('perfil-empresa')">

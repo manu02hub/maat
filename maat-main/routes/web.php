@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ListadoController;
+use App\Http\Controllers\PostController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
 
@@ -93,23 +94,13 @@ Route::get('/ranking', function () {
 Route::get('recogerRanking',[RankingController::class, 'ranking'])->name('recogerRanking');
 
     //PERFIL
-Route::get('/perfil', function () {
-    return Inertia::render('private/Piero/PerfilUsuario');
-})->middleware(['auth', 'verified'])->name('perfil-usuario');
 
 Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
 
-Route::get('editarPerfil',[PerfilController::class, 'editarPerfil'])->name('editarPerfil');
+    //POST
+Route::get('recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
 
-Route::get('updatePerfil',[PerfilController::class, 'editarPerfil'])->name('updatePerfil');
-
-
-
-Route::get('/editar', function () {
-    return Inertia::render('private/Piero/EditarUsuario');
-})->middleware(['auth', 'verified'])->name('editar-usuario');
-
-//Mail
+    //MAIL
 Route::get('employeeForm/{mail}',function($mail){    
     // dd($mail);
     $correo = new EmployeeForm;

@@ -20,7 +20,7 @@ import { Link } from "@inertiajs/vue3";
             <li><Link :href="route('index')" :class="{ 'active': route().current('index')}">Inicio</Link></li>
             <li><Link :href="route('noticias')" :class="{ 'active': route().current('noticias')}">Noticias</Link></li>
             <li><Link :href="route('donativos')" :class="{ 'active': route().current('donativos')}">Donativos</Link></li>
-            <li><Link :href="route('ranking')" :class="{ 'active': route().current('ranking')}">Ranking</Link></li>
+            <li><Link :href="route('recogerRanking')" :class="{ 'active': route().current('recogerRanking')}">Ranking</Link></li>
             <li><Link :href="route('login')" :class="{ 'active': route().current('login')}">Login</Link></li> 
             <li><Link :href="route('register')" :class="{ 'active': route().current('register')}">Registro</Link></li>
         </ul>
