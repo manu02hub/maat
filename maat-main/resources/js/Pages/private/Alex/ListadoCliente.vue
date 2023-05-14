@@ -67,6 +67,7 @@ export default {
             var end = 0;
 
             try {
+                console.log(this.filteredList)
                 if (this.indexPag != Math.ceil(this.maxPags / 2)) {
                     // Depende del valor pasado, hace una cosa u otra. Si es falso, entonces es recientes.
                     // Si es verdadero, entonces son todas las organizaciones
@@ -289,6 +290,8 @@ export default {
                     this.listData = this.orgs;
                 }
 
+                this.filteredList = [];
+
                 // Si no está vacío, entonces filtra
                 if (this.searchFilter != "" && this.searchFilter != null) {
                     this.listData.forEach((data) => {
@@ -508,7 +511,8 @@ export default {
                             class="pagsPropio"
                             @click="lastPag"
                             v-show="
-                                this.indexPag != Math.ceil(this.maxPags / 2)
+                                this.indexPag != Math.ceil(this.maxPags / 2) &&
+                                Math.ceil(this.maxPags / 2) != 0
                             "
                         >
                             {{ Math.ceil(this.maxPags / 2) }}
