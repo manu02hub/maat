@@ -5,20 +5,19 @@ import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { useForm, usePage } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
-const confirmingOrganizacionDeletion = ref(false);
+const confirmingEmpresaDeletion = ref(false);
 const passwordInput = ref(null);
 const form = useForm({
     password: '',
-    entidad: usePage().props.auth.user.entidad_id,
 });
-const confirmOrganizacionDeletion = () => {
-    confirmingOrganizacionDeletion.value = true;
+const confirmEmpresaDeletion = () => {
+    confirmingEmpresaDeletion.value = true;
     nextTick(() => passwordInput.value.focus());
 };
-const deleteOrganizacion = () => {
-    form.post(route('ong.delete'), {
+const deleteEmpresa = () => {
+    form.delete(route('profile.destroy'), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => passwordInput.value.focus(),
@@ -26,7 +25,7 @@ const deleteOrganizacion = () => {
     });
 };
 const closeModal = () => {
-    confirmingOrganizacionDeletion.value = false;
+    confirmingEmpresaDeletion.value = false;
     form.reset();
 };
 </script>
@@ -35,7 +34,7 @@ const closeModal = () => {
     <section class="space-y-6">
         <div class="p-5">
             <header>
-                <h2 class="text-lg font-medium text-gray-900">Eliminar organización</h2>
+                <h2 class="text-lg font-medium text-gray-900">Eliminar empresa</h2>
 
                 <p class="mt-1 text-sm text-gray-600">
                     Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
@@ -43,9 +42,9 @@ const closeModal = () => {
                 </p>
             </header>
 
-            <DangerButton class="mt-3" @click="confirmOrganizacionDeletion">Eliminar organización</DangerButton>
+            <DangerButton class="mt-3" @click="confirmEmpresaDeletion">Eliminar empresa</DangerButton>
 
-            <Modal :show="confirmingOrganizacionDeletion" @close="closeModal">
+            <Modal :show="confirmingEmpresaDeletion" @close="closeModal">
                 <div class="p-6">
                     <h2 class="text-lg font-medium text-gray-900">
                         Are you sure you want to delete your account?
@@ -60,7 +59,7 @@ const closeModal = () => {
                         <InputLabel for="password" value="Password" class="sr-only" />
 
                         <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
-                            class="mt-1 block w-3/4" placeholder="Password" @keyup.enter="deleteOrganizacion" />
+                            class="mt-1 block w-3/4" placeholder="Password" @keyup.enter="deleteEmpresa" />
 
                         <InputError :message="form.errors.password" class="mt-2" />
                     </div>
@@ -69,7 +68,7 @@ const closeModal = () => {
                         <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
 
                         <DangerButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                            @click="deleteOrganizacion">
+                            @click="deleteEmpresa">
                             Delete Account
                         </DangerButton>
                     </div>

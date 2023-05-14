@@ -14,6 +14,7 @@ class RankingController extends Controller
 
     public function ranking(Request $request)
     {
+
         $request = DB::table('users')
             ->join('user_has_evento', 'users.id', '=', 'user_has_evento.user_id')
             ->join('entidad', 'users.entidad_id', '=', 'entidad.id')
@@ -24,7 +25,7 @@ class RankingController extends Controller
             // dd($request);
 
             return Inertia::render('public/Ranking', ['user' => $request]);
-            
+
 
     }
 }

@@ -40,7 +40,7 @@ const form = useForm({
                 </div>
                 <div class="div-form-segundo">
                     <label for="fecha">Fecha:</label>
-                    <input type="text" id="fecha" v-model="form.fecha">
+                    <input type="date" id="fecha" v-model="form.fecha">
                 </div>
 
                 <div class="div-form-segundo">

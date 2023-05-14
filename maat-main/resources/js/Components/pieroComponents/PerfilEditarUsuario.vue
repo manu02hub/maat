@@ -37,7 +37,7 @@
           <div class="flex flex-wrap mt-5">
             <div class="mr-2">
               <label class="block text-sm font-medium mb-1" for="email">Email-Empresa</label>
-              <input id="email" class="form-input" type="email" v-model="$page.props.auth.user.email" disabled />
+              <input id="email" class="form-input" type="email" v-model="$page.props.auth.user.email" />
             </div>
           </div>
         </section>

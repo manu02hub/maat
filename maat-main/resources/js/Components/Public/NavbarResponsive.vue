@@ -1,90 +1,33 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
->>>>>>> carlos
-=======
 // const clases = computed(() =>
 //     props.active
 //         ? 'active'
 //         : ''
 // );
 
->>>>>>> mario2
 </script>
 
 <template>
     <nav>
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
-<<<<<<< HEAD
-            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg" /></i>
-        </label>
-        <label class="logo">maat</label>
-        <ul>
-            <li>
-                <Link :href="route('index')" active-class="active">Inicio</Link>
-            </li>
-            <li>
-                <Link :href="route('noticias')" active-class="active"
-                    >Noticias</Link
-                >
-            </li>
-            <li>
-                <Link :href="route('donativos')" active-class="active"
-                    >Donativos</Link
-                >
-            </li>
-            <li>
-                <Link :href="route('ranking')" active-class="active"
-                    >Ranking</Link
-                >
-            </li>
-            <li>
-                <Link :href="route('login')" active-class="active">Login</Link>
-            </li>
-            <li>
-                <Link :href="route('register')" active-class="active"
-                    >Registro</Link
-                >
-            </li>
-=======
             <i class="bx bx-menu"><img src="../../../img/icons/menu.svg"/></i>
         </label>
         <label class="logo">maat</label>
         <ul>
-<<<<<<< HEAD
-            <li><Link :href="route('index')" active-class="active">Inicio</Link></li>
-            <li><Link :href="route('noticias')" active-class="active">Noticias</Link></li>
-            <li><Link :href="route('donativos')" active-class="active">Donativos</Link></li>
-            <li><Link :href="route('ranking')" active-class="active">Ranking</Link></li>
-            <li><Link :href="route('login')" active-class="active">Login</Link></li>
-            <li><Link :href="route('register')" active-class="active">Registro</Link></li>
->>>>>>> carlos
-=======
             <li><Link :href="route('index')" :class="{ 'active': route().current('index')}">Inicio</Link></li>
             <li><Link :href="route('noticias')" :class="{ 'active': route().current('noticias')}">Noticias</Link></li>
             <li><Link :href="route('donativos')" :class="{ 'active': route().current('donativos')}">Donativos</Link></li>
-            <li><Link :href="route('ranking')" :class="{ 'active': route().current('ranking')}">Ranking</Link></li>
-            <li><Link :href="route('login')" :class="{ 'active': route().current('login')}">Login</Link></li> 
+            <li><Link :href="route('recogerRanking')" :class="{ 'active': route().current('recogerRanking')}">Ranking</Link></li>
+            <li><Link :href="route('login')" :class="{ 'active': route().current('login')}">Login</Link></li>
             <li><Link :href="route('register')" :class="{ 'active': route().current('register')}">Registro</Link></li>
->>>>>>> mario2
         </ul>
     </nav>
     <section></section>
 </template>
 
-<<<<<<< HEAD
-<style scope>
-:root {
-     --blue: #12d2db;
-    --white: #fcf2fa;
-    --green: #529541aa;
-     --green-blc: #230622dd;
-     --shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.3);
-=======
 <style>
 :root {
     --blue: #12d2db;
@@ -92,7 +35,6 @@ import { Link } from "@inertiajs/vue3";
     --green: #529541aa;
     --green-blc: #230622dd;
     --shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.3);
->>>>>>> carlos
     --navColor: linear-gradient(
         to right,
         rgba(59, 215, 72, 0.6) 5%,
@@ -105,10 +47,7 @@ import { Link } from "@inertiajs/vue3";
     margin: 0;
     text-decoration: none;
     box-sizing: border-box;
-<<<<<<< HEAD
-=======
-    
->>>>>>> carlos
+
 }
 body {
     font-family: "Poppins", sans-serif;
@@ -122,11 +61,7 @@ nav {
     z-index: 100;
 }
 label.logo {
-<<<<<<< HEAD
-    color: white;
-=======
     color: var(--white);
->>>>>>> carlos
     font-size: 30px;
     line-height: 80px;
     padding: 0 80px;
@@ -145,11 +80,7 @@ nav ul li {
     line-height: 80px;
 }
 nav ul li a {
-<<<<<<< HEAD
-    color: white;
-=======
     color: var(--white);
->>>>>>> carlos
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 13px;
@@ -157,11 +88,7 @@ nav ul li a {
 }
 a.active,
 a:hover {
-<<<<<<< HEAD
-    background: #529541aa;
-=======
     background: var(--green);
->>>>>>> carlos
     transition: 0.5s;
 }
 .checkbtn {
@@ -199,13 +126,8 @@ section {
         font-size: 14px;
     }
     section {
-<<<<<<< HEAD
-        padding: 7%;
-    }
-=======
     padding: 7%;
-}   
->>>>>>> carlos
+}
 }
 
 @media (max-width: 858px) {
@@ -242,12 +164,7 @@ section {
         left: 0;
     }
     section {
-<<<<<<< HEAD
-        padding: 8%;
-    }
-=======
     padding: 8%;
-}   
->>>>>>> carlos
+}
 }
 </style>

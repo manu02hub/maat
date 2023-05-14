@@ -1,11 +1,4 @@
 <script setup>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> master
->>>>>>> carlos
 </script>
 
 <template>

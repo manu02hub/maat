@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
->>>>>>> carlos
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,13 +26,10 @@ class Users extends Model
         'rol_id',
         'entidad_id'
     ];
-<<<<<<< HEAD
 
     public function roleName()
     {
         return $this->rol->nombre;
     }
 
-=======
->>>>>>> carlos
 }

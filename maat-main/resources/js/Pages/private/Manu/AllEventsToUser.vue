@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> carlos
 <script setup>
 import CardEventUser from "@/Components/manuComponents/CardEventUser.vue";
 import PrivateLayout from "@/Layouts/PrivateLayout.vue";
@@ -74,26 +70,12 @@ import { Head, Link, usePage } from "@inertiajs/vue3";
                                                 <div
                                                     class="block max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700"
                                                 >
-<<<<<<< HEAD
                                                     <img
                                                         class="rounded-t-lg"
                                                         src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
                                                         alt=""
                                                     />
 
-=======
-                                                    <Link
-                                                        href="/eventInfo"
-                                                        data-te-ripple-init
-                                                        data-te-ripple-color="light"
-                                                    >
-                                                        <img
-                                                            class="rounded-t-lg"
-                                                            src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
-                                                            alt=""
-                                                        />
-                                                    </Link>
->>>>>>> carlos
                                                     <div class="p-6">
                                                         <h5
                                                             class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50 limitador"
@@ -132,11 +114,7 @@ import { Head, Link, usePage } from "@inertiajs/vue3";
                                                         <Link
                                                             :href="
                                                                 route(
-<<<<<<< HEAD
                                                                     'eventInfo',
-=======
-                                                                    'add_event_to_user',
->>>>>>> carlos
                                                                     evento.id
                                                                 )
                                                             "
@@ -145,11 +123,7 @@ import { Head, Link, usePage } from "@inertiajs/vue3";
                                                             data-te-ripple-init
                                                             data-te-ripple-color="light"
                                                         >
-<<<<<<< HEAD
                                                             Mas información
-=======
-                                                            ApuntarmeHolaaa
->>>>>>> carlos
                                                         </Link>
                                                     </div>
                                                 </div>

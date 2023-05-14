@@ -53,7 +53,6 @@ import { Head, Link } from "@inertiajs/vue3";
                     v-for="evento in $page.props.eventos"
                     :key="evento.id"
                 >
-<<<<<<< HEAD
                     <div class="event-card">
                         <div class="event-image">
                             <img
@@ -185,8 +184,6 @@ import { Head, Link } from "@inertiajs/vue3";
                     v-for="evento in $page.props.eventos"
                     :key="evento.id"
                 >
-=======
->>>>>>> carlos
                     <div
                         class="rounded border border-white-700 p-4 justify-between leading-normal bg-white shadow-lg dark:bg-neutral-500"
                     >
@@ -282,20 +279,4 @@ import { Head, Link } from "@inertiajs/vue3";
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
 -->
-=======
-                <!--------------------------------------------{card}-------------------------------------------->
-            </div>
-        </div>
-    </PrivateLayout>
-</template>
-
-<style scope>
-.limitador {
-    width: 340px; /* ancho del div */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-</style>
->>>>>>> carlos

@@ -6,12 +6,6 @@ import AboutUs from '@/Components/Public/AboutUs.vue';
 import Hacemos from '@/Components/Public/Hacemos.vue';
 import VideoIndex from '@/Components/Public/VideoIndex.vue';
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> carlos
 </script>
 
 <template class="container">

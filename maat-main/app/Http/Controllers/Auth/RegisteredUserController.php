@@ -3,19 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Entidad;
-use App\Models\Organizaciones;
 use App\Models\User;
-<<<<<<< HEAD
-use App\Models\Users;
-=======
-<<<<<<< HEAD
-=======
 use App\Models\Users;
 use App\Models\Entidad;
 use App\Models\Organizaciones;
->>>>>>> master
->>>>>>> carlos
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -26,16 +17,8 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 
-=======
-<<<<<<< HEAD
-=======
-use Illuminate\Support\Facades\DB;
-
->>>>>>> master
->>>>>>> carlos
 class RegisteredUserController extends Controller
 {
     /**
@@ -53,83 +36,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-<<<<<<< HEAD
-        try {
-            // Si es falso, se está intentando registrar empresa
-            if ($request->clientOng == false) {
-                // Busca si existe la empresa a registrar
-                $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
-=======
-<<<<<<< HEAD
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
->>>>>>> carlos
-
-                // Si no existe en la base de datos esta empresa
-                if ($idOrg == null) {
-                    // Se crea la empresa
-                    $org = DB::insert(
-                        'insert into entidad (nombre, ubicacion, web, descripcion, tamano, numero_tarjeta) values (?, ?, ?, ?, ?, ?)',
-                        [$request->nombre_empresa, 'Ubicacion', 'Web', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quae cum saepe veritatis, incidunt assumenda quibusdam numquam beatae animi harum soluta quos nihil qui quaerat sequi alias sint veniam quisquam!', 1, $request->nif]
-                    );
-
-                    $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
-
-                    $empresa = DB::insert('insert into empresa (entidad_id) values (?)', [$idOrg[0]->id]);
-                }
-
-<<<<<<< HEAD
-                // Mira si existe el usuario a registrar dentro de la entidad
-                $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
-                from maat.users
-                inner join maat.entidad on entidad.id = users.entidad_id
-                where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
-
-                // Mira si existe el email a registrar
-                $emailExist = DB::select('select users.id, users.email
-                from maat.users
-                where users.email = ?', [$request->correo]);
-
-                // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
-                $employees = DB::select('select count(users.id) as empleados
-                from maat.users
-                inner join maat.entidad on entidad.id = users.entidad_id
-                where entidad.nombre = ?', [$request->nombre_empresa]);
-
-                // Si no existe el usuario en la organización y el email a registrar no existe
-                if ($userExist == null && $emailExist == null && $employees[0]->empleados == 0) {
-                    // Se crea usuario administrador de esa organizacion
-                    $user = User::create([
-                        'nombre' => $request->nombre_empresa,
-                        'email' => $request->correo,
-                        'password' => Hash::make($request->password),
-                        'activo' => 1,
-                        'rol_id' => 1,
-                        'entidad_id' => $idOrg[0]->id
-                    ]);
-
-                    event(new Registered($user));
-
-                    Auth::login($user);
-                }
-
-                // Cuando es una ONG
-            } else {
-                $request->validate([
-                    'name' => 'required|string|max:255',
-                    'email' => 'required|string|email|max:255|unique:' . User::class,
-                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                ]);
-
-                $user = User::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-=======
-=======
         // Si es falso, se está intentando registrar empresa
         if ($request->clientOng == false) {
             // Busca si existe la empresa a registrar
@@ -175,31 +81,18 @@ class RegisteredUserController extends Controller
                     'activo' => 1,
                     'rol_id' => 1,
                     'entidad_id' => $idOrg[0]->id
->>>>>>> carlos
                 ]);
 
                 event(new Registered($user));
 
                 Auth::login($user);
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-            // Cuando es una ONG
-        } else {
-<<<<<<< HEAD
-
-            $idOrganizacion = Entidad::where('nombre', $request->nombre_empresa)->first();
-
-            // dd($request->nif);
-=======
 
             // Cuando es una ONG
         } else {
             $idOrganizacion = Entidad::where('nombre', $request->nombre_empresa)->first();
 
             // dd($idOrganizacion);
->>>>>>> carlos
 
             if ($idOrganizacion == null) {
                 $organizacion = Entidad::create([
@@ -218,35 +111,6 @@ class RegisteredUserController extends Controller
                 ]);
             }
 
-<<<<<<< HEAD
-            $userExist = Users::where();
-
-
-=======
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:' . User::class,
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
-
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-            event(new Registered($user));
-
-            Auth::login($user);
->>>>>>> f5299890b14b25ccc8a9bbf9eb9c18b157ae60be
-=======
-        } catch (\Throwable $th) {
-            echo $th;
->>>>>>> alex3
-        }
-
-        // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
-=======
             // Mira si existe el usuario a registrar dentro de la entidad
             $userExist = Users::select('users.id', 'users.nombre', 'users.email', 'users.entidad_id', 'entidad.nombre', 'entidad.descripcion')
             ->join('entidad', 'entidad.id', '=', 'users.entidad_id')
@@ -307,24 +171,6 @@ class RegisteredUserController extends Controller
         }
 
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
->>>>>>> master
->>>>>>> carlos
         return redirect(RouteServiceProvider::HOME);
     }
 }
-
-// $request->validate([
-//     'name' => 'required|string|max:255',
-//     'email' => 'required|string|email|max:255|unique:' . User::class,
-//     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-// ]);
-
-// $user = User::create([
-//     'name' => $request->name,
-//     'email' => $request->email,
-//     'password' => Hash::make($request->password),
-// ]);
-
-// event(new Registered($user));
-
-// Auth::login($user);

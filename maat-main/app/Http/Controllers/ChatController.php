@@ -14,7 +14,6 @@ class ChatController extends Controller
     {
         return Inertia::render('private/Alex/ListadoCliente');
     }
-<<<<<<< HEAD
 
     // Redirecciona si la id a acceder es un numero
     public function getIdReceptor($id)
@@ -118,12 +117,12 @@ class ChatController extends Controller
     // Sirve para tanto coger el chat al iniciar por id
     public function getChatById(Request $request)
     {
+        dd("hllaklncki");
         try {
             // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
             $ong = DB::select('select * from maat.organizacion
                 inner join maat.entidad on organizacion.entidad_id = entidad.id
                 where entidad.id = ?', [$request->params['userId']]);
-
             // Revisa que la id de la entidad con la que se quiere chatear no sea la misma que la del usuario
             $withIsOng = DB::select('select * from maat.organizacion
                         inner join maat.entidad on organizacion.entidad_id = entidad.id
@@ -490,6 +489,4 @@ class ChatController extends Controller
             echo $th;
         }
     }
-=======
->>>>>>> carlos
 }

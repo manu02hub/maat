@@ -7,25 +7,16 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisterUser;
-<<<<<<< HEAD
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
-<<<<<<< HEAD
 use App\Http\Controllers\PlansController;
-=======
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\NoticiasController;
-use App\Http\Controllers\ProfileEmprController;
-use App\Http\Controllers\ListadoController;
 use App\Http\Controllers\OrganizacionesController;
->>>>>>> carlos
-=======
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
-
->>>>>>> mario2
 
 /*
 |--------------------------------------------------------------------------
@@ -58,106 +49,52 @@ Route::get('/events', function () {
 
 //---------------------MANU-----------------
 
-<<<<<<< HEAD
-Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('eventsIndex');
-Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('createNewEvent');
-Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('store');
-Route::patch('/updateEvent', [EventController::class, 'update'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('updateEvent');
-Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('edit');
-Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->middleware(['auth', 'verified','CheckUserRole:2'])->name('delete');
-// Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('eventsUser');
-Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('allEventsToUser');
-Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('ownEventsUser');
-Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('add_event_to_user');
-Route::get('/delete_event_of_user/{id}', [EventController::class, 'desapuntarseEvento'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('delete_event_of_user');
-Route::get('/eventInfo/{id}', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('eventInfo');
-Route::get('/plans', [PlansController::class, 'index'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('plans');
-Route::get('/joinPlan/{id}',[PlansController::class, 'joinPlan'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('joinPlan');
-Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('deposePlan');
 
-// Route::get('/plans', function () {
-//     return Inertia::render('private/Manu/Plans');
-// })->middleware(['auth', 'verified'])->name('plans');
-=======
 Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('eventsIndex');
 Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified'])->name('createNewEvent');
 Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
 Route::patch('/updateEvent', [EventController::class, 'update'])->middleware(['auth', 'verified'])->name('updateEvent');
 Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit');
 Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
-Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified'])->name('eventsUser');
+// Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified])->name('eventsUser');
 Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->middleware(['auth', 'verified'])->name('allEventsToUser');
 Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified'])->name('ownEventsUser');
 Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified'])->name('add_event_to_user');
 Route::get('/delete_event_of_user/{id}', [EventController::class, 'desapuntarseEvento'])->middleware(['auth', 'verified'])->name('delete_event_of_user');
-Route::get('/eventInfo', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified'])->name('eventInfo');
+Route::get('/eventInfo/{id}', [EventController::class, 'eventInfo'])->middleware(['auth', 'verified'])->name('eventInfo');
+Route::get('/plans', [PlansController::class, 'index'])->middleware(['auth', 'verified'])->name('plans');
+Route::get('/joinPlan/{id}', [PlansController::class, 'joinPlan'])->middleware(['auth', 'verified'])->name('joinPlan');
+Route::get('/deposePlan/{id}', [PlansController::class, 'deposePlan'])->middleware(['auth', 'verified'])->name('deposePlan');
 
-// Route::get('/createEvent', function () {
-//     return Inertia::render('private/Manu/CreateEvents');
-// })->middleware(['auth', 'verified'])->name('create-event');
 
-Route::get('/plans', function () {
-    return Inertia::render('private/Manu/Plans');
-})->middleware(['auth', 'verified'])->name('plans');
-
-// Route::get('/eventUser', function () {
-//     return Inertia::render('private/Manu/EventUser');
-// })->middleware(['auth', 'verified'])->name('event-user');
-
-// Route::get('/eventInfo', function () {
-//     return Inertia::render('private/Manu/EventInfo');
-// })->middleware(['auth', 'verified'])->name('event-info');
->>>>>>> carlos
+// Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('deposePlan');
 
 //-----------------------------------SERGIO---------------------------------------------------
 //------------------------------------MARIO---------------------------------------------------
 
-    //PUBLIC
+//PUBLIC
 Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
 Route::patch('/createUser', [RegisterUser::class, 'createUser'])->middleware(['auth', 'verified'])->name('createUser');
 Route::get('/editUser/{id}', [RegisterUser::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
 Route::patch('/updateUser', [RegisterUser::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
 Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->name('deleteUser');
 
-    //RANKING
-Route::get('/ranking', function () {
-    return Inertia::render('public/Ranking');
-})->name('ranking');
+Route::get('/recogerRanking', [RankingController::class, 'ranking'])->name('recogerRanking');
 
-Route::get('recogerRanking',[RankingController::class, 'ranking'])->name('recogerRanking');
-
-    //PERFIL
-Route::get('/perfil', function () {
-    return Inertia::render('private/Piero/PerfilUsuario');
-})->middleware(['auth', 'verified'])->name('perfil-usuario');
-
-Route::get('recogerPerfil',[RegisterUser::class, 'indexAuthUser'])->name('recogerPerfil');
-
-Route::get('/editar', function () {
-    return Inertia::render('private/Piero/EditarUsuario');
-})->middleware(['auth', 'verified'])->name('editar-usuario');
+Route::get('/recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
 
 //Mail
-Route::get('employeeForm/{mail}',function($mail){    
-    // dd($mail);
+Route::get('employeeForm/{mail}', function ($mail) {
     $correo = new EmployeeForm;
-
+    // dd($correo);
     Mail::to($mail)->send($correo);
-})->name('employeeForm');;
+})->name('employeeForm');
 
-Route::get('/formUser', function () {
-    return Inertia::render('Auth/RegisterUser');
-})->name('formUser');
+
 
 //--------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'Empresa'], function () {
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> carlos
     /*------------------------------------------------------------------------------------------*/
     Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
     /*------------------------------------------------------------------------------------------*/
@@ -208,43 +145,26 @@ Route::get('/chat', function () {
 })->middleware(['auth', 'verified'])->name('chat');
 
 // Abre el chat según la id de la entidad con la que se quiera hablar
-<<<<<<< HEAD
 Route::get('/chat/{id}', [ChatController::class, 'getIdReceptor'])->middleware(
-=======
-Route::get('/chat/{id}', [ListadoController::class, 'getIdReceptor'])->middleware(
->>>>>>> carlos
     ['auth', 'verified']
 )->name('getIdChatWith');
 
 // Chat coger todo si se ha accedido desde url /chat sin id
-<<<<<<< HEAD
 Route::post('/chat/all', [ChatController::class, 'getAllChats'])->middleware(
-=======
-Route::post('/chat/all', [ListadoController::class, 'getAllChats'])->middleware(
->>>>>>> carlos
     ['auth', 'verified']
 )->name('chatAll');
 
 // Recepcion de los datos iniciales (ejecutados a partir de url chat con id)
-<<<<<<< HEAD
 Route::post('/chat/getBy', [ChatController::class, 'getChatById'])->middleware(
-=======
-Route::post('/chat/getBy', [ListadoController::class, 'getChatById'])->middleware(
->>>>>>> carlos
     ['auth', 'verified']
 )->name('chatById');
 
 // Para abrir chat al clickear en una entidad
-<<<<<<< HEAD
 Route::post('/chat/open', [ChatController::class, 'getChatSelected'])->middleware(
-=======
-Route::post('/chat/open', [ListadoController::class, 'getChatSelected'])->middleware(
->>>>>>> carlos
     ['auth', 'verified']
 )->name('chat.open');
 
 // Enviar mensajes de chat
-<<<<<<< HEAD
 Route::post('/chat/send', [ChatController::class, 'sendChat'])->middleware(
     ['auth', 'verified']
 )->name('chat.send');
@@ -253,12 +173,6 @@ Route::post('/chat/send', [ChatController::class, 'sendChat'])->middleware(
 Route::post('/chat/refresh', [ChatController::class, 'refreshChatSelected'])->middleware(
     ['auth', 'verified']
 )->name('chat.refresh');
-=======
-Route::post('/chat/send', [ListadoController::class, 'sendChat'])->name('chat.send');
-
-// Recarga los últimos 100 mensajes de chat
-Route::post('/chat/refresh', [ListadoController::class, 'refreshChatSelected'])->name('chat.refresh');
->>>>>>> carlos
 
 // Listado de ONGs
 Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
@@ -274,18 +188,6 @@ Route::post('/del/empresa', [ProfileEmprController::class, 'deleteEmpr'])->middl
 
 //---------------------PAULA-----------------
 
-<<<<<<< HEAD
-Route::get('/noticias', function () {
-    return Inertia::render('public/Noticias');
-})->name('noticias');
-=======
-// Route::get('/noticias', function () {
-//     return Inertia::render('public/Noticias');
-// })->name('noticias');
-
-Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
->>>>>>> carlos
-
 Route::get('/item1noticia', function () {
     return Inertia::render('public/Item1');
 })->name('item1noticia');
@@ -294,16 +196,6 @@ Route::get('/donativos', function () {
     return Inertia::render('public/Donativos');
 })->name('donativos');
 
-<<<<<<< HEAD
-// Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
-
-=======
-
-// Route::get('/get/listado', [ListadoController::class, 'getListado'])->middleware(['auth', 'verified']);
-
-
-<<<<<<< HEAD
->>>>>>> carlos
 //---------------------PIERO-----------------
 Route::get('/perfil', function () {
     return Inertia::render('private/Piero/PerfilUsuario');
@@ -315,8 +207,6 @@ Route::get('/editar', function () {
 //------------------------------------------
 
 
-=======
->>>>>>> mario2
 //---------------------CARLOS-----------------
 Route::get('/perfilempresa', function () {
     return Inertia::render('private/Carlos/PerfilEmpresa');
@@ -325,8 +215,7 @@ Route::get('/perfilempresa', function () {
 Route::get('/editempresa', function () {
     return Inertia::render('private/Carlos/EditEmpresa');
 })->middleware(['auth', 'verified'])->name('edit-empresa');
-<<<<<<< HEAD
-=======
+
 
 Route::get('/editorganizacion', function () {
     return Inertia::render('private/Carlos/EditOrganizacion');
@@ -342,15 +231,15 @@ Route::post('/del/organizacion', [OrganizacionesController::class, 'deleteONG'])
 //CRUD noticias
 
 Route::prefix('/noticias')->group(function () {
-
+    Route::get('/noticias', [NoticiasController::class, 'index'])->name('noticias');
     Route::get('/noticias-listado', [NoticiasController::class, 'noticiaslistado'])->name('noticias-listado');
-    Route::get('create', [NoticiasController::class, 'create'])->name('noticia-create');
+    Route::get('/create', [NoticiasController::class, 'create'])->name('noticia-create');
     Route::patch('/store', [NoticiasController::class, 'store'])->name('noticia-store');
-    Route::get('edit/{id}', [NoticiasController::class, 'edit'])->name('noticia-edit');
-    Route::post('update/{id}', [NoticiasController::class, 'update'])->name('noticia-update');
-    Route::get('destroy/{id}', [NoticiasController::class, 'destroy'])->name('noticia-destroy');
+    Route::get('/edit/{id}', [NoticiasController::class, 'edit'])->name('noticia-edit');
+    Route::post('/update/{id}', [NoticiasController::class, 'update'])->name('noticia-update');
+    Route::get('/destroy/{id}', [NoticiasController::class, 'destroy'])->name('noticia-destroy');
 });
->>>>>>> carlos
+
 //------------------------------------------
 
 

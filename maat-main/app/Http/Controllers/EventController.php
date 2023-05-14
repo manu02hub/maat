@@ -8,21 +8,14 @@ use App\Models\plan_contratado;
 use App\Models\asociaciones_contratadas;
 use App\Models\Empresa;
 use App\Models\Entidad;
-<<<<<<< HEAD
 use App\Models\img_eventos;
-=======
->>>>>>> carlos
 use App\Models\Organizaciones;
 use App\Models\user_has_evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Storage;
-=======
 use Carbon\Carbon;
->>>>>>> carlos
-
 class EventController extends Controller
 {
     public function index()
@@ -38,34 +31,13 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        $reglas = [
-            // 'nombreEvento' => 'required|string|max:255',
-            // 'descripcion' => 'required|string',
-            // 'fecha' => 'required',
-            // 'horaInicio' => 'required|date_format:H:i',
-            // 'horaFinal' => 'required|date_format:H:i',
-            // 'plazas' => 'required|integer|min:1',
-=======
-
         $reglas = [
             'nombreEvento' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'fecha' => ['required', 'date', function ($attribute, $value, $fail) {
-                $year = substr($value, 0, 4); // extraer solo los primeros 4 caracteres
-                if (strlen($year) !== 4) {
-                    $fail($attribute . ' debe tener un año de 4 dígitos.');
-                }
-                $fechaActual = Carbon::now();
-                $fechaFormulario = Carbon::createFromFormat('Y-m-d', $value);
-                if ($fechaFormulario->lt($fechaActual)) {
-                    $fail($attribute . ' no puede ser una fecha anterior a la actual.');
-                }
-            }],
+            'fecha' => 'required',
             'horaInicio' => 'required|date_format:H:i',
             'horaFinal' => 'required|date_format:H:i',
             'plazas' => 'required|integer|min:1',
->>>>>>> carlos
         ];
 
         $validatedData = $request->validate($reglas);
@@ -77,7 +49,6 @@ class EventController extends Controller
         $eventData->hora_inicio = $validatedData['horaInicio'];
         $eventData->hora_final = $validatedData['horaFinal'];
         $eventData->plazas = $validatedData['plazas'];
-<<<<<<< HEAD
         /**
          * Revisar la organizacion que este registrada
          */
@@ -85,10 +56,6 @@ class EventController extends Controller
         /**------------------------------------------ */
         $eventData->save();
 
-=======
-        $eventData->organizacion_id = 1;
-        $eventData->save();
->>>>>>> carlos
         return Redirect::route('eventsIndex');
     }
 
@@ -135,17 +102,6 @@ class EventController extends Controller
     //modificarlo para que salgan los eventos los cuales tienen la emrpesa del trabajador contratado
     public function indexAllEventUser()
     {
-<<<<<<< HEAD
-=======
-
-        // $eventos = Eventos::whereNotIn('id', function ($query) {
-        //     $query->select('evento_id')
-        //         ->from('user_has_evento')
-        //         ->where('user_id', auth()->id());
-        // })
-        //     ->get();
-
->>>>>>> carlos
         $entidad_id = auth()->user()->entidad_id;
         $empresa = Empresa::where('entidad_id', $entidad_id)->first();
         // dd($empresa);
@@ -168,11 +124,7 @@ class EventController extends Controller
         $eventos = Eventos::join('user_has_evento', 'evento.id', '=', 'user_has_evento.evento_id')
             ->where('user_has_evento.user_id', auth()->id())
             ->get();
-<<<<<<< HEAD
-         dd(auth());
-=======
         //  dd(auth()->id());
->>>>>>> carlos
         return Inertia::render('private/Manu/OwnEvents', compact('eventos'));
     }
 
@@ -195,7 +147,6 @@ class EventController extends Controller
         return back();
     }
 
-<<<<<<< HEAD
     public function eventInfo(Request $request, $id)
     {
 
@@ -207,10 +158,5 @@ class EventController extends Controller
 
         $estaInscrito = user_has_evento::where('evento_id', $id)->exists();
         return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito'));
-=======
-    public function eventInfo(Request $request)
-    {
-        return Inertia::render('private/Manu/EventInfo');
->>>>>>> carlos
     }
 }

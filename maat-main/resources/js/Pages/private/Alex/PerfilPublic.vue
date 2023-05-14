@@ -4,12 +4,18 @@ export default {
     data() {
         return {
             org: "",
-<<<<<<< HEAD
             // img: "http://[::1]:5173/resources/img/fondoP.jpg",
-=======
-            img: "http://[::1]:5173/resources/img/fondoP.jpg",
->>>>>>> carlos
         };
+    },
+
+    methods: {
+        goListado: function () {
+            try {
+                window.location.href = route("listado");
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
 
     // Pone las variables para que luego se puedan montarse
@@ -29,12 +35,13 @@ export default {
     <nav class="rowPropio noRowGapPropio">
         <div
             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
-        ></div>
+        >
+            <span class="goBack" @click="goListado">&#8592;</span>
+        </div>
     </nav>
 
     <main>
         <div class="rowPropio noRowGapPropio">
-<<<<<<< HEAD
             <!-- <div
                 class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio fondoPPropio"
                 :style="{ 'background-image': 'url(' + img + ')' }"
@@ -42,11 +49,6 @@ export default {
             <img
                 class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio fondoPPropio"
                 src="./../../../../img/fondoP.jpg"
-=======
-            <div
-                class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio fondoPPropio"
-                :style="{ 'background-image': 'url(' + img + ')' }"
->>>>>>> carlos
             />
             <img
                 src="./../../../../img/prueba.jpg"
@@ -63,14 +65,10 @@ export default {
                     class="contenedorDescPropio col-lg-8Propio col-md-8Propio col-sm-12Propio col-12Propio"
                 >
                     <!-- Boton del chat (solo si es pantalla pequena, si no, aparece la otra) -->
-<<<<<<< HEAD
                     <a
                         class="aNoDecPropio"
                         :href="route('getIdChatWith', [this.org[0].org])"
                     >
-=======
-                    <a class="aNoDecPropio" :href="route('getIdChatWith', [this.org[0].org])">
->>>>>>> carlos
                         <button class="btnChatPropio">
                             Chat
                             <img
@@ -161,14 +159,10 @@ export default {
                 <div
                     class="contenedorDescPropio col-lg-4Propio col-md-4Propio col-sm-12Propio col-12Propio"
                 >
-<<<<<<< HEAD
                     <a
                         class="aNoDecPropio"
                         :href="route('getIdChatWith', [this.org[0].org])"
                     >
-=======
-                    <a class="aNoDecPropio" :href="route('getIdChatWith', [this.org[0].org])">
->>>>>>> carlos
                         <button class="btnChat2Propio">
                             Chat
                             <img
@@ -213,21 +207,26 @@ export default {
     font-family: "Montserrat";
 }
 
+.goBack {
+    cursor: pointer;
+    font-size: 2.5rem;
+    padding: 2rem;
+    background-color: #73cd99;
+}
+
+.goBack:hover {
+    background-color: seagreen;
+}
+
 /* Código hecho en primer trimestre de DAM y DAW (grid) */
 /*El grid*/
 .rowPropio {
     /* En la propiedad display agregamos grid para establecer una cuadricula */
     display: grid;
     /* Define el numero de columnas en el diseño de cuadricula */
-<<<<<<< HEAD
     grid-template-columns: repeat(12, [ col] 1fr);
     /* Define la altura de cada fila */
     grid-template-rows: repeat(5, [ row] auto);
-=======
-    grid-template-columns: repeat(12, [ col ] 1fr);
-    /* Define la altura de cada fila */
-    grid-template-rows: repeat(5, [ row ] auto);
->>>>>>> carlos
     column-gap: 1em; /* espacio entre columnas */
     row-gap: 15px; /* espacio entre filas */
 }
@@ -259,10 +258,7 @@ export default {
 
 /* El fondo que hay debajo de la foto del logo de la Org */
 .fondoPPropio {
-<<<<<<< HEAD
     width: 100%;
-=======
->>>>>>> carlos
     height: 13rem;
 }
 
@@ -358,11 +354,7 @@ export default {
 }
 
 /* Para evitar que otros estilos interfieran */
-<<<<<<< HEAD
 .filtroSvgPropio {
-=======
-.filtroSvgPropio{
->>>>>>> carlos
     display: inline;
     vertical-align: unset;
 }

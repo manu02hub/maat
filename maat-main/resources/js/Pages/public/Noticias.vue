@@ -11,14 +11,6 @@ import CartaNoticiasComponente from '@/Components/ComponentesPaula/CartaNoticias
 
 
     <PublicLayout>
-<<<<<<< HEAD
-    <CartaNoticiasComponente></CartaNoticiasComponente>
-    </PublicLayout>
-
-
-
-
-=======
         <div class="col p-5 m-10" style="background-color:rgb(239, 239, 239);">
             <!-- Content -->
             <div class="grow p-5 flex flex-col">
@@ -43,5 +35,4 @@ import CartaNoticiasComponente from '@/Components/ComponentesPaula/CartaNoticias
 
         </div>
     </PublicLayout>
->>>>>>> carlos
 </template>
