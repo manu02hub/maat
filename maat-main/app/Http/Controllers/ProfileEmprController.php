@@ -60,7 +60,7 @@ class ProfileEmprController extends Controller
 
         try {
             $admins = DB::select('select email, rol_id, entidad_id from maat.users
-            where rol_id = 1 and entidad_id = ?', [$user->entidad_id]);
+            where rol_id = 2 and entidad_id = ?', [$user->entidad_id]);
 
             // Si hay solo 1 administrador de la empresa, se elimina todos los datos de la empresa
             if (count($admins) == 1) {

@@ -79,7 +79,7 @@ class RegisteredUserController extends Controller
                     'email' => $request->correo,
                     'password' => Hash::make($request->password),
                     'activo' => 1,
-                    'rol_id' => 1,
+                    'rol_id' => 2,
                     'entidad_id' => $idOrg[0]->id
                 ]);
 
