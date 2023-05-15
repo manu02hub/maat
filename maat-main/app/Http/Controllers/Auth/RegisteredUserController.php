@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-<<<<<<< HEAD
-=======
 use App\Models\Users;
 use App\Models\Entidad;
 use App\Models\Organizaciones;
->>>>>>> master
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,11 +17,8 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\DB;
 
->>>>>>> master
 class RegisteredUserController extends Controller
 {
     /**
@@ -42,24 +36,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-<<<<<<< HEAD
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-=======
         // Si es falso, se está intentando registrar empresa
         if ($request->clientOng == false) {
             // Busca si existe la empresa a registrar
@@ -195,7 +171,6 @@ class RegisteredUserController extends Controller
         }
 
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
->>>>>>> master
         return redirect(RouteServiceProvider::HOME);
     }
 }

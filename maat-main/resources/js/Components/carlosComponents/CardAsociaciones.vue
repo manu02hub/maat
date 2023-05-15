@@ -1,8 +1,4 @@
 <script setup>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 </script>
 
 <template>

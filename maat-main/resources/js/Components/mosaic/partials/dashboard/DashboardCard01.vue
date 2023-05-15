@@ -99,6 +99,12 @@ export default {
     return {
       chartData,
 <<<<<<< HEAD
+    }
+  }
+}
+</script>
+=======
+<<<<<<< HEAD
     } 
   }
 }
@@ -109,3 +115,4 @@ export default {
 }
 </script>
 >>>>>>> master
+>>>>>>> carlos

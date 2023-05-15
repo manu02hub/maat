@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class plan_contratado extends Model
+class Rol extends Model
 {
     use HasFactory;
 
-    protected $table = 'plan_contratado';
+    protected $table = 'rol';
 
     public $timestamps = false;
 
     protected $fillable = [
         'id',
-        'activo',
-        'fecha_inicio',
-        'fecha_fin',
-        'tipos_plan_id',
-        'empresa_id'
+        'nombre'
     ];
+
+    public function usuarios()
+    {
+        return $this->hasMany(Users::class, 'rol_id');
+    }
 }

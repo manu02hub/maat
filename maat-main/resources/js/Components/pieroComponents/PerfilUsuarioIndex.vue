@@ -1,3 +1,14 @@
+<script setup>
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import TextInput from '@/Components/TextInput.vue';
+
+// const user = usePage().props.auth.user;
+
+const form = useForm({
+    email: "",
+});
+</script>
+
 <template>
     <div class="grow flex flex-col md:translate-x-0 transition-transform duration-300 ease-in-out" :class="profileSidebarOpen ? 'translate-x-1/3' : 'translate-x-0'">
 
@@ -55,13 +66,13 @@
         <header class="text-center sm:text-left mb-6">
           <!-- Name -->
           <div class="inline-flex items-start mb-2">
-            <h1 class="text-2xl text-slate-800 font-bold">Nombre de Usuario</h1>
+            <h1 class="text-2xl text-slate-800 font-bold">{{ $page.props.user.nombre }}</h1>
             <svg class="w-4 h-4 fill-current shrink-0 text-amber-500 ml-2" viewBox="0 0 16 16">
               <path d="M13 6a.75.75 0 0 1-.75-.75 1.5 1.5 0 0 0-1.5-1.5.75.75 0 1 1 0-1.5 1.5 1.5 0 0 0 1.5-1.5.75.75 0 1 1 1.5 0 1.5 1.5 0 0 0 1.5 1.5.75.75 0 1 1 0 1.5 1.5 1.5 0 0 0-1.5 1.5A.75.75 0 0 1 13 6ZM6 16a1 1 0 0 1-1-1 4 4 0 0 0-4-4 1 1 0 0 1 0-2 4 4 0 0 0 4-4 1 1 0 1 1 2 0 4 4 0 0 0 4 4 1 1 0 0 1 0 2 4 4 0 0 0-4 4 1 1 0 0 1-1 1Z" />
             </svg>
           </div>
           <!-- Bio -->
-          <div class="text-sm mb-3">Trabajador de la la entidad "Empresa"</div>
+          <div class="text-sm mb-3">Trabajador de la la entidad {{ $page.props.user.nombre }}</div>
           <!-- Meta -->
           <div class="flex flex-wrap justify-center sm:justify-start space-x-4">
             <div class="flex items-center">
@@ -74,10 +85,20 @@
               <svg class="w-4 h-4 fill-current shrink-0 text-slate-400" viewBox="0 0 16 16">
                 <path d="M11 0c1.3 0 2.6.5 3.5 1.5 1 .9 1.5 2.2 1.5 3.5 0 1.3-.5 2.6-1.4 3.5l-1.2 1.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.1-1.2c.6-.5.9-1.3.9-2.1s-.3-1.6-.9-2.2C12 1.7 10 1.7 8.9 2.8L7.7 4c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l1.2-1.1C8.4.5 9.7 0 11 0ZM8.3 12c.4-.4 1-.5 1.4-.1.4.4.4 1 0 1.4l-1.2 1.2C7.6 15.5 6.3 16 5 16c-1.3 0-2.6-.5-3.5-1.5C.5 13.6 0 12.3 0 11c0-1.3.5-2.6 1.5-3.5l1.1-1.2c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4L2.9 8.9c-.6.5-.9 1.3-.9 2.1s.3 1.6.9 2.2c1.1 1.1 3.1 1.1 4.2 0L8.3 12Zm1.1-6.8c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4l-4.2 4.2c-.2.2-.5.3-.7.3-.2 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l4.2-4.2Z" />
               </svg>
-              <a class="text-sm font-medium whitespace-nowrap text-indigo-500 hover:text-indigo-600 ml-2" href="#0">prueba@prueba.com</a>
+              <a class="text-sm font-medium whitespace-nowrap text-indigo-500 hover:text-indigo-600 ml-2" href="#0">{{ $page.props.user.email }}</a>
             </div>
           </div>
         </header>
+
+        <Link :href="route('editUser', $page.props.user.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <button class="action-buttons-list">
+                                    <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                </button>
+                                </Link>
 
         <!-- Tabs -->
         <div class="relative mb-6">
@@ -239,9 +260,9 @@
     </div>
   </template>
 
-  <script>
+  <!-- <script>
   export default {
     name: 'ProfileBody',
     props: ['profileSidebarOpen'],
   }
-  </script>
+  </script> -->

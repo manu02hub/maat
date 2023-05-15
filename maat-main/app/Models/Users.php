@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ class Users extends Model
 
     protected $fillable = [
         'id',
-        'name',
+        'nombre',
         'email',
         'email_verified_at',
         'password',
@@ -25,4 +26,10 @@ class Users extends Model
         'rol_id',
         'entidad_id'
     ];
+
+    public function roleName()
+    {
+        return $this->rol->nombre;
+    }
+
 }

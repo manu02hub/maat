@@ -8,12 +8,13 @@ import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
-    nombreEvento: '',
-    descripcion: '',
-    fecha: '',
-    horaInicio: '',
-    horaFinal: '',
-    plazas: '',
+
+    nombreEvento: "",
+    descripcion: "",
+    fecha: "",
+    horaInicio: "",
+    horaFinal: "",
+    plazas: "",
     terms: false,
 });
 </script>
@@ -28,7 +29,13 @@ const form = useForm({
             <div
                 class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
             >
-                <form @submit.prevent="form.patch(route('store'))">
+
+                <form
+                    @submit.prevent="form.patch(route('store'))"
+                    enctype="multipart/form-data"
+                >
+
+
                     <div>
                         <InputLabel
                             for="nombreEvento"

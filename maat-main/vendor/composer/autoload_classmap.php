@@ -9,10 +9,32 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
 <<<<<<< HEAD
+    'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
+    'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
+    'App\\Http\\Controllers\\Auth\\EmailVerificationNotificationController' => $baseDir . '/app/Http/Controllers/Auth/EmailVerificationNotificationController.php',
+    'App\\Http\\Controllers\\Auth\\EmailVerificationPromptController' => $baseDir . '/app/Http/Controllers/Auth/EmailVerificationPromptController.php',
+    'App\\Http\\Controllers\\Auth\\NewPasswordController' => $baseDir . '/app/Http/Controllers/Auth/NewPasswordController.php',
+    'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
+    'App\\Http\\Controllers\\Auth\\PasswordResetLinkController' => $baseDir . '/app/Http/Controllers/Auth/PasswordResetLinkController.php',
+    'App\\Http\\Controllers\\Auth\\RegisterUser' => $baseDir . '/app/Http/Controllers/Auth/RegisterUser.php',
+    'App\\Http\\Controllers\\Auth\\RegisteredUserController' => $baseDir . '/app/Http/Controllers/Auth/RegisteredUserController.php',
+    'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
+    'App\\Http\\Controllers\\ChatController' => $baseDir . '/app/Http/Controllers/ChatController.php',
+=======
+<<<<<<< HEAD
+>>>>>>> carlos
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\EventController' => $baseDir . '/app/Http/Controllers/EventController.php',
+    'App\\Http\\Controllers\\ListadoController' => $baseDir . '/app/Http/Controllers/ListadoController.php',
+    'App\\Http\\Controllers\\PlansController' => $baseDir . '/app/Http/Controllers/PlansController.php',
+    'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
+    'App\\Http\\Controllers\\ProfileEmprController' => $baseDir . '/app/Http/Controllers/ProfileEmprController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
+<<<<<<< HEAD
+    'App\\Http\\Middleware\\HandleInertiaRequests' => $baseDir . '/app/Http/Middleware/HandleInertiaRequests.php',
+=======
 =======
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -37,6 +59,7 @@ return array(
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\HandleInertiaRequests' => $baseDir . '/app/Http/Middleware/HandleInertiaRequests.php',
 >>>>>>> master
+>>>>>>> carlos
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
@@ -44,6 +67,23 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+<<<<<<< HEAD
+    'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
+    'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
+    'App\\Models\\Empresa' => $baseDir . '/app/Models/Empresa.php',
+    'App\\Models\\Entidad' => $baseDir . '/app/Models/Entidad.php',
+    'App\\Models\\Eventos' => $baseDir . '/app/Models/Eventos.php',
+    'App\\Models\\Organizaciones' => $baseDir . '/app/Models/Organizaciones.php',
+    'App\\Models\\Planes' => $baseDir . '/app/Models/Planes.php',
+    'App\\Models\\Rol' => $baseDir . '/app/Models/Rol.php',
+    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Users' => $baseDir . '/app/Models/Users.php',
+    'App\\Models\\asociaciones_contratadas' => $baseDir . '/app/Models/asociaciones_contratadas.php',
+    'App\\Models\\img_eventos' => $baseDir . '/app/Models/img_eventos.php',
+    'App\\Models\\plan_contratado' => $baseDir . '/app/Models/plan_contratado.php',
+    'App\\Models\\tipos_plan' => $baseDir . '/app/Models/tipos_plan.php',
+    'App\\Models\\user_has_evento' => $baseDir . '/app/Models/user_has_evento.php',
+=======
 <<<<<<< HEAD
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
 =======
@@ -60,6 +100,7 @@ return array(
     'App\\Models\\plan_contratado' => $baseDir . '/app/Models/plan_contratado.php',
     'App\\Models\\user_has_evento' => $baseDir . '/app/Models/user_has_evento.php',
 >>>>>>> master
+>>>>>>> carlos
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
@@ -5230,6 +5271,16 @@ return array(
     'Termwind\\ValueObjects\\Styles' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',
 <<<<<<< HEAD
+    'Tests\\Feature\\Auth\\AuthenticationTest' => $baseDir . '/tests/Feature/Auth/AuthenticationTest.php',
+    'Tests\\Feature\\Auth\\EmailVerificationTest' => $baseDir . '/tests/Feature/Auth/EmailVerificationTest.php',
+    'Tests\\Feature\\Auth\\PasswordConfirmationTest' => $baseDir . '/tests/Feature/Auth/PasswordConfirmationTest.php',
+    'Tests\\Feature\\Auth\\PasswordResetTest' => $baseDir . '/tests/Feature/Auth/PasswordResetTest.php',
+    'Tests\\Feature\\Auth\\PasswordUpdateTest' => $baseDir . '/tests/Feature/Auth/PasswordUpdateTest.php',
+    'Tests\\Feature\\Auth\\RegistrationTest' => $baseDir . '/tests/Feature/Auth/RegistrationTest.php',
+    'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
+    'Tests\\Feature\\ProfileTest' => $baseDir . '/tests/Feature/ProfileTest.php',
+=======
+<<<<<<< HEAD
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
 =======
     'Tests\\Feature\\Auth\\AuthenticationTest' => $baseDir . '/tests/Feature/Auth/AuthenticationTest.php',
@@ -5241,6 +5292,7 @@ return array(
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
     'Tests\\Feature\\ProfileTest' => $baseDir . '/tests/Feature/ProfileTest.php',
 >>>>>>> master
+>>>>>>> carlos
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ExampleTest' => $baseDir . '/tests/Unit/ExampleTest.php',
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',
