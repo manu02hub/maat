@@ -11,7 +11,7 @@ const form = useForm({
 });
 </script>
 
-<script>
+<!-- <script>
 export default {
   data () {
     return {
@@ -25,7 +25,7 @@ export default {
     },
   }
 }
-</script>
+</script> -->
 
 <template>
     <article v-for="posts in $page.props.post" class="bg-white shadow-md rounded-lg border border-emerald-500 border-2 p-5">
