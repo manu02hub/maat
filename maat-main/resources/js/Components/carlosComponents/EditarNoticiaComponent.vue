@@ -1,66 +1,92 @@
 <script setup>
+import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import CardEvent from "@/Components/manuComponents/CardEvent.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-import TextInput from '@/Components/TextInput.vue';
 
-// const user = usePage().props.auth.user;
+const props = defineProps({
+    id: {
+        type: Number,
+        required: true
+    },
+    titulo: {
+        type: String,
+        required: true
+    },
+    fecha: {
+        type: String,
+        required: true
+    },
+    descripcion: {
+        type: String,
+        required: true
+    },
+    imagen: {
+        type: String,
+        required: true
+    }
+})
 
-const { props } = usePage();
-let { user } = props;
-const { id, nombre, email} = user;
+const noticia = usePage().props.noticia;
 
 const form = useForm({
-    id: id,
-    nombre: nombre,
-    email: email,
+    titulo: noticia.titulo,
+    fecha: noticia.fecha,
+    descripcion: noticia.descripcion,
+    imagen: noticia.imagen,
 });
+
+const submit = (id) => {
+    form.post(route('noticia-update', id));
+};
 
 </script>
 
 <template>
-    <form @submit.prevent="form.patch(route('updateUser'))">
-        <div class="grid-system">
-            <header>
-                <span>{{ form.nombre }}</span>
-            </header>
-            <div class="div-img">
-                <img src="https://preview.cruip.com/mosaic/images/user-128-01.jpg" alt="">
-            </div>
+    <div class="grid-system">
+        <form @submit.prevent="submit($page.props.noticia.id)">
             <div class="spam-header">
-                <span>Usuario de empresa</span>
+                <span>Editar Noticia</span>
                 <div class="div-datos-basicos">
                     <div class="div-form-primero">
-                        <label for="nombre">Nombre</label>
-                        <TextInput type="text" id="nombre" v-model="form.nombre"/>
+                        <label for="titulo">Título</label>
+                        <input type="text" v-model="form.titulo">
                     </div>
+                    <div class="div-form-primero">
+                        <label for="fecha">Fecha</label>
+                        <input type="text" v-model="form.fecha">
+                    </div>
+
                     <!-- <div class="div-form-primero">
                     <label for="apellidos">Apellidos</label>
-                    <TextInput type="text" id="apellidos">
+                    <input type="text" id="apellidos">
                 </div> -->
                     <!-- <div class="div-form-primero">
                     <label for="puesto">Puesto</label>
-                    <TextInput type="text" id="puesto">
+                    <input type="text" id="puesto">
                 </div> -->
                 </div>
                 <div class="div-form-segundo">
-                    <label for="email">Email</label>
-                    <TextInput type="text" id="email" v-model="form.email"/>
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" v-model="form.descripcion">
                 </div>
-                <button class="button-email">Save</button>
                 <div class="div-form-segundo">
-                    <div>Password</div>
-                    <span>Puede establecer una contraseña permanente si no desea utilizar códigos de inicio de sesión
-                        temporales.</span>
+                    <label for="imagen">URL de la Imagen</label>
+                    <input type="text" v-model="form.imagen">
                 </div>
-                <button class="button-password">Restablecer contraseña</button>
             </div>
             <footer>
-                <Link :href="route('indexUser')">
+                <Link :href="route('noticias-listado')">
                 <button class="btn-cancelar">Cancelar</button>
                 </Link>
-                <button type="submit" class="btn-save">Guardar cambios</button>
+                <PrimaryButton class="btn-save" id="btnRegistro"
+                    :disabled="form.processing">
+                    Editar Noticia
+                </PrimaryButton>
             </footer>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>
 
 <style scoped>
@@ -209,3 +235,11 @@ footer {
     margin-left: 10px;
 }
 </style>
+
+<script>
+import { ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
+export default {
+    components: { Link },
+}
+</script>

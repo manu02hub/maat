@@ -1,66 +1,71 @@
 <script setup>
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-import TextInput from '@/Components/TextInput.vue';
-
-// const user = usePage().props.auth.user;
-
-const { props } = usePage();
-let { user } = props;
-const { id, nombre, email} = user;
 
 const form = useForm({
-    id: id,
-    nombre: nombre,
-    email: email,
+    titulo: "",
+    fecha: "",
+    descripcion: "",
+    imagen: "",
 });
 
-</script>
 
+</script>
 <template>
-    <form @submit.prevent="form.patch(route('updateUser'))">
-        <div class="grid-system">
-            <header>
-                <span>{{ form.nombre }}</span>
-            </header>
-            <div class="div-img">
-                <img src="https://preview.cruip.com/mosaic/images/user-128-01.jpg" alt="">
-            </div>
+    <div class="grid-system">
+        <header>
+            <span>{{ $page.props.auth.user.name }}</span>
+        </header>
+        <form @submit.prevent="form.patch(route('noticia-store'))">
             <div class="spam-header">
-                <span>Usuario de empresa</span>
+                <span>AÑADIR UNA NOTICIA NUEVA</span>
                 <div class="div-datos-basicos">
                     <div class="div-form-primero">
-                        <label for="nombre">Nombre</label>
-                        <TextInput type="text" id="nombre" v-model="form.nombre"/>
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" v-model="form.titulo">
                     </div>
                     <!-- <div class="div-form-primero">
-                    <label for="apellidos">Apellidos</label>
-                    <TextInput type="text" id="apellidos">
-                </div> -->
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" v-model="form.apellidos">
+                    </div> -->
                     <!-- <div class="div-form-primero">
-                    <label for="puesto">Puesto</label>
-                    <TextInput type="text" id="puesto">
-                </div> -->
+                        <label for="puesto">Puesto</label>
+                        <input type="text" id="puesto" v-model="form.puesto">
+                    </div> -->
                 </div>
                 <div class="div-form-segundo">
-                    <label for="email">Email</label>
-                    <TextInput type="text" id="email" v-model="form.email"/>
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" v-model="form.fecha">
                 </div>
-                <button class="button-email">Save</button>
+
                 <div class="div-form-segundo">
-                    <div>Password</div>
-                    <span>Puede establecer una contraseña permanente si no desea utilizar códigos de inicio de sesión
-                        temporales.</span>
+                    <label for="descripcion">Descripcion:</label>
+                    <input type="text" id="descripcion" v-model="form.descripcion">
                 </div>
-                <button class="button-password">Restablecer contraseña</button>
+
+                <div class="div-form-segundo">
+                    <label for="imagen">URL de la Imagen:</label>
+                    <input type="text" id="imagen" v-model="form.imagen">
+                </div>
             </div>
             <footer>
-                <Link :href="route('indexUser')">
-                <button class="btn-cancelar">Cancelar</button>
+                <Link class="btn-cancelar" :href="route('indexUser')">Cancelar
                 </Link>
-                <button type="submit" class="btn-save">Guardar cambios</button>
+                <!-- <Link :href="route('listUserEmpresa')">
+                <button class="btn-save">Crear usuario</button>
+                </Link> -->
+                <PrimaryButton class="ml-4 bg-green-500" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
+                    Añadir noticia
+                </PrimaryButton>
             </footer>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>
 
 <style scoped>
@@ -160,6 +165,14 @@ img {
     width: 20%;
 }
 
+#password {
+    width: 20%;
+}
+
+#confirmPassword {
+    width: 20%;
+}
+
 .button-email {
     margin-top: 1%;
     margin-left: 0%;
@@ -209,3 +222,11 @@ footer {
     margin-left: 10px;
 }
 </style>
+
+<script>
+import { ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
+export default {
+    components: { Link },
+}
+</script>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Entidad;
-use App\Models\Organizaciones;
 use App\Models\User;
 use App\Models\Users;
+use App\Models\Entidad;
+use App\Models\Organizaciones;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -90,10 +90,9 @@ class RegisteredUserController extends Controller
 
             // Cuando es una ONG
         } else {
-
             $idOrganizacion = Entidad::where('nombre', $request->nombre_empresa)->first();
 
-            // dd($request->nif);
+            // dd($idOrganizacion);
 
             if ($idOrganizacion == null) {
                 $organizacion = Entidad::create([
@@ -112,28 +111,66 @@ class RegisteredUserController extends Controller
                 ]);
             }
 
-            $userExist = Users::where();
+            // Mira si existe el usuario a registrar dentro de la entidad
+            $userExist = Users::select('users.id', 'users.nombre', 'users.email', 'users.entidad_id', 'entidad.nombre', 'entidad.descripcion')
+            ->join('entidad', 'entidad.id', '=', 'users.entidad_id')
+            ->where('entidad.nombre', $request->nombre_empresa)
+            ->where('users.email', $request->correo)
+            ->exists();
 
+            // $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
+            // from maat.users
+            // inner join maat.entidad on entidad.id = users.entidad_id
+            // where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
 
+            // dd($userExist);
+            // Mira si existe el email a registrar
+            $emailExist = Users::select('users.id', 'users.email')
+            ->where('users.email', $request->correo)
+            ->exists();
+
+            // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
+            // $empleados = Users::join('entidad', 'entidad.id', '=', 'users.entidad_id')
+            // ->where('entidad.nombre', $request->nombre_empresa)
+            // ->count();
+
+            $employees = DB::select('select count(users.id) as empleados
+            from maat.users
+            inner join maat.entidad on entidad.id = users.entidad_id
+            where entidad.nombre = ?', [$request->nombre_empresa]);
+
+            // dd($empleados);
+            // Si no existe el usuario en la organización y el email a registrar no existe
+            if ($userExist == false  && $emailExist == false && $employees[0]->empleados == 0) {
+                $idOrg = DB::select('select * from entidad where nombre = ?', [$request->nombre_empresa]);
+                // Se crea usuario administrador de esa organizacion
+                // dd('todo fue bien');
+                // $user = Users::create([
+                //     'nombre' => $request->nombre_empresa,
+                //     'email' => $request->correo,
+                //     'password' => Hash::make($request->password),
+                //     'activo' => 1,
+                //     'rol_id' => 1,
+                //     'entidad_id' => $idOrganizacion[0]->id
+                // ]);
+
+                $user=new Users();
+                $user->nombre=$request->nombre_empresa;
+                $user->email=$request->correo;
+                $user->password=Hash::make($request->password);
+                $user->activo=1;
+                $user->rol_id=1;
+                $user->entidad_id=$idOrg[0]->id;
+                $user->save();
+                event(new Registered($user));
+
+                // Auth::login($user);
+            } else {
+                dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
+            }
         }
 
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
         return redirect(RouteServiceProvider::HOME);
     }
 }
-
-// $request->validate([
-//     'name' => 'required|string|max:255',
-//     'email' => 'required|string|email|max:255|unique:' . User::class,
-//     'password' => ['required', 'confirmed', Rules\Password::defaults()],
-// ]);
-
-// $user = User::create([
-//     'name' => $request->name,
-//     'email' => $request->email,
-//     'password' => Hash::make($request->password),
-// ]);
-
-// event(new Registered($user));
-
-// Auth::login($user);

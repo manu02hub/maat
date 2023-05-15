@@ -12,4 +12,3 @@ import PlansPanel from '@/Components/manuComponents/PlansPanel.vue';
         <PlansPanel></PlansPanel>
     </PrivateLayout>
 </template>
-

@@ -87,64 +87,6 @@
                 <!--</router-link>-->
             </div>
 
-            <!--CARLOS-->
-
-            <SidebarLinkGroup v-slot="parentLink" :active="route().current('dashboard')">
-
-<a class="block text-slate-200 truncate transition duration-150" href="#0"
-    @click.prevent="sidebarExpanded ? parentLink.handleClick() : sidebarExpanded = true">
-    <div class="flex">
-        <div class="flex items-center justify-between">
-            <div class="items-center">
-                <svg class="shrink-0 h-0 w-6" viewBox="0 0 24 24">
-                    <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-500' : 'text-slate-400'" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />-->
-                    <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-600' : 'text-slate-600'" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />-->
-                    <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-200' : 'text-slate-400'" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />-->
-                </svg>
-                <div class="flex items-center">
-                    <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                        <path class="fill-current"
-                            :class="isExactActive ? 'text-indigo-500' : 'text-slate-600'"
-                            d="M1 3h22v20H1z" />
-                        <path class="fill-current"
-                            :class="isExactActive ? 'text-indigo-300' : 'text-slate-400'"
-                            d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
-                    </svg>
-                    <span
-                        class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                        CARLOS</span>
-                </div>
-            </div>
-            <!-- Icon -->
-            <div class="flex shrink-0 ml-2">
-                <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
-                    :class="parentLink.expanded && 'rotate-180'" viewBox="0 0 12 12">
-                    <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                </svg>
-            </div>
-        </div>
-    </div>
-</a>
-<div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
-    <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
-        <!--<router-link to="/" custom v-slot="{ href, navigate, isExactActive }">-->
-        <li class="mb-1 last:mb-0">
-
-            <a class="block transition duration-150 truncate"
-                :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
-                :href="href" @click="navigate">
-                <NavLink :href="route('perfil-empresa')"><span
-                        class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                        Perfil ONG</span></NavLink>
-            </a>
-
-
-
-        </li>
-    </ul>
-</div>
-</SidebarLinkGroup>
-
             <!-- Links -->
             <div class="space-y-8">
                 <!-- Pages group -->
@@ -164,170 +106,9 @@
                     </h3>
                     <ul class="mt-3">
                         <!-- ALEX -->
-                        <SidebarLinkGroup
-                            v-slot="parentLink"
-                            :active="route().current('dashboard')"
-                        >
-                            <a
-                                class="block text-slate-200 truncate transition duration-150"
-                                href="#0"
-                                @click.prevent="
-                                    sidebarExpanded
-                                        ? parentLink.handleClick()
-                                        : (sidebarExpanded = true)
-                                "
-                            >
-                                <div class="flex">
-                                    <div
-                                        class="flex items-center justify-between"
-                                    >
-                                        <div class="items-center">
-                                            <svg
-                                                class="shrink-0 h-0 w-6"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-500' : 'text-slate-400'" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />-->
-                                                <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-600' : 'text-slate-600'" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />-->
-                                                <!--<path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) ? 'text-indigo-200' : 'text-slate-400'" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />-->
-                                            </svg>
-                                            <div class="flex items-center">
-                                                <svg
-                                                    class="shrink-0 h-6 w-6"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        class="fill-current"
-                                                        :class="
-                                                            isExactActive
-                                                                ? 'text-indigo-500'
-                                                                : 'text-slate-600'
-                                                        "
-                                                        d="M1 3h22v20H1z"
-                                                    />
-                                                    <path
-                                                        class="fill-current"
-                                                        :class="
-                                                            isExactActive
-                                                                ? 'text-indigo-300'
-                                                                : 'text-slate-400'
-                                                        "
-                                                        d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
-                                                    />
-                                                </svg>
-                                                <span
-                                                    class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                                                >
-                                                    ALEX</span
-                                                >
-                                            </div>
-                                        </div>
-                                        <!-- Icon -->
-                                        <div class="flex shrink-0 ml-2">
-                                            <svg
-                                                class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
-                                                :class="
-                                                    parentLink.expanded &&
-                                                    'rotate-180'
-                                                "
-                                                viewBox="0 0 12 12"
-                                            >
-                                                <path
-                                                    d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div
-                                class="lg:hidden lg:sidebar-expanded:block 2xl:block"
-                            >
-                                <ul
-                                    class="pl-9 mt-1"
-                                    :class="!parentLink.expanded && 'hidden'"
-                                >
-                                    <!--<router-link to="/" custom v-slot="{ href, navigate, isExactActive }">-->
-                                    <li class="mb-1 last:mb-0">
-                                        <a
-                                            class="block transition duration-150 truncate"
-                                            :class="
-                                                isExactActive
-                                                    ? 'text-indigo-500'
-                                                    : 'text-slate-400 hover:text-slate-200'
-                                            "
-                                            :href="href"
-                                            @click="navigate"
-                                        >
-                                            <NavLink :href="route('chat')"
-                                                ><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                                                >
-                                                    Chat</span
-                                                ></NavLink
-                                            >
-                                        </a>
-                                    </li>
-                                    <!--</router-link>-->
-                                    <!--<router-link to="/dashboard/analytics" custom v-slot="{ href, navigate, isExactActive }">-->
-                                    <li class="mb-1 last:mb-0">
-                                        <a
-                                            class="block transition duration-150 truncate"
-                                            :class="
-                                                isExactActive
-                                                    ? 'text-indigo-500'
-                                                    : 'text-slate-400 hover:text-slate-200'
-                                            "
-                                            :href="href"
-                                            @click="navigate"
-                                        >
-                                            <NavLink :href="route('listado')"
-                                                ><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                                                >
-                                                    Listado organizaciones</span
-                                                ></NavLink
-                                            >
-                                        </a>
-                                    </li>
-                                    <!--</router-link>-->
-                                    <!--<router-link to="/dashboard/fintech" custom v-slot="{ href, navigate, isExactActive }">-->
-                                    <!-- <li class="mb-1 last:mb-0">
-
-                                        <a class="block transition duration-150 truncate"
-                                            :class="isExactActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200'"
-                                            :href="href" @click="navigate">
-                                    </li>
-                                    </router-link>-->
-                                    <!--<router-link to="/dashboard/fintech" custom v-slot="{ href, navigate, isExactActive }">-->
-                                    <!--<li class="mb-1 last:mb-0">
-                                        <a
-                                            class="block transition duration-150 truncate"
-                                            :class="
-                                                isExactActive
-                                                    ? 'text-indigo-500'
-                                                    : 'text-slate-400 hover:text-slate-200'
-                                            "
-                                            :href="href"
-                                            @click="navigate"
-                                        >
-                                            <NavLink :href="route('perfilP')"
-                                                ><span
-                                                    class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                                                >
-                                                    Perfil Publico
-                                                    EMPRESA/ORGANIZACION</span
-                                                ></NavLink
-                                            >
-                                        </a>
-                                    </li>-->
-                                    <!--</router-link>-->
-                                </ul>
-                            </div>
-                        </SidebarLinkGroup>
 
                         <!-- Calendar -->
-
-                        <NavLink :href="route('events')">
+                        <NavLink :href="route('chat')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -368,7 +149,56 @@
                                         </svg>
                                         <span
                                             class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                                            >Opcion</span
+                                            >Chat</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+                        <!-- Calendar -->
+                        <br />
+                        <NavLink :href="route('listado')">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                            >Listado</span
                                         >
                                     </div>
                                 </a>
@@ -376,7 +206,6 @@
                         </NavLink>
 
                         <!-- Calendar -->
-                        <br />
                         <NavLink :href="route('eventsIndex')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
@@ -425,7 +254,56 @@
                             </li>
                         </NavLink>
 
-                        <!-- Calendar -->
+                        <!--  LISTADO NOTICIAS -->
+                        <NavLink :href="route('noticias-listado')">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Listado Noticias</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+                        <!-- Calendar v-if="$page.props.auth.user.rol_id === 2-->
                         <NavLink :href="route('plans')" v-if="$page.props.auth.user.rol_id === 2">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
@@ -552,6 +430,7 @@
                                     </div>
                                 </div>
                             </a>
+
                             <div
                                 class="lg:hidden lg:sidebar-expanded:block 2xl:block"
                             >
@@ -709,9 +588,57 @@
                                 </a>
                             </li>
                         </NavLink>
-
+                        <!--  EDITAR ORGANIZACION -->
+                        <NavLink :href="route('edit-organizacion')">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Editar Organización</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
                         <!-- LPERFIL USUARIO -->
-                        <NavLink :href="route('perfil-usuario')">
+                        <NavLink :href="route('recogerPerfil')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -754,56 +681,6 @@
                                             class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
                                         >
                                             Perfil Usuario</span
-                                        >
-                                    </div>
-                                </a>
-                            </li>
-                        </NavLink>
-
-                        <!-- EDITAR PRFIL USUARIO -->
-                        <NavLink :href="route('editar-usuario')">
-                            <li
-                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
-                                :class="isExactActive && 'bg-slate-900'"
-                            >
-                                <a
-                                    class="block text-slate-200 truncate transition duration-150"
-                                    :class="
-                                        isExactActive
-                                            ? 'hover:text-slate-200'
-                                            : 'hover:text-white'
-                                    "
-                                    :href="href"
-                                    @click="navigate"
-                                >
-                                    <div class="flex items-center">
-                                        <svg
-                                            class="shrink-0 h-6 w-6"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                class="fill-current"
-                                                :class="
-                                                    isExactActive
-                                                        ? 'text-indigo-500'
-                                                        : 'text-slate-600'
-                                                "
-                                                d="M1 3h22v20H1z"
-                                            />
-                                            <path
-                                                class="fill-current"
-                                                :class="
-                                                    isExactActive
-                                                        ? 'text-indigo-300'
-                                                        : 'text-slate-400'
-                                                "
-                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
-                                            />
-                                        </svg>
-                                        <span
-                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
-                                        >
-                                            Editar Perfil Usuario</span
                                         >
                                     </div>
                                 </a>
@@ -1014,6 +891,7 @@
             </div>
 
             <!-- Expand / collapse button -->
+
             <div
                 class="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto"
             >
@@ -1028,15 +906,12 @@
                                 class="text-slate-400"
                                 d="M19.586 11l-5-5L16 4.586 23.414 12 16 19.414 14.586 18l5-5H7v-2z"
                             />
+
                             <path class="text-slate-600" d="M3 23H1V1h2z" />
                         </svg>
                     </button>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
 </template>

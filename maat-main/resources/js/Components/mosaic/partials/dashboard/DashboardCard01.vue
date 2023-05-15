@@ -98,7 +98,21 @@ export default {
 
     return {
       chartData,
+<<<<<<< HEAD
     }
   }
 }
 </script>
+=======
+<<<<<<< HEAD
+    } 
+  }
+}
+</script>
+=======
+    }
+  }
+}
+</script>
+>>>>>>> master
+>>>>>>> carlos

@@ -1,4 +1,3 @@
-
 <script setup>
 import PrivateLayout from "@/Layouts/PrivateLayout.vue";
 import InputError from "@/Components/InputError.vue";
@@ -9,6 +8,7 @@ import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
+
     nombreEvento: "",
     descripcion: "",
     fecha: "",
@@ -29,11 +29,13 @@ const form = useForm({
             <div
                 class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
             >
+
                 <form
                     @submit.prevent="form.patch(route('store'))"
                     enctype="multipart/form-data"
                 >
-                    @csrf
+
+
                     <div>
                         <InputLabel
                             for="nombreEvento"
@@ -83,7 +85,6 @@ const form = useForm({
                             type="date"
                             class="mt-1 block w-full"
                             v-model="form.fecha"
-                            @change="validarAnio"
                         />
 
                         <InputError class="mt-2" :message="form.errors.fecha" />

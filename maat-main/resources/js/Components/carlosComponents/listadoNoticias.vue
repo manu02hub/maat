@@ -2,42 +2,21 @@
 import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
 import PrivateLayout from "@/Layouts/PrivateLayout.vue";
 import CardEvent from "@/Components/manuComponents/CardEvent.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-
-
-const form = useForm({
-    email: "",
-});
+import { Head, Link } from "@inertiajs/vue3";
 </script>
 
 <template>
     <div class="grid-system">
         <div class="div-header">
             <header>
-                <span class="empresa">Empresa</span>
+                <span class="noticias">Noticias</span>
                 <div class="action-buttons">
                     <button class="action-button-eliminar">Eliminar</button>
-                    <Link :href="route('infoUserEmpresa')" class="action-button-añadir">
-                    <button>Añadir usuario</button>
+                    <Link :href="route('noticia-create')" class="action-button-añadir">
+                    <button>Añadir noticia</button>
                     </Link>
                 </div>
-
             </header>
-            <div>
-                <!-- esta es -->
-                <form @submit.prevent="form.get(route('employeeForm',form.email))">
-                    <div class="div-form-primero">
-                        <label for="email">email</label>
-                        <input type="email" id="email"  v-model="form.email">
-                        <PrimaryButton class="ml-4 bg-green-500">
-                            Enviar mail
-                        </PrimaryButton>
-                    </div>
-                </form>
-                <!-- fin -->
-            </div>
-
             <div class="div-tabla">
                 <table>
                     <thead>
@@ -46,27 +25,24 @@ const form = useForm({
                             <th class="attr-input-checkbox">
                                 <input type="checkbox">
                             </th>
-                            <th class="attr-th">Nombre</th>
-                            <th class="attr-th">Apellido 1º</th>
-                            <th class="attr-th">Email</th>
-                            <th class="attr-th">Nº eventos</th>
-                            <th class="attr-th">Horas en eventos</th>
-                            <th class="attr-th">Opciones</th>
+                            <th class="attr-th">Título</th>
+                            <th class="attr-th">Fecha</th>
+                            <th class="attr-th">Descripcion</th>
+                            <th class="attr-th">URL de la Imager</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="users in $page.props.user" :key="users.id">
+                        <tr v-for="noticias in $page.props.noticia" :key="noticias.id">
                             <td class="th-id">1</td>
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
-                            <td class="attr-td">{{ users.nombre }}</td>
-                            <td class="attr-td">{{ users.nombre }}</td>
-                            <td class="attr-td">{{ users.email }}</td>
-                            <td class="attr-td">{{ users.id }}</td>
-                            <td class="attr-td">{{ users.nombre }}</td>
+                            <td class="attr-td">{{ noticias.titulo }}</td>
+                            <td class="attr-td">{{ noticias.fecha }}</td>
+                            <td class="attr-td">{{ noticias.descripcion }}</td>
+                            <td class="attr-td"><img style="width: 150px; height: 100px;" :src="noticias.imagen"></td>
                             <td class="attr-td">
-                                <Link :href="route('editUser', users.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <Link :href="route('noticia-edit', noticias.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">
                                     <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -83,7 +59,7 @@ const form = useForm({
                                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                     </svg>
                                 </button>
-                                <Link :href="route('deleteUser', users.id)">
+                                <Link :href="route('noticia-destroy', noticias.id)">
                                 <button class="action-buttons-list" @click="Eliminar">
                                     <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -126,7 +102,7 @@ const form = useForm({
     border-color: rgb(226 232 240);
 }
 
-.empresa {
+.noticias {
     font-size: 30px;
 }
 

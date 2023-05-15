@@ -119,7 +119,7 @@ import { Head, Link } from "@inertiajs/vue3";
                                                         <Link
                                                             :href="
                                                                 route(
-                                                                    'delete_event_of_user',
+                                                                    'eventInfo',
                                                                     evento.id
                                                                 )
                                                             "

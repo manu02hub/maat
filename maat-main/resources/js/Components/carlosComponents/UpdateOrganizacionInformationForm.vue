@@ -14,10 +14,9 @@ const props = defineProps({
     mustVerifyEmail: Boolean,
     status: String,
 });
-
 const user = usePage().props.auth.user;
 
-var empresa = "";
+var organizacion = "";
 
 const form = useForm({
     name: "",
@@ -31,18 +30,18 @@ const form = useForm({
 onMounted(() => {
     try {
         axios
-            .get("/get/empresa", {
+            .get("/get/organizacion", {
                 params: {
-                    empresa: user.entidad_id,
+                    organizacion: user.entidad_id,
                 },
             })
             .then((response) => {
-                empresa = response.data;
-                form.name = empresa[0].nombre;
-                form.numTar = empresa[0].numero_tarjeta;
-                form.ubicacion = empresa[0].ubicacion;
-                form.web = empresa[0].web;
-                form.descripcion = empresa[0].descripcion;
+                organizacion = response.data;
+                form.name = organizacion[0].nombre;
+                form.numTar = organizacion[0].numero_tarjeta;
+                form.ubicacion = organizacion[0].ubicacion;
+                form.web = organizacion[0].web;
+                form.descripcion = organizacion[0].descripcion;
             });
     } catch (error) {
         console.log(error);
@@ -52,7 +51,6 @@ onMounted(() => {
 // Actualiza los datos
 const actualizar = () => {
     var contador = 0;
-
     try {
         // Mira que todo esté correcto antes de introducir los datos
         // Nombre de la empresa
@@ -114,7 +112,7 @@ const actualizar = () => {
 
         // Si cumple las condiciones, se actualizan los datos
         if (contador == 5) {
-            form.post("/edit/empresa", {
+            form.post("/edit/organizacion", {
                 onSuccess: () => (form.errors.sentData = ""),
                 onError: () =>
                     (form.errors.sentData =
@@ -156,17 +154,17 @@ const mirarInputsTarjeta = (e) => {
         <div class="p-5">
             <header>
                 <h2 class="text-lg font-medium text-gray-900">
-                    Información de la Empresa
+                    Información de la Organizacion
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600">
-                    Actualiza los datos de tu empresa
+                    Actualiza los datos de tu organizacion
                 </p>
             </header>
 
             <form @submit.prevent="actualizar" class="mt-6 space-y-6">
                 <div>
-                    <InputLabel for="name" value="Nombre de la empresa" />
+                    <InputLabel for="name" value="Nombre de la organizacion" />
 
                     <TextInput
                         id="name"
@@ -194,8 +192,8 @@ const mirarInputsTarjeta = (e) => {
                         v-model="form.numTar"
                         required
                         autocomplete="username"
-                        @keydown="mirarInputsTarjeta($event)"
-                        @keypress="mirarInputsTarjeta($event)"
+                        @keydown="mirarInputsWithSpace($event)"
+                        @keypress="mirarInputsWithSpace($event)"
                         @paste="$event.preventDefault()"
                     />
 
@@ -232,8 +230,8 @@ const mirarInputsTarjeta = (e) => {
                         required
                         autofocus
                         autocomplete="web"
-                        @keydown="mirarInputsWeb($event)"
-                        @keypress="mirarInputsWeb($event)"
+                        @keydown="mirarInputsWithSpace($event)"
+                        @keypress="mirarInputsWithSpace($event)"
                         @paste="$event.preventDefault()"
                     />
 
@@ -259,10 +257,7 @@ const mirarInputsTarjeta = (e) => {
                         @paste="$event.preventDefault()"
                     />
 
-                    <InputError
-                        class="mt-2"
-                        :message="form.errors.descripcion"
-                    />
+                    <InputError class="mt-2" :message="form.errors.desc" />
                 </div>
 
                 <div
@@ -290,8 +285,6 @@ const mirarInputsTarjeta = (e) => {
                         address.
                     </div>
                 </div>
-
-                <InputError class="mt-2" :message="form.errors.sentData" />
 
                 <div class="flex items-center gap-4">
                     <PrimaryButton :disabled="form.processing"

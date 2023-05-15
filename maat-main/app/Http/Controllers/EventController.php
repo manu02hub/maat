@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\Carbon;
 class EventController extends Controller
 {
     public function index()
@@ -32,12 +32,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $reglas = [
-            // 'nombreEvento' => 'required|string|max:255',
-            // 'descripcion' => 'required|string',
-            // 'fecha' => 'required',
-            // 'horaInicio' => 'required|date_format:H:i',
-            // 'horaFinal' => 'required|date_format:H:i',
-            // 'plazas' => 'required|integer|min:1',
+            'nombreEvento' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'fecha' => 'required',
+            'horaInicio' => 'required|date_format:H:i',
+            'horaFinal' => 'required|date_format:H:i',
+            'plazas' => 'required|integer|min:1',
         ];
 
         $validatedData = $request->validate($reglas);
