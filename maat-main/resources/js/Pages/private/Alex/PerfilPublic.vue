@@ -204,7 +204,7 @@ export default {
 /*Selector universal*/
 * {
     margin: 0;
-    font-family: "Montserrat";
+    /* font-family: "Montserrat"; */
 }
 
 .goBack {

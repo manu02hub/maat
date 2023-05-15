@@ -718,7 +718,7 @@ export default {
 /*Selector universal*/
 * {
     margin: 0;
-    font-family: "Montserrat";
+    /* font-family: "Montserrat"; */
     box-sizing: unset;
     line-height: normal;
 }
