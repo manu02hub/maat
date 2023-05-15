@@ -29,6 +29,7 @@ import { Link } from "@inertiajs/vue3";
 </template>
 
 <style>
+
 :root {
     --blue: #12d2db;
     --white: #fcf2fa;

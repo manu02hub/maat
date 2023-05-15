@@ -26,9 +26,7 @@ import HeaderVue from "@/Components/mosaic/partials/Header.vue";
                 :sidebarOpen="sidebarOpen"
                 @toggle-sidebar="sidebarOpen = !sidebarOpen"
             />
-            <main>
-                <slot></slot>
-            </main>
+            <main><slot></slot></main>
         </div>
     </div>
 </template>

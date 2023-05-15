@@ -539,7 +539,7 @@ export default {
 /*Selector universal*/
 * {
     margin: 0;
-    font-family: "Montserrat";
+    /* font-family: "Montserrat"; */
 }
 
 /* Código hecho en primer trimestre de DAM y DAW (grid) */
