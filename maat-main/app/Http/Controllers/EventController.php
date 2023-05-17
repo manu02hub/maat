@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Eventos;
 use App\Models\Users;
 use App\Models\plan_contratado;
 use App\Models\asociaciones_contratadas;
 use App\Models\Empresa;
+use App\Models\Post;
+use App\Models\Likes;
 use App\Models\Entidad;
+use App\Models\Comentario;
 use App\Models\img_eventos;
 use App\Models\Organizaciones;
 use App\Models\user_has_evento;
@@ -17,6 +21,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 class EventController extends Controller
+
 {
     public function index()
     {
@@ -156,7 +161,58 @@ class EventController extends Controller
             ->where('id', '<>', $id)
             ->get();
 
+        $posts = Post::where('evento_id', $id)->get()->first();
+
+
+        $likes = Likes::where('post_id', $posts->id)
+        ->where('isLiked', 1)
+        ->distinct('user_id')
+        ->count('user_id');
+
+        $comentario = Comentario::where('post_id', $posts->id)->get();
+        // dd($comentario);
+
+
+
         $estaInscrito = user_has_evento::where('evento_id', $id)->exists();
-        return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito'));
+        return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito','posts','likes', 'comentario'));
     }
+
+
+//     public function createComentario(Request $request, $post_id){
+//         // dd($request);
+//         $user = Users::where("id",auth()->id())->first();
+//        //  dd($user->id);
+//         $comentario = new Comentario();
+//         $comentario-> descripcion = $request->descripcion;
+//         $comentario-> user_id =  $user->id;
+//         $comentario-> post_id = $post_id;
+//         $comentario->save();
+//         return Redirect::route('recogerPost');
+//    }
+
+
+//    public function destroyComentario($id)
+//    {
+//        $comentario = Comentario::findOrFail($id);
+//        $comentario->delete();
+//        return back();
+//    }
+
+//    public function addLike(Request $request, $post_id){
+//     // dd($request);
+//     $user = Users::where("id",auth()->id())->first();
+//    //  dd($user->id);
+//     $likes = new Likes();
+//     $likes-> user_id =  $user->id;
+//     $likes-> post_id = $post_id;
+//     $likes-> isLiked = true;
+//     $likes->save();
+//     return Redirect::route('recogerPost');
+// }
+
+
+
+
+
 }
