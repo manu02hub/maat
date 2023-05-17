@@ -688,8 +688,6 @@
                             </li>
                         </NavLink>
 
-<<<<<<< HEAD
-=======
                         <!-- EDITAR PRFIL USUARIO
                         <NavLink :href="route('recogerPerfil')">
                             <li
@@ -740,7 +738,6 @@
                             </li>
                         </NavLink> -->
 
->>>>>>> mario2
                         <!--  PRFIL EMPRESA -->
                         <NavLink :href="route('perfil-empresa')">
                             <li
