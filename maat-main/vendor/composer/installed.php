@@ -25,6 +25,15 @@
                 0 => '*',
             ),
         ),
+        'cybercog/laravel-love' => array(
+            'pretty_version' => '9.0.0',
+            'version' => '9.0.0.0',
+            'reference' => '0758e2861637300d757b037acdb5637fb7b69baa',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../cybercog/laravel-love',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'davedevelopment/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(

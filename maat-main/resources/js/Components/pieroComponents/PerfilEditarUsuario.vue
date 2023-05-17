@@ -1,3 +1,21 @@
+<script setup>
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+import TextInput from '@/Components/TextInput.vue';
+
+// const user = usePage().props.auth.user;
+
+const { props } = usePage();
+let { user } = props;
+const { id, nombre, email} = user;
+
+const form = useForm({
+    // id: id,
+    nombre: nombre,
+    email: email,
+});
+
+</script>
+
 <template>
     <div class="grow">
       <!-- Panel body -->
@@ -19,11 +37,11 @@
           <div class="sm:flex sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5">
             <div class="sm:w-1/3">
               <label class="block text-sm font-medium mb-1" for="name" >Nombre</label>
-              <input id="name" class="form-input w-full" type="text" v-model="$page.props.auth.user.nombre" />
+              <input id="name" class="form-input w-full" type="text" v-model="form.nombre" />
             </div>
             <div class="sm:w-1/3">
               <label class="block text-sm font-medium mb-1" for="business-id">Nickname</label>
-              <input id="business-id" class="form-input w-full" type="text" v-model="$page.props.auth.user.nombre" />
+              <input id="business-id" class="form-input w-full" type="text" v-model="form.nombre" />
             </div>
             <div class="sm:w-1/3">
               <label class="block text-sm font-medium mb-1" for="location">Empresa</label>
@@ -37,7 +55,7 @@
           <div class="flex flex-wrap mt-5">
             <div class="mr-2">
               <label class="block text-sm font-medium mb-1" for="email">Email-Empresa</label>
-              <input id="email" class="form-input" type="email" v-model="$page.props.auth.user.email" />
+              <input id="email" class="form-input" type="email" v-model="form.email" disabled />
             </div>
           </div>
         </section>
@@ -62,7 +80,7 @@
     </div>
   </template>
 
-  <script>
+  <!-- <script>
   import { ref } from 'vue'
 
   export default {
@@ -76,4 +94,4 @@
       }
     }
   }
-  </script>
+  </script> -->

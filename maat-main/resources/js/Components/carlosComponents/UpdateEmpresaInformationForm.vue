@@ -109,7 +109,7 @@ const actualizar = () => {
             contador++;
         } else {
             form.errors.descripcion =
-                "La descripción tiene que tener 8 carácteres o más.";
+                "La descripción tiene que ser válida y tener 8 carácteres o más.";
         }
 
         // Si cumple las condiciones, se actualizan los datos

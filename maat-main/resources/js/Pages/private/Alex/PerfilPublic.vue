@@ -142,13 +142,13 @@ export default {
                                 </p>
                                 <p
                                     class="descEmplPropio"
-                                    v-if="data.rol_id == 1"
+                                    v-if="data.rol_id == 1 || data.rol_id == 2"
                                 >
                                     Administrador
                                 </p>
                                 <p
                                     class="descEmplPropio"
-                                    v-if="data.rol_id == 2"
+                                    v-if="data.rol_id == 3"
                                 >
                                     Empleado
                                 </p>
@@ -204,7 +204,7 @@ export default {
 /*Selector universal*/
 * {
     margin: 0;
-    font-family: "Montserrat";
+    /* font-family: "Montserrat"; */
 }
 
 .goBack {

@@ -10,11 +10,9 @@ use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
-use App\Http\Controllers\ListadoController;
-use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\NoticiasController;
-use App\Http\Controllers\OrganizacionesController;
+use App\Http\Controllers\ListadoController;
+use App\Http\Controllers\PostController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
 
@@ -81,10 +79,26 @@ Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->name('de
 
 Route::get('/recogerRanking', [RankingController::class, 'ranking'])->name('recogerRanking');
 
-Route::get('/recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
+Route::get('recogerRanking',[RankingController::class, 'ranking'])->name('recogerRanking');
 
-//Mail
-Route::get('employeeForm/{mail}', function ($mail) {
+    //PERFIL
+Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
+
+    //POST
+Route::get('recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
+
+    //COMENTARIO
+Route::patch('crearComentario/{id}', [PostController::class, 'createComentario'])->name('crearComentario');
+Route::get('/deleteComentario/{id}', [PostController::class, 'destroyComentario'])->name('deleteComentario');
+
+    //LIKES
+Route::get('/añadirLike/{id}', [PostController::class, 'addLike'])->name('añadirLike');
+
+
+
+    //MAIL
+Route::get('employeeForm/{mail}',function($mail){    
+    // dd($mail);
     $correo = new EmployeeForm;
     // dd($correo);
     Mail::to($mail)->send($correo);

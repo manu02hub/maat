@@ -6,31 +6,65 @@ import { Link } from "@inertiajs/vue3";
 //         ? 'active'
 //         : ''
 // );
-
 </script>
 
 <template>
     <nav>
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
-            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg"/></i>
+            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg" /></i>
         </label>
         <label class="logo">maat</label>
         <ul>
-            <li><Link :href="route('index')" :class="{ 'active': route().current('index')}">Inicio</Link></li>
-            <li><Link :href="route('noticias')" :class="{ 'active': route().current('noticias')}">Noticias</Link></li>
-            <li><Link :href="route('donativos')" :class="{ 'active': route().current('donativos')}">Donativos</Link></li>
-            <li><Link :href="route('recogerRanking')" :class="{ 'active': route().current('recogerRanking')}">Ranking</Link></li>
-            <li><Link :href="route('login')" :class="{ 'active': route().current('login')}">Login</Link></li>
-            <li><Link :href="route('register')" :class="{ 'active': route().current('register')}">Registro</Link></li>
+            <li>
+                <Link
+                    :href="route('index')"
+                    :class="{ active: route().current('index') }"
+                    >Inicio</Link
+                >
+            </li>
+            <li>
+                <Link
+                    :href="route('noticias')"
+                    :class="{ active: route().current('noticias') }"
+                    >Noticias</Link
+                >
+            </li>
+            <li>
+                <Link
+                    :href="route('donativos')"
+                    :class="{ active: route().current('donativos') }"
+                    >Donativos</Link
+                >
+            </li>
+            <li>
+                <Link
+                    :href="route('recogerRanking')"
+                    :class="{ active: route().current('recogerRanking') }"
+                    >Ranking</Link
+                >
+            </li>
+            <li>
+                <Link
+                    :href="route('login')"
+                    :class="{ active: route().current('login') }"
+                    >Login</Link
+                >
+            </li>
+            <li>
+                <Link
+                    :href="route('register')"
+                    :class="{ active: route().current('register') }"
+                    >Registro</Link
+                >
+            </li>
         </ul>
     </nav>
     <section></section>
 </template>
 
-<style>
-
-:root {
+<style scoped>
+nav {
     --blue: #12d2db;
     --white: #fcf2fa;
     --green: #529541aa;
@@ -48,7 +82,6 @@ import { Link } from "@inertiajs/vue3";
     margin: 0;
     text-decoration: none;
     box-sizing: border-box;
-
 }
 body {
     font-family: "Poppins", sans-serif;
@@ -127,8 +160,8 @@ section {
         font-size: 14px;
     }
     section {
-    padding: 7%;
-}
+        padding: 7%;
+    }
 }
 
 @media (max-width: 858px) {
@@ -165,7 +198,7 @@ section {
         left: 0;
     }
     section {
-    padding: 8%;
-}
+        padding: 8%;
+    }
 }
 </style>
