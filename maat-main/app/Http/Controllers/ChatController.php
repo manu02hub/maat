@@ -117,7 +117,6 @@ class ChatController extends Controller
     // Sirve para tanto coger el chat al iniciar por id
     public function getChatById(Request $request)
     {
-        dd("hllaklncki");
         try {
             // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
             $ong = DB::select('select * from maat.organizacion

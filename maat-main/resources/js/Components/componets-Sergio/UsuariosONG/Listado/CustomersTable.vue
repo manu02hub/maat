@@ -1,16 +1,29 @@
+<script setup>
+import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+import CardEvent from "@/Components/manuComponents/CardEvent.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+
+
+const form = useForm({
+    email: "",
+});
+</script>
 
 <template>
     <div class="grid-system">
         <div class="div-header">
             <header>
-                <span class="empresa">ONG</span>
+                <span class="empresa">Usuarios organizacion</span>
                 <div class="action-buttons">
-                    <button class="action-button-eliminar">Eliminar</button>
-                    <Link :href="route('infoUserONG')" class="action-button-añadir">
+                    <Link :href="route('newUserONG')" class="action-añadir">
                     <button>Añadir usuario</button>
                     </Link>
                 </div>
+
             </header>
+
             <div class="div-tabla">
                 <table>
                     <thead>
@@ -20,7 +33,6 @@
                                 <input type="checkbox">
                             </th>
                             <th class="attr-th">Nombre</th>
-                            <th class="attr-th">Apellido 1º</th>
                             <th class="attr-th">Email</th>
                             <th class="attr-th">Nº eventos</th>
                             <th class="attr-th">Horas en eventos</th>
@@ -28,19 +40,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="users in $page.props.user" :key="users.id">
                             <td class="th-id">1</td>
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
-                            <td class="attr-td">Sergio</td>
-                            <td class="attr-td">Hervas</td>
-                            <td class="attr-td">Sergiohervas9@gmail.com</td>
-                            <td class="attr-td">212</td>
-                            <td class="attr-td">422</td>
+                            <td class="attr-td">{{ users.nombre }}</td>
+                            <td class="attr-td">{{ users.email }}</td>
+                            <td class="attr-td">-</td>
+                            <td class="attr-td">-</td>
                             <td class="attr-td">
-                                <Link :href="route('editUserONG')"
-                                    class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <Link :href="route('editUserONG', users.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">
                                     <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -57,6 +67,7 @@
                                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                     </svg>
                                 </button>
+                                <Link :href="route('deleteUser', users.id)">
                                 <button class="action-buttons-list" @click="Eliminar">
                                     <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -68,6 +79,7 @@
                                         <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                                     </svg>
                                 </button>
+                                </Link>
                             </td>
                         </tr>
 
@@ -79,6 +91,14 @@
 </template>
 
 <style scoped>
+.button-enviar{
+    margin-left: 1%;
+    background-color: rgb(81, 161, 0);
+    padding: 0.9%;
+}
+.Email{
+    margin: 20px;
+}
 .grid-system {
     display: grid;
     grid-template-columns: 1fr;
@@ -88,8 +108,11 @@
     grid-template-rows: auto;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-auto-flow: dense;
-    margin: 20px;
     width: 100%;
+}
+
+.email{
+border-radius: 6px;
 }
 
 .div-header {
@@ -100,6 +123,7 @@
 
 .empresa {
     font-size: 30px;
+    padding-left: 2%;
 }
 
 .div-tabla {
@@ -110,7 +134,8 @@ header {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    padding: 2%;
+    padding-right: 3%;
+    padding-top: 2%;
 }
 
 table {
@@ -152,6 +177,12 @@ th {
     text-align: center;
 }
 
+.action-añadir{
+    background-color: coral;
+    border-radius: 6px;
+    padding: 7%;
+}
+
 .action-buttons-list {
     padding-bottom: 0%;
     padding-left: 3%;
@@ -159,42 +190,5 @@ th {
     padding-top: 0%;
 }
 
-.action-button-añadir {
-    background-color: #ff9800;
-    padding-bottom: 1%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 6%;
-    border-radius: 6px;
-    font-size: 17px;
-    margin-left: 20%;
 
-}
-
-.action-button-eliminar {
-    background-color: #dc3545;
-    padding-bottom: 1%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 1%;
-    border-radius: 6px;
-    font-size: 17px;
-    margin-left: -60%;
-}
-
-.action-buttons {
-    display: flex;
-}
 </style>
-
-<script>
-import { Link } from '@inertiajs/vue3'
-export default {
-    components: { Link },
-    methods: {
-        Eliminar() {
-            alert('Eliminar usuario');
-        }
-    }
-}
-</script>

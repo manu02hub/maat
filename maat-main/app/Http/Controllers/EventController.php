@@ -20,7 +20,8 @@ class EventController extends Controller
 {
     public function index()
     {
-        $eventos = Eventos::all();
+        $organizacion_id = Organizaciones::where('entidad_id',auth()->user()->entidad_id)->first();
+        $eventos = Eventos::where('organizacion_id', $organizacion_id->id)->get();
         return Inertia::render('private/Manu/MenuEventsONG', compact('eventos'));
     }
 
@@ -39,7 +40,7 @@ class EventController extends Controller
             'horaFinal' => 'required|date_format:H:i',
             'plazas' => 'required|integer|min:1',
         ];
-
+        $organizacion_id_entidad = Organizaciones::where('entidad_id',auth()->user()->entidad_id)->first();
         $validatedData = $request->validate($reglas);
         $eventData = new Eventos();
         $eventData->nombre = $validatedData['nombreEvento'];
@@ -49,11 +50,7 @@ class EventController extends Controller
         $eventData->hora_inicio = $validatedData['horaInicio'];
         $eventData->hora_final = $validatedData['horaFinal'];
         $eventData->plazas = $validatedData['plazas'];
-        /**
-         * Revisar la organizacion que este registrada
-         */
-        $eventData->organizacion_id = 1;
-        /**------------------------------------------ */
+        $eventData->organizacion_id =  $organizacion_id_entidad->id;
         $eventData->save();
 
         return Redirect::route('eventsIndex');
@@ -76,7 +73,8 @@ class EventController extends Controller
     {
         $id = $request->id;
         $evento = Eventos::findOrFail($id);
-        // dd($evento);
+        $organizacion_id_entidad = Organizaciones::where('entidad_id',auth()->user()->entidad_id)->first();
+
         $evento->update([
             'nombre' => $request->nombreEvento,
             'descripcion' => $request->descripcion,
@@ -85,7 +83,7 @@ class EventController extends Controller
             'hora_inicio' => $request->horaInicio,
             'hora_final' => $request->horaFinal,
             'plazas' => $request->plazas,
-            'organizacion' => 1
+            'organizacion_id' => $organizacion_id_entidad->id
         ]);
 
         return Redirect::route('eventsIndex');

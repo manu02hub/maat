@@ -28,9 +28,9 @@ import { Link } from "@inertiajs/vue3";
     <section></section>
 </template>
 
-<style>
+<style scoped>
 
-:root {
+nav {
     --blue: #12d2db;
     --white: #fcf2fa;
     --green: #529541aa;

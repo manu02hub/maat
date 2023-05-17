@@ -116,7 +116,7 @@ export default {
 
                         // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
                         this.nameChat = response.data[0].nombre;
-
+                        console.log(response.data);
                         response.data.forEach((mensajes) => {
                             this.chatInicial.push([
                                 mensajes.contenido,

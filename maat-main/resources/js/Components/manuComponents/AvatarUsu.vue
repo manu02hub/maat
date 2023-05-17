@@ -10,6 +10,6 @@ export default {
 <template>
 
     <!-- Avatars group -->
-    <img class="rounded-full border-2 border-white box-content object-fit-cover" :src="imagen" alt="Avatar" style="width: 86px; height: 86px;"/>
+    <img class="rounded-full border-2 border-white box-content object-fit-cover" :src="imagen" alt="" style="width: 86px; height: 86px;"/>
 
 </template>

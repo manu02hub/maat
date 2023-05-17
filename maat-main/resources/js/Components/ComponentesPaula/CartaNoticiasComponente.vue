@@ -27,8 +27,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="grid xl:grid-cols-2 gap-6 m-10">
-
+    <div class="grid xl:grid-cols-1 gap-6 m-10">
         <!-- Item 1 -->
         <article class="flex bg-white shadow-lg rounded-sm border border-slate-200 overflow-hidden">
             <!-- Image -->

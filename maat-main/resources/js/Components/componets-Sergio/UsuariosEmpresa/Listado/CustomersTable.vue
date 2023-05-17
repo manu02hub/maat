@@ -15,10 +15,9 @@ const form = useForm({
     <div class="grid-system">
         <div class="div-header">
             <header>
-                <span class="empresa">Empresa</span>
+                <span class="empresa">Usuarios empresa</span>
                 <div class="action-buttons">
-                    <button class="action-button-eliminar">Eliminar</button>
-                    <Link :href="route('infoUserEmpresa')" class="action-button-añadir">
+                    <Link :href="route('newUserEmpresa')" class="action-añadir">
                     <button>Añadir usuario</button>
                     </Link>
                 </div>
@@ -26,11 +25,10 @@ const form = useForm({
             </header>
             <div>
                 <!-- esta es -->
-                <form @submit.prevent="form.get(route('employeeForm',form.email))">
+                <form @submit.prevent="form.get(route('employeeForm',form.email))" class="Email">
                     <div class="div-form-primero">
-                        <label for="email">email</label>
-                        <input type="email" id="email"  v-model="form.email">
-                        <PrimaryButton class="ml-4 bg-green-500">
+                        <input class="email" type="email" id="email"  v-model="form.email">
+                        <PrimaryButton class="button-enviar">
                             Enviar mail
                         </PrimaryButton>
                     </div>
@@ -47,7 +45,6 @@ const form = useForm({
                                 <input type="checkbox">
                             </th>
                             <th class="attr-th">Nombre</th>
-                            <th class="attr-th">Apellido 1º</th>
                             <th class="attr-th">Email</th>
                             <th class="attr-th">Nº eventos</th>
                             <th class="attr-th">Horas en eventos</th>
@@ -61,12 +58,11 @@ const form = useForm({
                                 <input type="checkbox">
                             </td>
                             <td class="attr-td">{{ users.nombre }}</td>
-                            <td class="attr-td">{{ users.nombre }}</td>
                             <td class="attr-td">{{ users.email }}</td>
-                            <td class="attr-td">{{ users.id }}</td>
-                            <td class="attr-td">{{ users.nombre }}</td>
+                            <td class="attr-td">-</td>
+                            <td class="attr-td">-</td>
                             <td class="attr-td">
-                                <Link :href="route('editUser', users.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <Link :href="route('editUserEmpresa', users.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">
                                     <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -107,6 +103,14 @@ const form = useForm({
 </template>
 
 <style scoped>
+.button-enviar{
+    margin-left: 1%;
+    background-color: rgb(81, 161, 0);
+    padding: 0.9%;
+}
+.Email{
+    margin: 20px;
+}
 .grid-system {
     display: grid;
     grid-template-columns: 1fr;
@@ -116,8 +120,11 @@ const form = useForm({
     grid-template-rows: auto;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-auto-flow: dense;
-    margin: 20px;
     width: 100%;
+}
+
+.email{
+border-radius: 6px;
 }
 
 .div-header {
@@ -128,6 +135,7 @@ const form = useForm({
 
 .empresa {
     font-size: 30px;
+    padding-left: 2%;
 }
 
 .div-tabla {
@@ -138,7 +146,8 @@ header {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    padding: 2%;
+    padding-right: 3%;
+    padding-top: 2%;
 }
 
 table {
@@ -180,6 +189,12 @@ th {
     text-align: center;
 }
 
+.action-añadir{
+    background-color: coral;
+    border-radius: 6px;
+    padding: 7%;
+}
+
 .action-buttons-list {
     padding-bottom: 0%;
     padding-left: 3%;
@@ -187,30 +202,5 @@ th {
     padding-top: 0%;
 }
 
-.action-button-añadir {
-    background-color: #ff9800;
-    padding-bottom: 1%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 6%;
-    border-radius: 6px;
-    font-size: 17px;
-    margin-left: 20%;
 
-}
-
-.action-button-eliminar {
-    background-color: #dc3545;
-    padding-bottom: 1%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 1%;
-    border-radius: 6px;
-    font-size: 17px;
-    margin-left: -60%;
-}
-
-.action-buttons {
-    display: flex;
-}
 </style>
