@@ -94,11 +94,19 @@ Route::get('/ranking', function () {
 Route::get('recogerRanking',[RankingController::class, 'ranking'])->name('recogerRanking');
 
     //PERFIL
-
 Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
 
     //POST
 Route::get('recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
+
+    //COMENTARIO
+Route::patch('crearComentario/{id}', [PostController::class, 'createComentario'])->name('crearComentario');
+Route::get('/deleteComentario/{id}', [PostController::class, 'destroyComentario'])->name('deleteComentario');
+
+    //LIKES
+Route::get('/añadirLike/{id}', [PostController::class, 'addLike'])->name('añadirLike');
+
+
 
     //MAIL
 Route::get('employeeForm/{mail}',function($mail){    
