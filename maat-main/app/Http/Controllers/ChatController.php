@@ -10,11 +10,6 @@ use Inertia\Inertia;
 
 class ChatController extends Controller
 {
-    public function getListado(Request $request)
-    {
-        return Inertia::render('private/Alex/ListadoCliente');
-    }
-
     // Redirecciona si la id a acceder es un numero
     public function getIdReceptor($id)
     {
@@ -325,8 +320,8 @@ class ChatController extends Controller
                         'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
                         'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
                         'chat_id' => $chatId,
-                        'id_origen' => $request->params['id'],
-                        'id_destino' => $request->params['userId'],
+                        'id_origen' => $request->params['userId'],
+                        'id_destino' => $request->params['id'],
                     ]);
                 }
 

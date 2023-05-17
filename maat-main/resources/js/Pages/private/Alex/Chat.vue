@@ -11,6 +11,7 @@ export default {
             nameChat: "",
             idEntidadChat: 0,
             chatHistory: "",
+            canRefresh: true,
 
             // Mensaje (para el input)
             msg: "",
@@ -400,52 +401,65 @@ export default {
                 // Peticiones long polling. Se usa setTimeout porque el setInterval acumula procesos más
                 // rápidamente. Refresca chat cada 7 segundos.
                 await setTimeout(() => {
-                    axios
-                        .post("/chat/refresh", {
-                            params: {
-                                id: this.idEntidadChat,
-                                userId: this.$page.props.auth.user.entidad_id,
-                            },
-                        })
-                        .then((response) => {
-                            // Resetea contenedor de chat
-                            chat[0].innerHTML = "";
-                            chat[1].innerHTML = "";
+                    if (this.canRefresh) {
+                        axios
+                            .post("/chat/refresh", {
+                                params: {
+                                    id: this.idEntidadChat,
+                                    userId: this.$page.props.auth.user
+                                        .entidad_id,
+                                },
+                            })
+                            .then((response) => {
+                                // Resetea contenedor de chat
+                                chat[0].innerHTML = "";
+                                chat[1].innerHTML = "";
 
-                            // El chat coge las 100 últimas, por lo que hay que darle la vuelta para
-                            // decirle desde los mensajes más antiguos a los más recientes
-                            this.chatInicial = [];
+                                // El chat coge las 100 últimas, por lo que hay que darle la vuelta para
+                                // decirle desde los mensajes más antiguos a los más recientes
+                                this.chatInicial = [];
 
-                            response.data.reverse().forEach((mensajes) => {
-                                this.chatInicial.push([
-                                    mensajes.contenido,
-                                    mensajes.id_origen,
-                                    mensajes.fecha,
-                                    mensajes.hora,
-                                ]);
+                                response.data.reverse().forEach((mensajes) => {
+                                    this.chatInicial.push([
+                                        mensajes.contenido,
+                                        mensajes.id_origen,
+                                        mensajes.fecha,
+                                        mensajes.hora,
+                                    ]);
+                                });
+
+                                this.iniciarChatPorId();
+
+                                // El finally hace que pase lo que pase, se haga de nuevo el proceso, haciendo
+                                // que refresque el chat continuamente
+                            })
+                            .finally((response) => {
+                                this.getRefreshedChat();
                             });
-
-                            this.iniciarChatPorId();
-
-                            // El finally hace que pase lo que pase, se haga de nuevo el proceso, haciendo
-                            // que refresque el chat continuamente
-                        })
-                        .finally((response) => {
-                            this.getRefreshedChat();
-                        });
+                    } else {
+                        this.getRefreshedChat();
+                    }
                 }, 7000);
             } catch (error) {
                 console.log(error);
             }
         },
 
-        goListado: function(){
+        goListado: function () {
             try {
-                window.location.href = route('listado');
+                window.location.href = route("listado");
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
+
+        changeCanRefresh: function (valor) {
+            try {
+                this.canRefresh = valor;
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
 
     // Lo que hace a la hora de montarse la vista
@@ -554,7 +568,7 @@ export default {
                                 <div
                                     class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio infoChatPropio"
                                 >
-                                    <h2 class="h2DefaultPropio">
+                                    <h2 class="h2DefaultPropio smallerNameChat">
                                         {{ data.nombre }}
                                     </h2>
                                     <p class="pDefaultPropio lastMsgPropio">
@@ -586,7 +600,7 @@ export default {
                                 <div
                                     class="col-lg-10Propio col-md-10Propio col-sm-12Propio col-12Propio infoChatPropio"
                                 >
-                                    <h2 class="h2DefaultPropio">
+                                    <h2 class="h2DefaultPropio smallerNameChat">
                                         {{ data.nombre }}
                                     </h2>
                                 </div>
@@ -596,7 +610,6 @@ export default {
                 </div>
             </div>
 
-            <!-- https://pictogrammers.com/library/mdi/icon/arrow-left-bold-box/ -->
             <div
                 class="col-lg-9Propio col-md-9Propio col-sm-12Propio col-12Propio rowPropio noRowGapPropio noColGapPropio pantallaChatPropio"
             >
@@ -607,14 +620,19 @@ export default {
                     <div
                         class="nameContainerPropio col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio"
                     >
-                        <h2 class="h2DefaultPropio">{{ this.nameChat }}</h2>
+                        <h2 class="h2DefaultPropio">
+                            {{ this.nameChat }}
+                        </h2>
                     </div>
 
                     <div
                         class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio chatContainerPropio"
                     >
+                        <!-- Contenedor del chat (con los mensajes) -->
                         <div
                             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio chatUsersPropio contenedorChatAfueraPropio"
+                            @mouseenter="changeCanRefresh(false)"
+                            @mouseleave="changeCanRefresh(true)"
                         >
                             <div class="contenedorChatPropio"></div>
                         </div>
@@ -723,7 +741,7 @@ export default {
     line-height: normal;
 }
 
-.goList{
+.goList {
     color: white;
     background-color: #23458f;
     cursor: pointer;
@@ -732,7 +750,7 @@ export default {
     padding: 2.5rem;
 }
 
-.goList:hover{
+.goList:hover {
     background-color: #6283cb;
 }
 
@@ -983,10 +1001,27 @@ export default {
 
 /* Estilo del último mensaje enviado */
 .lastMsgPropio {
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: #3d3d3d;
     font-style: italic;
     font-size: smaller;
     margin-top: 1px;
+}
+
+/* Estilo h2 por defecto */
+.h2DefaultPropio {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.pDefaultPropio {
+    display: block;
 }
 
 /* Estilos responsive */
@@ -1033,6 +1068,16 @@ export default {
     .chatFilterPropio {
         padding: 1rem;
     }
+
+    .smallerNameChat {
+        text-overflow: ellipsis; /* Pone elipses si el texto es mayor que el width */
+        white-space: nowrap; /* Una sola línea */
+        overflow: hidden; /* Oculta texto que sobrepase el width definido */
+    }
+
+    .filterTitlePropio {
+        font-size: 1.25rem !important;
+    }
 }
 
 /* Pantalla tablet  */
@@ -1076,9 +1121,16 @@ export default {
 
     /* Titulo de los tipos de chat (recientes y todos los contactos) */
     .filterTitlePropio {
-        font-size: large;
+        font-size: large !important;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
+        user-select: none;
+    }
+
+    .smallerNameChat {
+        text-overflow: ellipsis; /* Pone elipses si el texto es mayor que el width */
+        white-space: nowrap; /* Una sola línea */
+        overflow: hidden; /* Oculta texto que sobrepase el width definido */
     }
 }
 
@@ -1126,6 +1178,7 @@ export default {
         font-size: large;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
+        user-select: none;
     }
 
     /* Pone todos los elementos de la lista de contactos en la misma linea */
@@ -1208,6 +1261,7 @@ export default {
         font-size: large;
         padding-top: 1.25rem;
         padding-bottom: 1.25rem;
+        user-select: none;
     }
 
     /* Pone todos los elementos de la lista de contactos en la misma linea */
@@ -1273,20 +1327,5 @@ export default {
     .borderContainerPropio {
         height: 42rem;
     }
-}
-
-/* Estilo h2 por defecto */
-.h2DefaultPropio {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
-
-.pDefaultPropio {
-    display: block;
 }
 </style>
