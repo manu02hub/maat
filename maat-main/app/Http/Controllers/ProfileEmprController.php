@@ -52,6 +52,7 @@ class ProfileEmprController extends Controller
     // Elimina la empresa y todos los usuarios asociados a esta
     public function deleteEmpr(Request $request)
     {
+        // Validación de contraseña
         $request->validate([
             'password' => ['required', 'current-password'],
         ]);
@@ -89,12 +90,15 @@ class ProfileEmprController extends Controller
                     $user->entidad_id
                 ]);
 
+                // Sale de sesión
                 Auth::logout();
             } else {
+                // En el caso de más de 1 admin en la entidad, solo se eliminará el usuario
                 Auth::logout();
                 $user->delete();
             }
 
+            // Nuevo tokens
             $request->session()->invalidate();
             $request->session()->regenerateToken();
         } catch (\Throwable $th) {
