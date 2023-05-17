@@ -10,8 +10,10 @@ use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
-use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ListadoController;
+use App\Http\Controllers\MatchController;
+use App\Http\Controllers\PlansController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
@@ -45,16 +47,16 @@ Route::get('/events', function () {
     return Inertia::render('Events');
 })->middleware(['auth', 'verified'])->name('events');
 
-//---------------------MANU-----------------
 
 
-Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified'])->name('eventsIndex');
-Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified'])->name('createNewEvent');
-Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
-Route::patch('/updateEvent', [EventController::class, 'update'])->middleware(['auth', 'verified'])->name('updateEvent');
-Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified'])->name('edit');
-Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->middleware(['auth', 'verified'])->name('delete');
-// Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified])->name('eventsUser');
+/*----------------------------------------------------[SERGIO]----------------------------------------------------*/
+
+Route::get('/eventsIndex', [EventController::class, 'index'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('eventsIndex');
+Route::get('/createNewEvent', [EventController::class, 'create'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('createNewEvent');
+Route::patch('/store', [EventController::class, 'store'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('store');
+Route::patch('/updateEvent', [EventController::class, 'update'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('updateEvent');
+Route::get('/edit/{id}', [EventController::class, 'edit'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('edit');
+Route::get('/eliminar/{id}', [EventController::class, 'destroy'])->middleware(['auth', 'verified','CheckUserRole:1'])->name('delete');
 Route::get('/allEventsUser', [EventController::class, 'indexAllEventUser'])->middleware(['auth', 'verified'])->name('allEventsToUser');
 Route::get('/eventsUser', [EventController::class, 'indexOwnUserEvents'])->middleware(['auth', 'verified'])->name('ownEventsUser');
 Route::get('/add_event_to_user/{id}', [EventController::class, 'apuntarseEvento'])->middleware(['auth', 'verified'])->name('add_event_to_user');
@@ -65,21 +67,33 @@ Route::get('/joinPlan/{id}', [PlansController::class, 'joinPlan'])->middleware([
 Route::get('/deposePlan/{id}', [PlansController::class, 'deposePlan'])->middleware(['auth', 'verified'])->name('deposePlan');
 
 
-// Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified','CheckUserRole:3'])->name('deposePlan');
+Route::get('/match/{id}', [MatchController::class, 'match'])->middleware(['auth', 'verified'])->name('match');
 
-//-----------------------------------SERGIO---------------------------------------------------
+
+
+// Route::get('/eventsUser', [EventController::class, 'indexEventUser'])->middleware(['auth', 'verified])->name('eventsUser');
+// Route::get('/deposePlan/{id}',[PlansController::class, 'deposePlan'])->middleware(['auth', 'verified'])->name('deposePlan');
+
+/*----------------------------------------------------------------------------------------------------------------*/
 //------------------------------------MARIO---------------------------------------------------
 
 //PUBLIC
-Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
-Route::patch('/createUser', [RegisterUser::class, 'createUser'])->middleware(['auth', 'verified'])->name('createUser');
-Route::get('/editUser/{id}', [RegisterUser::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
+Route::get('/indexUserONG', [RegisterUser::class, 'indexUserONG'])->middleware(['auth', 'verified'])->name('indexUserONG');
+Route::get('/indexUserEmpresa', [RegisterUser::class, 'indexUserEmpresa'])->middleware(['auth', 'verified'])->name('indexUserEmpresa');
+Route::get('/newUserONG', [RegisterUser::class, 'newUserONG'])->middleware(['auth', 'verified'])->name('newUserONG');
+Route::get('/newUserEmpresa', [RegisterUser::class, 'newUserEmpresa'])->middleware(['auth', 'verified'])->name('newUserEmpresa');
+Route::patch('/createUserONG', [RegisterUser::class, 'createUserONG'])->middleware(['auth', 'verified'])->name('createUserONG');
+Route::patch('/createUserEmpresa', [RegisterUser::class, 'createUserEmpresa'])->middleware(['auth', 'verified'])->name('createUserEmpresa');
+Route::get('/editUserONG/{id}', [RegisterUser::class, 'editUserONG'])->middleware(['auth', 'verified'])->name('editUserONG');
+Route::get('/editUserEmpresa/{id}', [RegisterUser::class, 'editUserEmpresa'])->middleware(['auth', 'verified'])->name('editUserEmpresa');
+Route::patch('/updateUserEmpresa', [RegisterUser::class, 'updateUserEmpresa'])->middleware(['auth', 'verified'])->name('updateUserEmpresa');
+Route::patch('/updateUserONG', [RegisterUser::class, 'updateUserONG'])->middleware(['auth', 'verified'])->name('updateUserONG');
+Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->middleware(['auth', 'verified'])->name('deleteUser');
 Route::patch('/updateUser', [RegisterUser::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
-Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->name('deleteUser');
-
 Route::get('/recogerRanking', [RankingController::class, 'ranking'])->name('recogerRanking');
 
-Route::get('recogerRanking',[RankingController::class, 'ranking'])->name('recogerRanking');
+Route::get('/editUser/{id}', [RegisterUser::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
+Route::get('/recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
 
     //PERFIL
 Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
@@ -97,7 +111,7 @@ Route::get('/añadirLike/{id}', [PostController::class, 'addLike'])->name('añad
 
 
     //MAIL
-Route::get('employeeForm/{mail}',function($mail){    
+Route::get('employeeForm/{mail}',function($mail){
     // dd($mail);
     $correo = new EmployeeForm;
     // dd($correo);
@@ -113,33 +127,33 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'Empresa'], func
     Route::get('/indexUser', [RegisterUser::class, 'indexUser'])->middleware(['auth', 'verified'])->name('indexUser');
     /*------------------------------------------------------------------------------------------*/
 
-    Route::get('/listado', function () {
-        return Inertia::render('private/Sergio/UsuariosEmpresa/Listado');
-    })->name('listUserEmpresa');
+    // Route::get('/listado', function () {
+    //     return Inertia::render('private/Sergio/UsuariosEmpresa/Listado');
+    // })->name('listUserEmpresa');
 
-    Route::get('/info', function () {
-        return Inertia::render('private/Sergio/UsuariosEmpresa/InfoUsuario');
-    })->name('infoUserEmpresa');
+    // Route::get('/info', function () {
+    //     return Inertia::render('private/Sergio/UsuariosEmpresa/InfoUsuario');
+    // })->name('infoUserEmpresa');
 
-    Route::get('/edit', function () {
-        return Inertia::render('private/Sergio/UsuariosEmpresa/EditUsuario');
-    })->name('editUserEmpresa');
+    // Route::get('/edit', function () {
+    //     return Inertia::render('private/Sergio/UsuariosEmpresa/EditUsuario');
+    // })->name('editUserEmpresa');
 });
 /*---------------------------------------------------------------------------------------------------------*/
 
 /*---------------------------------------[ONG]---------------------------------------*/
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'ONG'], function () {
-    Route::get('/listado', function () {
-        return Inertia::render('private/Sergio/UsuariosONG/Listado');
-    })->name('listUserONG');
+    // Route::get('/listado', function () {
+    //     return Inertia::render('private/Sergio/UsuariosONG/Listado');
+    // })->name('listUserONG');
 
-    Route::get('/info', function () {
-        return Inertia::render('private/Sergio/UsuariosONG/InfoUsuario');
-    })->name('infoUserONG');
+    // Route::get('/info', function () {
+    //     return Inertia::render('private/Sergio/UsuariosONG/InfoUsuario');
+    // })->name('infoUserONG');
 
-    Route::get('/edit', function () {
-        return Inertia::render('private/Sergio/UsuariosONG/EditUsuario');
-    })->name('editUserONG');
+    // Route::get('/edit', function () {
+    //     return Inertia::render('private/Sergio/UsuariosONG/EditUsuario');
+    // })->name('editUserONG');
 });
 /*---------------------------------------------------------------------------------------------------------*/
 

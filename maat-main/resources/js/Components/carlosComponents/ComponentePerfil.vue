@@ -7,9 +7,10 @@
         <div class="relative h-56 bg-slate-200">
             <img
                 class="object-cover h-full w-full"
-                src="./../../../img/fondoP.jpg"
-                width="100"
+                src="./../../../img/profile-bg.jpg"
+                width="979"
                 height="220"
+                alt="Profile background"
             />
             <!-- Close button -->
             <button
@@ -42,9 +43,7 @@
                     <h1 class="text-2xl text-slate-800 font-bold">
                         {{ this.entData[0].nombre }}
                     </h1>
-                    <h1 class="text-2xl text-slate-800 font-bold">
-                        Nombre Empresa
-                    </h1>
+                    <!--<h1 class="text-2xl text-slate-800 font-bold">Nombre Empresa</h1>-->
                 </div>
                 <div
                     class="flex flex-wrap justify-center sm:justify-start space-x-4"
@@ -96,6 +95,10 @@
                             <p>
                                 {{ this.entData[0].descripcion }}
                             </p>
+                            <p>
+                                Consectetur adipiscing elit, sed do eiusmod
+                                tempor magna aliqua.
+                            </p>
                         </div>
                     </div>
 
@@ -109,14 +112,14 @@
                             <!-- Card footer -->
                             <div class="flex justify-between items-center">
                                 <!-- Avatars group -->
-                                <AvatarGroup></AvatarGroup>
-                                <!-- Link -->
-                                <div>
-                                    <a
-                                        class="text-sm font-medium text-indigo-500 hover:text-indigo-600"
-                                        href="#0"
-                                        >View More -&gt;</a
-                                    >
+                                <div class="flex -space-x-5 -ml-0.5">
+                                    <img
+                                        class="rounded-full border-2 border-white box-content object-fit-cover"
+                                        src="./../../../img/fotoPerfil.png"
+                                        width="86"
+                                        height="86"
+                                        alt=""
+                                    />
                                 </div>
                             </div>
                         </div>

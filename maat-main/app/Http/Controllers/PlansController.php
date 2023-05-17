@@ -29,25 +29,27 @@ class PlansController extends Controller
         /**Ver si lo que esta registrado es un administrador de empresa */
         $usuario = Users::select('users.*', 'rol.nombre as nombre_rol')
             ->join('rol', 'users.rol_id', '=', 'rol.id')
-            ->where('rol.nombre', '=', 'adminEmpresa')
+            ->where('rol.nombre', '=', 'AdminEmpresa')
             ->first();
-        $entidad_id = $usuario->entidad_id;
-        $enlaceEmpresa_Entidad = Empresa::where('entidad_id', $entidad_id)->first();
-        /**Saber si la empresa tiene algun tipo de plan */
-        $existePlan = plan_contratado::where('empresa_id', $enlaceEmpresa_Entidad->id)->first();
-        /**Verifico si existe un plan, en caso de que exista, filtrar cual es el que tiene, e indicarselo al empresario */
-        if ($existePlan) {
-            // dd('existe plan');
-            $existePlanValidator = true;
-            /**Paquete que tiene contratado */
-            $plan = tipos_plan::where('id', $existePlan->tipos_plan_id)->first();
-            /**Planes que hay*/
-            $tipos_plan = tipos_plan::pluck('nombre');
-            return Inertia::render('private/Manu/Plans', compact('planes', 'tipos_plan', 'existePlanValidator', 'plan'));
-        } else {
-            // dd('no existe plan');
-            $existePlanValidator = false;
-            return Inertia::render('private/Manu/Plans', compact('planes', 'existePlanValidator'));
+        if ($usuario != null) {
+            $entidad_id = $usuario->entidad_id;
+            $enlaceEmpresa_Entidad = Empresa::where('entidad_id', $entidad_id)->first();
+            /**Saber si la empresa tiene algun tipo de plan */
+            $existePlan = plan_contratado::where('empresa_id', $enlaceEmpresa_Entidad->id)->first();
+            /**Verifico si existe un plan, en caso de que exista, filtrar cual es el que tiene, e indicarselo al empresario */
+            if ($existePlan) {
+                // dd('existe plan');
+                $existePlanValidator = true;
+                /**Paquete que tiene contratado */
+                $plan = tipos_plan::where('id', $existePlan->tipos_plan_id)->first();
+                /**Planes que hay*/
+                $tipos_plan = tipos_plan::pluck('nombre');
+                return Inertia::render('private/Manu/Plans', compact('planes', 'tipos_plan', 'existePlanValidator', 'plan'));
+            } else {
+                // dd('no existe plan');
+                $existePlanValidator = false;
+                return Inertia::render('private/Manu/Plans', compact('planes', 'existePlanValidator'));
+            }
         }
         /*---------------------------------------------------------------------*/
     }

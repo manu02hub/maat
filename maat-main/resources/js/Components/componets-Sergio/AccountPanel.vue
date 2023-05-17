@@ -24,9 +24,8 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('updateUserEmpresa'))">
-                    <div class="title">Editar Usuario Empresa</div>
-                    <span>Este usuario sera un cliente de su empresa, el cual tendra acceso con las credenciales que uste como empresa le facilite</span>
+                <form @submit.prevent="form.patch(route('updateUser'))">
+                    <div class="title">Editar Usuario</div>
                     <label for="nombre">Nombre:</label>
                     <input
                         type="text"
@@ -66,7 +65,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuario
+                            Actualizar Usuarioaaaa
                         </PrimaryButton>
                     </div>
                 </form>

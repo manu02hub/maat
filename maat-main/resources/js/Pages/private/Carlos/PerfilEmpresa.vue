@@ -6,7 +6,7 @@ import PrivateLayout from '@/Layouts/PrivateLayout.vue';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
 
 
     <PrivateLayout>

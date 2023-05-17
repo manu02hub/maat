@@ -144,7 +144,13 @@ export default {
                                     class="descEmplPropio"
                                     v-if="data.rol_id == 1 || data.rol_id == 2"
                                 >
-                                    Administrador
+                                    Administrador ONG
+                                </p>
+                                <p
+                                    class="descEmplPropio"
+                                    v-if="data.rol_id == 3"
+                                >
+                                    Administrador Empresa
                                 </p>
                                 <p
                                     class="descEmplPropio"
@@ -169,6 +175,14 @@ export default {
                                 src="./../../../../img/chat-fill.svg"
                                 class="filtroSvgPropio"
                             />
+                        </button>
+                    </a>
+                    <a v-if="$page.props.auth.user.rol_id === 2"
+                        class="aNoDecPropio"
+                        :href="route('match',this.org[0].org)"
+                    >
+                        <button class="btnChat2Propio">
+                            Contratar Organizacion
                         </button>
                     </a>
 
