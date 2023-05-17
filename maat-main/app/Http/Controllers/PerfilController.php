@@ -17,11 +17,4 @@ class PerfilController extends Controller
         return Inertia::render('private/Piero/PerfilUsuario', compact('user'));
     }
 
-    public function editPerfil($id){
-
-    }
-
-    public function updatePerfil(Request $request){
-
-    }
 }

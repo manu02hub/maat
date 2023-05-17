@@ -688,6 +688,59 @@
                             </li>
                         </NavLink>
 
+<<<<<<< HEAD
+=======
+                        <!-- EDITAR PRFIL USUARIO
+                        <NavLink :href="route('recogerPerfil')">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Editar Perfil Usuario</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink> -->
+
+>>>>>>> mario2
                         <!--  PRFIL EMPRESA -->
                         <NavLink :href="route('perfil-empresa')">
                             <li

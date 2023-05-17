@@ -9,6 +9,9 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> mario2
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
     'App\\Http\\Controllers\\Auth\\EmailVerificationNotificationController' => $baseDir . '/app/Http/Controllers/Auth/EmailVerificationNotificationController.php',
@@ -20,6 +23,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisteredUserController' => $baseDir . '/app/Http/Controllers/Auth/RegisteredUserController.php',
     'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
     'App\\Http\\Controllers\\ChatController' => $baseDir . '/app/Http/Controllers/ChatController.php',
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> carlos
@@ -60,6 +64,20 @@ return array(
     'App\\Http\\Middleware\\HandleInertiaRequests' => $baseDir . '/app/Http/Middleware/HandleInertiaRequests.php',
 >>>>>>> master
 >>>>>>> carlos
+=======
+    'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\EventController' => $baseDir . '/app/Http/Controllers/EventController.php',
+    'App\\Http\\Controllers\\ListadoController' => $baseDir . '/app/Http/Controllers/ListadoController.php',
+    'App\\Http\\Controllers\\PerfilController' => $baseDir . '/app/Http/Controllers/PerfilController.php',
+    'App\\Http\\Controllers\\PostController' => $baseDir . '/app/Http/Controllers/PostController.php',
+    'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
+    'App\\Http\\Controllers\\ProfileEmprController' => $baseDir . '/app/Http/Controllers/ProfileEmprController.php',
+    'App\\Http\\Controllers\\RankingController' => $baseDir . '/app/Http/Controllers/RankingController.php',
+    'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
+    'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
+    'App\\Http\\Middleware\\HandleInertiaRequests' => $baseDir . '/app/Http/Middleware/HandleInertiaRequests.php',
+>>>>>>> mario2
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
@@ -68,12 +86,20 @@ return array(
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
+=======
+    'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
+    'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
+    'App\\Mail\\EmployeeForm' => $baseDir . '/app/Mail/EmployeeForm.php',
+    'App\\Models\\Comentario' => $baseDir . '/app/Models/Comentario.php',
+>>>>>>> mario2
     'App\\Models\\Empresa' => $baseDir . '/app/Models/Empresa.php',
     'App\\Models\\Entidad' => $baseDir . '/app/Models/Entidad.php',
     'App\\Models\\Eventos' => $baseDir . '/app/Models/Eventos.php',
     'App\\Models\\Organizaciones' => $baseDir . '/app/Models/Organizaciones.php',
+<<<<<<< HEAD
     'App\\Models\\Planes' => $baseDir . '/app/Models/Planes.php',
     'App\\Models\\Rol' => $baseDir . '/app/Models/Rol.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
@@ -101,6 +127,14 @@ return array(
     'App\\Models\\user_has_evento' => $baseDir . '/app/Models/user_has_evento.php',
 >>>>>>> master
 >>>>>>> carlos
+=======
+    'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
+    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Users' => $baseDir . '/app/Models/Users.php',
+    'App\\Models\\asociaciones_contratadas' => $baseDir . '/app/Models/asociaciones_contratadas.php',
+    'App\\Models\\plan_contratado' => $baseDir . '/app/Models/plan_contratado.php',
+    'App\\Models\\user_has_evento' => $baseDir . '/app/Models/user_has_evento.php',
+>>>>>>> mario2
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
@@ -205,6 +239,78 @@ return array(
     'Carbon\\Translator' => $vendorDir . '/nesbot/carbon/src/Carbon/Translator.php',
     'Carbon\\TranslatorImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
     'Carbon\\TranslatorStrongTypeInterface' => $vendorDir . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
+    'Cog\\Contracts\\Love\\Exceptions\\LoveThrowable' => $vendorDir . '/cybercog/laravel-love/contracts/Exceptions/LoveThrowable.php',
+    'Cog\\Contracts\\Love\\Reactable\\Exceptions\\AlreadyRegisteredAsLoveReactant' => $vendorDir . '/cybercog/laravel-love/contracts/Reactable/Exceptions/AlreadyRegisteredAsLoveReactant.php',
+    'Cog\\Contracts\\Love\\Reactable\\Exceptions\\ReactableInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reactable/Exceptions/ReactableInvalid.php',
+    'Cog\\Contracts\\Love\\Reactable\\Models\\Reactable' => $vendorDir . '/cybercog/laravel-love/contracts/Reactable/Models/Reactable.php',
+    'Cog\\Contracts\\Love\\Reactant\\Exceptions\\NotAssignedToReactable' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/Exceptions/NotAssignedToReactable.php',
+    'Cog\\Contracts\\Love\\Reactant\\Exceptions\\ReactantInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/Exceptions/ReactantInvalid.php',
+    'Cog\\Contracts\\Love\\Reactant\\Facades\\Reactant' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/Facades/Reactant.php',
+    'Cog\\Contracts\\Love\\Reactant\\Models\\Reactant' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/Models/Reactant.php',
+    'Cog\\Contracts\\Love\\Reactant\\ReactionCounter\\Exceptions\\ReactionCounterDuplicate' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/ReactionCounter/Exceptions/ReactionCounterDuplicate.php',
+    'Cog\\Contracts\\Love\\Reactant\\ReactionCounter\\Exceptions\\ReactionCounterInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/ReactionCounter/Exceptions/ReactionCounterInvalid.php',
+    'Cog\\Contracts\\Love\\Reactant\\ReactionCounter\\Models\\ReactionCounter' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/ReactionCounter/Models/ReactionCounter.php',
+    'Cog\\Contracts\\Love\\Reactant\\ReactionTotal\\Exceptions\\ReactionTotalDuplicate' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/ReactionTotal/Exceptions/ReactionTotalDuplicate.php',
+    'Cog\\Contracts\\Love\\Reactant\\ReactionTotal\\Exceptions\\ReactionTotalInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/ReactionTotal/Exceptions/ReactionTotalInvalid.php',
+    'Cog\\Contracts\\Love\\Reactant\\ReactionTotal\\Models\\ReactionTotal' => $vendorDir . '/cybercog/laravel-love/contracts/Reactant/ReactionTotal/Models/ReactionTotal.php',
+    'Cog\\Contracts\\Love\\Reacter\\Exceptions\\NotAssignedToReacterable' => $vendorDir . '/cybercog/laravel-love/contracts/Reacter/Exceptions/NotAssignedToReacterable.php',
+    'Cog\\Contracts\\Love\\Reacter\\Exceptions\\ReacterInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reacter/Exceptions/ReacterInvalid.php',
+    'Cog\\Contracts\\Love\\Reacter\\Facades\\Reacter' => $vendorDir . '/cybercog/laravel-love/contracts/Reacter/Facades/Reacter.php',
+    'Cog\\Contracts\\Love\\Reacter\\Models\\Reacter' => $vendorDir . '/cybercog/laravel-love/contracts/Reacter/Models/Reacter.php',
+    'Cog\\Contracts\\Love\\Reacterable\\Exceptions\\AlreadyRegisteredAsLoveReacter' => $vendorDir . '/cybercog/laravel-love/contracts/Reacterable/Exceptions/AlreadyRegisteredAsLoveReacter.php',
+    'Cog\\Contracts\\Love\\Reacterable\\Exceptions\\ReacterableInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reacterable/Exceptions/ReacterableInvalid.php',
+    'Cog\\Contracts\\Love\\Reacterable\\Models\\Reacterable' => $vendorDir . '/cybercog/laravel-love/contracts/Reacterable/Models/Reacterable.php',
+    'Cog\\Contracts\\Love\\ReactionType\\Exceptions\\ReactionTypeInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/ReactionType/Exceptions/ReactionTypeInvalid.php',
+    'Cog\\Contracts\\Love\\ReactionType\\Models\\ReactionType' => $vendorDir . '/cybercog/laravel-love/contracts/ReactionType/Models/ReactionType.php',
+    'Cog\\Contracts\\Love\\Reaction\\Exceptions\\RateInvalid' => $vendorDir . '/cybercog/laravel-love/contracts/Reaction/Exceptions/RateInvalid.php',
+    'Cog\\Contracts\\Love\\Reaction\\Exceptions\\RateOutOfRange' => $vendorDir . '/cybercog/laravel-love/contracts/Reaction/Exceptions/RateOutOfRange.php',
+    'Cog\\Contracts\\Love\\Reaction\\Exceptions\\ReactionAlreadyExists' => $vendorDir . '/cybercog/laravel-love/contracts/Reaction/Exceptions/ReactionAlreadyExists.php',
+    'Cog\\Contracts\\Love\\Reaction\\Exceptions\\ReactionNotExists' => $vendorDir . '/cybercog/laravel-love/contracts/Reaction/Exceptions/ReactionNotExists.php',
+    'Cog\\Contracts\\Love\\Reaction\\Models\\Reaction' => $vendorDir . '/cybercog/laravel-love/contracts/Reaction/Models/Reaction.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\ReactionTypeAdd' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/ReactionTypeAdd.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\Recount' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/Recount.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\RegisterReactants' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/RegisterReactants.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\RegisterReacters' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/RegisterReacters.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\SetupReactable' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/SetupReactable.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\SetupReacterable' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/SetupReacterable.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\UpgradeV5ToV6' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/UpgradeV5ToV6.php',
+    'Cog\\Laravel\\Love\\Console\\Commands\\UpgradeV7ToV8' => $vendorDir . '/cybercog/laravel-love/src/Console/Commands/UpgradeV7ToV8.php',
+    'Cog\\Laravel\\Love\\LoveEventServiceProvider' => $vendorDir . '/cybercog/laravel-love/src/LoveEventServiceProvider.php',
+    'Cog\\Laravel\\Love\\LoveServiceProvider' => $vendorDir . '/cybercog/laravel-love/src/LoveServiceProvider.php',
+    'Cog\\Laravel\\Love\\Reactable\\Models\\Traits\\Reactable' => $vendorDir . '/cybercog/laravel-love/src/Reactable/Models/Traits/Reactable.php',
+    'Cog\\Laravel\\Love\\Reactable\\Observers\\ReactableObserver' => $vendorDir . '/cybercog/laravel-love/src/Reactable/Observers/ReactableObserver.php',
+    'Cog\\Laravel\\Love\\Reactable\\ReactableEloquentBuilderTrait' => $vendorDir . '/cybercog/laravel-love/src/Reactable/ReactableEloquentBuilderTrait.php',
+    'Cog\\Laravel\\Love\\Reactant\\Facades\\Reactant' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Facades/Reactant.php',
+    'Cog\\Laravel\\Love\\Reactant\\Jobs\\DecrementReactionAggregatesJob' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Jobs/DecrementReactionAggregatesJob.php',
+    'Cog\\Laravel\\Love\\Reactant\\Jobs\\IncrementReactionAggregatesJob' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Jobs/IncrementReactionAggregatesJob.php',
+    'Cog\\Laravel\\Love\\Reactant\\Jobs\\RebuildReactionAggregatesJob' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Jobs/RebuildReactionAggregatesJob.php',
+    'Cog\\Laravel\\Love\\Reactant\\Listeners\\DecrementAggregates' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Listeners/DecrementAggregates.php',
+    'Cog\\Laravel\\Love\\Reactant\\Listeners\\IncrementAggregates' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Listeners/IncrementAggregates.php',
+    'Cog\\Laravel\\Love\\Reactant\\Models\\NullReactant' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Models/NullReactant.php',
+    'Cog\\Laravel\\Love\\Reactant\\Models\\Reactant' => $vendorDir . '/cybercog/laravel-love/src/Reactant/Models/Reactant.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionCounter\\Models\\NullReactionCounter' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionCounter/Models/NullReactionCounter.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionCounter\\Models\\ReactionCounter' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionCounter/Models/ReactionCounter.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionCounter\\Observers\\ReactionCounterObserver' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionCounter/Observers/ReactionCounterObserver.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionCounter\\Services\\ReactionCounterService' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionCounter/Services/ReactionCounterService.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionTotal\\Models\\NullReactionTotal' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionTotal/Models/NullReactionTotal.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionTotal\\Models\\ReactionTotal' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionTotal/Models/ReactionTotal.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionTotal\\Observers\\ReactionTotalObserver' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionTotal/Observers/ReactionTotalObserver.php',
+    'Cog\\Laravel\\Love\\Reactant\\ReactionTotal\\Services\\ReactionTotalService' => $vendorDir . '/cybercog/laravel-love/src/Reactant/ReactionTotal/Services/ReactionTotalService.php',
+    'Cog\\Laravel\\Love\\Reacter\\Facades\\Reacter' => $vendorDir . '/cybercog/laravel-love/src/Reacter/Facades/Reacter.php',
+    'Cog\\Laravel\\Love\\Reacter\\Models\\NullReacter' => $vendorDir . '/cybercog/laravel-love/src/Reacter/Models/NullReacter.php',
+    'Cog\\Laravel\\Love\\Reacter\\Models\\Reacter' => $vendorDir . '/cybercog/laravel-love/src/Reacter/Models/Reacter.php',
+    'Cog\\Laravel\\Love\\Reacterable\\Models\\Traits\\Reacterable' => $vendorDir . '/cybercog/laravel-love/src/Reacterable/Models/Traits/Reacterable.php',
+    'Cog\\Laravel\\Love\\Reacterable\\Observers\\ReacterableObserver' => $vendorDir . '/cybercog/laravel-love/src/Reacterable/Observers/ReacterableObserver.php',
+    'Cog\\Laravel\\Love\\Reacterable\\ReacterableEloquentBuilderTrait' => $vendorDir . '/cybercog/laravel-love/src/Reacterable/ReacterableEloquentBuilderTrait.php',
+    'Cog\\Laravel\\Love\\ReactionType\\Models\\ReactionType' => $vendorDir . '/cybercog/laravel-love/src/ReactionType/Models/ReactionType.php',
+    'Cog\\Laravel\\Love\\Reaction\\Events\\ReactionHasBeenAdded' => $vendorDir . '/cybercog/laravel-love/src/Reaction/Events/ReactionHasBeenAdded.php',
+    'Cog\\Laravel\\Love\\Reaction\\Events\\ReactionHasBeenRemoved' => $vendorDir . '/cybercog/laravel-love/src/Reaction/Events/ReactionHasBeenRemoved.php',
+    'Cog\\Laravel\\Love\\Reaction\\Models\\Reaction' => $vendorDir . '/cybercog/laravel-love/src/Reaction/Models/Reaction.php',
+    'Cog\\Laravel\\Love\\Reaction\\Observers\\ReactionObserver' => $vendorDir . '/cybercog/laravel-love/src/Reaction/Observers/ReactionObserver.php',
+    'Cog\\Laravel\\Love\\Support\\Database\\AddForeignColumnStub' => $vendorDir . '/cybercog/laravel-love/src/Support/Database/AddForeignColumnStub.php',
+    'Cog\\Laravel\\Love\\Support\\Database\\Eloquent\\Model' => $vendorDir . '/cybercog/laravel-love/src/Support/Database/Eloquent/Model.php',
+    'Cog\\Laravel\\Love\\Support\\Database\\Migration' => $vendorDir . '/cybercog/laravel-love/src/Support/Database/Migration.php',
+    'Cog\\Laravel\\Love\\Support\\Database\\MigrationCreator' => $vendorDir . '/cybercog/laravel-love/src/Support/Database/MigrationCreator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Cron\\AbstractField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
@@ -5271,6 +5377,9 @@ return array(
     'Termwind\\ValueObjects\\Styles' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> mario2
     'Tests\\Feature\\Auth\\AuthenticationTest' => $baseDir . '/tests/Feature/Auth/AuthenticationTest.php',
     'Tests\\Feature\\Auth\\EmailVerificationTest' => $baseDir . '/tests/Feature/Auth/EmailVerificationTest.php',
     'Tests\\Feature\\Auth\\PasswordConfirmationTest' => $baseDir . '/tests/Feature/Auth/PasswordConfirmationTest.php',
@@ -5279,6 +5388,7 @@ return array(
     'Tests\\Feature\\Auth\\RegistrationTest' => $baseDir . '/tests/Feature/Auth/RegistrationTest.php',
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
     'Tests\\Feature\\ProfileTest' => $baseDir . '/tests/Feature/ProfileTest.php',
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
@@ -5293,6 +5403,8 @@ return array(
     'Tests\\Feature\\ProfileTest' => $baseDir . '/tests/Feature/ProfileTest.php',
 >>>>>>> master
 >>>>>>> carlos
+=======
+>>>>>>> mario2
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ExampleTest' => $baseDir . '/tests/Unit/ExampleTest.php',
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',
