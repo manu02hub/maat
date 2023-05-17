@@ -36,8 +36,8 @@ class PostController extends Controller
          $comentario-> user_id =  $user->id;
          $comentario-> post_id = $post_id;
          $comentario->save();
-         return Redirect::route('recogerPost');
-    }
+         return back();
+        }
 
 
     public function destroyComentario($id)
@@ -57,7 +57,7 @@ class PostController extends Controller
         $likes-> post_id = $post_id;
         $likes-> isLiked = true;
         $likes->save();
-        return Redirect::route('recogerPost');
+        return back();
    }
 
 
