@@ -33,6 +33,7 @@ class RegisterUser extends Controller
             ->skip(1) // Excluye el primer usuario
             ->take(PHP_INT_MAX) // Obtén todos los demás usuarios
             ->get();
+            // dd($user);
         return Inertia::render('private/Sergio/UsuariosEmpresa/Listado', compact('user'));
     }
     public function indexUserONG(Request $request)

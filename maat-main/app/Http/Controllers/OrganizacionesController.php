@@ -27,22 +27,21 @@ class OrganizacionesController extends Controller
         // where entidad.id = ?', [$request->empresa]);
 
         $org2 = Users::select(
-                'users.id',
-                'users.nombre',
-                'users.email',
-                'users.entidad_id',
-                'entidad.nombre',
-                'entidad.logo',
-                'entidad.ubicacion',
-                'entidad.web',
-                'entidad.descripcion',
-                'entidad.tamano',
-                'entidad.numero_tarjeta'
-            )
+            'users.id',
+            'users.nombre',
+            'users.email',
+            'users.entidad_id',
+            'entidad.nombre',
+            'entidad.logo',
+            'entidad.ubicacion',
+            'entidad.web',
+            'entidad.descripcion',
+            'entidad.tamano',
+            'entidad.numero_tarjeta'
+        )
             ->join('entidad', 'entidad.id', '=', 'users.entidad_id')
             ->where('entidad.id', '=', $request->organizacion)
             ->get();
-
         return $org2;
     }
 
@@ -91,8 +90,6 @@ class OrganizacionesController extends Controller
             // Delete the company and all associated data
             $delete = Entidad::where('id', $request->entidad)
                 ->delete();
-
-
         }
     }
 }

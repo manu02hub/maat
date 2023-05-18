@@ -17,6 +17,7 @@ class Entidad extends Model
         'id',
         'nombre',
         'logo',
+        'numero_tarjeta',
         'ubicacion',
         'web',
         'descripcion',

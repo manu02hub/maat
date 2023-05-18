@@ -36,6 +36,7 @@ onMounted(() => {
                 },
             })
             .then((response) => {
+                // console.log(organizacion[0].nombre);
                 organizacion = response.data;
                 form.name = organizacion[0].nombre;
                 form.numTar = organizacion[0].numero_tarjeta;

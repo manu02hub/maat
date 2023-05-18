@@ -21,4 +21,6 @@ class Likes extends Model
 
 
     use HasFactory;
+
+    // HALA MADRID
 }

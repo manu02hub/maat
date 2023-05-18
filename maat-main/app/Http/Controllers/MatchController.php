@@ -17,8 +17,6 @@ class MatchController extends Controller
 {
     public function match(Request $request, $id)
     {
-
-
         $id_entidad_empresa = auth()->user()->entidad_id;
         //Validar que la empresa tenga un plan
 

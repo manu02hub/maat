@@ -154,7 +154,7 @@ class RegisteredUserController extends Controller
                 //     'entidad_id' => $idOrganizacion[0]->id
                 // ]);
 
-                $user=new Users();
+                $user=new User();
                 $user->nombre=$request->nombre_empresa;
                 $user->email=$request->correo;
                 $user->password=Hash::make($request->password);
@@ -164,7 +164,7 @@ class RegisteredUserController extends Controller
                 $user->save();
                 event(new Registered($user));
 
-                // Auth::login($user);
+                Auth::login($user);
             } else {
                 dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
             }
