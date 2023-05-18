@@ -26,34 +26,137 @@ class RegisterUser extends Controller
         return Inertia::render('Auth/Register');
     }
 
-    public function indexUser(Request $request){
-        $user = Users::all();
+    public function indexUserEmpresa(Request $request)
+    {
+        $entidad_id = auth()->user()->entidad_id;
+        $user = Users::where('entidad_id', $entidad_id)
+            ->skip(1) // Excluye el primer usuario
+            ->take(PHP_INT_MAX) // Obtén todos los demás usuarios
+            ->get();
         return Inertia::render('private/Sergio/UsuariosEmpresa/Listado', compact('user'));
     }
+    public function indexUserONG(Request $request)
+    {
+        $entidad_id = auth()->user()->entidad_id;
+        $user = Users::where('entidad_id', $entidad_id)
+            ->skip(1) // Excluye el primer usuario
+            ->take(PHP_INT_MAX) // Obtén todos los demás usuarios
+            ->get();
+        return Inertia::render('private/Sergio/UsuariosONG/Listado', compact('user'));
+    }
 
-    public function indexAuthUser(Request $request){
+    public function newUserONG(Request $request)
+    {
+        return Inertia::render('private/Sergio/UsuariosONG/InfoUsuario');
+    }
+
+    public function newUserEmpresa(Request $request)
+    {
+        return Inertia::render('private/Sergio/UsuariosEmpresa/InfoUsuario');
+    }
+
+    public function indexAuthUser(Request $request)
+    {
         $user = Users::all();
         return Inertia::render('private/Piero/PerfilUsuario', compact('user'));
     }
 
-    public function createUser(Request $request){
-        // dd($request);
+    public function createUserONG(Request $request)
+    {
+        // dd("Se va a crear un usuario de ONG");
         $user = new Users();
-        $user-> nombre = $request->nombre;
-        $user-> email = $request->email;
-        $user-> password = $request->password;
-        // $user-> password_confirmation = $request->password_confirmation;
-        $user-> rol_id= $request->rol;
-        $user->entidad_id=1;
+        $user->nombre = $request->nombre;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->rol_id = 3;
+        $user->entidad_id = auth()->user()->entidad_id;
         $user->save();
-        return Redirect::route('indexUser');
+        return Redirect::route('indexUserONG');
     }
+    public function createUserEmpresa(Request $request)
+    {
+        // dd("Se va a crear un usuario de Empresa");
+        $user = new Users();
+        $user->nombre = $request->nombre;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->rol_id = 3;
+        $user->entidad_id = auth()->user()->entidad_id;
+        $user->save();
+        return Redirect::route('indexUserEmpresa');
+    }
+
+    public function editUserEmpresa($id)
+    {
+        $user = Users::findOrFail($id);
+        // dd($user);
+        // return Inertia::render('private/Sergio/UsuariosEmpresa/EditarUsuario', compact('user'));
+        return Inertia::render('private/Sergio/UsuariosEmpresa/EditUsuario', compact('user'));
+    }
+
+    public function editUserONG($id)
+    {
+        $user = Users::findOrFail($id);
+        // dd($user);
+        // return Inertia::render('private/Sergio/UsuariosEmpresa/EditarUsuario', compact('user'));
+        return Inertia::render('private/Sergio/UsuariosONG/EditUsuario', compact('user'));
+    }
+
+
 
     public function editUser($id){
         $user = Users::findOrFail($id);
         // dd($user);
         // return Inertia::render('private/Sergio/UsuariosEmpresa/EditarUsuario', compact('user'));
-        return Inertia::render('private/Sergio/UsuariosEmpresa/EditUsuario', compact('user'));
+        return Inertia::render('private/Sergio/EditUsuario', compact('user'));
+    }
+
+    public function updateUserEmpresa(Request $request)
+    {
+        $id = $request->id;
+        $user = Users::findOrFail($id);
+        // dd($user);
+        if ($request->password == null && $request->password_confirmation == null) {
+            $user->update([
+                'nombre' => $request->nombre,
+                'email' => $request->email,
+            ]);
+        } else {
+            if ($request->password === $request->password_confirmation) {
+                $user->update([
+                    'nombre' => $request->nombre,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password)
+                ]);
+            } else {
+                dd("Las contraseñas no coinciden");
+            }
+        }
+        return Redirect::route('indexUserEmpresa');
+    }
+
+    public function updateUserONG(Request $request)
+    {
+        $id = $request->id;
+        $user = Users::findOrFail($id);
+        // dd($user);
+        if ($request->password == null && $request->password_confirmation == null) {
+            $user->update([
+                'nombre' => $request->nombre,
+                'email' => $request->email,
+            ]);
+        } else {
+            if ($request->password === $request->password_confirmation) {
+                $user->update([
+                    'nombre' => $request->nombre,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password)
+                ]);
+            } else {
+                dd("Las contraseñas no coinciden");
+            }
+        }
+        return Redirect::route('indexUserONG');
     }
 
     public function updateUser(Request $request){
@@ -68,7 +171,7 @@ class RegisterUser extends Controller
             // 'rol_id' => $request->rol_id,
             // 'entidad_id' => $request->entidad_id,
         ]);
-        return Redirect::route('indexUser');
+        return Redirect::route('recogerPerfil');
     }
 
     public function destroyUser($id)
@@ -134,7 +237,7 @@ class RegisterUser extends Controller
                 'email' => $request->correo,
                 'password' => Hash::make($request->password),
                 'activo' => 1,
-                'rol_id' =>  $request->rol,
+                'rol_id' =>  3,
                 'entidad_id' => $idOrg[0]->id
             ]);
 
@@ -146,7 +249,7 @@ class RegisterUser extends Controller
         // Te devuelve o al dashboard (si se registra correctamente, o al login si no). Depende del Auth
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

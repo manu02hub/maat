@@ -1,8 +1,11 @@
 <script setup>
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+import InputError from "@/Components/InputError.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
+import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-import TextInput from '@/Components/TextInput.vue';
-
-// const user = usePage().props.auth.user;
 
 const { props } = usePage();
 let { user } = props;
@@ -12,74 +15,96 @@ const form = useForm({
     id: id,
     nombre: nombre,
     email: email,
+    password: "",
+    password_confirmation: ""
+
 });
-
 </script>
-
 <template>
-    <form @submit.prevent="form.patch(route('updateUser'))">
-        <div class="grid-system">
-            <header>
-                <span>{{ form.nombre }}</span>
-            </header>
-            <div class="div-img">
-                <img src="https://preview.cruip.com/mosaic/images/user-128-01.jpg" alt="">
-            </div>
-            <div class="spam-header">
-                <span>Usuario de empresa</span>
-                <div class="div-datos-basicos">
-                    <div class="div-form-primero">
-                        <label for="nombre">Nombre</label>
-                        <TextInput type="text" id="nombre" v-model="form.nombre"/>
+    <div class="grid-system">
+        <div>
+            <div class="form-container">
+                <form @submit.prevent="form.patch(route('updateUserEmpresa'))">
+                    <div class="title">Editar Usuario Empresa</div>
+                    <span>Este usuario sera un cliente de su empresa, el cual tendra acceso con las credenciales que uste como empresa le facilite</span>
+                    <label for="nombre">Nombre:</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        v-model="form.nombre"
+                        required
+                    />
+
+                    <label for="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        v-model="form.email"
+                        required
+                    />
+
+                    <label for="password">Contraseña:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        v-model="form.password"
+
+                    />
+
+                    <label for="confirmPassword">Contraseña:</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        v-model="form.password_confirmation"
+
+                    />
+
+                    <div>
+                        <PrimaryButton
+                            type="submit"
+                            class="submit-button"
+                            :class="{ 'opacity-25': form.processing }"
+                            :disabled="form.processing"
+                        >
+                            Actualizar Usuario
+                        </PrimaryButton>
                     </div>
-                    <!-- <div class="div-form-primero">
-                    <label for="apellidos">Apellidos</label>
-                    <TextInput type="text" id="apellidos">
-                </div> -->
-                    <!-- <div class="div-form-primero">
-                    <label for="puesto">Puesto</label>
-                    <TextInput type="text" id="puesto">
-                </div> -->
-                </div>
-                <div class="div-form-segundo">
-                    <label for="email">Email</label>
-                    <TextInput type="text" id="email" v-model="form.email"/>
-                </div>
-                <button class="button-email">Save</button>
-                <div class="div-form-segundo">
-                    <div>Password</div>
-                    <span>Puede establecer una contraseña permanente si no desea utilizar códigos de inicio de sesión
-                        temporales.</span>
-                </div>
-                <button class="button-password">Restablecer contraseña</button>
+                </form>
             </div>
-            <footer>
-                <Link :href="route('indexUser')">
-                <button class="btn-cancelar">Cancelar</button>
-                </Link>
-                <button type="submit" class="btn-save">Guardar cambios</button>
-            </footer>
         </div>
-    </form>
+    </div>
 </template>
 
 <style scoped>
-.grid-system {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 0;
-    grid-auto-rows: minmax(0, auto);
-    grid-template-areas: "area-1";
-    grid-template-rows: auto;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    grid-auto-flow: dense;
-    margin: 20px;
-    width: 100%;
+.title {
+    font-size: 30px;
+    padding-left: 2%;
+
 }
 
-header {
-    font-size: 30px;
-    font-weight: bold;
+span{
+    margin-bottom: 1%;
+    margin-left: 2%;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin-top: 4px;
+    --tw-text-opacity: 1;
+    color: rgb(75 85 99);
+}
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 98%;
+    margin: 0 auto;
+    margin-top: 5%;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 img {
@@ -95,117 +120,63 @@ img {
     margin-right: 0%;
 }
 
-.spam-header {
-    margin-top: 2%;
-    margin-left: 0%;
-    margin-bottom: 0%;
-    margin-right: 0%;
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding-left: 2%;
 }
 
-.div-datos-basicos {
-    margin-top: 2%;
-    margin-left: 0%;
-    margin-bottom: 0%;
-    margin-right: 0%;
+input {
+    margin-left:2%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 80%;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    border: 2px solid rgb(209 213 219);
+}
+
+.button-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-.div-form-primero {
-    /* Se determina lo que ocupara la caja de label + input */
-    flex-basis: 30%;
-    /* Modificamos sus 'caracteristicas' para que podamos jugar con la posicion de los componentes de div-form-primero*/
-    display: flex;
-    /* Se establece que el label + input aparecen en columna*/
-    flex-direction: column;
+.cancel-button {
+    float: right;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 2%;
+}
+.submit-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 2%;
 }
 
-.div-form-segundo {
-    /* Modificamos sus 'caracteristicas' para que podamos jugar con la posicion de los componentes de div-form-primero*/
-    display: flex;
-    /* Se establece que el label + input aparecen en columna*/
-    flex-direction: column;
-    margin-top: 2%;
-    margin-left: 0%;
-    margin-bottom: 0%;
-    margin-right: 0%;
+.submit-button:hover {
+    background-color: #3e8e41;
 }
 
-.div-form-segundo label {
-    font-size: 20px;
-    margin-top: 0%;
-    margin-left: 0%;
-    margin-bottom: 1%;
-    margin-right: 0%;
-}
-
-.div-form-segundo span {
-    margin-top: 0%;
-    margin-left: 0%;
-    margin-bottom: 2%;
-    margin-right: 0%;
-    font-size: 15px;
-}
-
-.div-form-segundo div {
-    font-size: 20px;
-    margin-top: 0%;
-    margin-left: 0%;
-    margin-bottom: 2%;
-    margin-right: 0%;
-}
-
-#email {
-    width: 20%;
-}
-
-.button-email {
-    margin-top: 1%;
-    margin-left: 0%;
-    margin-bottom: 0%;
-    margin-right: 0%;
-    padding-top: 1%;
-    padding-left: 2%;
-    padding-bottom: 1%;
-    padding-right: 2%;
-    color: purple;
-    background-color: rgb(231, 231, 231);
-}
-
-.button-password {
-    color: purple;
-    background-color: rgb(231, 231, 231);
-    padding-top: 1%;
-    padding-left: 2%;
-    padding-bottom: 1%;
-    padding-right: 2%;
-}
-
-footer {
-    margin-top: 2%;
-    border-top: 1px solid;
-    text-align: right;
-}
-
-.btn-cancelar {
-    color: purple;
-    background-color: rgb(231, 231, 231);
-    padding-top: 1%;
-    padding-left: 2%;
-    padding-bottom: 1%;
-    padding-right: 2%;
-    margin-top: 10px;
-}
-
-.btn-save {
-    color: purple;
-    background-color: rgb(231, 231, 231);
-    padding-top: 1%;
-    padding-left: 2%;
-    padding-bottom: 1%;
-    padding-right: 2%;
-    margin-top: 10px;
-    margin-left: 10px;
+@media screen and (max-width: 768px) {
+    .form-container {
+        width: 100%;
+    }
 }
 </style>

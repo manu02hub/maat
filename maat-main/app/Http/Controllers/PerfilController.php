@@ -13,15 +13,7 @@ class PerfilController extends Controller
 {
     public function indexPerfil(Request $request){
         $user = Users::where("id",auth()->id())->first();
-        // dd($user);
         return Inertia::render('private/Piero/PerfilUsuario', compact('user'));
     }
 
-    public function editPerfil($id){
-
-    }
-
-    public function updatePerfil(Request $request){
-
-    }
 }

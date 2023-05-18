@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Eventos;
 use App\Models\Users;
 use App\Models\plan_contratado;
-use App\Models\asociaciones_contratadas;
+use App\Models\asociaciones_contratadas; 
 use App\Models\Empresa;
+use App\Models\Post;
+use App\Models\Likes;
 use App\Models\Entidad;
+use App\Models\Comentario;
 use App\Models\img_eventos;
 use App\Models\Organizaciones;
 use App\Models\user_has_evento;
@@ -17,10 +21,12 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 class EventController extends Controller
+
 {
     public function index()
     {
-        $eventos = Eventos::all();
+        $organizacion_id = Organizaciones::where('entidad_id',auth()->user()->entidad_id)->first();
+        $eventos = Eventos::where('organizacion_id', $organizacion_id->id)->get();
         return Inertia::render('private/Manu/MenuEventsONG', compact('eventos'));
     }
 
@@ -39,7 +45,7 @@ class EventController extends Controller
             'horaFinal' => 'required|date_format:H:i',
             'plazas' => 'required|integer|min:1',
         ];
-
+        $organizacion_id_entidad = Organizaciones::where('entidad_id',auth()->user()->entidad_id)->first();
         $validatedData = $request->validate($reglas);
         $eventData = new Eventos();
         $eventData->nombre = $validatedData['nombreEvento'];
@@ -49,11 +55,7 @@ class EventController extends Controller
         $eventData->hora_inicio = $validatedData['horaInicio'];
         $eventData->hora_final = $validatedData['horaFinal'];
         $eventData->plazas = $validatedData['plazas'];
-        /**
-         * Revisar la organizacion que este registrada
-         */
-        $eventData->organizacion_id = 1;
-        /**------------------------------------------ */
+        $eventData->organizacion_id =  $organizacion_id_entidad->id;
         $eventData->save();
 
         return Redirect::route('eventsIndex');
@@ -76,7 +78,8 @@ class EventController extends Controller
     {
         $id = $request->id;
         $evento = Eventos::findOrFail($id);
-        // dd($evento);
+        $organizacion_id_entidad = Organizaciones::where('entidad_id',auth()->user()->entidad_id)->first();
+
         $evento->update([
             'nombre' => $request->nombreEvento,
             'descripcion' => $request->descripcion,
@@ -85,7 +88,7 @@ class EventController extends Controller
             'hora_inicio' => $request->horaInicio,
             'hora_final' => $request->horaFinal,
             'plazas' => $request->plazas,
-            'organizacion' => 1
+            'organizacion_id' => $organizacion_id_entidad->id
         ]);
 
         return Redirect::route('eventsIndex');
@@ -156,7 +159,58 @@ class EventController extends Controller
             ->where('id', '<>', $id)
             ->get();
 
+        $posts = Post::where('evento_id', $id)->get()->first();
+
+
+        $likes = Likes::where('post_id', $posts->id)
+        ->where('isLiked', 1)
+        ->distinct('user_id')
+        ->count('user_id');
+
+        $comentario = Comentario::where('post_id', $posts->id)->get();
+        // dd($comentario);
+
+
+
         $estaInscrito = user_has_evento::where('evento_id', $id)->exists();
-        return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito'));
+        return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito','posts','likes', 'comentario'));
     }
+
+
+//     public function createComentario(Request $request, $post_id){
+//         // dd($request);
+//         $user = Users::where("id",auth()->id())->first();
+//        //  dd($user->id);
+//         $comentario = new Comentario();
+//         $comentario-> descripcion = $request->descripcion;
+//         $comentario-> user_id =  $user->id;
+//         $comentario-> post_id = $post_id;
+//         $comentario->save();
+//         return Redirect::route('recogerPost');
+//    }
+
+
+//    public function destroyComentario($id)
+//    {
+//        $comentario = Comentario::findOrFail($id);
+//        $comentario->delete();
+//        return back();
+//    }
+
+//    public function addLike(Request $request, $post_id){
+//     // dd($request);
+//     $user = Users::where("id",auth()->id())->first();
+//    //  dd($user->id);
+//     $likes = new Likes();
+//     $likes-> user_id =  $user->id;
+//     $likes-> post_id = $post_id;
+//     $likes-> isLiked = true;
+//     $likes->save();
+//     return Redirect::route('recogerPost');
+// }
+
+
+
+
+
 }
