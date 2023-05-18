@@ -28,7 +28,7 @@ import { Head, Link } from "@inertiajs/vue3";
                             <th class="attr-th">Título</th>
                             <th class="attr-th">Fecha</th>
                             <th class="attr-th">Descripcion</th>
-                            <th class="attr-th">URL de la Imager</th>
+                            <th class="attr-th">URL de la Imagen</th>
                         </tr>
                     </thead>
                     <tbody>
