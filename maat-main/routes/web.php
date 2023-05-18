@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Private\AsocicacionesContratadasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
@@ -117,6 +118,16 @@ Route::get('employeeForm/{mail}',function($mail){
     // dd($correo);
     Mail::to($mail)->send($correo);
 })->name('employeeForm');
+
+
+//PRIVATE MAAT
+//AsocicacionesContratadas
+Route::get('indexAsocicacionesContratadas',[AsocicacionesContratadasController::class, 'index'])->name('indexAsocicacionesContratadas');
+Route::get('createAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'create'])->name('createAsocicacionesContratadas');
+Route::patch('storeAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'store'])->name('storeAsocicacionesContratadas');
+Route::get('editAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'edit'])->name('editAsocicacionesContratadas');
+Route::patch('updateAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'update'])->name('updateAsocicacionesContratadas');
+Route::get('deleteAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'destroyAsocicacionesContratadas'])->name('deleteAsocicacionesContratadas');
 
 
 

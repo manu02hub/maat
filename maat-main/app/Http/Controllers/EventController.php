@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Eventos;
 use App\Models\Users;
 use App\Models\plan_contratado;
-use App\Models\asociaciones_contratadas;
+use App\Models\asociaciones_contratadas; 
 use App\Models\Empresa;
 use App\Models\Post;
 use App\Models\Likes;
