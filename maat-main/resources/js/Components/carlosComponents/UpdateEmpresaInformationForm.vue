@@ -102,14 +102,16 @@ const actualizar = () => {
 
         // Descripción de la empresa
         if (
-            form.descripcion.replaceAll(" ", "").length >= 8 &&
+            form.descripcion.replace(" ", "").length >= 8 &&
+            form.descripcion.length >= 8 &&
+            form.descripcion.length < 256 &&
             Validaciones.checkInjection(form.descripcion.replaceAll(" ", ""))
         ) {
             form.errors.descripcion = "";
             contador++;
         } else {
             form.errors.descripcion =
-                "La descripción tiene que ser válida y tener 8 carácteres o más.";
+                "La descripción tiene que ser válida y tener 8 carácteres o más y menos de 256.";
         }
 
         // Si cumple las condiciones, se actualizan los datos
