@@ -16,6 +16,7 @@ use App\Http\Controllers\MatchController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\OrganizacionesController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
 

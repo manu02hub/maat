@@ -57,6 +57,7 @@ class ProfileEmprController extends Controller
             'password' => ['required', 'current-password'],
         ]);
 
+        // Si se valida correctamente, te devuelve el usuario admin actual
         $user = $request->user();
 
         try {
