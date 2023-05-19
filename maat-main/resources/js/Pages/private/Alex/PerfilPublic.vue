@@ -142,13 +142,13 @@ export default {
                                 </p>
                                 <p
                                     class="descEmplPropio"
-                                    v-if="data.rol_id == 1 || data.rol_id == 2"
+                                    v-if="data.rol_id == 1"
                                 >
                                     Administrador ONG
                                 </p>
                                 <p
                                     class="descEmplPropio"
-                                    v-if="data.rol_id == 3"
+                                    v-if="data.rol_id == 2"
                                 >
                                     Administrador Empresa
                                 </p>

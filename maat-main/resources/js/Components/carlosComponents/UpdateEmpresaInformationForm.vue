@@ -58,13 +58,14 @@ const actualizar = () => {
         // Nombre de la empresa
         if (
             form.name.replace(" ", "").length > 3 &&
+            form.name.length < 101 &&
             Validaciones.checkInjection(form.name.replace(" ", ""))
         ) {
             form.errors.name = "";
             contador++;
         } else {
             form.errors.name =
-                "El nombre de la empresa tiene que tener 4 o más carácteres y ser válido.";
+                "El nombre de la empresa tiene que tener 4 o más carácteres, ser válido y menos o igual de 100 carácteres.";
         }
 
         // Tarjeta de la empresa
@@ -85,7 +86,7 @@ const actualizar = () => {
             contador++;
         } else {
             form.errors.ubicacion =
-                "La ubicación tiene que ser válido y solo puede llevar 1 punto, 1 guión y tener más de 2 carácteres.";
+                "La ubicación tiene que ser válido y solo puede llevar 1 punto, 1 guión, tener más de 2 carácteres y menos de 256.";
         }
 
         // Link web de la empresa
@@ -97,7 +98,7 @@ const actualizar = () => {
             contador++;
         } else {
             form.errors.web =
-                "Asegúrate de que la web puesta tenga la siguiente estructura AAA.AAA o AAA.AAA.AAA";
+                "Asegúrate de que la web puesta tenga la siguiente estructura AAA.AAA o AAA.AAA.AAA y que tenga menos de 256 carácteres";
         }
 
         // Descripción de la empresa

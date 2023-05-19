@@ -238,7 +238,11 @@ export default {
             var date = new Date();
 
             try {
-                if (msg != null && msg != "") {
+                if (
+                    msg != null &&
+                    msg.replace(" ", "") != "" &&
+                    this.msg.length < 256
+                ) {
                     this.form.msg = msg;
 
                     msgContainer +=
@@ -281,6 +285,8 @@ export default {
                     });
 
                     this.msg = "";
+                } else {
+                    this.msg = "El mensaje tiene que tener menos de 256 carácteres."
                 }
             } catch (error) {
                 console.log(error);
