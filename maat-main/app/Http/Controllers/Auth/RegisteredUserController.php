@@ -92,15 +92,13 @@ class RegisteredUserController extends Controller
         } else {
             $idOrganizacion = Entidad::where('nombre', $request->nombre_empresa)->first();
 
-            // dd($idOrganizacion);
-
             if ($idOrganizacion == null) {
                 $organizacion = Entidad::create([
                     'nombre' => $request->nombre_empresa,
                     'ubicacion' => 'ubicacion',
                     'web' => 'web',
                     'descripcion' => 'descripcion',
-                    'tamano' => '12',
+                    'tamano' => '1',
                     'numero_tarjeta' => $request->nif
                 ]);
 
@@ -154,7 +152,7 @@ class RegisteredUserController extends Controller
                 //     'entidad_id' => $idOrganizacion[0]->id
                 // ]);
 
-                $user=new Users();
+                $user=new User();
                 $user->nombre=$request->nombre_empresa;
                 $user->email=$request->correo;
                 $user->password=Hash::make($request->password);
@@ -164,9 +162,9 @@ class RegisteredUserController extends Controller
                 $user->save();
                 event(new Registered($user));
 
-                // Auth::login($user);
+                Auth::login($user);
             } else {
-                dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
+                // dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
             }
         }
 

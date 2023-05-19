@@ -17,7 +17,7 @@ const confirmEmpresaDeletion = () => {
     nextTick(() => passwordInput.value.focus());
 };
 const deleteEmpresa = () => {
-    form.delete(route('profile.destroy'), {
+    form.post(route('ong.delete'), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => passwordInput.value.focus(),
@@ -34,7 +34,7 @@ const closeModal = () => {
     <section class="space-y-6">
         <div class="p-5">
             <header>
-                <h2 class="text-lg font-medium text-gray-900">Eliminar empresa</h2>
+                <h2 class="text-lg font-medium text-gray-900">Eliminar organización</h2>
 
                 <p class="mt-1 text-sm text-gray-600">
                     Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
@@ -42,7 +42,7 @@ const closeModal = () => {
                 </p>
             </header>
 
-            <DangerButton class="mt-3" @click="confirmEmpresaDeletion">Eliminar empresa</DangerButton>
+            <DangerButton class="mt-3" @click="confirmEmpresaDeletion">Eliminar organización</DangerButton>
 
             <Modal :show="confirmingEmpresaDeletion" @close="closeModal">
                 <div class="p-6">
