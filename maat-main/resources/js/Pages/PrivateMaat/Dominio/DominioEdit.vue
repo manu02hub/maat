@@ -1,11 +1,11 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
 import PrivateLayout from '@/Layouts/PrivateLayout.vue';
-import EditChat from '@/Components/Private/Chat/EditChat.vue';
+import EditDominio from '@/Components/Private/Dominio/EditDominio.vue';
 </script>
 <template>
     <Head title="info Usuario" />
     <PrivateLayout>
-        <EditChat />
+        <EditDominio />
     </PrivateLayout>
 </template>

@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dominio extends Model
 {
+
+    protected $table = 'dominio';
+
+    public $timestamps = false;
+
     use HasFactory;
 }

@@ -40,7 +40,7 @@ class AsocicacionesContratadasController extends Controller
     public function edit($id)
     {        
         $asociacionesContratadas = Asociaciones_contratadas::findOrFail($id);
-        return Inertia::render('PrivateMaat/AsocicacionesContratadasEdit', compact('asociacionesContratadas'));
+        return Inertia::render('PrivateMaat/AsocicacionesContratadas/AsocicacionesContratadasEdit', compact('asociacionesContratadas'));
     }
 
     public function update(Request $request)
@@ -59,8 +59,8 @@ class AsocicacionesContratadasController extends Controller
     //DELETE
     public function destroy($id)
     {
-        $evento = Asociaciones_contratadas::findOrFail($id);
-        $evento->delete();
+        $asociacionesContratadas = Asociaciones_contratadas::findOrFail($id);
+        $asociacionesContratadas->delete();
         return back();
     }
 

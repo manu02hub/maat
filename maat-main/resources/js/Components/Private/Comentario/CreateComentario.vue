@@ -8,8 +8,11 @@ import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
-    empresa_id: "",
-    organizacion_id: "",
+    descripcion: "",
+    user_id: "",
+    post_id: "",
+    like: "",
+
 });
 
 </script>
@@ -17,28 +20,44 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeAsocicacionesContratadas'))">
-                    <div class="title">Crear Asociaciones Contratadas</div>
+                <form @submit.prevent="form.patch(route('storeChat'))">
+                    <div class="title">Crear Chat</div>
 
-                    <label for="nombre">Empresa_id:</label>
+                    <label for="descripcion">descripcion:</label>
                     <input
                         type="text"
-                        id="nombre"
-                        v-model="form.nombre"
+                        id="descripcion"
+                        v-model="form.descripcion"
                         required
                     />
 
-                    <label for="email">Organizacion_id:</label>
+                    <label for="user_id">user_id:</label>
                     <input
-                        type="email"
-                        id="email"
-                        v-model="form.email"
+                        type="text"
+                        id="user_id"
+                        v-model="form.user_id"
+                        required
+                    />
+
+                    <label for="post_id">post_id:</label>
+                    <input
+                        type="text"
+                        id="post_id"
+                        v-model="form.post_id"
+                        required
+                    />
+
+                    <label for="like">like:</label>
+                    <input
+                        type="text"
+                        id="like"
+                        v-model="form.like"
                         required
                     />
 
                     <div class="button-container">
                         <Link
-                            :href="route('indexAsocicacionesContratadas')"
+                            :href="route('indexComentario')"
                             type="button"
                             class="cancel-button"
                         >
