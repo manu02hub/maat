@@ -36,8 +36,6 @@ export default {
         // Muestra chats ya contactados (necesario crear uno si no existe chat, es decir, al querrer
         // chatear con una nueva entidad)
         mostrar: function (event, entidadChatear) {
-            var chat = document.getElementsByClassName("contenedorChatPropio");
-
             try {
                 // Resetea todos los chats a sus estilos por defecto (ninguno activo) del chat de recientes
                 // Recorre todos los chats existentes de recientes
@@ -93,10 +91,6 @@ export default {
                 this.nameChat =
                     event.currentTarget.lastChild.firstChild.textContent;
 
-                // Resetea los chats enviados
-                chat[0].innerHTML = "";
-                chat[1].innerHTML = "";
-
                 // Si la pantalla es muy pequena, entonces muestra el chat del pequeno
                 if (window.innerWidth <= 768) {
                     this.chatSmall = true;
@@ -117,7 +111,7 @@ export default {
 
                         // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
                         this.nameChat = response.data[0].nombre;
-                        console.log(response.data);
+
                         response.data.forEach((mensajes) => {
                             this.chatInicial.push([
                                 mensajes.contenido,
@@ -141,8 +135,6 @@ export default {
 
                         this.iniciarChatPorId();
                     });
-
-                // Mostrar historial del chat del clickeado
             } catch (error) {
                 console.error(error);
             }
@@ -191,6 +183,10 @@ export default {
             );
 
             try {
+                // Resetea los chats enviados
+                chat[0].innerHTML = "";
+                chat[1].innerHTML = "";
+
                 // Recorre todos los mensajes del chat entre los 2 usuarios (solo cuando se inicia por id)
                 this.chatInicial.forEach((mensajes) => {
                     // Si origen es la misma que la entidad del usuario
@@ -286,7 +282,8 @@ export default {
 
                     this.msg = "";
                 } else {
-                    this.msg = "El mensaje tiene que tener menos de 256 carácteres."
+                    this.msg =
+                        "El mensaje tiene que tener menos de 256 carácteres.";
                 }
             } catch (error) {
                 console.log(error);
@@ -1017,6 +1014,7 @@ export default {
 /* Estilo h2 por defecto */
 .h2DefaultPropio {
     display: block;
+    user-select: none;
     font-size: 1.5em;
     margin-block-start: 0;
     margin-block-end: 0;
@@ -1027,6 +1025,7 @@ export default {
 
 .pDefaultPropio {
     display: block;
+    user-select: none;
 }
 
 /* Estilos responsive */
@@ -1331,6 +1330,41 @@ export default {
 
     .borderContainerPropio {
         height: 42rem;
+    }
+}
+
+/* Ajuste del texto de lastMsg */
+@media only screen and (min-width: 649px) and (max-width: 768px) {
+    .lastMsgPropio {
+        width: 30.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 549px) and (max-width: 649px) {
+    .lastMsgPropio {
+        width: 24.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 549px) {
+    .lastMsgPropio {
+        width: 18.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 325px) and (max-width: 451px) {
+    .lastMsgPropio {
+        width: 7rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 325px) {
+    .lastMsgPropio {
+        width: 7rem;
     }
 }
 </style>

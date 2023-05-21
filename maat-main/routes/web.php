@@ -133,7 +133,7 @@ Route::get('editAsocicacionesContratadas/{id}', [AsocicacionesContratadasControl
 Route::patch('updateAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'update'])->name('updateAsocicacionesContratadas');
 Route::get('deleteAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'destroy'])->name('deleteAsocicacionesContratadas');
 
-//Chat
+//Chat (panel admin)
 Route::get('indexChat',[ChatsController::class, 'index'])->name('indexChat');
 Route::get('createChat', [ChatsController::class, 'create'])->name('createChat');
 Route::patch('storeChat', [ChatsController::class, 'store'])->name('storeChat');
