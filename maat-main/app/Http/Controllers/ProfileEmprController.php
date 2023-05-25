@@ -66,6 +66,25 @@ class ProfileEmprController extends Controller
 
             // Si hay solo 1 administrador de la empresa, se elimina todos los datos de la empresa
             if (count($admins) == 1) {
+                $searchToDel = DB::select('select * from maat.plan_contratado where empresa_id = ?', [
+                    $user->entidad_id
+                ]);
+
+                // Mira si existe antes de hacer las operaciones de eliminar
+                if (count($searchToDel) == 1) {
+                    // Elimina de la tabla mensaje
+                    $delete = DB::delete('delete from maat.asociaciones_contratadas
+                    where id = ?', [
+                        $searchToDel[0]->id
+                    ]);
+
+                    // Elimina de la tabla mensaje
+                    $delete = DB::delete('delete from maat.plan_contratado
+                    where empresa_id = ?', [
+                        $user->entidad_id
+                    ]);
+                }
+
                 // Elimina de la tabla mensaje
                 $delete = DB::delete('delete from maat.mensaje where id_origen = ? or id_destino = ?', [
                     $user->entidad_id, $user->entidad_id
