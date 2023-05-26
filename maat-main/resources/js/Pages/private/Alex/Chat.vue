@@ -692,6 +692,8 @@ export default {
                     >
                         <div
                             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio chatUsersPropio contenedorChatAfueraPropio"
+                            @mouseenter="changeCanRefresh(false)"
+                            @mouseleave="changeCanRefresh(true)"
                         >
                             <div class="contenedorChatPropio"></div>
                         </div>
