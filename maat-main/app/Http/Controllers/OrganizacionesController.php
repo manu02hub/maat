@@ -23,8 +23,8 @@ class OrganizacionesController extends Controller
         // $org = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre,
         // entidad.logo, entidad.ubicacion, entidad.web, entidad.descripcion, entidad.tamano,
         // entidad.numero_tarjeta
-        // from maat.users
-        // inner join maat.entidad on entidad.id = users.entidad_id
+        // from betec_maat.users
+        // inner join betec_maat.entidad on entidad.id = users.entidad_id
         // where entidad.id = ?', [$request->empresa]);
 
         $org2 = Users::select(
@@ -51,7 +51,7 @@ class OrganizacionesController extends Controller
     public function editONG(Request $request)
     {
         // Actualiza por los nuevos datos recibidos
-        // $update = DB::update("update maat.entidad set nombre = ?,
+        // $update = DB::update("update betec_maat.entidad set nombre = ?,
         // logo = ?, ubicacion = ?, web = ?, descripcion = ?, numero_tarjeta = ?
         // where id = ?", [
         //     $request->name, '', $request->ubicacion, $request->web, $request->descripcion,
@@ -91,12 +91,12 @@ class OrganizacionesController extends Controller
             // Si hay solo 1 administrador de la empresa, se elimina todos los datos de la empresa
             if ($admins->count() == 1) {
                 // Elimina de la tabla mensaje
-                $delete = DB::delete('delete from maat.mensaje where id_origen = ? or id_destino = ?', [
+                $delete = DB::delete('delete from betec_maat.mensaje where id_origen = ? or id_destino = ?', [
                     $user->entidad_id, $user->entidad_id
                 ]);
 
                 // Elimina de la tabla chat
-                $delete = DB::delete('delete from maat.chat where organizacion_id = ?', [
+                $delete = DB::delete('delete from betec_maat.chat where organizacion_id = ?', [
                     $user->entidad_id
                 ]);
 

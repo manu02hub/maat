@@ -30,38 +30,38 @@ class ChatController extends Controller
     {
         try {
             // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
-            $ong = DB::select('select * from maat.organizacion
-            inner join maat.entidad on organizacion.entidad_id = entidad.id
+            $ong = DB::select('select * from betec_maat.organizacion
+            inner join betec_maat.entidad on organizacion.entidad_id = entidad.id
             where entidad.id = ?', [$request->params['userId']]);
 
             // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
-            $empr = DB::select('select * from maat.empresa
-            inner join maat.entidad on empresa.entidad_id = entidad.id
+            $empr = DB::select('select * from betec_maat.empresa
+            inner join betec_maat.entidad on empresa.entidad_id = entidad.id
             where entidad.id = ?', [$request->params['userId']]);
 
             // Es ONG el usuario, por lo que va a mostrar los chats de empresa
             if (count($ong) == 1) {
                 // Guarda en $listChats todas las entidades empresas
-                $listChats = DB::select('select * from maat.entidad
-                inner join maat.empresa on empresa.entidad_id = entidad.id');
+                $listChats = DB::select('select * from betec_maat.entidad
+                inner join betec_maat.empresa on empresa.entidad_id = entidad.id');
 
                 // Recoge los chats recientes (o sea los que hayan tenido contacto con la empresa
                 // anteriormente)
                 $recentChats = DB::select(
                     'select entidad.nombre, c1.empresa_id as entidad, mensaje.contenido
-                    from maat.chat as c1
+                    from betec_maat.chat as c1
                     inner join (
                         select mensaje.chat_id
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         group by mensaje.chat_id
                         order by mensaje.chat_id desc
                         ) c2
                     on c1.id = c2.chat_id
                     inner join mensaje on c2.chat_id = mensaje.chat_id
-                    inner join maat.entidad on entidad.id = c1.empresa_id
+                    inner join betec_maat.entidad on entidad.id = c1.empresa_id
                     where organizacion_id = ? and mensaje.id in (
                         select max(mensaje.id)
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         where c2.chat_id = mensaje.chat_id
                         )',
                     [$request->params['userId']]
@@ -71,8 +71,8 @@ class ChatController extends Controller
                 // Es empresa el usuario, por lo que va a mostrar los chats de ONG
             } else if (count($empr) == 1) {
                 // Guarda en $listChats todas las entidades ONGs
-                $listChats = DB::select('select * from maat.entidad
-                inner join maat.organizacion on organizacion.entidad_id = entidad.id');
+                $listChats = DB::select('select * from betec_maat.entidad
+                inner join betec_maat.organizacion on organizacion.entidad_id = entidad.id');
 
                 // Se ha usado el IN para poder coger los ultimos mensajes (valores concretos)
                 // https://www.w3schools.com/mysql/mysql_in.asp
@@ -83,19 +83,19 @@ class ChatController extends Controller
                 // valores de una misma columna (en este caso el contenido del mensaje)
                 $recentChats = DB::select(
                     'select entidad.nombre, c1.organizacion_id as entidad, mensaje.contenido
-                    from maat.chat as c1
+                    from betec_maat.chat as c1
                     inner join (
                         select mensaje.chat_id
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         group by mensaje.chat_id
                         order by mensaje.chat_id desc
                         ) c2
                     on c1.id = c2.chat_id
                     inner join mensaje on c2.chat_id = mensaje.chat_id
-                    inner join maat.entidad on entidad.id = c1.organizacion_id
+                    inner join betec_maat.entidad on entidad.id = c1.organizacion_id
                     where empresa_id = ? and mensaje.id in (
                         select max(mensaje.id)
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         where c2.chat_id = mensaje.chat_id
                         )',
                     [$request->params['userId']]
@@ -114,23 +114,23 @@ class ChatController extends Controller
     {
         try {
             // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
-            $ong = DB::select('select * from maat.organizacion
-                inner join maat.entidad on organizacion.entidad_id = entidad.id
+            $ong = DB::select('select * from betec_maat.organizacion
+                inner join betec_maat.entidad on organizacion.entidad_id = entidad.id
                 where entidad.id = ?', [$request->params['userId']]);
 
             // Revisa que la id de la entidad con la que se quiere chatear no sea la misma que la del usuario
-            $withIsOng = DB::select('select * from maat.organizacion
-                        inner join maat.entidad on organizacion.entidad_id = entidad.id
+            $withIsOng = DB::select('select * from betec_maat.organizacion
+                        inner join betec_maat.entidad on organizacion.entidad_id = entidad.id
                         where entidad.id = ?', [$request->params['id']]);
 
             // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
-            $empr = DB::select('select * from maat.empresa
-                inner join maat.entidad on empresa.entidad_id = entidad.id
+            $empr = DB::select('select * from betec_maat.empresa
+                inner join betec_maat.entidad on empresa.entidad_id = entidad.id
                 where entidad.id = ?', [$request->params['userId']]);
 
             // Revisa que la id de la entidad con la que se quiere chatear no sea la misma que la del usuario
-            $withIsEmpr = DB::select('select * from maat.empresa
-                        inner join maat.entidad on empresa.entidad_id = entidad.id
+            $withIsEmpr = DB::select('select * from betec_maat.empresa
+                        inner join betec_maat.entidad on empresa.entidad_id = entidad.id
                         where entidad.id = ?', [$request->params['id']]);
 
             // Es ONG el usuario, por lo que va a mostrar los chats de empresa
@@ -139,12 +139,12 @@ class ChatController extends Controller
                 count($withIsOng) < 1
             ) {
                 // Guarda en $chatEmpresa todas las entidades empresas
-                $chatEmpresa = DB::select('select * from maat.entidad
-                    inner join maat.empresa on empresa.entidad_id = entidad.id');
+                $chatEmpresa = DB::select('select * from betec_maat.entidad
+                    inner join betec_maat.empresa on empresa.entidad_id = entidad.id');
 
                 // Mira con quien está chateando
                 $chatWith = DB::select(
-                    'select * from maat.chat
+                    'select * from betec_maat.chat
                     where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['userId'], $request->params['id']]
                 );
@@ -152,18 +152,18 @@ class ChatController extends Controller
                 // Mira si existe el chat con el usuario seleccionado
                 if (count($chatWith) == 0) {
                     // Si no existe, entonces crea uno
-                    $chatId = DB::table('maat.chat')->insertGetId([
+                    $chatId = DB::table('betec_maat.chat')->insertGetId([
                         'empresa_id' => $request->params['id'],
                         'organizacion_id' => $request->params['userId']
                     ]);
 
-                    $chat = DB::table('maat.mensaje')->insert([
+                    $chat = DB::table('betec_maat.mensaje')->insert([
                         'contenido' => 'Has iniciado un chat',
                         'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
                         'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
                         'chat_id' => $chatId,
-                        'id_origen' => $request->params['id'],
-                        'id_destino' => $request->params['userId'],
+                        'id_origen' => $request->params['userId'],
+                        'id_destino' => $request->params['id'],
                     ]);
                 }
 
@@ -171,19 +171,19 @@ class ChatController extends Controller
                 // anteriormente)
                 $recentChats = DB::select(
                     'select entidad.nombre, c1.empresa_id as entidad, mensaje.contenido
-                    from maat.chat as c1
+                    from betec_maat.chat as c1
                     inner join (
                         select mensaje.chat_id
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         group by mensaje.chat_id
                         order by mensaje.chat_id desc
                         ) c2
                     on c1.id = c2.chat_id
                     inner join mensaje on c2.chat_id = mensaje.chat_id
-                    inner join maat.entidad on entidad.id = c1.empresa_id
+                    inner join betec_maat.entidad on entidad.id = c1.empresa_id
                     where organizacion_id = ? and mensaje.id in (
                         select max(mensaje.id)
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         where c2.chat_id = mensaje.chat_id
                         )',
                     [$request->params['userId']]
@@ -192,9 +192,9 @@ class ChatController extends Controller
                 // Si existe, entonces abre el historial de chat con el usuario
                 $chatWith = DB::select(
                     'select mensaje.id_origen, mensaje.id_destino, mensaje.contenido,
-                        mensaje.fecha, mensaje.hora, entidad.nombre from maat.chat
-                        inner join maat.mensaje on mensaje.chat_id = chat.id
-                        inner join maat.entidad on entidad.id = chat.organizacion_id
+                        mensaje.fecha, mensaje.hora, entidad.nombre from betec_maat.chat
+                        inner join betec_maat.mensaje on mensaje.chat_id = chat.id
+                        inner join betec_maat.entidad on entidad.id = chat.organizacion_id
                         where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['userId'], $request->params['id']]
                 );
@@ -208,12 +208,12 @@ class ChatController extends Controller
                 count($withIsEmpr) < 1
             ) {
                 // Guarda en $chatOngs todas las entidades ONGs
-                $chatOngs = DB::select('select * from maat.entidad
-                    inner join maat.organizacion on organizacion.entidad_id = entidad.id');
+                $chatOngs = DB::select('select * from betec_maat.entidad
+                    inner join betec_maat.organizacion on organizacion.entidad_id = entidad.id');
 
                 // Mira con quien está chateando
                 $chatWith = DB::select(
-                    'select * from maat.chat
+                    'select * from betec_maat.chat
                     where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['id'], $request->params['userId']]
                 );
@@ -221,12 +221,12 @@ class ChatController extends Controller
                 // Mira si existe el chat con el usuario
                 if (count($chatWith) == 0) {
                     // Si no existe, entonces crea uno
-                    $chatId = DB::table('maat.chat')->insertGetId([
+                    $chatId = DB::table('betec_maat.chat')->insertGetId([
                         'empresa_id' => $request->params['userId'],
                         'organizacion_id' => $request->params['id']
                     ]);
 
-                    $chat = DB::table('maat.mensaje')->insert([
+                    $chat = DB::table('betec_maat.mensaje')->insert([
                         'contenido' => 'Has iniciado un chat',
                         'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
                         'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
@@ -245,19 +245,19 @@ class ChatController extends Controller
                 // valores de una misma columna (en este caso el contenido del mensaje)
                 $recentChats = DB::select(
                     'select entidad.nombre, c1.organizacion_id as entidad, mensaje.contenido
-                    from maat.chat as c1
+                    from betec_maat.chat as c1
                     inner join (
                         select mensaje.chat_id
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         group by mensaje.chat_id
                         order by mensaje.chat_id desc
                         ) c2
                     on c1.id = c2.chat_id
                     inner join mensaje on c2.chat_id = mensaje.chat_id
-                    inner join maat.entidad on entidad.id = c1.organizacion_id
+                    inner join betec_maat.entidad on entidad.id = c1.organizacion_id
                     where empresa_id = ? and mensaje.id in (
                         select max(mensaje.id)
-                        from maat.mensaje
+                        from betec_maat.mensaje
                         where c2.chat_id = mensaje.chat_id
                         )',
                     [$request->params['userId']]
@@ -266,9 +266,9 @@ class ChatController extends Controller
                 // Si existe, entonces abre el historial de chat con el usuario
                 $chatWith = DB::select(
                     'select mensaje.id_origen, mensaje.id_destino, mensaje.contenido,
-                        mensaje.fecha, mensaje.hora, entidad.nombre from maat.chat
-                        inner join maat.mensaje on mensaje.chat_id = chat.id
-                        inner join maat.entidad on entidad.id = chat.organizacion_id
+                        mensaje.fecha, mensaje.hora, entidad.nombre from betec_maat.chat
+                        inner join betec_maat.mensaje on mensaje.chat_id = chat.id
+                        inner join betec_maat.entidad on entidad.id = chat.organizacion_id
                         where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['id'], $request->params['userId']]
                 );
@@ -289,20 +289,20 @@ class ChatController extends Controller
     {
         try {
             // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
-            $ong = DB::select('select * from maat.organizacion
-            inner join maat.entidad on organizacion.entidad_id = entidad.id
+            $ong = DB::select('select * from betec_maat.organizacion
+            inner join betec_maat.entidad on organizacion.entidad_id = entidad.id
             where entidad.id = ?', [$request->params['userId']]);
 
             // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
-            $empr = DB::select('select * from maat.empresa
-            inner join maat.entidad on empresa.entidad_id = entidad.id
+            $empr = DB::select('select * from betec_maat.empresa
+            inner join betec_maat.entidad on empresa.entidad_id = entidad.id
             where entidad.id = ?', [$request->params['userId']]);
 
             // Es ONG el usuario, por lo que va a mostrar los chats de empresa
             if (count($ong) == 1) {
                 // Mira con quien está chateando
                 $chatWith = DB::select(
-                    'select * from maat.chat
+                    'select * from betec_maat.chat
                                     where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['userId'], $request->params['id']]
                 );
@@ -310,12 +310,12 @@ class ChatController extends Controller
                 // Mira si existe el chat con el usuario seleccionado
                 if (count($chatWith) == 0) {
                     // Si no existe, entonces crea uno
-                    $chatId = DB::table('maat.chat')->insertGetId([
+                    $chatId = DB::table('betec_maat.chat')->insertGetId([
                         'empresa_id' => $request->params['id'],
                         'organizacion_id' => $request->params['userId']
                     ]);
 
-                    $chat = DB::table('maat.mensaje')->insert([
+                    $chat = DB::table('betec_maat.mensaje')->insert([
                         'contenido' => 'Has iniciado un chat',
                         'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
                         'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
@@ -329,9 +329,9 @@ class ChatController extends Controller
                 $getChatHistory = DB::select(
                     'select chat.id, entidad.nombre, mensaje.contenido, mensaje.fecha, mensaje.hora,
                     mensaje.id_origen, mensaje.id_destino
-                    from maat.chat
-                    inner join maat.mensaje on mensaje.chat_id = chat.id
-                    inner join maat.entidad on entidad.id = chat.empresa_id
+                    from betec_maat.chat
+                    inner join betec_maat.mensaje on mensaje.chat_id = chat.id
+                    inner join betec_maat.entidad on entidad.id = chat.empresa_id
                     where chat.empresa_id = ? and chat.organizacion_id = ?',
                     [$request->params['id'], $request->params['userId']]
                 );
@@ -341,7 +341,7 @@ class ChatController extends Controller
             } else if (count($empr) == 1) {
                 // Mira con quien está chateando
                 $chatWith = DB::select(
-                    'select * from maat.chat
+                    'select * from betec_maat.chat
                     where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->params['id'], $request->params['userId']]
                 );
@@ -349,12 +349,12 @@ class ChatController extends Controller
                 // Mira si existe el chat con el usuario
                 if (count($chatWith) == 0) {
                     // Si no existe, entonces crea uno
-                    $chatId = DB::table('maat.chat')->insertGetId([
+                    $chatId = DB::table('betec_maat.chat')->insertGetId([
                         'empresa_id' => $request->params['userId'],
                         'organizacion_id' => $request->params['id']
                     ]);
 
-                    $chat = DB::table('maat.mensaje')->insert([
+                    $chat = DB::table('betec_maat.mensaje')->insert([
                         'contenido' => 'Has iniciado un chat',
                         'fecha' => now()->year . "-" . now()->month . "-" . now()->day,
                         'hora' => now()->hour . ":" . now()->minute . ":" . now()->second,
@@ -368,9 +368,9 @@ class ChatController extends Controller
                 $getChatHistory = DB::select(
                     'select chat.id, entidad.nombre, mensaje.contenido, mensaje.fecha, mensaje.hora,
                     mensaje.id_origen, mensaje.id_destino
-                    from maat.chat
-                    inner join maat.mensaje on mensaje.chat_id = chat.id
-                    inner join maat.entidad on entidad.id = chat.organizacion_id
+                    from betec_maat.chat
+                    inner join betec_maat.mensaje on mensaje.chat_id = chat.id
+                    inner join betec_maat.entidad on entidad.id = chat.organizacion_id
                     where chat.empresa_id = ? and chat.organizacion_id = ?',
                     [$request->params['userId'], $request->params['id']]
                 );
@@ -387,13 +387,13 @@ class ChatController extends Controller
     {
         try {
             // Mira si el usuario es de una organizacion
-            $ong = DB::select('select * from maat.organizacion
-            inner join maat.entidad on organizacion.entidad_id = entidad.id
+            $ong = DB::select('select * from betec_maat.organizacion
+            inner join betec_maat.entidad on organizacion.entidad_id = entidad.id
             where entidad.id = ?', [$request->idOrigen]);
 
             // Mira si el usuario es de una empresa
-            $empr = DB::select('select * from maat.empresa
-            inner join maat.entidad on empresa.entidad_id = entidad.id
+            $empr = DB::select('select * from betec_maat.empresa
+            inner join betec_maat.entidad on empresa.entidad_id = entidad.id
             where entidad.id = ?', [$request->idOrigen]);
 
             // Dependiendo del contador entonces significa que es un tipo de usuario (ONG o empresa)
@@ -401,11 +401,11 @@ class ChatController extends Controller
             if (count($ong) == 1) {
                 // Coge el id del chat del usuario
                 $chatId = DB::select(
-                    'select * from maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
+                    'select * from betec_maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->idOrigen, $request->idDestino]
                 );
 
-                $chat = DB::table('maat.mensaje')->insert([
+                $chat = DB::table('betec_maat.mensaje')->insert([
                     'contenido' => $request->msg,
                     'fecha' => $request->fecha,
                     'hora' => $request->hora,
@@ -419,12 +419,12 @@ class ChatController extends Controller
                 // Coge el id del chat del usuario para saber la id del chat al que pertenece el mensaje
                 // enviado
                 $chatId = DB::select(
-                    'select id from maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
+                    'select id from betec_maat.chat where chat.organizacion_id = ? and chat.empresa_id = ?',
                     [$request->idDestino, $request->idOrigen]
                 );
 
                 // Envia el mensaje a la base de datos
-                $chat = DB::table('maat.mensaje')->insert([
+                $chat = DB::table('betec_maat.mensaje')->insert([
                     'contenido' => $request->msg,
                     'fecha' => $request->fecha,
                     'hora' => $request->hora,
@@ -445,21 +445,21 @@ class ChatController extends Controller
     {
         try {
             // Guarda en $ong todas la organizacion de tipo ong que cumpla con el requisito
-            $ong = DB::select('select * from maat.organizacion
-                       inner join maat.entidad on organizacion.entidad_id = entidad.id
+            $ong = DB::select('select * from betec_maat.organizacion
+                       inner join betec_maat.entidad on organizacion.entidad_id = entidad.id
                        where entidad.id = ?', [$request->params['userId']]);
 
             // Guarda en $empr todas la organizacion de tipo empresa que cumpla con el requisito
-            $empr = DB::select('select * from maat.empresa
-                       inner join maat.entidad on empresa.entidad_id = entidad.id
+            $empr = DB::select('select * from betec_maat.empresa
+                       inner join betec_maat.entidad on empresa.entidad_id = entidad.id
                        where entidad.id = ?', [$request->params['userId']]);
 
             // Es ONG el usuario
             if (count($ong) == 1) {
                 $refreshedChat = DB::select(
                     'select *
-                    from maat.mensaje
-                    inner join maat.chat on chat.id = mensaje.chat_id
+                    from betec_maat.mensaje
+                    inner join betec_maat.chat on chat.id = mensaje.chat_id
                     where chat.empresa_id =? and chat.organizacion_id = ?
                     order by mensaje.id desc
                     limit 100',
@@ -470,8 +470,8 @@ class ChatController extends Controller
             } else if (count($empr) == 1) {
                 $refreshedChat = DB::select(
                     'select *
-                    from maat.mensaje
-                    inner join maat.chat on chat.id = mensaje.chat_id
+                    from betec_maat.mensaje
+                    inner join betec_maat.chat on chat.id = mensaje.chat_id
                     where chat.empresa_id =? and chat.organizacion_id = ?
                     order by mensaje.id desc
                     limit 100',

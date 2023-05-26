@@ -213,19 +213,19 @@ class RegisterUser extends Controller
 
         // Mira si existe el usuario a registrar dentro de la entidad
         $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
-        from maat.users
-        inner join maat.entidad on entidad.id = users.entidad_id
+        from betec_maat.users
+        inner join betec_maat.entidad on entidad.id = users.entidad_id
         where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
 
         // Mira si existe el email a registrar
         $emailExist = DB::select('select users.id, users.email
-        from maat.users
+        from betec_maat.users
         where users.email = ?', [$request->correo]);
 
         // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
         $employees = DB::select('select count(users.id) as empleados
-        from maat.users
-        inner join maat.entidad on entidad.id = users.entidad_id
+        from betec_maat.users
+        inner join betec_maat.entidad on entidad.id = users.entidad_id
         where entidad.nombre = ?', [$request->nombre_empresa]);
 
         // Si no existe el usuario en la organización y el email a registrar no existe

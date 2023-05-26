@@ -236,7 +236,7 @@ export default {
             try {
                 if (
                     msg != null &&
-                    msg.replace(" ", "") != "" &&
+                    msg.replaceAll(" ", "") != "" &&
                     this.msg.length < 256
                 ) {
                     this.form.msg = msg;
@@ -283,7 +283,7 @@ export default {
                     this.msg = "";
                 } else {
                     this.msg =
-                        "El mensaje tiene que tener menos de 256 carácteres.";
+                        "El mensaje tiene que tener menos de 256 carácteres y no estar vacío.";
                 }
             } catch (error) {
                 console.log(error);
@@ -651,6 +651,7 @@ export default {
                                 class="inputChatPropio"
                                 placeholder="Escribe..."
                                 v-bind:disabled="this.nameChat == ''"
+                                @keyup.enter="enviar(msg)"
                             />
 
                             <!-- Enviar mensaje -->
@@ -704,6 +705,7 @@ export default {
                                 class="inputChatPropio"
                                 placeholder="Escribe..."
                                 v-bind:disabled="this.nameChat == ''"
+                                @keyup.enter="enviar(msg)"
                             />
 
                             <!-- Envia mensajes -->

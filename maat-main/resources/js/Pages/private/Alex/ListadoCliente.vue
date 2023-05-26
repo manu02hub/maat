@@ -386,6 +386,7 @@ export default {
                                 type="text"
                                 placeholder="Buscar..."
                                 v-model="this.searchFilter"
+                                @keyup.enter="buscarFilter"
                             />
                         </div>
 
