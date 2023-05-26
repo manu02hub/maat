@@ -243,6 +243,16 @@ export default {
 
                     msgContainer +=
                         "<div class='sendChatPropio'>" + this.form.msg;
+
+                    // Configura el tiempo de envío
+                    this.form.hora = date.toLocaleTimeString();
+                    this.form.fecha =
+                        date.getFullYear() +
+                        "-" +
+                        date.getMonth() +
+                        "-" +
+                        date.getDate();
+
                     msgContainer +=
                         "<p class='timeChatSendPropio pDefaultPropio'>Enviado a las " +
                         this.form.hora +
@@ -264,14 +274,6 @@ export default {
                         0,
                         contenedorChat[1].scrollHeight
                     );
-
-                    this.form.hora = date.toLocaleTimeString();
-                    this.form.fecha =
-                        date.getFullYear() +
-                        "-" +
-                        date.getMonth() +
-                        "-" +
-                        date.getDate();
 
                     this.form.post("/chat/send", {
                         onFinish: () =>
