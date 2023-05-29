@@ -3,6 +3,8 @@
 <script>
 import Sidebar from "@/Components/mosaic/partials/Sidebar.vue";
 import axios from "axios";
+import { Head } from "@inertiajs/vue3";
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
 
 import * as Validaciones from "./../../../validations/Validaciones.js";
 
@@ -188,62 +190,6 @@ export default {
             }
         },
 
-        // Mira lo que se introduce y lo previene o deja que se use esa tecla (escribir)
-        checkNameInput: function (e) {
-            try {
-                // Validaciones.checkUserTxt(e); // Este devuelve boolean
-                Validaciones.checkInput(e);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-
-        // Mira lo que se introduce y lo previene o deja que se use esa tecla (escribir)
-        checkEmailInput: function (e) {
-            try {
-                Validaciones.checkInputEmail(e);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-
-        // Mira lo que se introduce y lo previene o deja que se use esa tecla (escribir)
-        checkTarjInput: function (e) {
-            try {
-                Validaciones.checkInputTarjeta(e);
-            } catch (error) {
-                console.log(error);
-            }
-        },
-
-        // Valida el nombre
-        valName: function () {
-            try {
-                if (
-                    Validaciones.checkInjection(this.prueba) &&
-                    Validaciones.checkUserTxt(this.prueba)
-                ) {
-                    console.log("Es válido");
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        },
-
-        // Valida el nombre
-        valEmail: function () {
-            try {
-                if (
-                    Validaciones.checkInjection(this.prueba) &&
-                    Validaciones.checkEmailTxt(this.prueba1)
-                ) {
-                    console.log("Es válido");
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        },
-
         // Cuando cambia de tipo (reciente o todos)
         changeTypeCont: function (cambio) {
             var start = 0;
@@ -333,14 +279,14 @@ export default {
         }
     },
 
-    components: { Sidebar },
+    components: { Sidebar, Head, PrivateLayout },
 };
 </script>
 
 <template>
-    <main>
-        <Sidebar class="contenedorSidebar" />
+    <Head title="Listado" />
 
+    <PrivateLayout>
         <div class="contenedorContenidoPropio">
             <!-- Contenido propio -->
             <div class="rowPropio noRowGapPropio">
@@ -443,7 +389,7 @@ export default {
                             >
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img
-                                    src="./../../../../img/prueba.jpg"
+                                    src="./../../../../img/fondoGeneralChat.jpg"
                                     class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                     alt=""
                                 />
@@ -531,7 +477,7 @@ export default {
                 </ul>
             </div>
         </div>
-    </main>
+    </PrivateLayout>
 </template>
 
 <style scoped>
@@ -611,15 +557,17 @@ export default {
 .contenedorContenidoPropio {
     width: 85%;
     float: right;
-    margin-top: 4rem;
+    margin-top: 1.25rem;
+    margin-right: 2.5rem !important;
 }
 
 /* Para 80% de pantalla height (según el zoom). Vuelve a normal al poner 100% zoom. */
 @media only screen and (max-height: 762px) and (min-height: 610px) {
     .contenedorContenidoPropio {
-        width: 85% !important;
+        width: 100% !important;
         float: right !important;
-        margin-top: 4.5rem !important;
+        margin-top: 2.5rem !important;
+        margin-right: 2rem !important;
     }
 
     .listadoOrgPropio {
@@ -763,7 +711,7 @@ export default {
     border-bottom-right-radius: 0.15rem;
     border-bottom-left-radius: 0.5rem;
     /* Comportamiento cuando se sale de la altura o ancho establecido */
-    overflow-y: hidden;
+    overflow-y: scroll;
     /* Margenes */
     margin-top: 1.5rem;
     margin-bottom: 1rem;

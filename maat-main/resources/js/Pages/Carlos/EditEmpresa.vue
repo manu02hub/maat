@@ -10,7 +10,7 @@ import UpdatePasswordForm from '@/Components/carlosComponents/UpdatePasswordForm
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Editar" />
 
 
     <PrivateLayout>

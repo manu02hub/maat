@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Nombre y logo de la app -->
+        <title inertia>{{ config('app.name'), 'MAAT' }}</title>
+        <link rel="icon" href="{{url("logoMAAT.png")}}" sizes="2x16">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

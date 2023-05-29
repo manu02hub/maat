@@ -1,5 +1,7 @@
 <!-- Parte Alex -->
 <script>
+import { Head } from "@inertiajs/vue3";
+
 export default {
     data() {
         return {
@@ -26,15 +28,20 @@ export default {
             console.log(error);
         }
     },
+
+    components: { Head },
 };
 </script>
 
 <!-- Contenido propio -->
 <template>
+    <!-- Pone titulo a la página de la app -->
+    <Head title="Perfil" />
+
     <!-- NavBar -->
     <nav class="rowPropio noRowGapPropio">
         <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio estiloHeaderPropio"
         >
             <span class="goBack" @click="goListado">&#8592;</span>
         </div>
@@ -51,7 +58,7 @@ export default {
                 src="./../../../../img/fondoP.jpg"
             />
             <img
-                src="./../../../../img/prueba.jpg"
+                src="./../../../../img/fondoGeneralChat.jpg"
                 class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio logoOrgPropio"
             />
         </div>
@@ -124,7 +131,7 @@ export default {
                         <!-- Solo muestra los 3 primeros empleados de la lista -->
                         <template v-if="index < 3">
                             <img
-                                src="./../../../../img/prueba.jpg"
+                                src="./../../../../img/fondoGeneralChat.jpg"
                                 class="col-lg-3Propio col-md-2Propio col-sm-12Propio col-12Propio imgEmplPropio"
                                 alt=""
                             />
@@ -177,9 +184,10 @@ export default {
                             />
                         </button>
                     </a>
-                    <a v-if="$page.props.auth.user.rol_id === 2"
+                    <a
+                        v-if="$page.props.auth.user.rol_id === 2"
                         class="aNoDecPropio"
-                        :href="route('match',this.org[0].org)"
+                        :href="route('match', this.org[0].org)"
                     >
                         <button class="btnChat2Propio">
                             Contratar Organizacion
@@ -259,7 +267,7 @@ export default {
 }
 
 /* Rellena espacio del nav (temporal) */
-.pruebaPropio {
+.estiloHeaderPropio {
     height: 4rem;
     background: lightblue;
 }

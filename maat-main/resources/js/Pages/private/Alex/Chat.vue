@@ -1,7 +1,7 @@
 <!-- Parte Alex -->
 <script>
 import axios from "axios";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Head } from "@inertiajs/vue3";
 
 export default {
     data() {
@@ -499,15 +499,20 @@ export default {
             console.log(error);
         }
     },
+
+    components: { Head },
 };
 </script>
 
 <!-- Contenido propio -->
 <template>
+    <!-- Pone titulo a la página de la app -->
+    <Head title="Chat" />
+
     <!-- NavBar -->
     <nav class="rowPropio noRowGapPropio">
         <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio estiloFondoChatPropio"
         >
             <span class="goList" @click="goListado">&#9751;</span>
         </div>
@@ -564,7 +569,7 @@ export default {
                             >
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img
-                                    src="./../../../../img/prueba.jpg"
+                                    src="./../../../../img/fondoGeneralChat.jpg"
                                     class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                     alt=""
                                 />
@@ -592,7 +597,7 @@ export default {
                             >
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img
-                                    src="./../../../../img/prueba.jpg"
+                                    src="./../../../../img/fondoGeneralChat.jpg"
                                     class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                     alt=""
                                 />
@@ -733,7 +738,7 @@ export default {
     <!-- Footer -->
     <footer>
         <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio estiloFondoChatPropio"
         ></div>
     </footer>
 </template>
@@ -789,7 +794,7 @@ export default {
 }
 
 /* Rellena espacio del nav (temporal) */
-.pruebaPropio {
+.estiloFondoChatPropio {
     height: 2.75rem;
     background: #291f1e;
 }
