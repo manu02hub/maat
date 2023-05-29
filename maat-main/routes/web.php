@@ -16,6 +16,9 @@ use App\Http\Controllers\MatchController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\NoticiasController;
+use App\Http\Controllers\Private\MigrationsController;
+use App\Http\Controllers\Private\RolController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
 
@@ -128,6 +131,25 @@ Route::patch('storeAsocicacionesContratadas', [AsocicacionesContratadasControlle
 Route::get('editAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'edit'])->name('editAsocicacionesContratadas');
 Route::patch('updateAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'update'])->name('updateAsocicacionesContratadas');
 Route::get('deleteAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'destroyAsocicacionesContratadas'])->name('deleteAsocicacionesContratadas');
+
+
+//Migrations
+Route::get('indexMigrations',[MigrationsController::class, 'index'])->name('indexMigrations');
+Route::get('createMigrations', [MigrationsController::class, 'create'])->name('createMigrations');
+Route::patch('storeMigrations', [MigrationsController::class, 'store'])->name('storeMigrations');
+Route::get('editMigrations/{id}', [MigrationsController::class, 'edit'])->name('editMigrations');
+Route::post('updateMigrations', [MigrationsController::class, 'update'])->name('updateMigrations');
+Route::get('deleteMigrations/{id}', [MigrationsController::class, 'destroy'])->name('deleteMigrations');
+
+
+//Rol
+Route::get('indexRol',[RolController::class, 'index'])->name('indexRol');
+Route::get('createRol', [RolController::class, 'create'])->name('createRol');
+Route::patch('storeRol', [RolController::class, 'store'])->name('storeRol');
+Route::get('editRol/{id}', [RolController::class, 'edit'])->name('editRol');
+Route::post('updateRol', [RolController::class, 'update'])->name('updateRol');
+Route::get('deleteRol/{id}', [RolController::class, 'destroy'])->name('deleteRol');
+
 
 
 

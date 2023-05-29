@@ -296,7 +296,409 @@
                                         <span
                                             class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
                                         >
-                                            Listado Noticias</span
+                                            Gestión Noticias</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  CRUD MIGRATIONS -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión Migrations</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+
+                        <!--  CRUD PasswordReset -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión PasswordReset</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+
+                        <!--  CRUD PersonalAccessToken -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión PersonalAccessToken</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  CRUD ROLES -->
+                        <NavLink :href="route('indexRol')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión Roles</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  CRUD TiposPlan -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión TiposPlan</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  CRUD Transaccion -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión Transaccion</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  CRUD userHasEvento -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión userHasEvento</span
+                                        >
+                                    </div>
+                                </a>
+                            </li>
+                        </NavLink>
+
+                        <!--  CRUD VALORACIONES -->
+                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                            <li
+                                class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                                :class="isExactActive && 'bg-slate-900'"
+                            >
+                                <a
+                                    class="block text-slate-200 truncate transition duration-150"
+                                    :class="
+                                        isExactActive
+                                            ? 'hover:text-slate-200'
+                                            : 'hover:text-white'
+                                    "
+                                    :href="href"
+                                    @click="navigate"
+                                >
+                                    <div class="flex items-center">
+                                        <svg
+                                            class="shrink-0 h-6 w-6"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-500'
+                                                        : 'text-slate-600'
+                                                "
+                                                d="M1 3h22v20H1z"
+                                            />
+                                            <path
+                                                class="fill-current"
+                                                :class="
+                                                    isExactActive
+                                                        ? 'text-indigo-300'
+                                                        : 'text-slate-400'
+                                                "
+                                                d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z"
+                                            />
+                                        </svg>
+                                        <span
+                                            class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
+                                        >
+                                            Gestión Valoraciones</span
                                         >
                                     </div>
                                 </a>

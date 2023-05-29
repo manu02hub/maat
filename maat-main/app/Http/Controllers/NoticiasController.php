@@ -18,7 +18,6 @@ class NoticiasController extends Controller
      */
     public function index()
     {
-        // $songs = Song::all()->sortBy('id');
         $noticia = Noticias::all();
         // dd($noticia);
         return Inertia::render('public/Noticias', compact('noticia'));
@@ -26,7 +25,6 @@ class NoticiasController extends Controller
 
     public function noticiaslistado()
     {
-        // $songs = Song::all()->sortBy('id');
         $noticia = Noticias::all();
         // dd($noticia);
         return Inertia::render('private/Carlos/NoticiasListado', compact('noticia'));
@@ -59,21 +57,12 @@ class NoticiasController extends Controller
 
         // dd($request);
 
-
-        // $imagen = $request->img;
-        // $imagen = str_replace('C:\fakepath\\', "http://localhost/img/DWES/p3/img/", $imagen);
-
         $noticia = Noticias::create([
             'titulo' => $request->titulo,
             'fecha' => $request->fecha,
             'descripcion' => $request->descripcion,
             'imagen' => $request->imagen
         ]);
-
-        // $song = new Song();
-        // $song->song = $request->song;
-
-        // dd($request->song);
 
         // $noticia->save();
 

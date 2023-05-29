@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 
 class OrganizacionesController extends Controller
 {
-    // Alex
     /**
      * Coge los datos de la empresa del usuario iniciado sesion
      */

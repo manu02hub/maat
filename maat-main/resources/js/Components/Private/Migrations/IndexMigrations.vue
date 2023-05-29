@@ -2,20 +2,27 @@
 import SearchForm from "@/Components/mosaic/components/SearchForm.vue";
 import PrivateLayout from "@/Layouts/PrivateLayout.vue";
 import CardEvent from "@/Components/manuComponents/CardEvent.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
+
+
+const form = useForm({
+    email: "",
+});
 </script>
 
 <template>
     <div class="grid-system">
         <div class="div-header">
             <header>
-                <span class="noticias">Noticias</span>
+                <span class="empresa">Migraciones</span>
                 <div class="action-buttons">
-                    <Link :href="route('noticia-create')" class="action-button-añadir">
-                    <button>Añadir noticia</button>
+                    <Link :href="route('createMigrations')" class="action-añadir">
+                    <button>Añadir Migración</button>
                     </Link>
                 </div>
             </header>
+
             <div class="div-tabla">
                 <table>
                     <thead>
@@ -24,24 +31,21 @@ import { Head, Link } from "@inertiajs/vue3";
                             <th class="attr-input-checkbox">
                                 <input type="checkbox">
                             </th>
-                            <th class="attr-th">Título</th>
-                            <th class="attr-th">Fecha</th>
-                            <th class="attr-th">Descripcion</th>
-                            <th class="attr-th">URL de la Imagen</th>
+                            <th class="attr-th">Nombre de la Migración</th>
+                            <th class="attr-th">Batch</th>
+                            <th class="attr-th">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="noticias in $page.props.noticia" :key="noticias.id">
+                        <tr v-for="migrations in $page.props.migration" :key="migrations.id">
                             <td class="th-id">1</td>
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
-                            <td class="attr-td">{{ noticias.titulo }}</td>
-                            <td class="attr-td">{{ noticias.fecha }}</td>
-                            <td class="attr-td">{{ noticias.descripcion }}</td>
-                            <td class="attr-td"><img style="width: 150px; height: 100px;" :src="noticias.imagen"></td>
+                            <td class="attr-td">{{ migrations.migration }}</td>
+                            <td class="attr-td">{{ migrations.batch }}</td>
                             <td class="attr-td">
-                                <Link :href="route('noticia-edit', noticias.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <Link :href="route('editMigrations', migrations.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">
                                     <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -50,7 +54,7 @@ import { Head, Link } from "@inertiajs/vue3";
                                     </svg>
                                 </button>
                                 </Link>
-                                <Link :href="route('noticia-destroy', noticias.id)">
+                                <Link :href="route('deleteMigrations', migrations.id)">
                                 <button class="action-buttons-list" @click="Eliminar">
                                     <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -74,6 +78,14 @@ import { Head, Link } from "@inertiajs/vue3";
 </template>
 
 <style scoped>
+.button-enviar{
+    margin-left: 1%;
+    background-color: rgb(81, 161, 0);
+    padding: 0.9%;
+}
+.Email{
+    margin: 20px;
+}
 .grid-system {
     display: grid;
     grid-template-columns: 1fr;
@@ -83,8 +95,11 @@ import { Head, Link } from "@inertiajs/vue3";
     grid-template-rows: auto;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid-auto-flow: dense;
-    margin: 20px;
     width: 100%;
+}
+
+.email{
+border-radius: 6px;
 }
 
 .div-header {
@@ -93,8 +108,9 @@ import { Head, Link } from "@inertiajs/vue3";
     border-color: rgb(226 232 240);
 }
 
-.noticias {
+.empresa {
     font-size: 30px;
+    padding-left: 2%;
 }
 
 .div-tabla {
@@ -105,7 +121,8 @@ header {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    padding: 2%;
+    padding-right: 3%;
+    padding-top: 2%;
 }
 
 table {
@@ -147,6 +164,12 @@ th {
     text-align: center;
 }
 
+.action-añadir{
+    background-color: coral;
+    border-radius: 6px;
+    padding: 7%;
+}
+
 .action-buttons-list {
     padding-bottom: 0%;
     padding-left: 3%;
@@ -154,30 +177,5 @@ th {
     padding-top: 0%;
 }
 
-.action-button-añadir {
-    background-color: #ff9800;
-    padding-bottom: 1%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 6%;
-    border-radius: 6px;
-    font-size: 17px;
-    margin-left: 20%;
 
-}
-
-.action-button-eliminar {
-    background-color: #dc3545;
-    padding-bottom: 1%;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 1%;
-    border-radius: 6px;
-    font-size: 17px;
-    margin-left: -60%;
-}
-
-.action-buttons {
-    display: flex;
-}
 </style>
