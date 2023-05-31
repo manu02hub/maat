@@ -44,14 +44,21 @@ import { Link } from "@inertiajs/vue3";
                     >Ranking</Link
                 >
             </li>
-            <li>
+            <li v-if="$page.props.auth.user != null">
+                <Link
+                    :href="route('login')"
+                    :class="{ active: route().current('login') }"
+                    >Area privada</Link
+                >
+            </li>
+            <li v-if="$page.props.auth.user == null">
                 <Link
                     :href="route('login')"
                     :class="{ active: route().current('login') }"
                     >Login</Link
                 >
             </li>
-            <li>
+            <li v-if="$page.props.auth.user == null">
                 <Link
                     :href="route('register')"
                     :class="{ active: route().current('register') }"

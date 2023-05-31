@@ -12,6 +12,7 @@ use App\Http\Controllers\Private\AsocicacionesContratadasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
+use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PerfilController;
@@ -32,12 +33,6 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
     return Inertia::render('public/Index');
 })->name('index');
 
@@ -101,7 +96,7 @@ Route::get('/recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('rec
 Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
 
     //POST
-Route::get('recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
+Route::get('/recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
 
     //COMENTARIO
 Route::patch('crearComentario/{id}', [PostController::class, 'createComentario'])->name('crearComentario');

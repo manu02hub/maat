@@ -13,7 +13,7 @@
         <div
             id="sidebar"
             ref="sidebar"
-            class="flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-slate-800 p-4 transition-all duration-200 ease-in-out"
+            class="flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-custom p-4 transition-all duration-200 ease-in-out"
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-64'"
         >
             <!-- Sidebar header -->
@@ -39,6 +39,7 @@
                 </button>
                 <!-- Logo -->
                 <!--<router-link class="block" to="/">-->
+                <!--
                 <svg width="32" height="32" viewBox="0 0 32 32">
                     <defs>
                         <linearGradient
@@ -84,6 +85,7 @@
                         fill="url(#logo-b)"
                     />
                 </svg>
+            -->
                 <!--</router-link>-->
             </div>
 
@@ -99,16 +101,19 @@
                             aria-hidden="true"
                             >•••</span
                         >
-                        <span
-                            class="lg:hidden lg:sidebar-expanded:block 2xl:block"
-                            >Pages</span
-                        >
+                        <img src="./../../../../img/logoMAAT.png" alt="" height="35" width="160">
                     </h3>
                     <ul class="mt-3">
                         <!-- ALEX -->
 
                         <!-- Calendar -->
-                        <NavLink :href="route('chat')" v-if="$page.props.auth.user.rol_id === 2 || $page.props.auth.user.rol_id === 1">
+                        <NavLink
+                            :href="route('chat')"
+                            v-if="
+                                $page.props.auth.user.rol_id === 2 ||
+                                $page.props.auth.user.rol_id === 1
+                            "
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -156,7 +161,13 @@
                             </li>
                         </NavLink>
                         <!-- Calendar -->
-                        <NavLink :href="route('listado')"  v-if="$page.props.auth.user.rol_id === 2 || $page.props.auth.user.rol_id === 1">
+                        <NavLink
+                            :href="route('listado')"
+                            v-if="
+                                $page.props.auth.user.rol_id === 2 ||
+                                $page.props.auth.user.rol_id === 1
+                            "
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -205,7 +216,10 @@
                         </NavLink>
 
                         <!-- Calendar -->
-                        <NavLink :href="route('eventsIndex')"  v-if="$page.props.auth.user.rol_id === 1">
+                        <NavLink
+                            :href="route('eventsIndex')"
+                            v-if="$page.props.auth.user.rol_id === 1"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -254,7 +268,10 @@
                         </NavLink>
 
                         <!--  LISTADO NOTICIAS -->
-                        <NavLink :href="route('noticias-listado')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink
+                            :href="route('noticias-listado')"
+                            v-if="$page.props.auth.user.rol_id === 4"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -303,7 +320,10 @@
                             </li>
                         </NavLink>
                         <!-- Calendar v-if="$page.props.auth.user.rol_id === 2-->
-                        <NavLink :href="route('plans')" v-if="$page.props.auth.user.rol_id === 2">
+                        <NavLink
+                            :href="route('plans')"
+                            v-if="$page.props.auth.user.rol_id === 2"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -356,7 +376,8 @@
 
                         <SidebarLinkGroup
                             v-slot="parentLink"
-                            :active="route().current('dashboard')"  v-if="$page.props.auth.user.rol_id === 3"
+                            :active="route().current('dashboard')"
+                            v-if="$page.props.auth.user.rol_id === 3"
                         >
                             <a
                                 class="block text-slate-200 truncate transition duration-150"
@@ -491,7 +512,10 @@
                         </SidebarLinkGroup>
 
                         <!-- LISTADO USER EMPRESA -->
-                        <NavLink :href="route('indexUserEmpresa')"  v-if="$page.props.auth.user.rol_id === 2">
+                        <NavLink
+                            :href="route('indexUserEmpresa')"
+                            v-if="$page.props.auth.user.rol_id === 2"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -540,7 +564,10 @@
                         </NavLink>
 
                         <!-- LISTADO USER ONG -->
-                        <NavLink :href="route('indexUserONG')"  v-if="$page.props.auth.user.rol_id === 1">
+                        <NavLink
+                            :href="route('indexUserONG')"
+                            v-if="$page.props.auth.user.rol_id === 1"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -588,7 +615,10 @@
                             </li>
                         </NavLink>
                         <!--  EDITAR ORGANIZACION -->
-                        <NavLink :href="route('edit-organizacion')"  v-if="$page.props.auth.user.rol_id === 1">
+                        <NavLink
+                            :href="route('edit-organizacion')"
+                            v-if="$page.props.auth.user.rol_id === 1"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -637,7 +667,10 @@
                             </li>
                         </NavLink>
                         <!-- LPERFIL USUARIO -->
-                        <NavLink :href="route('recogerPerfil')"  v-if="$page.props.auth.user.rol_id === 3">
+                        <NavLink
+                            :href="route('recogerPerfil')"
+                            v-if="$page.props.auth.user.rol_id === 3"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -737,7 +770,10 @@
                         </NavLink> -->
 
                         <!--  PRFIL EMPRESA -->
-                        <NavLink :href="route('perfil-empresa')"  v-if="$page.props.auth.user.rol_id === 2">
+                        <NavLink
+                            :href="route('perfil-empresa')"
+                            v-if="$page.props.auth.user.rol_id === 2"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -787,7 +823,10 @@
                         </NavLink>
 
                         <!--  EDITAR EMPRESA -->
-                        <NavLink :href="route('edit-empresa')"  v-if="$page.props.auth.user.rol_id === 2">
+                        <NavLink
+                            :href="route('edit-empresa')"
+                            v-if="$page.props.auth.user.rol_id === 2"
+                        >
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -837,7 +876,7 @@
                         </NavLink>
 
                         <!--  FEED -->
-                        <br>
+                        <br />
                         <NavLink :href="route('feed')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
@@ -888,7 +927,7 @@
                         </NavLink>
                         <br />
                         <!--  POST -->
-                        <NavLink :href="route('post')">
+                        <NavLink :href="route('recogerPost')">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"

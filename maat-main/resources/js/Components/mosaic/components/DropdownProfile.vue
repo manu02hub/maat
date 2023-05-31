@@ -71,20 +71,12 @@
                     @focusout="dropdownOpen = false"
                 >
                     <li>
-                        <router-link
-                            class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                            to="/settings/account"
-                            @click="dropdownOpen = false"
-                            >Settings</router-link
-                        >
-                    </li>
-                    <li>
                         <Link
                             class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
                             :href="route('logout')"
                             method="POST"
                             @click="dropdownOpen = false"
-                            >Sign Out</Link
+                            >Cerrar sesión</Link
                         >
                     </li>
                 </ul>

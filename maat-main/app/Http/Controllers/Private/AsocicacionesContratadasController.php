@@ -15,7 +15,7 @@ class AsocicacionesContratadasController extends Controller
     public function index()
     {
         $asociacionesContratadas = Asociaciones_contratadas::all();
-   
+
         return Inertia::render('PrivateMaat/AsocicacionesContratadas/AsocicacionesContratadasIndex', compact('asociacionesContratadas'));
     }
 
@@ -31,14 +31,13 @@ class AsocicacionesContratadasController extends Controller
         $asociacionesContratadas-> plan_contratado = $request->plan_contratado;
         $asociacionesContratadas-> organizacion_id = $request->organizacion_id;
         $asociacionesContratadas->save();
-
         return Redirect::route('indexAsocicacionesContratadas');
     }
 
     //EDIT AND UPDATE
 
     public function edit($id)
-    {        
+    {
         $asociacionesContratadas = Asociaciones_contratadas::findOrFail($id);
         return Inertia::render('PrivateMaat/AsocicacionesContratadasEdit', compact('asociacionesContratadas'));
     }

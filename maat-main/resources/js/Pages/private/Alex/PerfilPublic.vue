@@ -22,6 +22,7 @@ export default {
     beforeMount() {
         try {
             this.org = this.$page.props.datos;
+            this.val = this.$page.props.validador_contrato;
         } catch (error) {
             console.log(error);
         }
@@ -142,13 +143,13 @@ export default {
                                 </p>
                                 <p
                                     class="descEmplPropio"
-                                    v-if="data.rol_id == 1 || data.rol_id == 2"
+                                    v-if="data.rol_id == 1"
                                 >
                                     Administrador ONG
                                 </p>
                                 <p
                                     class="descEmplPropio"
-                                    v-if="data.rol_id == 3"
+                                    v-if="data.rol_id == 2"
                                 >
                                     Administrador Empresa
                                 </p>
@@ -177,14 +178,25 @@ export default {
                             />
                         </button>
                     </a>
-                    <a v-if="$page.props.auth.user.rol_id === 2"
+                    <a
+                        v-if="$page.props.auth.user.rol_id === 2 && !this.val"
                         class="aNoDecPropio"
-                        :href="route('match',this.org[0].org)"
+                        :href="route('match', this.org[0].org)"
                     >
                         <button class="btnChat2Propio">
                             Contratar Organizacion
                         </button>
                     </a>
+
+                    <button
+                        v-else-if="
+                            $page.props.auth.user.rol_id === 2 && this.val
+                        "
+                        class="btnChat2PropioYaContratado btn-save cursor-not-allowed"
+                        disabled
+                    >
+                        Organizacion Contratada
+                    </button>
 
                     <div class="descPropio">
                         <h1 class="h1StyleDefault">Contacto</h1>
@@ -344,6 +356,20 @@ export default {
     margin-bottom: 1rem;
     padding: 0.75rem;
     transition: 1s;
+}
+
+.btnChat2PropioYaContratado {
+    height: 4rem;
+    font-size: larger;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.45rem;
+    background-color: #c97f01;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    transition: 1s;
+    height: 4rem;
+    width: 100%;
 }
 
 /* Este chat solo aparece cuando es pequena la pantalla */

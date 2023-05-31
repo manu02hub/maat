@@ -52,7 +52,7 @@ const form = useForm({
                         />
 
                         <InputError
-                            class="mt-2"
+                            class="mt-1"
                             :message="form.errors.nombreEvento"
                         />
                     </div>
@@ -71,7 +71,7 @@ const form = useForm({
                         />
 
                         <InputError
-                            class="mt-2"
+                            class="mt-1"
                             :message="form.errors.descripcion"
                         />
                     </div>
@@ -87,7 +87,7 @@ const form = useForm({
                             v-model="form.fecha"
                         />
 
-                        <InputError class="mt-2" :message="form.errors.fecha" />
+                        <InputError class="mt-1" :message="form.errors.fecha" />
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
@@ -105,7 +105,7 @@ const form = useForm({
                             />
 
                             <InputError
-                                class="mt-2"
+                                class="mt-1"
                                 :message="form.errors.horaInicio"
                             />
                         </div>
@@ -121,7 +121,7 @@ const form = useForm({
                             />
 
                             <InputError
-                                class="mt-2"
+                                class="mt-1"
                                 :message="form.errors.horaFinal"
                             />
                         </div>
@@ -138,7 +138,7 @@ const form = useForm({
                         />
 
                         <InputError
-                            class="mt-2"
+                            class="mt-1"
                             :message="form.errors.plazas"
                         />
                     </div>
