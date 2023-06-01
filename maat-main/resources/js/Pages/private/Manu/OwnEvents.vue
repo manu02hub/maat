@@ -18,28 +18,7 @@ import { Head, Link } from "@inertiajs/vue3";
                 >
                     <h1>Mis eventos</h1>
                 </div>
-                <div class="flex-1">
-                    <div class="flex" style="width: auto">
-                        <div
-                            class="relative mb-4 flex w-full flex-wrap items-stretch"
-                        >
-                            <input
-                                type="date"
-                                class="bg-white relative m-0 block w-[1px] min-w-0 flex-auto rounded-l border border-r-0 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition ease-in-out focus:z-[3] focus:border-primary-600 focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
-                                placeholder="Recipient's username"
-                                aria-label="Recipient's username"
-                                aria-describedby="button-addon2"
-                            />
-                            <button
-                                class="relative z-[2] rounded-r bg-indigo-600 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:z-[3] focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-                                type="button"
-                                id="button-addon2"
-                            >
-                                Button
-                            </button>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="container-fluid mr-5 ml-5 mt-5">

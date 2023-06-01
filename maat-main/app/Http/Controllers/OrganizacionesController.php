@@ -8,6 +8,7 @@ use App\Models\Users;
 use App\Models\Entidad;
 use App\Models\Organizaciones;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class OrganizacionesController extends Controller
@@ -22,8 +23,8 @@ class OrganizacionesController extends Controller
         // $org = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre,
         // entidad.logo, entidad.ubicacion, entidad.web, entidad.descripcion, entidad.tamano,
         // entidad.numero_tarjeta
-        // from maat.users
-        // inner join maat.entidad on entidad.id = users.entidad_id
+        // from betec_maat.users
+        // inner join betec_maat.entidad on entidad.id = users.entidad_id
         // where entidad.id = ?', [$request->empresa]);
 
         $org2 = Users::select(
@@ -49,7 +50,7 @@ class OrganizacionesController extends Controller
     public function editONG(Request $request)
     {
         // Actualiza por los nuevos datos recibidos
-        // $update = DB::update("update maat.entidad set nombre = ?,
+        // $update = DB::update("update betec_maat.entidad set nombre = ?,
         // logo = ?, ubicacion = ?, web = ?, descripcion = ?, numero_tarjeta = ?
         // where id = ?", [
         //     $request->name, '', $request->ubicacion, $request->web, $request->descripcion,
@@ -72,24 +73,57 @@ class OrganizacionesController extends Controller
     // Elimina la empresa y todos los usuarios asociados a esta
     public function deleteONG(Request $request)
     {
-        $admins = Users::select('email', 'rol_id', 'entidad_id')
-            ->where('rol_id', 1)
-            ->where('entidad_id', $request->entidad)
-            ->get();
+        // Validación de contraseña
+        $request->validate([
+            'password' => ['required', 'current-password'],
+        ]);
 
-        // Si hay solo 1 administrador de la empresa, se elimina todos los datos de la empresa
-        if ($admins->count() == 1) {
-            // Delete all users of the company
-            $delete = Users::where('entidad_id', $request->entidad)
-                ->delete();
+        // Si se valida correctamente, te devuelve el usuario admin actual
+        $user = $request->user();
 
-            // Delete from the "empresa" table
-            $delete = Organizaciones::where('entidad_id', $request->entidad)
-                ->delete();
+        try {
+            $admins = Users::select('email', 'rol_id', 'entidad_id')
+                ->where('rol_id', 1)
+                ->where('entidad_id', $user->entidad_id)
+                ->get();
 
-            // Delete the company and all associated data
-            $delete = Entidad::where('id', $request->entidad)
-                ->delete();
+            // Si hay solo 1 administrador de la empresa, se elimina todos los datos de la empresa
+            if ($admins->count() == 1) {
+                // Elimina de la tabla mensaje
+                $delete = DB::delete('delete from betec_maat.mensaje where id_origen = ? or id_destino = ?', [
+                    $user->entidad_id, $user->entidad_id
+                ]);
+
+                // Elimina de la tabla chat
+                $delete = DB::delete('delete from betec_maat.chat where organizacion_id = ?', [
+                    $user->entidad_id
+                ]);
+
+                // Delete from the "empresa" table
+                $delete = Organizaciones::where('entidad_id', $user->entidad_id)
+                    ->delete();
+
+                // Delete all users of the company
+                $delete = Users::where('entidad_id', $user->entidad_id)
+                    ->delete();
+
+                // Delete the company and all associated data
+                $delete = Entidad::where('id', $user->entidad_id)
+                    ->delete();
+
+                // Sale de sesión
+                Auth::logout();
+            } else {
+                // En el caso de más de 1 admin en la entidad, solo se eliminará el usuario
+                Auth::logout();
+                $user->delete();
+            }
+
+            // Nuevo tokens
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 }

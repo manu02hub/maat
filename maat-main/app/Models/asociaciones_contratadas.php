@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class asociaciones_contratadas extends Model
+class Asociaciones_contratadas extends Model
 {
     use HasFactory;
 

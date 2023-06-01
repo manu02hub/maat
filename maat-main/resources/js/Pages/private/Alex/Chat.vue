@@ -1,7 +1,7 @@
 <!-- Parte Alex -->
 <script>
 import axios from "axios";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Head } from "@inertiajs/vue3";
 
 export default {
     data() {
@@ -36,8 +36,6 @@ export default {
         // Muestra chats ya contactados (necesario crear uno si no existe chat, es decir, al querrer
         // chatear con una nueva entidad)
         mostrar: function (event, entidadChatear) {
-            var chat = document.getElementsByClassName("contenedorChatPropio");
-
             try {
                 // Resetea todos los chats a sus estilos por defecto (ninguno activo) del chat de recientes
                 // Recorre todos los chats existentes de recientes
@@ -93,10 +91,6 @@ export default {
                 this.nameChat =
                     event.currentTarget.lastChild.firstChild.textContent;
 
-                // Resetea los chats enviados
-                chat[0].innerHTML = "";
-                chat[1].innerHTML = "";
-
                 // Si la pantalla es muy pequena, entonces muestra el chat del pequeno
                 if (window.innerWidth <= 768) {
                     this.chatSmall = true;
@@ -117,7 +111,7 @@ export default {
 
                         // Muestra el nombre de la entidad con la que se esta comunicandose en el chat
                         this.nameChat = response.data[0].nombre;
-                        console.log(response.data);
+
                         response.data.forEach((mensajes) => {
                             this.chatInicial.push([
                                 mensajes.contenido,
@@ -141,8 +135,6 @@ export default {
 
                         this.iniciarChatPorId();
                     });
-
-                // Mostrar historial del chat del clickeado
             } catch (error) {
                 console.error(error);
             }
@@ -191,6 +183,10 @@ export default {
             );
 
             try {
+                // Resetea los chats enviados
+                chat[0].innerHTML = "";
+                chat[1].innerHTML = "";
+
                 // Recorre todos los mensajes del chat entre los 2 usuarios (solo cuando se inicia por id)
                 this.chatInicial.forEach((mensajes) => {
                     // Si origen es la misma que la entidad del usuario
@@ -238,11 +234,25 @@ export default {
             var date = new Date();
 
             try {
-                if (msg != null && msg != "") {
+                if (
+                    msg != null &&
+                    msg.replaceAll(" ", "") != "" &&
+                    this.msg.length < 256
+                ) {
                     this.form.msg = msg;
 
                     msgContainer +=
                         "<div class='sendChatPropio'>" + this.form.msg;
+
+                    // Configura el tiempo de envío
+                    this.form.hora = date.toLocaleTimeString();
+                    this.form.fecha =
+                        date.getFullYear() +
+                        "-" +
+                        date.getMonth() +
+                        "-" +
+                        date.getDate();
+
                     msgContainer +=
                         "<p class='timeChatSendPropio pDefaultPropio'>Enviado a las " +
                         this.form.hora +
@@ -265,14 +275,6 @@ export default {
                         contenedorChat[1].scrollHeight
                     );
 
-                    this.form.hora = date.toLocaleTimeString();
-                    this.form.fecha =
-                        date.getFullYear() +
-                        "-" +
-                        date.getMonth() +
-                        "-" +
-                        date.getDate();
-
                     this.form.post("/chat/send", {
                         onFinish: () =>
                             console.log(
@@ -281,6 +283,9 @@ export default {
                     });
 
                     this.msg = "";
+                } else {
+                    this.msg =
+                        "El mensaje tiene que tener menos de 256 carácteres y no estar vacío.";
                 }
             } catch (error) {
                 console.log(error);
@@ -494,15 +499,20 @@ export default {
             console.log(error);
         }
     },
+
+    components: { Head },
 };
 </script>
 
 <!-- Contenido propio -->
 <template>
+    <!-- Pone titulo a la página de la app -->
+    <Head title="Chat" />
+
     <!-- NavBar -->
     <nav class="rowPropio noRowGapPropio">
         <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio estiloFondoChatPropio"
         >
             <span class="goList" @click="goListado">&#9751;</span>
         </div>
@@ -559,7 +569,7 @@ export default {
                             >
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img
-                                    src="./../../../../img/prueba.jpg"
+                                    src="./../../../../img/fondoGeneralChat.jpg"
                                     class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                     alt=""
                                 />
@@ -587,7 +597,7 @@ export default {
                             >
                                 <!-- Imagen (hacia izquierda y arriba si la pantalla es pequena) -->
                                 <img
-                                    src="./../../../../img/prueba.jpg"
+                                    src="./../../../../img/fondoGeneralChat.jpg"
                                     class="col-lg-2Propio col-md-2Propio col-sm-12Propio col-12Propio imgOrgPropio"
                                     alt=""
                                 />
@@ -648,6 +658,7 @@ export default {
                                 class="inputChatPropio"
                                 placeholder="Escribe..."
                                 v-bind:disabled="this.nameChat == ''"
+                                @keyup.enter="enviar(msg)"
                             />
 
                             <!-- Enviar mensaje -->
@@ -686,6 +697,8 @@ export default {
                     >
                         <div
                             class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio chatUsersPropio contenedorChatAfueraPropio"
+                            @mouseenter="changeCanRefresh(false)"
+                            @mouseleave="changeCanRefresh(true)"
                         >
                             <div class="contenedorChatPropio"></div>
                         </div>
@@ -701,6 +714,7 @@ export default {
                                 class="inputChatPropio"
                                 placeholder="Escribe..."
                                 v-bind:disabled="this.nameChat == ''"
+                                @keyup.enter="enviar(msg)"
                             />
 
                             <!-- Envia mensajes -->
@@ -724,7 +738,7 @@ export default {
     <!-- Footer -->
     <footer>
         <div
-            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio pruebaPropio"
+            class="col-lg-12Propio col-md-12Propio col-sm-12Propio col-12Propio estiloFondoChatPropio"
         ></div>
     </footer>
 </template>
@@ -780,7 +794,7 @@ export default {
 }
 
 /* Rellena espacio del nav (temporal) */
-.pruebaPropio {
+.estiloFondoChatPropio {
     height: 2.75rem;
     background: #291f1e;
 }
@@ -1011,6 +1025,7 @@ export default {
 /* Estilo h2 por defecto */
 .h2DefaultPropio {
     display: block;
+    user-select: none;
     font-size: 1.5em;
     margin-block-start: 0;
     margin-block-end: 0;
@@ -1021,6 +1036,7 @@ export default {
 
 .pDefaultPropio {
     display: block;
+    user-select: none;
 }
 
 /* Estilos responsive */
@@ -1325,6 +1341,41 @@ export default {
 
     .borderContainerPropio {
         height: 42rem;
+    }
+}
+
+/* Ajuste del texto de lastMsg */
+@media only screen and (min-width: 649px) and (max-width: 768px) {
+    .lastMsgPropio {
+        width: 30.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 549px) and (max-width: 649px) {
+    .lastMsgPropio {
+        width: 24.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 549px) {
+    .lastMsgPropio {
+        width: 18.9rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 325px) and (max-width: 451px) {
+    .lastMsgPropio {
+        width: 7rem;
+        white-space: nowrap;
+    }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 325px) {
+    .lastMsgPropio {
+        width: 7rem;
     }
 }
 </style>

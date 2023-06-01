@@ -8,15 +8,21 @@ use Inertia\Inertia;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Private\ChatsController;
+use App\Http\Controllers\Private\DominioController;
+use App\Http\Controllers\Private\ComentarioController;
+use App\Http\Controllers\Private\AsocicacionesContratadasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
+use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\OrganizacionesController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
 
@@ -32,12 +38,6 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
     return Inertia::render('public/Index');
 })->name('index');
 
@@ -101,7 +101,7 @@ Route::get('/recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('rec
 Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
 
     //POST
-Route::get('recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
+Route::get('/recogerPost',[PostController::class, 'indexPost'])->name('recogerPost');
 
     //COMENTARIO
 Route::patch('crearComentario/{id}', [PostController::class, 'createComentario'])->name('crearComentario');
@@ -121,6 +121,38 @@ Route::get('employeeForm/{mail}',function($mail){
 })->name('employeeForm');
 
 
+//PRIVATE MAAT
+//AsocicacionesContratadas
+Route::get('indexAsocicacionesContratadas',[AsocicacionesContratadasController::class, 'index'])->name('indexAsocicacionesContratadas');
+Route::get('createAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'create'])->name('createAsocicacionesContratadas');
+Route::patch('storeAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'store'])->name('storeAsocicacionesContratadas');
+Route::get('editAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'edit'])->name('editAsocicacionesContratadas');
+Route::patch('updateAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'update'])->name('updateAsocicacionesContratadas');
+Route::get('deleteAsocicacionesContratadas/{id}', [AsocicacionesContratadasController::class, 'destroy'])->name('deleteAsocicacionesContratadas');
+
+//Chat (panel admin)
+Route::get('indexChat',[ChatsController::class, 'index'])->name('indexChat');
+Route::get('createChat', [ChatsController::class, 'create'])->name('createChat');
+Route::patch('storeChat', [ChatsController::class, 'store'])->name('storeChat');
+Route::get('editChat/{id}', [ChatsController::class, 'edit'])->name('editChat');
+Route::patch('updateChat', [ChatsController::class, 'update'])->name('updateChat');
+Route::get('deleteChat/{id}', [ChatsController::class, 'destroy'])->name('deleteChat');
+
+//Comentario
+Route::get('indexComentario',[ComentarioController::class, 'index'])->name('indexComentario');
+Route::get('createComentario', [ComentarioController::class, 'create'])->name('createComentario');
+Route::patch('storeComentario', [ComentarioController::class, 'store'])->name('storeComentario');
+Route::get('editComentario/{id}', [ComentarioController::class, 'edit'])->name('editComentario');
+Route::patch('updateComentario', [ComentarioController::class, 'update'])->name('updateComentario');
+Route::get('deleteComentario/{id}', [ComentarioController::class, 'destroy'])->name('deleteComentario');
+
+//Dominio
+Route::get('indexDominio',[DominioController::class, 'index'])->name('indexDominio');
+Route::get('createDominio', [DominioController::class, 'create'])->name('createDominio');
+Route::patch('storeDominio', [DominioController::class, 'store'])->name('storeDominio');
+Route::get('editDominio/{id}', [DominioController::class, 'edit'])->name('editDominio');
+Route::patch('updateDominio', [DominioController::class, 'update'])->name('updateDominio');
+Route::get('deleteDominio/{id}', [DominioController::class, 'destroy'])->name('deleteDominio');
 
 //--------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/

@@ -28,7 +28,8 @@ class MatchController extends Controller
         /**Comprobamos que tiene un plan contratado */
         if ($plan_contratado === null) {
             /**Si no hay plan contratado, que el empresario reciba un feedback de que tiene que comprar un plan */
-            dd("No hay plan contratado");
+            // dd("No hay plan contratado");
+            return Redirect::route('plans');
         } else {
             /**En caso de tener un plan contratado, la empresa podra pasar a contratar esa organizacion */
             // dd($plan_contratado->id);
@@ -38,7 +39,8 @@ class MatchController extends Controller
             if ($plan_contratado->tipos_plan_id === 1) {
                 // dd("puede contrartar 2 organizacion");
                 if ($asociaciones_contratadas >= 2) {
-                    dd('no puedes tener mas de dos asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
+                    return Redirect::route('plans');
+                    // dd('no puedes tener mas de dos asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
                 } else {
                     // dd('estas dentro de las asociaciones');
                     $puede_contrarat = true;
@@ -46,7 +48,8 @@ class MatchController extends Controller
             } else if ($plan_contratado->tipos_plan_id === 2) {
                 // dd("puede contrartar 5 organizacion");
                 if ($asociaciones_contratadas >= 5) {
-                    dd('no puedes tener mas de cinco asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
+                    return Redirect::route('plans');
+                    // dd('no puedes tener mas de cinco asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
                 } else {
                     // dd('estas dentro de las asociaciones');
                     $puede_contrarat = true;
@@ -54,7 +57,8 @@ class MatchController extends Controller
             } else if ($plan_contratado->tipos_plan_id === 3) {
                 // dd("puede contrartar 12 organizacion");
                 if ($asociaciones_contratadas >= 12) {
-                    dd('no puedes tener mas de doce asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
+                    return Redirect::route('plans');
+                    // dd('no puedes tener mas de doce asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
                 } else {
                     // dd('estas dentro de las asociaciones');
                     $puede_contrarat = true;
@@ -62,7 +66,8 @@ class MatchController extends Controller
             } else if ($plan_contratado->tipos_plan_id === 4) {
                 // dd("puede contrartar 1 organizacion");
                 if ($asociaciones_contratadas >= 1) {
-                    dd('no puedes tener mas de una asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
+                    return Redirect::route('plans');
+                    // dd('no puedes tener mas de una asociaciones contratadas, para poder contratar mas organizaciones, revise los planes');
                 } else {
                     // dd('estas dentro de las asociaciones');
                     $puede_contrarat = true;

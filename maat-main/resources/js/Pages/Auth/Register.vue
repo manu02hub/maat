@@ -382,7 +382,7 @@ const mirarInputsTarjeta = (e) => {
         </div>
     </div>
 </template>
-<style>
+<style scoped>
 button {
     position: relative;
     border-radius: 50px;

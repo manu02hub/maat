@@ -21,6 +21,7 @@ class Entidad extends Model
         'ubicacion',
         'web',
         'descripcion',
-        'tamano'
+        'tamano',
+        'numero_tarjeta'
     ];
 }

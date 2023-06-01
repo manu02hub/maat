@@ -9,7 +9,7 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <nav class="navbar">
+    <nav class="nav">
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
             <i class="bx bx-menu"><img src="../../../img/icons/menu.svg" /></i>
@@ -44,14 +44,21 @@ import { Link } from "@inertiajs/vue3";
                     >Ranking</Link
                 >
             </li>
-            <li>
+            <li v-if="$page.props.auth.user != null">
+                <Link
+                    :href="route('login')"
+                    :class="{ active: route().current('login') }"
+                    >Area privada</Link
+                >
+            </li>
+            <li v-if="$page.props.auth.user == null">
                 <Link
                     :href="route('login')"
                     :class="{ active: route().current('login') }"
                     >Login</Link
                 >
             </li>
-            <li>
+            <li v-if="$page.props.auth.user == null">
                 <Link
                     :href="route('register')"
                     :class="{ active: route().current('register') }"
@@ -64,7 +71,7 @@ import { Link } from "@inertiajs/vue3";
 </template>
 
 <style scoped>
-.navbar {
+.nav {
     --blue: #12d2db;
     --white: #fcf2fa;
     --green: #529541aa;

@@ -27,10 +27,11 @@ class PlansController extends Controller
 
         /*-----------------------{{Descarte de botones}}-----------------------*/
         /**Ver si lo que esta registrado es un administrador de empresa */
-        $usuario = Users::select('users.*', 'rol.nombre as nombre_rol')
-            ->join('rol', 'users.rol_id', '=', 'rol.id')
-            ->where('rol.nombre', '=', 'AdminEmpresa')
-            ->first();
+        // $usuario = Users::select('users.*', 'rol.nombre as nombre_rol')
+        //     ->join('rol', 'users.rol_id', '=', 'rol.id')
+        //     ->where('rol.nombre', '=', 'AdminEmpresa')
+        //     ->first();
+        $usuario = auth()->user();
         if ($usuario != null) {
             $entidad_id = $usuario->entidad_id;
             $enlaceEmpresa_Entidad = Empresa::where('entidad_id', $entidad_id)->first();
@@ -59,16 +60,17 @@ class PlansController extends Controller
         /**Veo que el usuario es una empresa */
         $usuario = Users::select('users.*', 'rol.nombre as nombre_rol')
             ->join('rol', 'users.rol_id', '=', 'rol.id')
-            ->where('rol.nombre', '=', 'adminEmpresa')
+            ->where('rol.nombre', '=', 'AdminEmpresa')
             ->first();
         /**En caso de serlo, obtengo la empresa a la que pertenece */
-        $entidad_id = $usuario->entidad_id;
+        $entidad_id = auth()->user()->entidad_id;
         /**Obtengo la empresa y la entidad que es*/
         $enlaceEmpresa_Entidad = Empresa::where('entidad_id', $entidad_id)->first();
 
         $plan_a_actualizar = plan_contratado::where('empresa_id', $enlaceEmpresa_Entidad->id)->first();
         switch ($id) {
             case 1:
+                dd($entidad_id);
                 $plan_a_actualizar->update([
                     'activo' => 1,
                     'fecha_inicio' => now(),
@@ -78,6 +80,7 @@ class PlansController extends Controller
                 ]);
                 break;
             case 2:
+                dd($entidad_id);
                 $plan_a_actualizar->update([
                     'activo' => 1,
                     'fecha_inicio' => now(),
@@ -87,6 +90,7 @@ class PlansController extends Controller
                 ]);
                 break;
             case 3:
+                dd($entidad_id);
                 $plan_a_actualizar->update([
                     'activo' => 1,
                     'fecha_inicio' => now(),
@@ -96,6 +100,7 @@ class PlansController extends Controller
                 ]);
                 break;
             case 4:
+                dd($entidad_id);
                 $plan_a_actualizar->update([
                     'activo' => 1,
                     'fecha_inicio' => now(),
@@ -114,13 +119,13 @@ class PlansController extends Controller
         /**Veo que el usuario es una empresa */
         $usuario = Users::select('users.*', 'rol.nombre as nombre_rol')
             ->join('rol', 'users.rol_id', '=', 'rol.id')
-            ->where('rol.nombre', '=', 'adminEmpresa')
             ->first();
         /**En caso de serlo, obtengo la empresa a la que pertenece */
-        $entidad_id = $usuario->entidad_id;
+        $entidad_id = auth()->user()->entidad_id;
         /**Obtengo la empresa y la entidad que es*/
         $enlaceEmpresa_Entidad = Empresa::where('entidad_id', $entidad_id)->first();
 
+        // dd($enlaceEmpresa_Entidad->id);
         /**Objeto de plan contratado */
         $joinPlan = new plan_contratado();
         $joinPlan->activo = 1;

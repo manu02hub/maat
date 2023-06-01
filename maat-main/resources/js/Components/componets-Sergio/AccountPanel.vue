@@ -65,7 +65,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuarioaaaa
+                            Actualizar Usuario
                         </PrimaryButton>
                     </div>
                 </form>

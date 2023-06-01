@@ -56,19 +56,19 @@ class RegisteredUserController extends Controller
 
             // Mira si existe el usuario a registrar dentro de la entidad
             $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
-            from maat.users
-            inner join maat.entidad on entidad.id = users.entidad_id
+            from betec_maat.users
+            inner join betec_maat.entidad on entidad.id = users.entidad_id
             where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
 
             // Mira si existe el email a registrar
             $emailExist = DB::select('select users.id, users.email
-            from maat.users
+            from betec_maat.users
             where users.email = ?', [$request->correo]);
 
             // Mira si ya existe un empleado dentro de esa empresa (solo se permite 1 por empleado)
             $employees = DB::select('select count(users.id) as empleados
-            from maat.users
-            inner join maat.entidad on entidad.id = users.entidad_id
+            from betec_maat.users
+            inner join betec_maat.entidad on entidad.id = users.entidad_id
             where entidad.nombre = ?', [$request->nombre_empresa]);
 
             // Si no existe el usuario en la organización y el email a registrar no existe
@@ -92,15 +92,13 @@ class RegisteredUserController extends Controller
         } else {
             $idOrganizacion = Entidad::where('nombre', $request->nombre_empresa)->first();
 
-            // dd($idOrganizacion);
-
             if ($idOrganizacion == null) {
                 $organizacion = Entidad::create([
                     'nombre' => $request->nombre_empresa,
                     'ubicacion' => 'ubicacion',
                     'web' => 'web',
                     'descripcion' => 'descripcion',
-                    'tamano' => '12',
+                    'tamano' => '1',
                     'numero_tarjeta' => $request->nif
                 ]);
 
@@ -119,8 +117,8 @@ class RegisteredUserController extends Controller
             ->exists();
 
             // $userExist = DB::select('select users.id, users.nombre, users.email, users.entidad_id, entidad.nombre, entidad.descripcion
-            // from maat.users
-            // inner join maat.entidad on entidad.id = users.entidad_id
+            // from betec_maat.users
+            // inner join betec_maat.entidad on entidad.id = users.entidad_id
             // where entidad.nombre = ? and users.email = ?', [$request->nombre_empresa, $request->correo]);
 
             // dd($userExist);
@@ -135,8 +133,8 @@ class RegisteredUserController extends Controller
             // ->count();
 
             $employees = DB::select('select count(users.id) as empleados
-            from maat.users
-            inner join maat.entidad on entidad.id = users.entidad_id
+            from betec_maat.users
+            inner join betec_maat.entidad on entidad.id = users.entidad_id
             where entidad.nombre = ?', [$request->nombre_empresa]);
 
             // dd($empleados);
@@ -166,7 +164,7 @@ class RegisteredUserController extends Controller
 
                 Auth::login($user);
             } else {
-                dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
+                // dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
             }
         }
 

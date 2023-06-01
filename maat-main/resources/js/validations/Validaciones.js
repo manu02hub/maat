@@ -56,7 +56,6 @@ function checkInputTarjeta(e) {
     }
 }
 
-
 function checkInputWithSpace(e) {
     try {
         // Solo permite de la A-Z, a-z, 0-9, el ' - ', el ' . ', el ' - ' y el espacio
@@ -77,7 +76,6 @@ function checkInputWithSpace(e) {
         console.log(error);
     }
 }
-
 
 // Validaciones para ver si existe alguna injeccion no deseada en el texto
 function checkInjection(txt) {
@@ -102,12 +100,10 @@ function checkInjection(txt) {
 // Mira el usuario recibido y comprueba si es válido. Devolverá un boolean (false o true)
 function checkUserTxt(usuario) {
     try {
-
         if (
             usuario.replaceAll(" ", "").length > 4 &&
             usuario.replaceAll(" ", "").length < 31
         ) {
-
             return true;
         } else {
             return false;
@@ -134,7 +130,6 @@ function checkEmailTxt(email) {
             .substring(email.lastIndexOf(".") + 1, email.length)
             .replaceAll(" ", "");
 
-
         // Comprueba que tenga solo 1 o 2 puntos el email. Comprueba que el email
         // tenga una estructura parecida a AAA@AAA.com
         // También, comprueba que la extensión tenga una longitud 2 a 3 y que no
@@ -145,7 +140,6 @@ function checkEmailTxt(email) {
             if (
                 email.replace(/[^.]/g, "").length >= 1 &&
                 email.replace(/[^.]/g, "").length < 3 &&
-
                 email1.length > 2 &&
                 email2.length > 2 &&
                 email3.length > 1 &&
@@ -208,7 +202,6 @@ function checkTarjeta(tarjeta) {
     }
 }
 
-
 // Valida la web
 function checkWeb(web) {
     var contenedorWeb1 = "";
@@ -253,7 +246,8 @@ function checkWeb(web) {
                 contenedorWeb1.length < 4 &&
                 contenedorWeb2.length > 2 &&
                 contenedorWeb3.length >= 2 &&
-                contenedorWeb3.length < 4
+                contenedorWeb3.length < 4 &&
+                web.length < 256
             ) {
                 valido = true;
             }
@@ -276,7 +270,8 @@ function checkUbicacion(ubicacion) {
             ubicacion.replace(/[^-]/g, "").length >= 0 &&
             ubicacion.replace(/[^-]/g, "").length < 2 &&
             ubicacion.replace(/[^_]/g, "").length >= 0 &&
-            ubicacion.replace(/[^_]/g, "").length < 2
+            ubicacion.replace(/[^_]/g, "").length < 2 &&
+            ubicacion.length < 256
         ) {
             return true;
         } else {
@@ -299,6 +294,5 @@ export {
     checkPassword,
     checkTarjeta,
     checkWeb,
-    checkUbicacion
-
+    checkUbicacion,
 };
