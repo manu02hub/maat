@@ -1,15 +1,14 @@
 <script setup>
-import PrivateLayout from "@/Layouts/PrivateLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
+const { props } = usePage();
+let { dominio } = props;
+const { id, nombre, entidad_id } = dominio;
+
 const form = useForm({
-    empresa_id: "",
-    organizacion_id: "",
+    nombre: nombre,
+    entidad_id: entidad_id,
 });
 
 </script>
@@ -17,10 +16,9 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeAsocicacionesContratadas'))">
-                    <div class="title">Crear Asociaciones Contratadas</div>
-
-                    <label for="nombre">Empresa_id:</label>
+                <form @submit.prevent="form.patch(route('updateDominio'))">
+                    <div class="title">Editar Dominio</div>
+                    <label for="nombre">nombre:</label>
                     <input
                         type="text"
                         id="nombre"
@@ -28,29 +26,22 @@ const form = useForm({
                         required
                     />
 
-                    <label for="email">Organizacion_id:</label>
+                    <label for="entidad_id">entidad_id:</label>
                     <input
-                        type="email"
-                        id="email"
-                        v-model="form.email"
+                        type="entidad_id"
+                        id="entidad_id"
+                        v-model="form.entidad_id"
                         required
                     />
 
-                    <div class="button-container">
-                        <Link
-                            :href="route('indexAsocicacionesContratadas')"
-                            type="button"
-                            class="cancel-button"
-                        >
-                            Cancelar
-                        </Link>
+                    <div>
                         <PrimaryButton
                             type="submit"
                             class="submit-button"
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Actualizar Usuario
                         </PrimaryButton>
                     </div>
                 </form>
@@ -107,11 +98,11 @@ img {
 label {
     font-weight: bold;
     margin-bottom: 5px;
-    padding-left: 3%;
+    padding-left: 2%;
 }
 
 input {
-    margin-left:3%;
+    margin-left:2%;
 }
 
 input[type="text"],
@@ -132,7 +123,6 @@ textarea {
 .button-container {
     display: flex;
     justify-content: flex-start;
-    margin-left: 3%;
 }
 
 .cancel-button {
@@ -152,6 +142,7 @@ textarea {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 2%;
 }
 
 .submit-button:hover {

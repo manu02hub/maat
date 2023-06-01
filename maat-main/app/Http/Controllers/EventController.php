@@ -159,17 +159,20 @@ class EventController extends Controller
     {
         $entidad_id = auth()->user()->entidad_id;
         $empresa = Empresa::where('entidad_id', $entidad_id)->first();
-        // dd($empresa);
         $empresa_id = $empresa->id;
         $plan_contratado = plan_contratado::where('empresa_id', $empresa_id)->first();
-        $plan_contratado_id = $plan_contratado->id;
-        $asociaciones_contratadas = asociaciones_contratadas::where('plan_contratado_id', $plan_contratado_id)->pluck('organizacion_id');
-        $eventos = Eventos::whereIn('organizacion_id', $asociaciones_contratadas)->whereNotIn('id', function ($query) {
-            $query->select('evento_id')
-                ->from('user_has_evento')
-                ->where('user_id', auth()->id());
-        })
-            ->get();
+        $eventos = [];
+
+        if ($plan_contratado != null) {
+            $plan_contratado_id = $plan_contratado->id;
+            $asociaciones_contratadas = asociaciones_contratadas::where('plan_contratado_id', $plan_contratado_id)->pluck('organizacion_id');
+            $eventos = Eventos::whereIn('organizacion_id', $asociaciones_contratadas)->whereNotIn('id', function ($query) {
+                $query->select('evento_id')
+                    ->from('user_has_evento')
+                    ->where('user_id', auth()->id());
+            })
+                ->get();
+        }
 
         return Inertia::render('private/Manu/AllEventsToUser', compact('eventos'));
     }

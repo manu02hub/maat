@@ -8,8 +8,8 @@ import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
-    empresa_id: "",
-    organizacion_id: "",
+    nombre: "",
+    entidad_id: "",
 });
 
 </script>
@@ -17,10 +17,10 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeAsocicacionesContratadas'))">
-                    <div class="title">Crear Asociaciones Contratadas</div>
+                <form @submit.prevent="form.patch(route('storeDominio'))">
+                    <div class="title">Crear Chat</div>
 
-                    <label for="nombre">Empresa_id:</label>
+                    <label for="nombre">nombre:</label>
                     <input
                         type="text"
                         id="nombre"
@@ -28,17 +28,17 @@ const form = useForm({
                         required
                     />
 
-                    <label for="email">Organizacion_id:</label>
+                    <label for="entidad_id">entidad_id:</label>
                     <input
-                        type="email"
-                        id="email"
-                        v-model="form.email"
+                        type="text"
+                        id="entidad_id"
+                        v-model="form.entidad_id"
                         required
                     />
 
                     <div class="button-container">
                         <Link
-                            :href="route('indexAsocicacionesContratadas')"
+                            :href="route('indexDominio')"
                             type="button"
                             class="cancel-button"
                         >

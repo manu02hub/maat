@@ -7,7 +7,7 @@ import PrivateLayout from "@/Layouts/PrivateLayout.vue";
 </script>
 
 <template>
-    <Head title="Perfil de EmpresaESTE" />
+    <Head title="Perfil" />
     <PrivateLayout>
         <div
             class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-1"

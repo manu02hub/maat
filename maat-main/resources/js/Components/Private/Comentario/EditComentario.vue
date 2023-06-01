@@ -1,15 +1,17 @@
 <script setup>
-import PrivateLayout from "@/Layouts/PrivateLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
-import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
+const { props } = usePage();
+let { comentario } = props;
+const { id, descripcion, user_id, post_id, like} = comentario;
+
 const form = useForm({
-    empresa_id: "",
-    organizacion_id: "",
+    id: id,
+    descripcion: descripcion,
+    user_id: user_id,
+    post_id: post_id,
+    like: like,
 });
 
 </script>
@@ -17,40 +19,47 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeAsocicacionesContratadas'))">
-                    <div class="title">Crear Asociaciones Contratadas</div>
-
-                    <label for="nombre">Empresa_id:</label>
+                <form @submit.prevent="form.patch(route('updateComentario'))">
+                    <div class="title">Editar Comentarios</div>
+                    <label for="descripcion">descripcion:</label>
                     <input
                         type="text"
-                        id="nombre"
-                        v-model="form.nombre"
+                        id="descripcion"
+                        v-model="form.descripcion"
                         required
                     />
 
-                    <label for="email">Organizacion_id:</label>
+                    <label for="user_id">user_id:</label>
                     <input
-                        type="email"
-                        id="email"
-                        v-model="form.email"
+                        type="user_id"
+                        id="user_id"
+                        v-model="form.user_id"
                         required
                     />
 
-                    <div class="button-container">
-                        <Link
-                            :href="route('indexAsocicacionesContratadas')"
-                            type="button"
-                            class="cancel-button"
-                        >
-                            Cancelar
-                        </Link>
+                    <label for="post_id">post_id:</label>
+                    <input
+                        type="post_id"
+                        id="post_id"
+                        v-model="form.post_id"
+                        required
+                    />
+
+                    <label for="like">like:</label>
+                    <input
+                        type="like"
+                        id="like"
+                        v-model="form.like"
+                        required
+                    />
+                    <div>
                         <PrimaryButton
                             type="submit"
                             class="submit-button"
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Actualizar Usuario
                         </PrimaryButton>
                     </div>
                 </form>
@@ -107,11 +116,11 @@ img {
 label {
     font-weight: bold;
     margin-bottom: 5px;
-    padding-left: 3%;
+    padding-left: 2%;
 }
 
 input {
-    margin-left:3%;
+    margin-left:2%;
 }
 
 input[type="text"],
@@ -132,7 +141,6 @@ textarea {
 .button-container {
     display: flex;
     justify-content: flex-start;
-    margin-left: 3%;
 }
 
 .cancel-button {
@@ -152,6 +160,7 @@ textarea {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 2%;
 }
 
 .submit-button:hover {

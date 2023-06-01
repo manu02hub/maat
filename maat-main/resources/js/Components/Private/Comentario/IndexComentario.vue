@@ -6,19 +6,16 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 
-const form = useForm({
-    email: "",
-});
 </script>
 
 <template>
     <div class="grid-system">
         <div class="div-header">
             <header>
-                <span class="empresa">asociaciones_contratadas</span>
+                <span class="empresa">Comentario</span>
                 <div class="action-buttons">
-                    <Link :href="route('createAsocicacionesContratadas')" class="action-añadir">
-                    <button>Añadir asociaciones_contratadas</button>
+                    <Link :href="route('createComentario')" class="action-añadir">
+                    <button>Añadir Comentario</button>
                     </Link>
                 </div>
             </header>
@@ -31,21 +28,25 @@ const form = useForm({
                             <th class="attr-input-checkbox">
                                 <input type="checkbox">
                             </th>
-                            <th class="attr-th">plan_contratado_id</th>
-                            <th class="attr-th">organizacion_id</th>
+                            <th class="attr-th">descripcion</th>
+                            <th class="attr-th">user_id</th>
+                            <th class="attr-th">post_id</th>
+                            <th class="attr-th">like</th>
                             <th class="attr-th">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="asociacionesContratadass in $page.props.asociacionesContratadas" :key="asociacionesContratadass.id">
+                        <tr v-for="comentarios in $page.props.comentario" :key="comentarios.id">
                             <td class="th-id">1</td>
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
-                            <td class="attr-td">{{ asociacionesContratadass.plan_contratado_id }}</td>
-                            <td class="attr-td">{{ asociacionesContratadass.organizacion_id }}</td>
+                            <td class="attr-td">{{ comentarios.descripcion }}</td>
+                            <td class="attr-td">{{ comentarios.user_id }}</td>
+                            <td class="attr-td">{{ comentarios.post_id }}</td>
+                            <td class="attr-td">{{ comentarios.like }}</td>
                             <td class="attr-td">
-                                <Link :href="route('editAsocicacionesContratadas', asociacionesContratadass.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
+                                <Link :href="route('editComentario', comentarios.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">
                                     <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor">
@@ -62,7 +63,7 @@ const form = useForm({
                                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                     </svg>
                                 </button>
-                                <Link :href="route('deleteAsocicacionesContratadas', asociacionesContratadass.id)">
+                                <Link :href="route('deleteComentario', comentarios.id)">
                                 <button class="action-buttons-list" @click="Eliminar">
                                     <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                         stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

@@ -9,7 +9,7 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <nav>
+    <nav class="nav">
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
             <i class="bx bx-menu"><img src="../../../img/icons/menu.svg" /></i>
@@ -71,7 +71,7 @@ import { Link } from "@inertiajs/vue3";
 </template>
 
 <style scoped>
-nav {
+.nav {
     --blue: #12d2db;
     --white: #fcf2fa;
     --green: #529541aa;
