@@ -86,6 +86,16 @@ export default {
                         </button>
                     </a>
 
+                    <a
+                        v-if="$page.props.auth.user.rol_id === 2 && !this.val"
+                        class="aNoDecPropio"
+                        :href="route('match', this.org[0].org)"
+                    >
+                        <button class="btnChatPropio">
+                            Contratar Organizacion
+                        </button>
+                    </a>
+
                     <!-- Mostrar descripcion -->
                     <div class="descPropio">
                         <h1 class="h1StyleDefault">{{ this.org[0].nombre }}</h1>
@@ -354,14 +364,15 @@ export default {
 /* Estilo del boton del chat */
 .btnChatPropio,
 .btnChat2Propio {
-    height: 4rem;
+    height: 5rem;
     font-size: larger;
     font-weight: bold;
     border: none;
     border-radius: 0.45rem;
     background-color: #73cd99;
+    margin-right: 0.5rem;
     margin-bottom: 1rem;
-    padding: 0.75rem;
+    padding: 0.25rem;
     transition: 1s;
 }
 

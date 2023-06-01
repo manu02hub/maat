@@ -89,26 +89,34 @@ class ListadoController extends Controller
             where entidad.id = ?', [$id]);
 
             try {
-                //ver la asociacion en la tabla de asociaciones contratadas
-                //busco al endidad por organizacion
-                $id_organizacion = Organizaciones::where('entidad_id', $id)->first();
-                // dd($id_organizacion->id);
+                // Mira si es ONG antes de hacer las siguientes operaciones
+                if (count($ong) >= 1) {
+                    //ver la asociacion en la tabla de asociaciones contratadas
+                    //busco al endidad por organizacion
+                    $id_organizacion = Organizaciones::where('entidad_id', $id)->first();
+                    // dd($id_organizacion->id);
 
-                //busco la organizacion en la tabla de asociaciones contratadas,
-                $asociaciones_contratadas = Asociaciones_contratadas::where('organizacion_id', $id_organizacion->id)->get();
+                    //busco la organizacion en la tabla de asociaciones contratadas,
+                    $asociaciones_contratadas = Asociaciones_contratadas::where('organizacion_id', $id_organizacion->id)->get();
 
-                $id_empresa = Empresa::where('entidad_id', auth()->user()->entidad_id)->first();
-                $asociacion_contratada = Asociaciones_contratadas::where('organizacion_id', $id_organizacion->id)
-                    ->join('plan_contratado', 'asociaciones_contratadas.plan_contratado_id', '=', 'plan_contratado.id')
-                    ->where('plan_contratado.empresa_id', $id_empresa->id)
-                    ->exists();
+                    $id_empresa = Empresa::where('entidad_id', auth()->user()->entidad_id)->first();
+                    $asociacion_contratada = Asociaciones_contratadas::where('organizacion_id', $id_organizacion->id)
+                        ->join('plan_contratado', 'asociaciones_contratadas.plan_contratado_id', '=', 'plan_contratado.id')
+                        ->where('plan_contratado.empresa_id', $id_empresa->id)
+                        ->exists();
+                }
             } catch (\Throwable $th) {
                 echo $th;
             }
 
             // Envía los resultados obtenidos
             if (count($orgs) == 1 && count($orgData) != 0) {
-                return Inertia::render('private/Alex/PerfilPublic', ['datos' => $orgData, 'isOng' => count($ong), 'validador_contrato' => $asociacion_contratada]);
+                // Dependiendo de si el usuario es ONG o no, te da en la pantalla unos datos u otros
+                if (count($ong) >= 1) {
+                    return Inertia::render('private/Alex/PerfilPublic', ['datos' => $orgData, 'isOng' => count($ong), 'validador_contrato' => $asociacion_contratada]);
+                } else {
+                    return Inertia::render('private/Alex/PerfilPublic', ['datos' => $orgData, 'isOng' => count($ong)]);
+                }
             } else {
                 return Inertia::render('private/Alex/ListadoCliente');
             }
