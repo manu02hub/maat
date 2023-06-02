@@ -12,6 +12,8 @@ class user_has_evento extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'user_id';
+
     protected $fillable = [
         'user_id',
         'evento_id'

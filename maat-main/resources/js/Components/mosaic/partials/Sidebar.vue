@@ -355,7 +355,7 @@
 
 
                         <!--  CRUD PasswordReset -->
-                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink :href="route('indexPasswordReset')"  v-if="$page.props.auth.user.rol_id === 4">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -406,7 +406,7 @@
 
 
                         <!--  CRUD PersonalAccessToken -->
-                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink :href="route('indexpersonalAccessToken')"  v-if="$page.props.auth.user.rol_id === 4">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -506,7 +506,7 @@
                         </NavLink>
 
                         <!--  CRUD TiposPlan -->
-                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink :href="route('indexTiposPlan')"  v-if="$page.props.auth.user.rol_id === 4">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -556,7 +556,7 @@
                         </NavLink>
 
                         <!--  CRUD Transaccion -->
-                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink :href="route('indexTransacciones')"  v-if="$page.props.auth.user.rol_id === 4">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -606,7 +606,7 @@
                         </NavLink>
 
                         <!--  CRUD userHasEvento -->
-                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink :href="route('indexuserHasEvento')"  v-if="$page.props.auth.user.rol_id === 4">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"
@@ -656,7 +656,7 @@
                         </NavLink>
 
                         <!--  CRUD VALORACIONES -->
-                        <NavLink :href="route('indexMigrations')"  v-if="$page.props.auth.user.rol_id === 4">
+                        <NavLink :href="route('indexValoracion')"  v-if="$page.props.auth.user.rol_id === 4">
                             <li
                                 class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
                                 :class="isExactActive && 'bg-slate-900'"

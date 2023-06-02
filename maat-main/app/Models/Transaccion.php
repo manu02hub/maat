@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Password_resets extends Model
+class Transaccion extends Model
 {
     use HasFactory;
 
-    protected $table = 'password_resets';
+    protected $table = 'transaccion';
 
     public $timestamps = false;
 
-    // protected $primaryKey = 'email';
-
     protected $fillable = [
         'id',
-        'email',
-        'token',
-        'created_at'
+        'titular',
+        'concepto',
+        'fecha',
+        'hora',
+        'cantidad',
+        'entidad_id',
     ];
 }

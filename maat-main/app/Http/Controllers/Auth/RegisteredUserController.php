@@ -166,7 +166,7 @@ class RegisteredUserController extends Controller
 
                 // Auth::login($user);
             } else {
-                dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
+                // dd($userExist.'---'.$emailExist.'---'.$employees[0]->empleados);
             }
         }
 

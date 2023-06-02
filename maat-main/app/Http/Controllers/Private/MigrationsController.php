@@ -94,7 +94,7 @@ class MigrationsController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        dd($request, $id);
+        // dd($request, $id);
         Migrations::find($id)->update([
             'migration' => $request->migration,
             'batch' => $request->batch,

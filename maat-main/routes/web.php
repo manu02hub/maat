@@ -17,8 +17,15 @@ use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NoticiasController;
+use App\Http\Controllers\OrganizacionesController;
 use App\Http\Controllers\Private\MigrationsController;
 use App\Http\Controllers\Private\RolController;
+use App\Http\Controllers\Private\ValoracionesController;
+use App\Http\Controllers\Private\PasswordResetsController;
+use App\Http\Controllers\Private\TiposPlanController;
+use App\Http\Controllers\Private\TransaccionController;
+use App\Http\Controllers\Private\PersonalAccessTokensController;
+use App\Http\Controllers\Private\UserHasEventoController;
 use App\Mail\EmployeeForm;
 use Illuminate\Support\Facades\Mail;
 
@@ -138,7 +145,7 @@ Route::get('indexMigrations',[MigrationsController::class, 'index'])->name('inde
 Route::get('createMigrations', [MigrationsController::class, 'create'])->name('createMigrations');
 Route::patch('storeMigrations', [MigrationsController::class, 'store'])->name('storeMigrations');
 Route::get('editMigrations/{id}', [MigrationsController::class, 'edit'])->name('editMigrations');
-Route::post('updateMigrations', [MigrationsController::class, 'update'])->name('updateMigrations');
+Route::post('updateMigrations/{id}', [MigrationsController::class, 'update'])->name('updateMigrations');
 Route::get('deleteMigrations/{id}', [MigrationsController::class, 'destroy'])->name('deleteMigrations');
 
 
@@ -147,8 +154,56 @@ Route::get('indexRol',[RolController::class, 'index'])->name('indexRol');
 Route::get('createRol', [RolController::class, 'create'])->name('createRol');
 Route::patch('storeRol', [RolController::class, 'store'])->name('storeRol');
 Route::get('editRol/{id}', [RolController::class, 'edit'])->name('editRol');
-Route::post('updateRol', [RolController::class, 'update'])->name('updateRol');
+Route::post('updateRol/{id}', [RolController::class, 'update'])->name('updateRol');
 Route::get('deleteRol/{id}', [RolController::class, 'destroy'])->name('deleteRol');
+
+//Valoracion
+Route::get('indexValoracion',[ValoracionesController::class, 'index'])->name('indexValoracion');
+Route::get('createValoracion', [ValoracionesController::class, 'create'])->name('createValoracion');
+Route::patch('storeValoracion', [ValoracionesController::class, 'store'])->name('storeValoracion');
+Route::get('editValoracion/{id}', [ValoracionesController::class, 'edit'])->name('editValoracion');
+Route::post('updateValoracion/{id}', [ValoracionesController::class, 'update'])->name('updateValoracion');
+Route::get('deleteValoracion/{id}', [ValoracionesController::class, 'destroy'])->name('deleteValoracion');
+
+//PasswordReset
+Route::get('indexPasswordReset',[PasswordResetsController::class, 'index'])->name('indexPasswordReset');
+Route::get('createPasswordReset', [PasswordResetsController::class, 'create'])->name('createPasswordReset');
+Route::patch('storePasswordReset', [PasswordResetsController::class, 'store'])->name('storePasswordReset');
+Route::get('editPasswordReset/{id}', [PasswordResetsController::class, 'edit'])->name('editPasswordReset');
+Route::post('updatePasswordReset/{id}', [PasswordResetsController::class, 'update'])->name('updatePasswordReset');
+Route::get('deletePasswordReset/{id}', [PasswordResetsController::class, 'destroy'])->name('deletePasswordReset');
+
+//tiposPlan
+Route::get('indexTiposPlan',[TiposPlanController::class, 'index'])->name('indexTiposPlan');
+Route::get('createTiposPlan', [TiposPlanController::class, 'create'])->name('createTiposPlan');
+Route::patch('storeTiposPlan', [TiposPlanController::class, 'store'])->name('storeTiposPlan');
+Route::get('editTiposPlan/{id}', [TiposPlanController::class, 'edit'])->name('editTiposPlan');
+Route::post('updateTiposPlan/{id}', [TiposPlanController::class, 'update'])->name('updateTiposPlan');
+Route::get('deleteTiposPlan/{id}', [TiposPlanController::class, 'destroy'])->name('deleteTiposPlan');
+
+//Transacciones
+Route::get('indexTransacciones',[TransaccionController::class, 'index'])->name('indexTransacciones');
+Route::get('createTransacciones', [TransaccionController::class, 'create'])->name('createTransacciones');
+Route::patch('storeTransacciones', [TransaccionController::class, 'store'])->name('storeTransacciones');
+Route::get('editTransacciones/{id}', [TransaccionController::class, 'edit'])->name('editTransacciones');
+Route::post('updateTransacciones/{id}', [TransaccionController::class, 'update'])->name('updateTransacciones');
+Route::get('deleteTransacciones/{id}', [TransaccionController::class, 'destroy'])->name('deleteTransacciones');
+
+//personalAccessToken
+Route::get('indexpersonalAccessToken',[PersonalAccessTokensController::class, 'index'])->name('indexpersonalAccessToken');
+Route::get('createpersonalAccessToken', [PersonalAccessTokensController::class, 'create'])->name('createpersonalAccessToken');
+Route::patch('storepersonalAccessToken', [PersonalAccessTokensController::class, 'store'])->name('storepersonalAccessToken');
+Route::get('editpersonalAccessToken/{id}', [PersonalAccessTokensController::class, 'edit'])->name('editpersonalAccessToken');
+Route::post('updatepersonalAccessToken/{id}', [PersonalAccessTokensController::class, 'update'])->name('updatepersonalAccessToken');
+Route::get('deletepersonalAccessToken/{id}', [PersonalAccessTokensController::class, 'destroy'])->name('deletepersonalAccessToken');
+
+//personalAccessToken
+Route::get('indexuserHasEvento',[UserHasEventoController::class, 'index'])->name('indexuserHasEvento');
+Route::get('createuserHasEvento', [UserHasEventoController::class, 'create'])->name('createuserHasEvento');
+Route::patch('storeuserHasEvento', [UserHasEventoController::class, 'store'])->name('storeuserHasEvento');
+Route::get('edituserHasEvento/{id}', [UserHasEventoController::class, 'edit'])->name('edituserHasEvento');
+Route::post('updateuserHasEvento/{id}', [UserHasEventoController::class, 'update'])->name('updateuserHasEvento');
+Route::get('deleteuserHasEvento/{id}', [UserHasEventoController::class, 'destroy'])->name('deleteuserHasEvento');
 
 
 

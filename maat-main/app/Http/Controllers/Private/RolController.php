@@ -92,9 +92,9 @@ class RolController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        dd($request, $id);
+        // dd($request, $id);
         Rol::find($id)->update([
-            'nombre' => 'required|string|max:255',
+            'nombre' => $request->nombre,
         ]);
 
         return Redirect::route('indexRol');
