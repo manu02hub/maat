@@ -12,9 +12,9 @@ class LikesController extends Controller
 {
     public function index()
     {
-        $likes = Likes::all();
+        $like = Likes::all();
 
-        return Inertia::render('PrivateMaat/Likes/LikesIndex', compact('likes'));
+        return Inertia::render('PrivateMaat/Likes/LikesIndex', compact('like'));
     }
 
     //CREATE AND STORE
@@ -25,10 +25,12 @@ class LikesController extends Controller
 
     public function store(Request $request)
     {
-        $likes = new Likes();
-        $likes->ruta = $request->ruta;
-        $likes->post_id = $request->post_id;
-        $likes->save();
+        $like = new Likes();
+        $like->user_id = $request->user_id;
+        $like->post_id = $request->post_id;
+        $like->isLiked = $request->isLiked;
+
+        $like->save();
 
         return Redirect::route('indexLikes');
     }
@@ -37,18 +39,19 @@ class LikesController extends Controller
 
     public function edit($id)
     {
-        $likes = Likes::findOrFail($id);
-        return Inertia::render('PrivateMaat/Likes/LikesEdit', compact('likes'));
+        $like = Likes::findOrFail($id);
+        return Inertia::render('PrivateMaat/Likes/LikesEdit', compact('like'));
     }
 
     public function update(Request $request)
     {
         $id = $request->id;
-        $likes = Likes::findOrFail($id);
+        $like = Likes::findOrFail($id);
 
-        $likes->update([
-            'ruta' => $request->ruta,
+        $like->update([
+            'user_id' => $request->user_id,
             'post_id' => $request->post_id,
+            'isLiked' => $request->isLiked,
         ]);
 
         return Redirect::route('indexLikes');
@@ -57,8 +60,8 @@ class LikesController extends Controller
     //DELETE
     public function destroy($id)
     { 
-        $likes = Likes::findOrFail($id);
-        $likes->delete();
+        $like = Likes::findOrFail($id);
+        $like->delete();
         return back();
     }
 }

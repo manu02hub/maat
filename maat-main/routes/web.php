@@ -19,6 +19,8 @@ use App\Http\Controllers\Private\FailedJobsController;
 use App\Http\Controllers\Private\ImgEventosController;
 use App\Http\Controllers\Private\ImgPostController;
 use App\Http\Controllers\Private\LikesController;
+use App\Http\Controllers\Private\MatchsController;
+use App\Http\Controllers\Private\MensajeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
@@ -126,7 +128,7 @@ Route::get('employeeForm/{mail}',function($mail){
 })->name('employeeForm');
 
 
-//PRIVATE MAAT
+//PRIVATE MAAT -> CRUDS
 //AsocicacionesContratadas
 Route::get('indexAsocicacionesContratadas',[AsocicacionesContratadasController::class, 'index'])->name('indexAsocicacionesContratadas');
 Route::get('createAsocicacionesContratadas', [AsocicacionesContratadasController::class, 'create'])->name('createAsocicacionesContratadas');
@@ -207,13 +209,29 @@ Route::get('editImg_post/{id}', [ImgPostController::class, 'edit'])->name('editI
 Route::patch('updateImg_post', [ImgPostController::class, 'update'])->name('updateImg_post');
 Route::get('deleteImg_post/{id}', [ImgPostController::class, 'destroy'])->name('deleteImg_post');
 
-//Img_post
+//Likes
 Route::get('indexLikes',[LikesController::class, 'index'])->name('indexLikes');
 Route::get('createLikes', [LikesController::class, 'create'])->name('createLikes');
 Route::patch('storeLikes', [LikesController::class, 'store'])->name('storeLikes');
 Route::get('editLikes/{id}', [LikesController::class, 'edit'])->name('editLikes');
 Route::patch('updateLikes', [LikesController::class, 'update'])->name('updateLikes');
 Route::get('deleteLikes/{id}', [LikesController::class, 'destroy'])->name('deleteLikes');
+
+//Matchs
+Route::get('indexMatchs',[MatchsController::class, 'index'])->name('indexMatchs');
+Route::get('createMatchs', [MatchsController::class, 'create'])->name('createMatchs');
+Route::patch('storeMatchs', [MatchsController::class, 'store'])->name('storeMatchs');
+Route::get('editMatchs/{id}', [MatchsController::class, 'edit'])->name('editMatchs');
+Route::patch('updateMatchs', [MatchsController::class, 'update'])->name('updateMatchs');
+Route::get('deleteMatchs/{id}', [MatchsController::class, 'destroy'])->name('deleteMatchs');
+
+//Mensajes
+Route::get('indexMensajes',[MensajeController::class, 'index'])->name('indexMensajes');
+Route::get('createMensajes', [MensajeController::class, 'create'])->name('createMensajes');
+Route::patch('storeMensajes', [MensajeController::class, 'store'])->name('storeMensajes');
+Route::get('editMensajes/{id}', [MensajeController::class, 'edit'])->name('editMensajes');
+Route::patch('updateMensajes', [MensajeController::class, 'update'])->name('updateMensajes');
+Route::get('deleteMensajes/{id}', [MensajeController::class, 'destroy'])->name('deleteMensajes');
 
 
 
