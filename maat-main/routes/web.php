@@ -12,6 +12,13 @@ use App\Http\Controllers\Private\ChatsController;
 use App\Http\Controllers\Private\DominioController;
 use App\Http\Controllers\Private\ComentarioController;
 use App\Http\Controllers\Private\AsocicacionesContratadasController;
+use App\Http\Controllers\Private\EmpresaController;
+use App\Http\Controllers\Private\EntidadController;
+use App\Http\Controllers\Private\EventoController;
+use App\Http\Controllers\Private\FailedJobsController;
+use App\Http\Controllers\Private\ImgEventosController;
+use App\Http\Controllers\Private\ImgPostController;
+use App\Http\Controllers\Private\LikesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileEmprController;
 use App\Http\Controllers\ListadoController;
@@ -151,6 +158,64 @@ Route::patch('storeDominio', [DominioController::class, 'store'])->name('storeDo
 Route::get('editDominio/{id}', [DominioController::class, 'edit'])->name('editDominio');
 Route::patch('updateDominio', [DominioController::class, 'update'])->name('updateDominio');
 Route::get('deleteDominio/{id}', [DominioController::class, 'destroy'])->name('deleteDominio');
+
+//Empresa
+Route::get('indexEmpresa',[EmpresaController::class, 'index'])->name('indexEmpresa');
+Route::get('createEmpresa', [EmpresaController::class, 'create'])->name('createEmpresa');
+Route::patch('storeEmpresa', [EmpresaController::class, 'store'])->name('storeEmpresa');
+Route::get('editEmpresa/{id}', [EmpresaController::class, 'edit'])->name('editEmpresa');
+Route::patch('updateEmpresa', [EmpresaController::class, 'update'])->name('updateEmpresa');
+Route::get('deleteEmpresa/{id}', [EmpresaController::class, 'destroy'])->name('deleteEmpresa');
+
+//Entidad
+Route::get('indexEntidad',[EntidadController::class, 'index'])->name('indexEntidad');
+Route::get('createEntidad', [EntidadController::class, 'create'])->name('createEntidad');
+Route::patch('storeEntidad', [EntidadController::class, 'store'])->name('storeEntidad');
+Route::get('editEntidad/{id}', [EntidadController::class, 'edit'])->name('editEntidad');
+Route::patch('updateEntidad', [EntidadController::class, 'update'])->name('updateEntidad');
+Route::get('deleteEntidad/{id}', [EntidadController::class, 'destroy'])->name('deleteEntidad');
+
+//Evento
+Route::get('indexEvento',[EventoController::class, 'index'])->name('indexEvento');
+Route::get('createEvento', [EventoController::class, 'create'])->name('createEvento');
+Route::patch('storeEvento', [EventoController::class, 'store'])->name('storeEvento');
+Route::get('editEvento/{id}', [EventoController::class, 'edit'])->name('editEvento');
+Route::patch('updateEvento', [EventoController::class, 'update'])->name('updateEvento');
+Route::get('deleteEvento/{id}', [EventoController::class, 'destroy'])->name('deleteEvento');
+
+//Failed_jobs
+Route::get('indexFailed_jobs',[FailedJobsController::class, 'index'])->name('indexFailed_jobs');
+Route::get('createFailed_jobs', [FailedJobsController::class, 'create'])->name('createFailed_jobs');
+Route::patch('storeFailed_jobs', [FailedJobsController::class, 'store'])->name('storeFailed_jobs');
+Route::get('editFailed_jobs/{id}', [FailedJobsController::class, 'edit'])->name('editFailed_jobs');
+Route::patch('updateFailed_jobs', [FailedJobsController::class, 'update'])->name('updateFailed_jobs');
+Route::get('deleteFailed_jobs/{id}', [FailedJobsController::class, 'destroy'])->name('deleteFailed_jobs');
+
+//Img_eventos
+Route::get('indexImg_eventos',[ImgEventosController::class, 'index'])->name('indexImg_eventos');
+Route::get('createImg_eventos', [ImgEventosController::class, 'create'])->name('createImg_eventos');
+Route::patch('storeImg_eventos', [ImgEventosController::class, 'store'])->name('storeImg_eventos');
+Route::get('editImg_eventos/{id}', [ImgEventosController::class, 'edit'])->name('editImg_eventos');
+Route::patch('updateImg_eventos', [ImgEventosController::class, 'update'])->name('updateImg_eventos');
+Route::get('deleteImg_eventos/{id}', [ImgEventosController::class, 'destroy'])->name('deleteImg_eventos');
+
+//Img_post
+Route::get('indexImg_post',[ImgPostController::class, 'index'])->name('indexImg_post');
+Route::get('createImg_post', [ImgPostController::class, 'create'])->name('createImg_post');
+Route::patch('storeImg_post', [ImgPostController::class, 'store'])->name('storeImg_post');
+Route::get('editImg_post/{id}', [ImgPostController::class, 'edit'])->name('editImg_post');
+Route::patch('updateImg_post', [ImgPostController::class, 'update'])->name('updateImg_post');
+Route::get('deleteImg_post/{id}', [ImgPostController::class, 'destroy'])->name('deleteImg_post');
+
+//Img_post
+Route::get('indexLikes',[LikesController::class, 'index'])->name('indexLikes');
+Route::get('createLikes', [LikesController::class, 'create'])->name('createLikes');
+Route::patch('storeLikes', [LikesController::class, 'store'])->name('storeLikes');
+Route::get('editLikes/{id}', [LikesController::class, 'edit'])->name('editLikes');
+Route::patch('updateLikes', [LikesController::class, 'update'])->name('updateLikes');
+Route::get('deleteLikes/{id}', [LikesController::class, 'destroy'])->name('deleteLikes');
+
+
 
 //--------------------------------------------
 /*---------------------------------------[Empresa]---------------------------------------*/

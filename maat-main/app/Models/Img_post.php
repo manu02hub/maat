@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Img_post extends Model
 {
+
+    protected $table = 'img_post';
+
     use HasFactory;
 }
