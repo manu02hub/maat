@@ -49,7 +49,8 @@ const form = useForm({
                             <!-- Like button -->
 
                             <Link :href="route('añadirLike', posts.id)">
-                            <button class="flex items-center text-slate-400 hover:text-red-600">
+                                <p style="color: greenyellow;">{{ $page.props.likes }}</p>
+                            <button :class="{'red': $page.props.like.isLiked === 1 }" class="flex items-center text-slate-400 hover:text-red-600">
                                 <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
                                     <path
                                         d="M14.682 2.318A4.485 4.485 0 0011.5 1 4.377 4.377 0 008 2.707 4.383 4.383 0 004.5 1a4.5 4.5 0 00-3.182 7.682L8 15l6.682-6.318a4.5 4.5 0 000-6.364zm-1.4 4.933L8 12.247l-5.285-5A2.5 2.5 0 014.5 3c1.437 0 2.312.681 3.5 2.625C9.187 3.681 10.062 3 11.5 3a2.5 2.5 0 011.785 4.251h-.003z" />
@@ -148,22 +149,22 @@ const form = useForm({
                                         <!-- Footer -->
                                         <footer class="flex items-center space-x-4">
                                             <!-- Like button -->
-                                            <button class="flex items-center text-slate-400 hover:text-red-600">
+                                            <!-- <button class="flex items-center text-slate-400 hover:text-red-600">
                                                 <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
                                                     <path
                                                         d="M14.682 2.318A4.485 4.485 0 0011.5 1 4.377 4.377 0 008 2.707 4.383 4.383 0 004.5 1a4.5 4.5 0 00-3.182 7.682L8 15l6.682-6.318a4.5 4.5 0 000-6.364zm-1.4 4.933L8 12.247l-5.285-5A2.5 2.5 0 014.5 3c1.437 0 2.312.681 3.5 2.625C9.187 3.681 10.062 3 11.5 3a2.5 2.5 0 011.785 4.251h-.003z" />
                                                 </svg>
                                                 <div class="text-sm text-slate-500">{{ comentarios.like }}</div>
                                             </button>
-                                            <!-- Share button -->
+                                             Share button 
                                             <button class="flex items-center text-slate-400 hover:text-emerald-500">
                                                 <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
                                                     <path
                                                         d="M13 7h2v6a1 1 0 0 1-1 1H4v2l-4-3 4-3v2h9V7ZM3 9H1V3a1 1 0 0 1 1-1h10V0l4 3-4 3V4H3v5Z" />
                                                 </svg>
                                                 <div class="text-sm text-slate-500">{{ comentarios.repost }}</div>
-                                            </button>
-                                            <Link :href="route('deleteComentario', comentarios.id)">
+                                            </button> -->
+                                            <Link v-if="comentarios.user_id == $page.props.auth.user.rol_id" :href="route('deleteComentario', comentarios.id)">
                                             <button class="action-buttons-list" @click="Eliminar">
                                                 <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                                     stroke="currentColor" fill="none" stroke-linecap="round"
@@ -194,3 +195,11 @@ const form = useForm({
         </div>
     </article>
 </template>
+
+<style>
+
+.red{
+    color: red;
+}
+
+</style>

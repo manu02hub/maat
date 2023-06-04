@@ -4,12 +4,15 @@ import { Head } from '@inertiajs/vue3';
 import FeedIzq from '@/Components/jorgeComponents/FeedIzq.vue'
 import FeedDcha from '@/Components/jorgeComponents/FeedDcha.vue'
 import EntradaPost from '@/Components/jorgeComponents/EntradaPost.vue';
+import PrivateLayout from "@/Layouts/PrivateLayout.vue";
+
 </script>
 
 <template>
     <Head title="Post" />
+    <PrivateLayout>
 
-    <AuthenticatedLayout>
+    <!-- <AuthenticatedLayout> -->
         <!-- Content area -->
         <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
@@ -25,7 +28,7 @@ import EntradaPost from '@/Components/jorgeComponents/EntradaPost.vue';
                         <div class="md:flex flex-1">
 
                             <!-- Left content -->
-                            <FeedIzq />
+                            <!-- <FeedIzq /> -->
 
                             <!-- Middle content -->
 
@@ -52,5 +55,7 @@ import EntradaPost from '@/Components/jorgeComponents/EntradaPost.vue';
             </main>
 
         </div>
-    </AuthenticatedLayout>
+    <!-- </AuthenticatedLayout> -->
+</PrivateLayout>
+
 </template>

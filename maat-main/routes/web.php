@@ -116,6 +116,7 @@ Route::get('/deleteComentario/{id}', [PostController::class, 'destroyComentario'
 
     //LIKES
 Route::get('/añadirLike/{id}', [PostController::class, 'addLike'])->name('añadirLike');
+Route::get('/editarLike/{id}', [PostController::class, 'editLike'])->name('editarLike');
 
 
 

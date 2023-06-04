@@ -496,7 +496,7 @@
                         </NavLink>
 
                         <div v-if="$page.props.auth.user.rol_id != 5">
-                            <!--  FEED -->
+                             <!-- FEED
                             <br />
                             <NavLink :href="route('feed')">
                                 <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
@@ -522,7 +522,7 @@
                                     </a>
                                 </li>
                             </NavLink>
-                            <br />
+                            <br /> -->
                             <!--  POST -->
                             <NavLink :href="route('recogerPost')">
                                 <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
@@ -543,7 +543,7 @@
                                             </svg>
                                             <span
                                                 class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                                POST</span>
+                                                POSTS</span>
                                         </div>
                                     </a>
                                 </li>

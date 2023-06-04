@@ -226,7 +226,12 @@ class EventController extends Controller
             $comentario = Comentario::where('post_id', $posts->id)->get();
             // dd($comentario);
             $validator = true;
-            return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito', 'posts', 'likes', 'comentario', 'validator'));
+
+            $user = Users::where("id", auth()->id())->first();
+            $like = Likes::where('user_id', $user -> id)->get()->first();
+            // dd($like);
+
+            return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito', 'posts', 'likes', 'comentario', 'validator', 'like'));
         } else {
             $validator = false;
         }
