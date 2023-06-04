@@ -49,18 +49,36 @@ const form = useForm({
                             <!-- Like button -->
 
                             <Link :href="route('añadirLike', posts.id)">
-                                <p style="color: greenyellow;">{{ $page.props.likes }}</p>
-                            <button :class="{'red': $page.props.like.isLiked === 1 }" class="flex items-center text-slate-400 hover:text-red-600">
-                                <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-                                    <path
-                                        d="M14.682 2.318A4.485 4.485 0 0011.5 1 4.377 4.377 0 008 2.707 4.383 4.383 0 004.5 1a4.5 4.5 0 00-3.182 7.682L8 15l6.682-6.318a4.5 4.5 0 000-6.364zm-1.4 4.933L8 12.247l-5.285-5A2.5 2.5 0 014.5 3c1.437 0 2.312.681 3.5 2.625C9.187 3.681 10.062 3 11.5 3a2.5 2.5 0 011.785 4.251h-.003z" />
-                                </svg>
-                                <div v-for="likes in $page.props.like">
-                                    <div v-if="posts.id == likes.post_id">
-                                        <div class="text-sm text-slate-500">{{ $page.props.like.length }}</div>
-                                    </div>
-                                </div>
-                            </button>
+                            <!-- <p style="color: green;">{{ $page.props.like }}</p>
+                            <p>{{ $page.props.result }}</p> -->
+                            <!-- <p>{{ $page.props.register.id }}</p> -->
+                            <!-- <p>{{ $page.props.register }}</p> -->
+                            <!-- <p>{{ $page.props.register }}</p> -->
+                            <div v-for="registers,i in $page.props.register">
+                                <p style="color: red;">{{ $page.props.result }}</p>
+                                <!-- <div v-if="results.usuario == $page.props.register.id">   -->
+                                    <!-- <p>{{ registers.id }}</p>   
+                                    <p>{{ $page.props.like }}</p> 
+                                    <p>{{ $page.props.like[i].isLiked }}</p> 
+
+                                    <p>{{ $page.props.result[i].isLiked }}</p>
+                                    <p>1</p>
+                                    <p>{{ registers.id }}</p>
+                                    <p>{{ $page.props.like[i].user_id }}</p> -->
+                                    <button :class="{ 'red': $page.props.like[i].isLiked  === 1 && registers.id == $page.props.like[i].user_id  }"
+                                        class="flex items-center text-slate-400 hover:text-red-600">
+                                        <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
+                                            <path
+                                                d="M14.682 2.318A4.485 4.485 0 0011.5 1 4.377 4.377 0 008 2.707 4.383 4.383 0 004.5 1a4.5 4.5 0 00-3.182 7.682L8 15l6.682-6.318a4.5 4.5 0 000-6.364zm-1.4 4.933L8 12.247l-5.285-5A2.5 2.5 0 014.5 3c1.437 0 2.312.681 3.5 2.625C9.187 3.681 10.062 3 11.5 3a2.5 2.5 0 011.785 4.251h-.003z" />
+                                        </svg>
+                                        <div v-for="likes in $page.props.like">
+                                            <div v-if="posts.id == likes.post_id">
+                                                <div class="text-sm text-slate-500">{{ $page.props.like.length }}</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                <!-- </div> -->
+                            </div>
                             </Link>
 
                             <!-- Share button -->
@@ -164,7 +182,8 @@ const form = useForm({
                                                 </svg>
                                                 <div class="text-sm text-slate-500">{{ comentarios.repost }}</div>
                                             </button> -->
-                                            <Link v-if="comentarios.user_id == $page.props.auth.user.rol_id" :href="route('deleteComentario', comentarios.id)">
+                                            <Link v-if="comentarios.user_id == $page.props.auth.user.rol_id"
+                                                :href="route('deleteComentario', comentarios.id)">
                                             <button class="action-buttons-list" @click="Eliminar">
                                                 <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="2"
                                                     stroke="currentColor" fill="none" stroke-linecap="round"
@@ -197,9 +216,7 @@ const form = useForm({
 </template>
 
 <style>
-
-.red{
+.red {
     color: red;
 }
-
 </style>

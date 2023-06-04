@@ -10,6 +10,7 @@ use App\Models\Likes;
 use App\Models\Comentario;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
@@ -25,9 +26,19 @@ class PostController extends Controller
         // dd($comentario);
         // dd($likes);
 
+        $result = DB::table('likes')
+        ->select('users.id AS usuario', 'post.id AS post', 'likes.isLiked')
+        ->join('users', 'likes.user_id', '=', 'users.id')
+        ->join('post', 'likes.post_id', '=', 'post.id')
+        ->where('likes.isLiked', true)
+        ->get();
+
+        $register = Users::where("id", auth()->id())->get();
+
+        // dd($result);
 
 
-        return Inertia::render('private/Jorge/Post', compact('post', 'user', 'comentario', 'like'));
+        return Inertia::render('private/Jorge/Post', compact('post', 'user', 'comentario', 'like', 'result', 'register'));
     }
 
     public function createComentario(Request $request, $post_id)
@@ -78,12 +89,30 @@ class PostController extends Controller
         // dd($likes[$request->id-1] -> user_id);
         $likes = Likes::all();
         $user = Users::where("id", auth()->id())->first();
-        $like = new Likes();
+        // dd($user);
+        // dd($likes);
+        // dd($likes[$request->id - 1]->user_id);
+
+        $existeLike = DB::table('likes')
+        ->where('user_id', auth()->id())
+        ->where('post_id', $post_id)
+        ->exists();
+
+        $idLike = DB::table('likes')
+        ->where('user_id', auth()->id())
+        ->where('post_id', $post_id)
+        ->pluck('id')
+        ->first();
+
+        // dd($idLike);
+        // dd($existeLike);
 
 
-        if ($likes[$request->id - 1]->user_id == $user->id) {
+        if ($existeLike == true) {
             $id = $request->id;
-            $likeFindId = Likes::findOrFail($id);
+            // dd($id);
+            $likeFindId = Likes::findOrFail($idLike);
+            // dd($likeFindId);
             if ($likeFindId->isLiked == 0) {
                 $likeFindId->update([
                     'isLiked' => 1,
@@ -96,6 +125,7 @@ class PostController extends Controller
 
             return back();
         } else {
+            $like = new Likes();
             $like->user_id =  $user->id;
             $like->post_id = $post_id;
             $like->isLiked = true;
