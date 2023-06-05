@@ -19,9 +19,9 @@
                             Progress
                         </div>
                     </div>
-                    <div v-for="users, index in $page.props.user">
+                    <div v-for="users, i in $page.props.user">
                         <!-- puesto 1 -->
-                        <div v-if="index === 0" class="ranking-table-row-leader-1">
+                        <div v-if="i === 0" class="ranking-table-row-leader-1">
                             <div class="ranking-table-data-leader-1">
                                 <div class="medal-gold"></div>
                             </div>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <!-- Puesto 2 -->
-                        <div v-else-if="index === 1" class="ranking-table-row-leader-2">
+                        <div v-else-if="i === 1" class="ranking-table-row-leader-2">
                             <div class="ranking-table-data-leader-2">
                                 <div class="medal-silver"></div>
                             </div>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <!-- Puesto 3 -->
-                        <div v-else-if="index === 2" class="ranking-table-row-leader-3">
+                        <div v-else-if="i === 2" class="ranking-table-row-leader-3">
                             <div class="ranking-table-data-leader-3">
                                 <div class="medal-bronze"></div>
                             </div>
@@ -50,16 +50,18 @@
                                 <div class="complete"></div>
                             </div>
                         </div>
-                        <!-- Puesto 4 -->
-                        <div v-else class="ranking-table-body">
-                            <div class="ranking-table-row">
-                                <div class="ranking-table-data">{{ index + 1 }}</div>
-                                <div class="ranking-table-data">
-                                    {{ users.nombre }}
-                                </div>
-                                <div class="ranking-table-data">
-                                    <div class="complete"></div>
-                                </div>
+                    </div>
+
+                    <!-- Puesto 4 -->
+                    <div class="ranking-table-body">
+                        <div v-for="userss, i in $page.props.user" class="ranking-table-row"
+                            v-if="i != 0 && i != 1 && i != 2">
+                            <div class="ranking-table-data">{{ i + 4 }}</div>
+                            <div class="ranking-table-data">
+                                {{ userss.nombre }}
+                            </div>
+                            <div class="ranking-table-data">
+                                <div class="complete"></div>
                             </div>
                         </div>
                     </div>

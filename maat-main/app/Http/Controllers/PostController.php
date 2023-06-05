@@ -27,18 +27,46 @@ class PostController extends Controller
         // dd($likes);
 
         $result = DB::table('likes')
-        ->select('users.id AS usuario', 'post.id AS post', 'likes.isLiked')
-        ->join('users', 'likes.user_id', '=', 'users.id')
-        ->join('post', 'likes.post_id', '=', 'post.id')
-        ->where('likes.isLiked', true)
-        ->get();
+            ->select('users.id AS usuario', 'post.id AS post', 'likes.isLiked')
+            ->join('users', 'likes.user_id', '=', 'users.id')
+            ->join('post', 'likes.post_id', '=', 'post.id')
+            ->where('likes.isLiked', true)
+            ->get();
 
-        $register = Users::where("id", auth()->id())->get();
+        $likePosts = DB::table('post')
+            ->leftJoin('likes', function ($join) {
+                $join->on('post.id', '=', 'likes.post_id')
+                    ->where('likes.isLiked', true);
+            })
+            ->select('post.id AS post_id', 'post.titulo AS post', DB::raw('COUNT(likes.id) AS numero_likes'))
+            ->groupBy('post.id', 'post.titulo')
+            ->get();
 
+        $comentariosPost = DB::table('post')
+            ->leftJoin('comentario', 'post.id', '=', 'comentario.post_id')
+            ->select('post.id AS post_id', 'post.titulo AS post', DB::raw('COUNT(comentario.id) AS numero_comentarios'))
+            ->groupBy('post.id', 'post.titulo')
+            ->get();
+        // dd($comentariosPost);
+
+        $register = Users::where("id", auth()->id())->first();
+
+        // dd($register);
+
+        $likeUser =  DB::table('post')
+            ->leftJoin('likes', function ($join) use ($register) {
+                $join->on('post.id', '=', 'likes.post_id')
+                    ->where('likes.user_id', '=', $register->id)
+                    ->where('likes.isLiked', '=', true);
+            })
+            ->select('post.id AS post_id', 'post.titulo AS post', DB::raw('IF(likes.user_id IS NULL, 0, 1) AS likeBool'))
+            ->get();
+
+        // dd($likeUser);
         // dd($result);
+        // dd($likePosts);
 
-
-        return Inertia::render('private/Jorge/Post', compact('post', 'user', 'comentario', 'like', 'result', 'register'));
+        return Inertia::render('private/Jorge/Post', compact('post', 'user', 'comentario', 'like', 'result', 'likePosts', 'likeUser','comentariosPost'));
     }
 
     public function createComentario(Request $request, $post_id)
@@ -94,15 +122,15 @@ class PostController extends Controller
         // dd($likes[$request->id - 1]->user_id);
 
         $existeLike = DB::table('likes')
-        ->where('user_id', auth()->id())
-        ->where('post_id', $post_id)
-        ->exists();
+            ->where('user_id', auth()->id())
+            ->where('post_id', $post_id)
+            ->exists();
 
         $idLike = DB::table('likes')
-        ->where('user_id', auth()->id())
-        ->where('post_id', $post_id)
-        ->pluck('id')
-        ->first();
+            ->where('user_id', auth()->id())
+            ->where('post_id', $post_id)
+            ->pluck('id')
+            ->first();
 
         // dd($idLike);
         // dd($existeLike);

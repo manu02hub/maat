@@ -8,7 +8,7 @@ import VideoIndex from '@/Components/Public/VideoIndex.vue';
 
 </script>
 
-<template class="container">
+<template >
     <Head title="Index" />
     <PublicLayout>
         <VideoIndex/>

@@ -74,7 +74,6 @@ export default {
 
 .containerPartners p {
     text-align: justify;
-    margin-bottom: 50px;
 }
 
 .title p {
@@ -123,12 +122,12 @@ export default {
 }
 
 .slider .slide img {
-    width: 180px;
-    height: 70px;
+    /* width: 35vw; */
+    height: 10vw;
     padding: 10%;
     background-color: white;
     cursor: pointer;
-    margin: 20px;
+    margin: 12vw;
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25)0px 2px 5px -1px,
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -141,8 +140,8 @@ export default {
     }
 
     100% {
-        -webkit-transform: translateX(calc(-250px * 8));
-        transform: translateX(calc(-250px * 8));
+        -webkit-transform: translateX(calc(-250px * 10));
+        transform: translateX(calc(-250px * 10));
     }
 }
 </style>

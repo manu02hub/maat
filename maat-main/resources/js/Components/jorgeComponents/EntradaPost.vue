@@ -15,7 +15,7 @@ const form = useForm({
 </script>
 
 <template>
-    <article v-for="posts in $page.props.post" class="bg-white shadow-md rounded-lg border border-emerald-500 border-2 p-5">
+    <article v-for="posts,f in $page.props.post" class="bg-white shadow-md rounded-lg border border-emerald-500 border-2 p-5">
         <div v-for="users in $page.props.user">
             <div v-if="posts.user_id == users.id">
                 <!-- Breadcrumbs -->
@@ -49,23 +49,7 @@ const form = useForm({
                             <!-- Like button -->
 
                             <Link :href="route('añadirLike', posts.id)">
-                            <!-- <p style="color: green;">{{ $page.props.like }}</p>
-                            <p>{{ $page.props.result }}</p> -->
-                            <!-- <p>{{ $page.props.register.id }}</p> -->
-                            <!-- <p>{{ $page.props.register }}</p> -->
-                            <!-- <p>{{ $page.props.register }}</p> -->
-                            <div v-for="registers,i in $page.props.register">
-                                <p style="color: red;">{{ $page.props.result }}</p>
-                                <!-- <div v-if="results.usuario == $page.props.register.id">   -->
-                                    <!-- <p>{{ registers.id }}</p>   
-                                    <p>{{ $page.props.like }}</p> 
-                                    <p>{{ $page.props.like[i].isLiked }}</p> 
-
-                                    <p>{{ $page.props.result[i].isLiked }}</p>
-                                    <p>1</p>
-                                    <p>{{ registers.id }}</p>
-                                    <p>{{ $page.props.like[i].user_id }}</p> -->
-                                    <button :class="{ 'red': $page.props.like[i].isLiked  === 1 && registers.id == $page.props.like[i].user_id  }"
+                                    <button :class="{ 'red': $page.props.likeUser[f].likeBool  === 1 }"
                                         class="flex items-center text-slate-400 hover:text-red-600">
                                         <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
                                             <path
@@ -73,29 +57,21 @@ const form = useForm({
                                         </svg>
                                         <div v-for="likes in $page.props.like">
                                             <div v-if="posts.id == likes.post_id">
-                                                <div class="text-sm text-slate-500">{{ $page.props.like.length }}</div>
+                                                <div class="text-sm text-slate-500">{{ $page.props.likePosts[f].numero_likes }}</div>
+                                                <!-- <p>{{ $page.props.likePosts[f] }}</p> -->
                                             </div>
                                         </div>
                                     </button>
                                 <!-- </div> -->
-                            </div>
                             </Link>
 
-                            <!-- Share button -->
-                            <button class="flex items-center text-slate-400 hover:text-emerald-500">
-                                <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
-                                    <path
-                                        d="M13 7h2v6a1 1 0 0 1-1 1H4v2l-4-3 4-3v2h9V7ZM3 9H1V3a1 1 0 0 1 1-1h10V0l4 3-4 3V4H3v5Z" />
-                                </svg>
-                                <div class="text-sm text-slate-500">{{ posts.repost }}</div>
-                            </button>
                             <!-- Replies button -->
                             <button class="flex items-center text-slate-400 hover:text-amber-500">
                                 <svg class="w-4 h-4 shrink-0 fill-current mr-1.5" viewBox="0 0 16 16">
                                     <path
                                         d="M8 0C3.6 0 0 3.1 0 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L8.9 12H8c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z" />
                                 </svg>
-                                <div class="text-sm text-slate-500"> {{ $page.props.comentario.length }}</div>
+                                <div class="text-sm text-slate-500"> {{ $page.props.comentariosPost[f].numero_comentarios }}</div>
                             </button>
                         </footer>
                     </div>

@@ -65,18 +65,19 @@
                         </div>
                     </div>
                 </li>
-            </ul>
-            <div class="textoHacemos">
-                <h1>OTRAS COSAS</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.</p>
-                <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.</p>
-                <img src="../../../img/banner.jpg"> 
-            </div>
+            </ul> 
+        </div>
+
+        <div class="textoHacemos">
+            <h1>OTRAS COSAS</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua.</p>
+            <br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua.</p>
+            <img src="../../../img/banner.jpg"> 
         </div>
     </div>
 </template>
@@ -105,6 +106,7 @@
   text-align: center;
   margin-right: 10%;
   margin-left: 10%;
+  font-size: 100%;
 }
 
 .contenedorHacemos {
@@ -113,13 +115,14 @@
 }
 
 .h1hacemos {
-    font-size: 75px;
+    font-size: 60px;
+    font-weight: 600;
     text-align: center;
 }
 
 .timeline {
     position: relative;
-    width: 660px;
+    width: 97vw;
     margin: 0 auto;
     margin-top: 20px;
     padding: 1em 0;
@@ -196,14 +199,14 @@
 
 .direction-l {
     position: relative;
-    width: 300px;
+    width: 35vw;
     float: left;
     text-align: right;
 }
 
 .direction-r {
     position: relative;
-    width: 300px;
+    width: 35vw;
     float: right;
 }
 
@@ -322,6 +325,14 @@
 
 .direction-r .desc {
     margin: 1em 0 0 0.75em;
+}
+
+@media (max-width: 858px) {
+.h1hacemos{
+    display: flex;
+    flex-direction: column;
+}
+
 }
 
 </style>

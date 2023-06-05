@@ -99,10 +99,13 @@ Route::patch('/updateUserEmpresa', [RegisterUser::class, 'updateUserEmpresa'])->
 Route::patch('/updateUserONG', [RegisterUser::class, 'updateUserONG'])->middleware(['auth', 'verified'])->name('updateUserONG');
 Route::get('/eliminarUser/{id}', [RegisterUser::class, 'destroyUser'])->middleware(['auth', 'verified'])->name('deleteUser');
 Route::patch('/updateUser', [RegisterUser::class, 'updateUser'])->middleware(['auth', 'verified'])->name('updateUser');
-Route::get('/recogerRanking', [RankingController::class, 'ranking'])->name('recogerRanking');
 
 Route::get('/editUser/{id}', [RegisterUser::class, 'editUser'])->middleware(['auth', 'verified'])->name('editUser');
 Route::get('/recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');
+
+    //RANKING
+Route::get('/recogerRanking', [RankingController::class, 'ranking'])->name('recogerRanking');
+
 
     //PERFIL
 Route::get('recogerPerfil',[PerfilController::class, 'indexPerfil'])->name('recogerPerfil');

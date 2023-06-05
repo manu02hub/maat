@@ -9,10 +9,11 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
+    
     <nav class="nav">
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
-            <i class="bx bx-menu"><img src="../../../img/icons/menu.svg" /></i>
+            <img src="../../../img/icons/menu.svg" />
         </label>
         <label class="logo">maat</label>
         <ul>
@@ -72,6 +73,8 @@ import { Link } from "@inertiajs/vue3";
 
 <style scoped>
 .nav {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
     --blue: #12d2db;
     --white: #fcf2fa;
     --green: #529541aa;
@@ -90,9 +93,7 @@ import { Link } from "@inertiajs/vue3";
     text-decoration: none;
     box-sizing: border-box;
 }
-body {
-    font-family: "Poppins", sans-serif;
-}
+
 nav {
     position: absolute;
     background: var(--navColor);
@@ -100,6 +101,7 @@ nav {
     height: 80px;
     width: 100%;
     z-index: 100;
+    margin: 0;
 }
 label.logo {
     color: var(--white);
@@ -172,14 +174,20 @@ section {
 }
 
 @media (max-width: 858px) {
+    nav{
+        width: 100%;
+    }
     /* mobile mode */
     .checkbtn {
         display: block;
+        margin: 0;
+        z-index: 109;
+        padding: 27px;
     }
     ul {
         position: fixed;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: var(--green-blc);
         top: 80px;
         left: -100%;

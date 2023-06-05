@@ -1,7 +1,7 @@
 <template>
       <!-- Site footer -->
       <footer class="site-footer">
-      <div class="container m-5">
+      <div class="container-fliud m-5">
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <h6>Sobre</h6>
@@ -27,7 +27,7 @@
         </div>
         <hr>
       </div>
-      <div class="container m-5">
+      <div class="container-fliud m-5">
         <div class="row">
           <div class="col-md-8 col-sm-6 col-xs-12">
             <p class="copyright-text">Copyright &copy; 2023 maatTogether
@@ -51,6 +51,7 @@
 <style>
 .site-footer
 {
+  text-align: center;
   background-color:#26272b;
   padding:45px 0 20px;
   font-size:15px;
