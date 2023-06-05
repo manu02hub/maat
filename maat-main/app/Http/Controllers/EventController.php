@@ -207,6 +207,7 @@ class EventController extends Controller
     public function eventInfo(Request $request, $id)
     {
 
+        $users = Users::all();
         $datosEvento = Eventos::find($id);
         $organizaciones = Organizaciones::where('id', $datosEvento->organizacion_id)->first();
         $datosOrganizacionEvento = Entidad::find($organizaciones->entidad_id);
@@ -231,7 +232,7 @@ class EventController extends Controller
             $like = Likes::where('user_id', $user -> id)->get()->first();
             // dd($like);
 
-            return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito', 'posts', 'likes', 'comentario', 'validator', 'like'));
+            return Inertia::render('private/Manu/EventInfo', compact('datosEvento', 'datosOrganizacionEvento', 'eventosDeMismaOrganizacion', 'estaInscrito', 'posts', 'likes', 'comentario', 'validator', 'like','users'));
         } else {
             $validator = false;
         }

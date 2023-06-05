@@ -296,11 +296,10 @@ const form2 = useForm({
                                                     <img class="rounded-full" src="" width="24" height="24"
                                                         alt="User (foto)" />
                                                 </a>
-                                                <div v-for="users in $page.props
-                                                    .user">
-                                                    <a v-if="comentarios.user_id ==
-                                                        users.id
-                                                        " class="font-medium text-yellow-500 hover:text-yellow-600"
+                                                <div v-for="users in $page.props.users">
+                                                    <!-- <p>aa{{ comentarios.user_id }}</p>
+                                                    <p>aa{{ users.id }}</p> -->
+                                                    <a v-if="comentarios.user_id == users.id" class="font-medium text-yellow-500 hover:text-yellow-600"
                                                         href="#0">{{ users.nombre }}</a>
                                                 </div>
                                             </div>
