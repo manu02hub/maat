@@ -3,8 +3,8 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const { props } = usePage();
-let { asociacion } = props;
-const { id, plan_contratado_id, organizacion_id} = asociacion;
+let { asociacionesContratadas } = props;
+const { id, plan_contratado_id, organizacion_id} = asociacionesContratadas;
 
 const form = useForm({
     id: id,
@@ -30,7 +30,7 @@ const form = useForm({
 
                     <label for="organizacion_id">Organizacion_id:</label>
                     <input
-                        type="organizacion_id"
+                        type="text"
                         id="organizacion_id"
                         v-model="form.organizacion_id"
                         required
