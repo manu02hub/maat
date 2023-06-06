@@ -7,6 +7,7 @@ let { evento } = props;
 const { id, nombre, descripcion, fecha_inicio, fecha_final, hora_inicio, hora_final, plazas, organizacion_id } = evento;
 
 const form = useForm({
+    id:id,
     nombre: nombre,
     descripcion: descripcion,
     fecha_inicio: fecha_inicio,
@@ -96,7 +97,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuario
+                            Actualizar Eventos
                         </PrimaryButton>
                     </div>
                 </form>

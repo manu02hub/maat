@@ -7,6 +7,7 @@ let { img_post } = props;
 const { id, ruta, post_id } = img_post;
 
 const form = useForm({
+    id:id,
     ruta: ruta,
     post_id: post_id,
 
@@ -43,7 +44,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Falied Jobs
+                            Actualizar Img Post
                         </PrimaryButton>
                     </div>
                 </form>

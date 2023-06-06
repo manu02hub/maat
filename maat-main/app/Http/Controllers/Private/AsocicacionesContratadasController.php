@@ -28,7 +28,7 @@ class AsocicacionesContratadasController extends Controller
     public function store(Request $request)
     {
         $asociacionesContratadas = new Asociaciones_contratadas();
-        $asociacionesContratadas-> plan_contratado = $request->plan_contratado;
+        $asociacionesContratadas-> plan_contratado_id = $request->plan_contratado_id;
         $asociacionesContratadas-> organizacion_id = $request->organizacion_id;
         $asociacionesContratadas->save();
         return Redirect::route('indexAsocicacionesContratadas');

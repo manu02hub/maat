@@ -16,8 +16,8 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeLikes'))">
-                    <div class="title">Crear Likes</div>
+                <form @submit.prevent="form.patch(route('storeMatchs'))">
+                    <div class="title">Crear Match</div>
 
                     <label for="post_empresa_id">post_empresa_id:</label>
                     <input
@@ -37,7 +37,7 @@ const form = useForm({
 
                     <div class="button-container">
                         <Link
-                            :href="route('indexLikes')"
+                            :href="route('indexMatchs')"
                             type="button"
                             class="cancel-button"
                         >
@@ -49,7 +49,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Guardar Match
                         </PrimaryButton>
                     </div>
                 </form>

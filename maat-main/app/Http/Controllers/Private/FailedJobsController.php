@@ -26,18 +26,15 @@ class FailedJobsController extends Controller
     public function store(Request $request)
     {
         $failed_job = new Failed_jobs();
-        $failed_job->nombre = $request->nombre;
-        $failed_job->descripcion = $request->descripcion;
-        $failed_job->ubicacion = $request->ubicacion;
-        $failed_job->fecha_inicio = $request->fecha_inicio;
-        $failed_job->fecha_final = $request->fecha_final;
-        $failed_job->hora_inicio = $request->hora_inicio;
-        $failed_job->hora_final = $request->hora_final;
-        $failed_job->plazas = $request->plazas;
-        $failed_job->organizacion_id = $request->organizacion_id;
+        $failed_job->uuid = $request->uuid;
+        $failed_job->connection = $request->connection;
+        $failed_job->queue = $request->queue;
+        $failed_job->payload = $request->payload;
+        $failed_job->exception = $request->exception;
+        $failed_job->failed_at = $request->failed_at;
         $failed_job->save();
 
-        return Redirect::route('indexFailed_job');
+        return Redirect::route('indexFailed_jobs');
     }
 
     //EDIT AND UPDATE
@@ -54,18 +51,15 @@ class FailedJobsController extends Controller
         $failed_job = Failed_jobs::findOrFail($id);
 
         $failed_job->update([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'ubicacion' => $request->ubicacion,
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_final' => $request->fecha_final,
-            'hora_inicio' => $request->hora_inicio,
-            'hora_final' => $request->hora_final,
-            'plazas' => $request->plazas,
-            'organizacion_id' => $request->organizacion_id,
+            'uuid' => $request->uuid,
+            'connection' => $request->connection,
+            'queue' => $request->queue,
+            'payload' => $request->payload,
+            'exception' => $request->exception,
+            'failed_at' => $request->failed_at,
         ]);
 
-        return Redirect::route('indexFailed_job');
+        return Redirect::route('indexFailed_jobs');
     }
 
     //DELETE

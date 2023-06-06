@@ -18,8 +18,7 @@ const form = useForm({
         <div>
             <div class="form-container">
                 <form @submit.prevent="form.patch(route('updateChat'))">
-                    <div class="title">Editar Usuario Empresa</div>
-                    <span>Este usuario sera un cliente de su empresa, el cual tendra acceso con las credenciales que uste como empresa le facilite</span>
+                    <div class="title">Editar Chat</div>
                     <label for="empresa_id">empresa_id:</label>
                     <input
                         type="text"
@@ -30,7 +29,7 @@ const form = useForm({
 
                     <label for="organizacion_id">organizacion_id:</label>
                     <input
-                        type="organizacion_id"
+                        type="text"
                         id="organizacion_id"
                         v-model="form.organizacion_id"
                         required
@@ -42,7 +41,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuario
+                            Actualizar Chat
                         </PrimaryButton>
                     </div>
                 </form>

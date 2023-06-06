@@ -30,7 +30,6 @@ class ComentarioController extends Controller
          $comentario->descripcion = $request->descripcion;
          $comentario->user_id = $request->user_id;
          $comentario->post_id = $request->post_id;
-         $comentario->like = $request->like;
          $comentario->save();
  
          return Redirect::route('indexComentario');
@@ -53,7 +52,6 @@ class ComentarioController extends Controller
              'descripcion' => $request->descripcion,
              'user_id' => $request->user_id,
              'post_id' => $request->post_id,
-             'like' => $request->like,
          ]);
  
          return Redirect::route('indexComentario');

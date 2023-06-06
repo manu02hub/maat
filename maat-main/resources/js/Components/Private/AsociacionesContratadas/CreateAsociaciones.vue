@@ -8,7 +8,7 @@ import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
-    empresa_id: "",
+    plan_contratado_id: "",
     organizacion_id: "",
 });
 
@@ -20,19 +20,19 @@ const form = useForm({
                 <form @submit.prevent="form.patch(route('storeAsocicacionesContratadas'))">
                     <div class="title">Crear Asociaciones Contratadas</div>
 
-                    <label for="nombre">Empresa_id:</label>
+                    <label for="nombre">plan_contratado_id:</label>
                     <input
                         type="text"
                         id="nombre"
-                        v-model="form.nombre"
+                        v-model="form.plan_contratado_id"
                         required
                     />
 
-                    <label for="email">Organizacion_id:</label>
+                    <label for="email">organizacion_id:</label>
                     <input
-                        type="email"
+                        type="text"
                         id="email"
-                        v-model="form.email"
+                        v-model="form.organizacion_id"
                         required
                     />
 

@@ -7,6 +7,7 @@ let { failed_job } = props;
 const { id, uuid, connection, queue, payload, exception, failed_at } = failed_job;
 
 const form = useForm({
+    id:id,
     uuid: uuid,
     connection: connection,
     queue: queue,

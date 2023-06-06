@@ -10,6 +10,11 @@ class Dominio extends Model
 
     protected $table = 'dominio';
 
+    protected $fillable = [
+        'nombre',
+        'entidad_id'
+    ];
+
     public $timestamps = false;
 
     use HasFactory;

@@ -11,7 +11,6 @@ const form = useForm({
     descripcion: descripcion,
     user_id: user_id,
     post_id: post_id,
-    like: like,
 });
 
 </script>
@@ -31,7 +30,7 @@ const form = useForm({
 
                     <label for="user_id">user_id:</label>
                     <input
-                        type="user_id"
+                        type="text"
                         id="user_id"
                         v-model="form.user_id"
                         required
@@ -39,19 +38,12 @@ const form = useForm({
 
                     <label for="post_id">post_id:</label>
                     <input
-                        type="post_id"
+                        type="text"
                         id="post_id"
                         v-model="form.post_id"
                         required
                     />
 
-                    <label for="like">like:</label>
-                    <input
-                        type="like"
-                        id="like"
-                        v-model="form.like"
-                        required
-                    />
                     <div>
                         <PrimaryButton
                             type="submit"
@@ -59,7 +51,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuario
+                            Actualizar Comentario
                         </PrimaryButton>
                     </div>
                 </form>

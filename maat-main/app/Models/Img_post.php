@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Img_post extends Model
 {
+    public $timestamps = false;
 
     protected $table = 'img_post';
+
+    protected $fillable = [
+        'id',
+        'ruta',
+        'post_id'
+    ];
 
     use HasFactory;
 }

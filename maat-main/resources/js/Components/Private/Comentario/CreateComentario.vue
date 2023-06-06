@@ -9,9 +9,8 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
     descripcion: "",
-    user_id: "",
+    user_id: "", 
     post_id: "",
-    like: "",
 
 });
 
@@ -20,8 +19,8 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeChat'))">
-                    <div class="title">Crear Chat</div>
+                <form @submit.prevent="form.patch(route('storeComentario'))">
+                    <div class="title">Crear Comentario</div>
 
                     <label for="descripcion">descripcion:</label>
                     <input
@@ -47,13 +46,6 @@ const form = useForm({
                         required
                     />
 
-                    <label for="like">like:</label>
-                    <input
-                        type="text"
-                        id="like"
-                        v-model="form.like"
-                        required
-                    />
 
                     <div class="button-container">
                         <Link
@@ -69,7 +61,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Guardar Comentario
                         </PrimaryButton>
                     </div>
                 </form>

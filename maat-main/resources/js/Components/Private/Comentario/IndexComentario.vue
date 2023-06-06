@@ -31,7 +31,6 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
                             <th class="attr-th">descripcion</th>
                             <th class="attr-th">user_id</th>
                             <th class="attr-th">post_id</th>
-                            <th class="attr-th">like</th>
                             <th class="attr-th">Opciones</th>
                         </tr>
                     </thead>
@@ -44,7 +43,6 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
                             <td class="attr-td">{{ comentarios.descripcion }}</td>
                             <td class="attr-td">{{ comentarios.user_id }}</td>
                             <td class="attr-td">{{ comentarios.post_id }}</td>
-                            <td class="attr-td">{{ comentarios.like }}</td>
                             <td class="attr-td">
                                 <Link :href="route('editComentario', comentarios.id)" class="text-slate-400 hover:text-slate-500 rounded-full">
                                 <button class="action-buttons-list">

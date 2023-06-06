@@ -3,10 +3,11 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const { props } = usePage();
-let { img_eventos } = props;
-const { id, ruta, evento_id } = img_eventos;
+let { img_evento } = props;
+const { id, ruta, evento_id } = img_evento;
 
 const form = useForm({
+    id:id,
     ruta: ruta,
     evento_id: evento_id,
 
@@ -43,7 +44,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Falied Jobs
+                            Actualizar Img Eventos
                         </PrimaryButton>
                     </div>
                 </form>

@@ -17,7 +17,7 @@ const form = useForm({
         <div>
             <div class="form-container">
                 <form @submit.prevent="form.patch(route('storeEmpresa'))">
-                    <div class="title">Crear Chat</div>
+                    <div class="title">Crear Empresa</div>
 
                     <label for="entidad_id">entidad_id:</label>
                     <input
@@ -41,7 +41,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Guardar Empresa
                         </PrimaryButton>
                     </div>
                 </form>

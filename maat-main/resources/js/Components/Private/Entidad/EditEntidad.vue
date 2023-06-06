@@ -7,6 +7,7 @@ let { entidad } = props;
 const { id, nombre, logo, ubicacion, web, descripcion, tamano, numero_tarjeta } = entidad;
 
 const form = useForm({
+    id:id,
     nombre: nombre,
     logo: logo,
     ubicacion: ubicacion,
@@ -38,7 +39,6 @@ const form = useForm({
                         type="text"
                         id="logo"
                         v-model="form.logo"
-                        required
                     />
 
                     <label for="ubicacion">ubicacion:</label>
@@ -87,7 +87,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuario
+                            Actualizar Entidad
                         </PrimaryButton>
                     </div>
                 </form>

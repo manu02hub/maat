@@ -98,7 +98,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Guardar Evento
                         </PrimaryButton>
                     </div>
                 </form>

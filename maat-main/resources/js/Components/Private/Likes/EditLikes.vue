@@ -3,10 +3,11 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const { props } = usePage();
-let { likes } = props;
-const { id, user_id, post_id, isLiked } = likes;
+let { like } = props;
+const { id, user_id, post_id, isLiked } = like;
 
 const form = useForm({
+    id:id,
     user_id: user_id,
     post_id: post_id,
     isLiked: isLiked,
@@ -19,7 +20,7 @@ const form = useForm({
         <div>
             <div class="form-container">
                 <form @submit.prevent="form.patch(route('updateLikes'))">
-                    <div class="title">Editar Img Post</div>
+                    <div class="title">Editar Likes</div>
 
                     <label for="user_id">user_id:</label>
                     <input
@@ -52,7 +53,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Falied Jobs
+                            Actualizar Likes
                         </PrimaryButton>
                     </div>
                 </form>

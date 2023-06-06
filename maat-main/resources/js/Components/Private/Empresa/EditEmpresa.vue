@@ -7,6 +7,7 @@ let { empresa } = props;
 const { id, entidad_id } = empresa;
 
 const form = useForm({
+    id:id,
     entidad_id: entidad_id,
 });
 
@@ -20,7 +21,7 @@ const form = useForm({
 
                     <label for="entidad_id">entidad_id:</label>
                     <input
-                        type="entidad_id"
+                        type="text"
                         id="entidad_id"
                         v-model="form.entidad_id"
                         required
@@ -33,7 +34,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Usuario
+                            Actualizar Empresa
                         </PrimaryButton>
                     </div>
                 </form>

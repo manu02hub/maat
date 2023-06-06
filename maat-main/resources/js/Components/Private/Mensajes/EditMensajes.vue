@@ -7,6 +7,7 @@ let { mensaje } = props;
 const { id, contenido, fecha, hora, chat_id, id_origen, id_destino } = mensaje;
 
 const form = useForm({
+    id:id,
     contenido: contenido,
     fecha: fecha,
     hora: hora,
@@ -79,7 +80,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Actualizar Falied Jobs
+                            Actualizar mensajes
                         </PrimaryButton>
                     </div>
                 </form>

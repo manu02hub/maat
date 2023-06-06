@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Matchs extends Model
 {
     protected $table = 'match';
+    public $timestamps = false;
+
 
     use HasFactory;
 }

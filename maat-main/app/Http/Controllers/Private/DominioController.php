@@ -44,6 +44,7 @@ class DominioController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request);
         $id = $request->id;
         $dominio = Dominio::findOrFail($id);
 

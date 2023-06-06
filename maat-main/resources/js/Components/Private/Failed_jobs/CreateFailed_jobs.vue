@@ -8,7 +8,7 @@ import TextArea from "@/Components/TextArea.vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 
 const form = useForm({
-    nombre: "", descripcion: "", fecha_inicio: "", fecha_final: "", hora_inicio: "", hora_final: "", plazas: "", organizacion_id: "",
+    uuid: "", connection: "", queue: "", payload: "", exception: "", failed_at: "",
 });
 
 </script>
@@ -16,77 +16,61 @@ const form = useForm({
     <div class="grid-system">
         <div>
             <div class="form-container">
-                <form @submit.prevent="form.patch(route('storeEvento'))">
-                    <div class="title">Crear Evento</div>
+                <form @submit.prevent="form.patch(route('storeFailed_jobs'))">
+                    <div class="title">Crear Failed Jobs</div>
 
                     
-                    <label for="nombre">nombre:</label>
+                    <label for="uuid">uuid:</label>
                     <input
                         type="text"
-                        id="nombre"
-                        v-model="form.nombre"
+                        id="uuid"
+                        v-model="form.uuid"
                         required
                     />
 
-                    <label for="descripcion">descripcion:</label>
+                    <label for="connection">connection:</label>
                     <input
                         type="text"
-                        id="descripcion"
-                        v-model="form.descripcion"
+                        id="connection"
+                        v-model="form.connection"
                         required
                     />
 
-                    <label for="fecha_inicio">fecha_inicio:</label>
+                    <label for="queue">queue:</label>
                     <input
                         type="text"
-                        id="fecha_inicio"
-                        v-model="form.fecha_inicio"
+                        id="queue"
+                        v-model="form.queue"
                         required
                     />
 
-                    <label for="fecha_final">fecha_final:</label>
+                    <label for="payload">payload:</label>
                     <input
                         type="text"
-                        id="fecha_final"
-                        v-model="form.fecha_final"
+                        id="payload"
+                        v-model="form.payload"
                         required
                     />
 
-                    <label for="hora_inicio">hora_inicio:</label>
+                    <label for="exception">exception:</label>
                     <input
                         type="text"
-                        id="hora_inicio"
-                        v-model="form.hora_inicio"
+                        id="exception"
+                        v-model="form.exception"
                         required
                     />
 
-                    <label for="hora_final">hora_final:</label>
+                    <label for="failed_at">failed_at:</label>
                     <input
                         type="text"
-                        id="hora_final"
-                        v-model="form.hora_final"
-                        required
-                    />
-
-                    <label for="plazas">plazas:</label>
-                    <input
-                        type="text"
-                        id="plazas"
-                        v-model="form.plazas"
-                        required
-                    />
-
-                    <label for="organizacion_id">organizacion_id:</label>
-                    <input
-                        type="text"
-                        id="organizacion_id"
-                        v-model="form.organizacion_id"
+                        id="failed_at"
+                        v-model="form.failed_at"
                         required
                     />
 
                     <div class="button-container">
                         <Link
-                            :href="route('indexEvento')"
+                            :href="route('indexFailed_jobs')"
                             type="button"
                             class="cancel-button"
                         >
@@ -98,7 +82,7 @@ const form = useForm({
                             :class="{ 'opacity-25': form.processing }"
                             :disabled="form.processing"
                         >
-                            Guardar Asocicaciones Contratadas
+                            Guardar Failed Jobs
                         </PrimaryButton>
                     </div>
                 </form>

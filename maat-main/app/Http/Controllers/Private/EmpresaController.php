@@ -38,7 +38,7 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $empresa = Empresa::findOrFail($id);
-        return Inertia::render('PrivateMaat/Empresa/EmpresaEdit', compact('Empresa'));
+        return Inertia::render('PrivateMaat/Empresa/EmpresaEdit', compact('empresa'));
     }
 
     public function update(Request $request)

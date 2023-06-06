@@ -42,7 +42,7 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
-                            <td class="attr-td">{{ failed_jobs.uuiid }}</td>
+                            <td class="attr-td">{{ failed_jobs.uuid }}</td>
                             <td class="attr-td">{{ failed_jobs.queue }}</td>
                             <td class="attr-td">{{ failed_jobs.payload }}</td>
                             <td class="attr-td">{{ failed_jobs.exception }}</td>

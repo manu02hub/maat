@@ -27,9 +27,7 @@ class EventoController extends Controller
     {
         $evento = new Eventos();
         $evento->nombre = $request->nombre;
-        $evento->descripcion = $request->descripcion;
-        $evento->ubicacion = $request->ubicacion;
-        $evento->fecha_inicio = $request->fecha_inicio;
+        $evento->descripcion = $request->descripcion;        $evento->fecha_inicio = $request->fecha_inicio;
         $evento->fecha_final = $request->fecha_final;
         $evento->hora_inicio = $request->hora_inicio;
         $evento->hora_final = $request->hora_final;
@@ -56,7 +54,6 @@ class EventoController extends Controller
         $evento->update([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
-            'ubicacion' => $request->ubicacion,
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_final' => $request->fecha_final,
             'hora_inicio' => $request->hora_inicio,

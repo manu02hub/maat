@@ -30,7 +30,7 @@ class ImgEventosController extends Controller
         $img_evento->evento_id = $request->evento_id;
         $img_evento->save();
 
-        return Redirect::route('indexImg_evento');
+        return Redirect::route('indexImg_eventos');
     }
 
     //EDIT AND UPDATE
@@ -38,6 +38,7 @@ class ImgEventosController extends Controller
     public function edit($id)
     {
         $img_evento = Img_eventos::findOrFail($id);
+        // dd($img_evento);
         return Inertia::render('PrivateMaat/Img_eventos/Img_eventosEdit', compact('img_evento'));
     }
 
@@ -51,7 +52,7 @@ class ImgEventosController extends Controller
             'evento_id' => $request->evento_id,
         ]);
 
-        return Redirect::route('indexImg_evento');
+        return Redirect::route('indexImg_eventos');
     }
 
     //DELETE

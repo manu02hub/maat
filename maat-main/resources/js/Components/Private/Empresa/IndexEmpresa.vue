@@ -24,20 +24,21 @@ import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
                 <table>
                     <thead>
                         <tr>
-                            <th class="th-id">id</th>
                             <th class="attr-input-checkbox">
                                 <input type="checkbox">
                             </th>
+                            <th class="attr-th">id</th>
                             <th class="attr-th">entidad_id</th>
                             <th class="attr-th">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="empresas in $page.props.empresa" :key="empresas.id">
+                        <tr v-for="empresas,i in $page.props.empresa" :key="empresas.id">
                             <td class="th-id">1</td>
                             <td class="attr-input-checkbox">
                                 <input type="checkbox">
                             </td>
+                            <td class="attr-td">{{ empresas.id }}</td>
                             <td class="attr-td">{{ empresas.entidad_id }}</td>
 
                             <td class="attr-td">
